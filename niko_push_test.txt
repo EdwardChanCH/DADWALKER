@@ -1,7 +1,7 @@
 asdasdasd
 
-This is totally to the code that you made earlier!!! 
+THIS IS A TEST TO DESTROY THE PULL REQUEST 
 Our code changes the same file but not in the same section, 
-so GitHub should not explode in this commit. 
+so GitHub should not explode in this commit.
 
 bla bla bla
