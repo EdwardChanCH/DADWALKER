@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="DokiJam"
+run/main_scene="uid://dv8xc81ptsajr"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://scripts/autoloads/globals.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/initial_position_type=0
+window/size/initial_position=Vector2i(30, 80)
+window/stretch/mode="viewport"
+
+[physics]
+
+common/physics_jitter_fix=0.0
+3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/sleep_velocity_threshold=0.1
+3d/default_linear_damp=0.0
+3d/default_angular_damp=0.0
+3d/sleep_threshold_angular=0.00174533
+2d/default_linear_damp=0.0
+2d/default_angular_damp=0.0
+2d/sleep_threshold_linear=0.1
+2d/sleep_threshold_angular=0.00174533
+common/physics_interpolation=true
