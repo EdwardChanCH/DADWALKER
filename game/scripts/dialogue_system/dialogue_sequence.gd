@@ -1,4 +1,4 @@
-class_name _DialogueSequeance
+class_name _DialogueSequence
 extends Resource
 
 enum Characters

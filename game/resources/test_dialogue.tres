@@ -1,27 +1,27 @@
 [gd_resource type="Resource" script_class="_Dialogue" load_steps=6 format=3 uid="uid://bihjrlk04fjoq"]
 
 [ext_resource type="Script" uid="uid://bgv01d7aiks5m" path="res://scripts/dialogue_system/dialogue.gd" id="1_y1akj"]
-[ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/dialogue_sequance.gd" id="2_srvtp"]
+[ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="2_y1akj"]
+
+[sub_resource type="Resource" id="Resource_srvtp"]
+script = ExtResource("2_y1akj")
+CharacterName = 1
+Text = "Insert text"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
 
 [sub_resource type="Resource" id="Resource_ugcts"]
-script = ExtResource("2_srvtp")
-CharacterName = 1
-Text = "AAAAAA"
+script = ExtResource("2_y1akj")
+CharacterName = 2
+Text = "Empty Text"
 metadata/_custom_type_script = "uid://c4mq2t0watni7"
 
 [sub_resource type="Resource" id="Resource_cabj5"]
-script = ExtResource("2_srvtp")
-CharacterName = 2
-Text = "PAIn"
-metadata/_custom_type_script = "uid://c4mq2t0watni7"
-
-[sub_resource type="Resource" id="Resource_71n3e"]
-script = ExtResource("2_srvtp")
+script = ExtResource("2_y1akj")
 CharacterName = 3
-Text = "STuff"
+Text = "Empty Text 2222"
 metadata/_custom_type_script = "uid://c4mq2t0watni7"
 
 [resource]
 script = ExtResource("1_y1akj")
-sequeance = Array[ExtResource("2_srvtp")]([SubResource("Resource_ugcts"), SubResource("Resource_cabj5"), SubResource("Resource_71n3e")])
+sequence = Array[ExtResource("2_y1akj")]([SubResource("Resource_srvtp"), SubResource("Resource_ugcts"), SubResource("Resource_cabj5")])
 metadata/_custom_type_script = "uid://bgv01d7aiks5m"
