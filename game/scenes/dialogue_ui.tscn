@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=6 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_6q285"]
-[ext_resource type="Texture2D" uid="uid://qvktdvdaj5yq" path="res://icon.svg" id="1_dwk8m"]
 [ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_jx1sv"]
+[ext_resource type="Texture2D" uid="uid://bo3pmhpg2ougu" path="res://assets/textures/dragoon_temp.png" id="3_e6usr"]
+[ext_resource type="Texture2D" uid="uid://csygnkeas6ant" path="res://assets/textures/doki_temp.png" id="4_imsod"]
+[ext_resource type="Texture2D" uid="uid://cucbumpae4lpl" path="res://assets/textures/dad_temp.png" id="4_wlc0t"]
 
 [node name="DialogueUI" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("character_name_label", "dialogue_text_label")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "character_sprite_1", "character_sprite_2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +19,9 @@ script = ExtResource("1_6q285")
 character_name_label = NodePath("Background/CharacterNameBackground/CharacterName")
 dialogue_text_label = NodePath("Background/DialogueText")
 dialogue = ExtResource("2_jx1sv")
+character_sprite_1 = NodePath("CharacterSprite1")
+character_sprite_2 = NodePath("CharacterSprite2")
+character_sprite_texture = Array[Texture2D]([ExtResource("4_imsod"), ExtResource("4_wlc0t"), ExtResource("3_e6usr")])
 metadata/_edit_lock_ = true
 
 [node name="CharacterSprite1" type="TextureRect" parent="Control"]
@@ -29,7 +34,7 @@ offset_top = -824.0
 offset_right = 720.0
 offset_bottom = -344.0
 grow_vertical = 0
-texture = ExtResource("1_dwk8m")
+expand_mode = 1
 
 [node name="CharacterSprite2" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -44,7 +49,7 @@ offset_right = -192.0
 offset_bottom = -344.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("1_dwk8m")
+expand_mode = 1
 
 [node name="Background" type="Panel" parent="Control"]
 layout_mode = 1

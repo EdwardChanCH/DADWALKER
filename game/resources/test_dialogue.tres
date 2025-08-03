@@ -1,27 +1,63 @@
-[gd_resource type="Resource" script_class="_Dialogue" load_steps=6 format=3 uid="uid://bihjrlk04fjoq"]
+[gd_resource type="Resource" script_class="_Dialogue" load_steps=11 format=3 uid="uid://bihjrlk04fjoq"]
 
 [ext_resource type="Script" uid="uid://bgv01d7aiks5m" path="res://scripts/dialogue_system/dialogue.gd" id="1_y1akj"]
 [ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="2_y1akj"]
 
-[sub_resource type="Resource" id="Resource_srvtp"]
+[sub_resource type="Resource" id="Resource_ywfq0"]
 script = ExtResource("2_y1akj")
-CharacterName = 1
-Text = "Insert text"
-metadata/_custom_type_script = "uid://c4mq2t0watni7"
-
-[sub_resource type="Resource" id="Resource_ugcts"]
-script = ExtResource("2_y1akj")
-CharacterName = 2
-Text = "Empty Text"
+character_name = 0
+sequence_text = "i mix up left and right for this one but just switch them"
 metadata/_custom_type_script = "uid://c4mq2t0watni7"
 
 [sub_resource type="Resource" id="Resource_cabj5"]
 script = ExtResource("2_y1akj")
-CharacterName = 3
-Text = "Empty Text 2222"
+character_name = 3
+sequence_text = "THE ONLY ONE ON THE RIGHT"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_srvtp"]
+script = ExtResource("2_y1akj")
+character_name = 1
+sequence_text = "LEFT"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_ugcts"]
+script = ExtResource("2_y1akj")
+character_name = 3
+sequence_text = "RIGHT"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_y1akj"]
+script = ExtResource("2_y1akj")
+character_name = 2
+sequence_text = "LEFT"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_71n3e"]
+script = ExtResource("2_y1akj")
+character_name = 0
+sequence_text = "NO SIDE"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_yus6l"]
+script = ExtResource("2_y1akj")
+character_name = 3
+sequence_text = "RIGHT AGAIN"
+metadata/_custom_type_script = "uid://c4mq2t0watni7"
+
+[sub_resource type="Resource" id="Resource_ycaob"]
+script = ExtResource("2_y1akj")
+character_name = 0
+sequence_text = "LAST ONE"
 metadata/_custom_type_script = "uid://c4mq2t0watni7"
 
 [resource]
 script = ExtResource("1_y1akj")
-sequence = Array[ExtResource("2_y1akj")]([SubResource("Resource_srvtp"), SubResource("Resource_ugcts"), SubResource("Resource_cabj5")])
+character = Dictionary[int, int]({
+0: 0,
+1: 2,
+2: 2,
+3: 1
+})
+sequence = Array[ExtResource("2_y1akj")]([SubResource("Resource_ywfq0"), SubResource("Resource_cabj5"), SubResource("Resource_srvtp"), SubResource("Resource_ugcts"), SubResource("Resource_y1akj"), SubResource("Resource_71n3e"), SubResource("Resource_yus6l"), SubResource("Resource_ycaob")])
 metadata/_custom_type_script = "uid://bgv01d7aiks5m"

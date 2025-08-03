@@ -1,6 +1,7 @@
 class_name _DialogueSequence
 extends Resource
 
+# I rather use string but to make this easier to use enum it is
 enum Characters
 {
 	NONE,
@@ -9,5 +10,5 @@ enum Characters
 	DRAGOON
 }
 
-@export var CharacterName: Characters = Characters.NONE
-@export var Text: String = "Empty Text"
+@export var character_name: Characters = Characters.NONE
+@export var sequence_text: String = "Empty Text"
