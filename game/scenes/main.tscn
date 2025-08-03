@@ -1,9 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv8xc81ptsajr"]
+[gd_scene load_steps=9 format=3 uid="uid://dv8xc81ptsajr"]
 
 [ext_resource type="Script" uid="uid://yg2mptqj8a14" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://df64whveplypg" path="res://scenes/gameplay.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://cprcplelu0skb" path="res://scripts/test_3d_render.gd" id="3_sugp2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sugp2"]
+viewport_path = NodePath("TestSubViewport")
+
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sugp2"]
+gradient = SubResource("Gradient_0wfyh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+albedo_texture = SubResource("GradientTexture2D_sugp2")
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbgi4"]
+material = SubResource("StandardMaterial3D_jyhfs")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_o5qli")
 
 [node name="Gameplay" parent="." instance=ExtResource("2_0wfyh")]
+
+[node name="TestSprite" type="Sprite2D" parent="."]
+position = Vector2(960, 300)
+texture = SubResource("ViewportTexture_sugp2")
+
+[node name="TestSubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Test3DRender" type="Node3D" parent="TestSubViewport" node_paths=PackedStringArray("cube")]
+script = ExtResource("3_sugp2")
+cube = NodePath("TestCube")
+
+[node name="TestCube" type="MeshInstance3D" parent="TestSubViewport/Test3DRender"]
+mesh = SubResource("BoxMesh_tbgi4")
+
+[node name="TestCamera3D" type="Camera3D" parent="TestSubViewport/Test3DRender"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="TestOmniLight3D" type="OmniLight3D" parent="TestSubViewport/Test3DRender"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+light_energy = 10.0
