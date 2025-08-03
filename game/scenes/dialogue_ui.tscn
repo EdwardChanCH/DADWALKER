@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvhpyaj518tl8"]
+
+[ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_6q285"]
+[ext_resource type="Texture2D" uid="uid://qvktdvdaj5yq" path="res://icon.svg" id="1_dwk8m"]
+[ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_jx1sv"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("character_name_label", "dialogue_text_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6q285")
+character_name_label = NodePath("Background/CharacterNameBackground/CharacterName")
+dialogue_text_label = NodePath("Background/DialogueText")
+dialogue = ExtResource("2_jx1sv")
+metadata/_edit_lock_ = true
+
+[node name="CharacterSprite1" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -824.0
+offset_right = 720.0
+offset_bottom = -344.0
+grow_vertical = 0
+texture = ExtResource("1_dwk8m")
+
+[node name="CharacterSprite2" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -720.0
+offset_top = -824.0
+offset_right = -192.0
+offset_bottom = -344.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_dwk8m")
+
+[node name="Background" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.711
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 0.119995
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="DialogueText" type="Label" parent="Control/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.12
+mouse_filter = 1
+text = "ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY "
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="CharacterNameBackground" type="Panel" parent="Control/Background"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = -79.88
+offset_right = 352.0
+offset_bottom = -15.88
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="CharacterName" type="Label" parent="Control/Background/CharacterNameBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Character Name"
+horizontal_alignment = 1
+vertical_alignment = 1
