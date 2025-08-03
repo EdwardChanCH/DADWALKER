@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://djks7sqgmdsrl"]
+
+[ext_resource type="Script" uid="uid://jxq6almr4rjj" path="res://scripts/player.gd" id="1_3vyb7"]
+
+[sub_resource type="Gradient" id="Gradient_sugp2"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jyhfs"]
+gradient = SubResource("Gradient_sugp2")
+width = 80
+height = 30
+
+[sub_resource type="Gradient" id="Gradient_0wfyh"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sugp2"]
+gradient = SubResource("Gradient_0wfyh")
+height = 128
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wfyh"]
+radius = 15.0
+height = 80.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_3vyb7")
+
+[node name="PlayerShadow" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_jyhfs")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = SubResource("GradientTexture2D_sugp2")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0wfyh")
