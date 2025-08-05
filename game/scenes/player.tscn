@@ -19,9 +19,10 @@ height = 30
 [sub_resource type="ViewportTexture" id="ViewportTexture_g2els"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("dragoon_world_node")]
 motion_mode = 1
 script = ExtResource("1_3vyb7")
+dragoon_world_node = NodePath("SubViewport/DragoonWorld")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 rotation = 1.5708

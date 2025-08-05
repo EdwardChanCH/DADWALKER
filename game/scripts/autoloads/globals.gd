@@ -1,3 +1,16 @@
 extends Node
 ## Use this script for global functions and variables.
 ## Global variables should have getters & setters, and emit signals when changed.
+
+# --- Math Functions --- #
+
+const STEP: float = 0.00001 # Epsilon
+
+## @GlobalScope.log() new implementation.
+func logg(x: float, base: float) -> float:
+	return log(x) / log(base)
+
+## Find lerp weight t using exponential decay.
+## [url]https://www.youtube.com/watch?v=LSNQuFEDOyQ[/url]
+func lerp_t(decay: float, delta: float) -> float:
+	return 1 - exp(-decay * delta)

@@ -1,13 +1,29 @@
 class_name _Player
 extends CharacterBody2D
 
-var input_direction: Vector2 = Vector2.ZERO
+## Dragoon world (handles model animations).
+@export var dragoon_world_node: _DragoonWorld = null
+
+## Player input vector (similar to joystick input).
+var input_vector: Vector2 = Vector2.ZERO
+
+## Payer movement speed.
 var move_speed: float = 400.0
 
+func _ready() -> void:
+	# Check if missing export variables.
+	if (not dragoon_world_node):
+		push_error("Missing export variables in node '%s'." % [self.name])
+	pass
+
 func _physics_process(_delta: float) -> void:
-	var direction = input_direction.normalized()
+	var direction: Vector2 = input_vector.normalized()
+	
 	self.velocity = direction * move_speed
 	self.move_and_slide()
+	
+	if (direction != Vector2.ZERO):
+		dragoon_world_node.target_look_vector = direction
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -17,22 +33,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if key:
 		if event.is_action_pressed("move_player_in"):
-			input_direction += Vector2.UP
+			input_vector += Vector2.UP
 		elif event.is_action_pressed("move_player_out"):
-			input_direction += Vector2.DOWN
+			input_vector += Vector2.DOWN
 		elif event.is_action_pressed("move_player_left"):
-			input_direction += Vector2.LEFT
+			input_vector += Vector2.LEFT
 		elif event.is_action_pressed("move_player_right"):
-			input_direction += Vector2.RIGHT
+			input_vector += Vector2.RIGHT
 		
 		if event.is_action_released("move_player_in"):
-			input_direction -= Vector2.UP
+			input_vector -= Vector2.UP
 		elif event.is_action_released("move_player_out"):
-			input_direction -= Vector2.DOWN
+			input_vector -= Vector2.DOWN
 		elif event.is_action_released("move_player_left"):
-			input_direction -= Vector2.LEFT
+			input_vector -= Vector2.LEFT
 		elif event.is_action_released("move_player_right"):
-			input_direction -= Vector2.RIGHT
+			input_vector -= Vector2.RIGHT
 	elif mouse_button:
 		pass
 	elif mouse_motion:
