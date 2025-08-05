@@ -10,5 +10,9 @@ enum Characters
 	DRAGOON
 }
 
-@export var character_name: Characters = Characters.NONE
-@export var sequence_text: String = "Empty Text"
+enum Position
+{
+	NONE,
+	LEFT,
+	RIGHT
+}

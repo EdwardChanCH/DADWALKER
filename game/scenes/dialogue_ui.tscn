@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=15 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_6q285"]
 [ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_jx1sv"]
 [ext_resource type="Texture2D" uid="uid://bo3pmhpg2ougu" path="res://assets/textures/dragoon_temp.png" id="3_e6usr"]
 [ext_resource type="Texture2D" uid="uid://csygnkeas6ant" path="res://assets/textures/doki_temp.png" id="4_imsod"]
 [ext_resource type="Texture2D" uid="uid://cucbumpae4lpl" path="res://assets/textures/dad_temp.png" id="4_wlc0t"]
-[ext_resource type="Texture2D" uid="uid://qvktdvdaj5yq" path="res://icon.svg" id="6_wlc0t"]
 
 [sub_resource type="Animation" id="Animation_ecd83"]
 length = 0.001
@@ -24,6 +23,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_x1ric"]
 resource_name = "slide_in"
+length = 0.500003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -31,7 +31,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-528, 256), Vector2(191, 256)]
@@ -41,21 +41,6 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_ecd83"),
 &"slide_in": SubResource("Animation_x1ric")
-}
-
-[sub_resource type="Animation" id="Animation_wlc0t"]
-resource_name = "slide_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1920, 256), Vector2(1200, 256)]
 }
 
 [sub_resource type="Animation" id="Animation_8oo06"]
@@ -73,13 +58,7 @@ tracks/0/keys = {
 "values": [Vector2(1200, 256)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hypas"]
-_data = {
-&"RESET": SubResource("Animation_8oo06"),
-&"slide_in": SubResource("Animation_wlc0t")
-}
-
-[sub_resource type="Animation" id="Animation_imsod"]
+[sub_resource type="Animation" id="Animation_wlc0t"]
 resource_name = "slide_in"
 length = 0.500003
 tracks/0/type = "value"
@@ -92,7 +71,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(8, 1168), Vector2(8, 768)]
+"values": [Vector2(1920, 256), Vector2(1200, 256)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hypas"]
+_data = {
+&"RESET": SubResource("Animation_8oo06"),
+&"slide_in": SubResource("Animation_wlc0t")
 }
 
 [sub_resource type="Animation" id="Animation_rn5aw"]
@@ -108,6 +93,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(8, 768)]
+}
+
+[sub_resource type="Animation" id="Animation_imsod"]
+resource_name = "slide_in"
+length = 0.333337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 1168), Vector2(8, 768)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8oo06"]
@@ -148,7 +149,6 @@ offset_top = -824.0
 offset_right = 719.0
 offset_bottom = -344.0
 grow_vertical = 0
-texture = ExtResource("6_wlc0t")
 expand_mode = 1
 
 [node name="CharacterSpriteAnimation1" type="AnimationPlayer" parent="Control/CharacterSprite1"]
@@ -169,7 +169,6 @@ offset_right = -192.0
 offset_bottom = -344.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("6_wlc0t")
 expand_mode = 1
 
 [node name="CharacterSpriteAnimation2" type="AnimationPlayer" parent="Control/CharacterSprite2"]
@@ -191,6 +190,7 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="DialogueText" type="Label" parent="Control/TextBox"]
 layout_mode = 1
