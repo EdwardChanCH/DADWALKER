@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkg71ts1l5cna"]
+
+[ext_resource type="PackedScene" uid="uid://cc6n1v2va2l1x" path="res://scenes/test_dragoon.tscn" id="1_0rgdu"]
+
+[sub_resource type="Environment" id="Environment_g2els"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.25
+
+[node name="TestDragoonWorld" type="Node3D"]
+
+[node name="TestDragoon" parent="." instance=ExtResource("1_0rgdu")]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 0, 0)
+
+[node name="AmbientLight" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g2els")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 1, 1)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 1)
+projection = 1
+fov = 90.0
+size = 2.0
