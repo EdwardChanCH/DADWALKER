@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://djks7sqgmdsrl"]
 
 [ext_resource type="Script" uid="uid://jxq6almr4rjj" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="PackedScene" uid="uid://dkg71ts1l5cna" path="res://scenes/test_dragoon_world.tscn" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://chgaqnre855ug" path="res://scenes/dragoon_world.tscn" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wfyh"]
 radius = 20.0
@@ -17,7 +17,7 @@ width = 80
 height = 30
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g2els"]
-viewport_path = NodePath("TestSubViewport")
+viewport_path = NodePath("SubViewport")
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -37,8 +37,8 @@ position = Vector2(0, -64)
 texture = SubResource("ViewportTexture_g2els")
 offset = Vector2(0, -40)
 
-[node name="TestSubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
 transparent_bg = true
 
-[node name="TestDragoonWorld" parent="TestSubViewport" instance=ExtResource("2_g2els")]
+[node name="DragoonWorld" parent="SubViewport" instance=ExtResource("2_g2els")]

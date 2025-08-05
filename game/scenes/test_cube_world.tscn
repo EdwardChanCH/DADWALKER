@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxp4ltvtv6m2m"]
+[gd_scene load_steps=6 format=3 uid="uid://cr2cn7iu36oei"]
 
-[ext_resource type="Script" uid="uid://cprcplelu0skb" path="res://scripts/test_3d_render.gd" id="1_p3j4p"]
+[ext_resource type="Script" uid="uid://bsug3uw4cvlh" path="res://scripts/cube_world.gd" id="1_p3j4p"]
 
 [sub_resource type="Gradient" id="Gradient_0wfyh"]
 colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1)
@@ -14,9 +14,8 @@ albedo_texture = SubResource("GradientTexture2D_sugp2")
 [sub_resource type="BoxMesh" id="BoxMesh_tbgi4"]
 material = SubResource("StandardMaterial3D_jyhfs")
 
-[node name="TestCubeWorld" type="Node3D" node_paths=PackedStringArray("cube")]
+[node name="CubeWorld" type="Node3D"]
 script = ExtResource("1_p3j4p")
-cube = NodePath("TestCube")
 
 [node name="TestCube" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_tbgi4")

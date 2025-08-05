@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://chgaqnre855ug"]
+
+[ext_resource type="Script" uid="uid://085yrwegosj6" path="res://scripts/dragoon_world.gd" id="1_pa4lr"]
+[ext_resource type="PackedScene" uid="uid://b85h3387js3r4" path="res://scenes/dragoon.tscn" id="1_qnf6g"]
+
+[sub_resource type="Environment" id="Environment_g2els"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.25
+
+[node name="DragoonWorld" type="Node3D" node_paths=PackedStringArray("dragoon_node")]
+script = ExtResource("1_pa4lr")
+dragoon_node = NodePath("Dragoon")
+
+[node name="AmbientLight" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g2els")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 1, 1)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 1)
+projection = 1
+fov = 90.0
+size = 2.0
+
+[node name="Dragoon" parent="." instance=ExtResource("1_qnf6g")]

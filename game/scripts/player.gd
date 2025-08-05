@@ -4,7 +4,7 @@ extends CharacterBody2D
 var input_direction: Vector2 = Vector2.ZERO
 var move_speed: float = 400.0
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var direction = input_direction.normalized()
 	self.velocity = direction * move_speed
 	self.move_and_slide()
