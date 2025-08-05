@@ -9,18 +9,21 @@ extends Control
 # Actually this should be done dynamically
 # Can't overkill this
 @export var character_sprite_1: TextureRect
+@export var character_sprite_animation_player_1: AnimationPlayer
+
 @export var character_sprite_2: TextureRect
+@export var character_sprite_animation_player_2: AnimationPlayer
 
 @export var character_sprite_texture: Array[Texture2D]
+
+@export var text_box_animation_player: AnimationPlayer
 
 # The current index of the dialogue sequance
 var current_dialogue_index: int = 0
 
 func _ready() -> void:
-	if(character_name_label or dialogue_text_label):
-		reset_dialogue_sequance()
-		return
-	printerr("Label not set")
+	text_box_animation_player.play("slide_in")
+	reset_dialogue_sequance()
 	pass
 
 func _gui_input(event: InputEvent) -> void:
@@ -50,10 +53,10 @@ func set_dialogue_sequence(set_dialogue_sequence_text: int) -> bool:
 	
 	# Set text and name of the sequence
 	var sequence = dialogue.sequence[set_dialogue_sequence_text]
-	var name = _DialogueSequence.Characters.find_key(sequence.character_name)
+	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
 	
 	dialogue_text_label.text = sequence.sequence_text
-	character_name_label.text = name.capitalize()
+	character_name_label.text = character_name.capitalize()
 	
 	# Set sprite of the sequence	
 	var postion : _Dialogue.Position = dialogue.character[sequence.character_name]
@@ -76,12 +79,16 @@ func set_dialogue_sequence(set_dialogue_sequence_text: int) -> bool:
 func set_character_sprite(character: _DialogueSequence.Characters, position: _Dialogue.Position) -> void:
 	
 	var target_sprite: TextureRect = null
+	var target_animation_player: AnimationPlayer = null
 	
 	match(position):
 		_Dialogue.Position.LEFT:
 			target_sprite = character_sprite_1
+			target_animation_player = character_sprite_animation_player_1
+			
 		_Dialogue.Position.RIGHT:
 			target_sprite = character_sprite_2
+			target_animation_player = character_sprite_animation_player_2
 			
 	if( not target_sprite ):
 		return
@@ -93,13 +100,13 @@ func set_character_sprite(character: _DialogueSequence.Characters, position: _Di
 	match(character):
 		_DialogueSequence.Characters.DOKI:
 			target_sprite.texture = character_sprite_texture[0]
-			return
+			
 		_DialogueSequence.Characters.DAD:
 			target_sprite.texture = character_sprite_texture[1]
-			return
+			
 		_DialogueSequence.Characters.DRAGOON:
 			target_sprite.texture = character_sprite_texture[2]
-			return
-		
-		
+			
+	target_animation_player.play("slide_in")
+	
 	pass
