@@ -4,6 +4,9 @@ extends CharacterBody2D
 ## Dragoon world (handles model animations).
 @export var dragoon_world_node: _DragoonWorld = null
 
+## Accept player input or not.
+@export var can_control: bool = false
+
 ## Player input vector (similar to joystick input).
 var input_vector: Vector2 = Vector2.ZERO
 
@@ -27,6 +30,9 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
+	if (not can_control):
+		return
+	
 	var key := event as InputEventKey
 	var mouse_button := event as InputEventMouseButton
 	var mouse_motion := event as InputEventMouseMotion

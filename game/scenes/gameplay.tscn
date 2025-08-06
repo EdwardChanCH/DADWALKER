@@ -103,9 +103,6 @@ shape = SubResource("RectangleShape2D_ocj2s")
 position = Vector2(1930, 880)
 shape = SubResource("RectangleShape2D_din8e")
 
-[node name="Player" parent="." instance=ExtResource("2_l1v76")]
-position = Vector2(960, 880)
-
 [node name="TestCubeSprite" type="Sprite2D" parent="."]
 position = Vector2(960, 300)
 texture = SubResource("ViewportTexture_ct7aa")
@@ -115,3 +112,184 @@ own_world_3d = true
 transparent_bg = true
 
 [node name="CubeWorld" parent="TestSubViewport" instance=ExtResource("4_ct7aa")]
+
+[node name="YSorted" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(960, 880)
+can_control = true
+
+[node name="Player2" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1440, 970)
+
+[node name="Player3" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1680, 748)
+
+[node name="Player4" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(839, 730)
+
+[node name="Player5" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(749, 989)
+
+[node name="Player6" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(639, 747)
+
+[node name="Player7" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(476, 972)
+
+[node name="Player8" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(409, 744)
+
+[node name="Player9" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(198, 953)
+
+[node name="Player10" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(175, 772)
+
+[node name="Player11" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1140, 1044)
+
+[node name="Player12" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1803, 1039)
+
+[node name="Player13" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1245, 719)
+
+[node name="Player14" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1327, 1033)
+
+[node name="Player15" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1395, 785)
+
+[node name="Player16" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1535, 1046)
+
+[node name="Player17" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1604, 927)
+
+[node name="Player18" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1696, 999)
+
+[node name="Player19" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1841, 898)
+
+[node name="Player20" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1529, 780)
+
+[node name="Player21" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1010, 1051)
+
+[node name="Player22" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(85, 1020)
+
+[node name="Player23" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1256, 822)
+
+[node name="Player24" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1125, 833)
+
+[node name="Player25" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1225, 923)
+
+[node name="Player26" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(891, 1023)
+
+[node name="Player27" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(55, 745)
+
+[node name="Player28" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(607, 999)
+
+[node name="Player29" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(327, 988)
+
+[node name="Player30" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(297, 709)
+
+[node name="Player31" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1483, 958)
+
+[node name="Player32" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1723, 736)
+
+[node name="Player33" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(882, 718)
+
+[node name="Player34" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(792, 977)
+
+[node name="Player35" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(682, 735)
+
+[node name="Player36" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(519, 960)
+
+[node name="Player37" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(452, 732)
+
+[node name="Player38" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(241, 941)
+
+[node name="Player39" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(218, 760)
+
+[node name="Player40" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1183, 1032)
+
+[node name="Player41" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1846, 1027)
+
+[node name="Player42" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1288, 707)
+
+[node name="Player43" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1370, 1021)
+
+[node name="Player44" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1438, 773)
+
+[node name="Player45" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1578, 1034)
+
+[node name="Player46" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1647, 915)
+
+[node name="Player47" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1739, 987)
+
+[node name="Player48" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1884, 886)
+
+[node name="Player49" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1572, 768)
+
+[node name="Player50" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1053, 1039)
+
+[node name="Player51" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(128, 1008)
+
+[node name="Player52" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1299, 810)
+
+[node name="Player53" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1168, 821)
+
+[node name="Player54" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(1268, 911)
+
+[node name="Player55" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(934, 1011)
+
+[node name="Player56" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(98, 733)
+
+[node name="Player57" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(650, 987)
+
+[node name="Player58" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(370, 976)
+
+[node name="Player59" parent="YSorted" instance=ExtResource("2_l1v76")]
+position = Vector2(340, 697)
