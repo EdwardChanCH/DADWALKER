@@ -1,5 +1,5 @@
 class_name _Player
-extends CharacterBody2D
+extends _NPC
 
 ## Dragoon world (handles model animations).
 @export var dragoon_world_node: _DragoonWorld = null
@@ -16,13 +16,21 @@ var null_cancelling_vector: Vector2 = Vector2.ZERO
 ## Payer movement speed.
 var move_speed: float = 400.0
 
+func test() -> void:
+	print("B")
+	pass
+
 func _ready() -> void:
+	super._ready() # Reuse super-class's method.
+	
 	# Check if missing export variables.
 	if (not dragoon_world_node):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
 func _process(delta: float) -> void:
+	super._process(delta) # Reuse super-class's method.
+	
 	# --- Detect Player Input --- #
 	# Uses null-cancelling movement (like in Team Fortress 2)
 	
