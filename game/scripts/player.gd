@@ -1,31 +1,19 @@
 class_name _Player
 extends _NPC
 
-## Dragoon world (handles model animations).
-@export var dragoon_world_node: _DragoonWorld = null
-
-## Accept player input or not.
-@export var can_control: bool = false
-
-## Player input vector (not normalized).
+## Keyboard/Joystick input vector (not normalized).
 var input_vector: Vector2 = Vector2.ZERO
 
 ## Null-cancelling vector (not normalized).
 var null_cancelling_vector: Vector2 = Vector2.ZERO
 
-## Payer movement speed.
-var move_speed: float = 400.0
-
-func test() -> void:
-	print("B")
-	pass
-
 func _ready() -> void:
 	super._ready() # Reuse super-class's method.
 	
-	# Check if missing export variables.
-	if (not dragoon_world_node):
-		push_error("Missing export variables in node '%s'." % [self.name])
+	# TODO
+	# Initialize variables.
+	can_player_control = true
+	move_speed = 400
 	pass
 
 func _process(delta: float) -> void:
@@ -66,6 +54,5 @@ func _physics_process(_delta: float) -> void:
 	self.velocity = direction * move_speed
 	self.move_and_slide()
 	
-	if (direction != Vector2.ZERO):
-		dragoon_world_node.target_look_vector = direction
+	update_look_vector(direction)
 	pass

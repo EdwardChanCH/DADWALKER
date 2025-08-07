@@ -1,5 +1,5 @@
 class_name _DragoonWorld
-extends Node3D
+extends _NPCWorld
 
 ## Dragoon scene root.
 @export var dragoon_node: _Dragoon = null
@@ -33,7 +33,7 @@ func _ready() -> void:
 	animation_node.play("dragoon_walk")
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# --- Update Look Direction --- #
 	if (not __look_vector.is_equal_approx(target_look_vector)):
 		__look_vector = __look_vector.slerp(target_look_vector, Globals.lerp_t(look_decay, delta))
