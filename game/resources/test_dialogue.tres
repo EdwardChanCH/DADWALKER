@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="_Dialogue" load_steps=9 format=3 uid="uid://bihjrlk04fjoq"]
+[gd_resource type="Resource" script_class="_Dialogue" load_steps=10 format=3 uid="uid://bihjrlk04fjoq"]
 
 [ext_resource type="Script" uid="uid://bgv01d7aiks5m" path="res://scripts/dialogue_system/dialogue.gd" id="1_y1akj"]
 [ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/dialogue_sequence.gd" id="2_y1akj"]
@@ -35,7 +35,13 @@ character_name = 2
 sequence_text = "2"
 metadata/_custom_type_script = "uid://8if0smrkob6y"
 
+[sub_resource type="Resource" id="Resource_yus6l"]
+script = ExtResource("3_srvtp")
+character_name = 2
+sequence_text = "Empty Text"
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
 [resource]
 script = ExtResource("1_y1akj")
-sequence = Array[ExtResource("2_y1akj")]([SubResource("Resource_cabj5"), SubResource("Resource_ugcts"), SubResource("Resource_71n3e"), SubResource("Resource_srvtp")])
+sequence = Array[ExtResource("2_y1akj")]([SubResource("Resource_cabj5"), SubResource("Resource_ugcts"), SubResource("Resource_71n3e"), SubResource("Resource_srvtp"), SubResource("Resource_yus6l")])
 metadata/_custom_type_script = "uid://bgv01d7aiks5m"
