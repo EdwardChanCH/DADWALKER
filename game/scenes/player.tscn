@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://djks7sqgmdsrl"]
 
-[ext_resource type="Script" uid="uid://jxq6almr4rjj" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://jxq6almr4rjj" path="res://scripts/player_npc_system/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://chgaqnre855ug" path="res://scenes/dragoon_world.tscn" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wfyh"]
@@ -19,10 +19,10 @@ height = 30
 [sub_resource type="ViewportTexture" id="ViewportTexture_g2els"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("npc_world_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("character_world_node")]
 motion_mode = 1
 script = ExtResource("1_3vyb7")
-npc_world_node = NodePath("SubViewport/DragoonWorld")
+character_world_node = NodePath("SubViewport/DragoonWorld")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 rotation = 1.5708

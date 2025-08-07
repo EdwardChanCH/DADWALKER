@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://chgaqnre855ug"]
 
-[ext_resource type="Script" uid="uid://085yrwegosj6" path="res://scripts/dragoon_world.gd" id="1_pa4lr"]
+[ext_resource type="Script" uid="uid://085yrwegosj6" path="res://scripts/player_npc_system/dragoon_world.gd" id="1_pa4lr"]
 [ext_resource type="PackedScene" uid="uid://b85h3387js3r4" path="res://scenes/dragoon.tscn" id="1_qnf6g"]
 
 [sub_resource type="Environment" id="Environment_g2els"]
@@ -9,9 +9,9 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.25
 
-[node name="DragoonWorld" type="Node3D" node_paths=PackedStringArray("dragoon_node")]
+[node name="DragoonWorld" type="Node3D" node_paths=PackedStringArray("character_node")]
 script = ExtResource("1_pa4lr")
-dragoon_node = NodePath("Dragoon")
+character_node = NodePath("Dragoon")
 
 [node name="AmbientLight" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g2els")
