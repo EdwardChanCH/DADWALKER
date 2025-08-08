@@ -41,58 +41,61 @@ func _ready() -> void:
 	add_child(__music_channel)
 	
 	
-	#DirAccess.open("res://assets/sound/")
-	#print(ResourceLoader.list_directory("res://assets/sound/")[0])
 	var files: Array[String]
-	files.append("res://assets/sound/")
-	get_sub_directories("res://assets/sound/",files)
+	get_file_path("res://assets/sound/",files)
 	
-	for dir in files:
-		var path = ResourceLoader.list_directory(dir)
-		#for sound_path in path:
-			#pass
-			
-		print(path)
-		
+	for item in files:
+		var audio_steam: AudioStream = load(item)
+		__sound_cache.set(item, audio_steam)
 	pass
 
-func get_sub_directories(path: String, files: Array[String]) -> void:
-	var dir = DirAccess.open(path)
-	if(not dir):
-		return
-	
-	dir.list_dir_begin()
-	
-	var file_name = dir.get_next()
-	# No do while loop yay
-	while file_name != "":
-		if(dir.current_is_dir()):
-			var new_dir_path: String
-			new_dir_path = path + file_name + "/"
-			files.append(new_dir_path)
-			get_sub_directories(new_dir_path, files)
-		file_name = dir.get_next()
+func get_file_path(path: String, files: Array[String]) -> void:
+	var list = ResourceLoader.list_directory(path)
+	for item in list:
+		if(item.ends_with("/")):
+			var new_path = path + item
+			get_file_path(new_path, files)
+			continue
+		files.append(path+item)
 	pass
-
 
 func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
 	var sfx_channel = AudioStreamPlayer.new()
 	sfx_channel.name = "SFXChannel" + str(__sfx_channels.size())
 	sfx_channel.bus = "SFX"
+	sfx_channel.stream = sfx
 	sfx_channel.process_mode = Node.PROCESS_MODE_PAUSABLE
 	add_child(sfx_channel)
 	
 	__sfx_channels.set(sfx, sfx_channel)
 	return sfx_channel
 
-static func play_sfx(sfx: AudioStream, volume_linear: float = 1.0) -> AudioStreamPlayer:
+static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:
 	
 	var target_channel: AudioStreamPlayer = null
+	var audio_steam: AudioStream = __sound_cache[sound_path]
 	
-	if(not __sfx_channels.has(sfx)):
-		_instance.create_sfx_channel(sfx)
+	if(not __sfx_channels.has(audio_steam)):
+		_instance.create_sfx_channel(audio_steam)
 	
-	target_channel = __sfx_channels[sfx]
+	target_channel = __sfx_channels[audio_steam]
 	target_channel.volume_linear = volume_linear
 	target_channel.play()
 	return target_channel
+
+static func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
+	var audio_steam: AudioStream = __sound_cache[sound_path]
+	__voice_channel.stop()
+	__voice_channel.stream = audio_steam
+	__voice_channel.volume_linear = volume_linear
+	__voice_channel.play()
+	pass
+	
+static func play_music(sound_path: String, volume_linear: float = 1.0) -> void:
+	var audio_steam: AudioStream = __sound_cache[sound_path]
+	__music_channel.stop()
+	__music_channel.stream = audio_steam
+	__music_channel.volume_linear = volume_linear
+	__music_channel.play()
+
+	pass
