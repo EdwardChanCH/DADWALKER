@@ -14,6 +14,7 @@ func _ready() -> void:
 	# Initialize variables.
 	in_player_control = true
 	move_speed = 400
+	projectile_speed = 400
 	pass
 
 func _process(delta: float) -> void:
@@ -49,4 +50,31 @@ func _process(delta: float) -> void:
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
+	pass
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		print("Player shoot.")
+		shoot_once(get_global_mouse_position() - self.global_position)
+	pass
+
+## Shoot one projectile.
+func shoot_once(p_vector: Vector2) -> void:
+	var p_velocity: Vector2 = p_vector.normalized() * projectile_speed
+	var p_angle: float = Vector2.RIGHT.angle_to(p_vector)
+	
+	var projectile: _Projectile = projectile_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
+	Globals.gameplay.add_projectie_to_scene(projectile)
+	projectile.setup_start(self.global_position, p_velocity, p_angle)
+	pass
+
+## Hit detection.
+func _on_hit_detector_area_entered(area: Area2D) -> void:
+	# TODO
+	print("Player hit.")
+	
+	var projectile := area as _Projectile
+	if (projectile):
+		projectile.despawn()
+	
 	pass

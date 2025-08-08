@@ -4,6 +4,12 @@ extends CharacterBody2D
 ## Character world (handles model rotation and animation).
 @export var character_world_node: _CharacterWorld = null
 
+## Projectile scene as weapon.
+@export var projectile_scene: PackedScene = null
+
+## Projectile speed.
+@export var projectile_speed: float = 50
+
 ## Max health.
 @export var max_health: int = 1
 
@@ -39,7 +45,8 @@ var movement_vector: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Check if missing export variables.
-	if (not character_world_node):
+	if (not character_world_node
+		or not projectile_scene):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Initialize health bar.

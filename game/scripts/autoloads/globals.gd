@@ -2,6 +2,21 @@ extends Node
 ## Use this script for global functions and variables.
 ## Global variables should have getters & setters, and emit signals when changed.
 
+# --- Constants --- #
+
+enum HitboxLayer {
+	WALL = 0,			# Layer 1
+	PLAYER = 1,			# Layer 2
+	ENEMY = 2,			# Layer 3
+	PLAYER_BULLET = 3,	# Layer 4
+	ENEMY_BULLET = 4,	# Layer 5
+	BOSS_BULLET = 5,	# Layer 6
+}
+
+# --- Global Variables --- #
+
+var gameplay: _Gameplay = null
+
 # --- Math Functions --- #
 
 const STEP: float = 0.00001 # Epsilon

@@ -1,10 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://df64whveplypg"]
+[gd_scene load_steps=23 format=3 uid="uid://df64whveplypg"]
 
 [ext_resource type="Script" uid="uid://ca6xflgxec3a0" path="res://scripts/gameplay.gd" id="1_00tan"]
 [ext_resource type="Script" uid="uid://cjqqp3av0j00n" path="res://scripts/camera_2d.gd" id="2_ct7aa"]
-[ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player.tscn" id="2_l1v76"]
+[ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player_npc_system/player.tscn" id="2_l1v76"]
 [ext_resource type="PackedScene" uid="uid://cr2cn7iu36oei" path="res://scenes/test_cube_world.tscn" id="3_ct7aa"]
-[ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/basic_enemy.tscn" id="5_ocj2s"]
+[ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/player_npc_system/basic_enemy.tscn" id="5_ocj2s"]
+[ext_resource type="PackedScene" uid="uid://cy5pgh5s187uq" path="res://scenes/projectiles/feather.tscn" id="6_din8e"]
+[ext_resource type="PackedScene" uid="uid://v777emx0ysva" path="res://scenes/projectiles/bullet.tscn" id="7_101mb"]
+[ext_resource type="PackedScene" uid="uid://cp71so7s63jj6" path="res://scenes/projectiles/sonic_boom.tscn" id="8_hbo4f"]
+[ext_resource type="PackedScene" uid="uid://brixo5wuvafds" path="res://scenes/projectiles/seed.tscn" id="9_ctvyo"]
 
 [sub_resource type="Gradient" id="Gradient_din8e"]
 offsets = PackedFloat32Array(1)
@@ -57,8 +61,9 @@ size = Vector2(20, 360)
 [sub_resource type="ViewportTexture" id="ViewportTexture_ct7aa"]
 viewport_path = NodePath("TestSubViewport")
 
-[node name="Gameplay" type="Node2D"]
+[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("projectile_list")]
 script = ExtResource("1_00tan")
+projectile_list = NodePath("YSorted/ProjectileList")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -117,24 +122,40 @@ transparent_bg = true
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="YSorted" instance=ExtResource("2_l1v76")]
+[node name="GameObjectList" type="Node2D" parent="YSorted"]
+
+[node name="Player" parent="YSorted/GameObjectList" instance=ExtResource("2_l1v76")]
 position = Vector2(960, 880)
 
-[node name="BasicEnemy" parent="YSorted" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
+[node name="BasicEnemy" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
 position = Vector2(1625, 913)
 in_tracking_mode = true
 tracking_object = NodePath("../Player")
 
-[node name="BasicEnemy2" parent="YSorted" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
+[node name="BasicEnemy2" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
 position = Vector2(1795, 807)
 in_tracking_mode = true
 tracking_object = NodePath("../Player")
 max_health = 2
 current_health = 2
 
-[node name="BasicEnemy3" parent="YSorted" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
+[node name="BasicEnemy3" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
 position = Vector2(1796, 1022)
 in_tracking_mode = true
 tracking_object = NodePath("../Player")
 max_health = 3
 current_health = 3
+
+[node name="ProjectileList" type="Node2D" parent="YSorted"]
+
+[node name="Feather" parent="." instance=ExtResource("6_din8e")]
+position = Vector2(111, 808)
+
+[node name="Bullet" parent="." instance=ExtResource("7_101mb")]
+position = Vector2(111, 1018)
+
+[node name="SonicBoom" parent="." instance=ExtResource("8_hbo4f")]
+position = Vector2(447, 1012)
+
+[node name="Seed" parent="." instance=ExtResource("9_ctvyo")]
+position = Vector2(451, 813)
