@@ -18,6 +18,8 @@ extends Control
 
 @export var text_box_animation_player: AnimationPlayer
 
+@export var border_animation_player : AnimationPlayer
+
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
 
@@ -27,7 +29,7 @@ var __current_dialogue_index: int = 0
 var __current_character_position: Array[_DialogueSequence.Characters] = [_DialogueSequence.Characters.NONE, _DialogueSequence.Characters.NONE]
 
 func _ready() -> void:
-	text_box_animation_player.play("slide_in")
+	await play_ui_slide_in_animation();
 	reset_dialogue_sequance()
 	pass
 
@@ -38,7 +40,11 @@ func _gui_input(event: InputEvent) -> void:
 	if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
 		# Can't do current_dialogue_index++ pain
 		__current_dialogue_index += 1
-		if ( not set_dialogue_sequence(__current_dialogue_index) ):
+		
+		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
+		
+		if ( not keep_going ):
+			await play_ui_slide_out_animation()
 			visible = false
 		print("Clicked")
 		
@@ -59,11 +65,26 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 	var current_sequence = dialogue.sequence[new_sequence]
 	
 	if(current_sequence is _TextSequence):
-		set_text(current_sequence)
+		var character_position = set_text(current_sequence)
+		if(character_position != _DialogueSequence.Position.NONE):
+			await play_sprite_ui_animation(character_position, "talk").animation_finished
+			await get_tree().create_timer(0.25).timeout
 		return true
 	
 	if(current_sequence is _CharacterSequence):
-		set_character_sprite(current_sequence)
+		if(current_sequence.play_animation):
+			await play_sprite_ui_animation(current_sequence.character_position, "slide_in", true).animation_finished
+			set_character_sprite(current_sequence)
+			await play_sprite_ui_animation(current_sequence.character_position, "slide_in").animation_finished
+		else:
+			set_character_sprite(current_sequence)
+
+		__current_dialogue_index += 1
+		set_dialogue_sequence(__current_dialogue_index)
+		return true
+
+	if(current_sequence is _SpriteAniatmionSequence):
+		await play_sprite_ui_animation(current_sequence.target_position, current_sequence.animation_name).animation_finished
 		__current_dialogue_index += 1
 		set_dialogue_sequence(__current_dialogue_index)
 		return true
@@ -74,22 +95,19 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 func set_character_sprite(sequence: _CharacterSequence) -> void:
 	
 	var target_sprite: TextureRect = null
-	var target_animation_player: AnimationPlayer = null
 
 	match(sequence.character_position):
 		_DialogueSequence.Position.LEFT:
 			target_sprite = character_sprite_1
-			target_animation_player = character_sprite_animation_player_1
 			__current_character_position[0] = sequence.character_name
 			
 		_DialogueSequence.Position.RIGHT:
 			target_sprite = character_sprite_2
-			target_animation_player = character_sprite_animation_player_2
 			__current_character_position[1] = sequence.character_name
 			
 	if( not target_sprite ):
 		return
-	
+
 	## This is hardcoded to save time
 	## It would be better to have a character class for storing sprite and their expression
 	## Might actually do that later if needed
@@ -104,30 +122,68 @@ func set_character_sprite(sequence: _CharacterSequence) -> void:
 		_:
 			target_sprite.texture = null
 	
-	if(sequence.play_animation):
-		target_animation_player.play(sequence.animation_name, sequence.animation_speed)
-	#
 	pass
 
-
-func set_text(sequence: _TextSequence) -> void:
+func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	# Set text and name of the sequence
 	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
 	
 	dialogue_text_label.text = sequence.sequence_text
-	character_name_label.text = character_name.capitalize()
 	
+	if(character_name != "None"):
+		character_name_label.text = character_name.capitalize()
 	
 	if(__current_character_position[0] == sequence.character_name):
 		character_sprite_1.modulate = Color(1, 1, 1)
 		character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
-		return
-		
+		return _DialogueSequence.Position.LEFT
+
 	if (__current_character_position[1] == sequence.character_name):
 		character_sprite_1.modulate = Color(0.5, 0.5, 0.5)
 		character_sprite_2.modulate = Color(1, 1, 1)
-		return
+		return _DialogueSequence.Position.RIGHT
 	
 	character_sprite_1.modulate = Color(0.5, 0.5, 0.5)
 	character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
-	pass
+	return _DialogueSequence.Position.NONE
+
+func play_sprite_ui_animation(character_position: _DialogueSequence.Position, animation_name: String, play_backwards: bool = false) -> AnimationPlayer:
+	var target_animation_player: AnimationPlayer = null
+	match(character_position):
+		_DialogueSequence.Position.LEFT:
+			target_animation_player = character_sprite_animation_player_1
+			
+		_DialogueSequence.Position.RIGHT:
+			target_animation_player = character_sprite_animation_player_2
+	
+	if(play_backwards):
+		target_animation_player.play_backwards(animation_name)
+	else:
+		target_animation_player.play(animation_name)
+		
+	return target_animation_player
+
+func play_ui_slide_in_animation() -> Signal:
+	
+	set_character_sprite(dialogue.starting_characters_1)
+	set_character_sprite(dialogue.starting_characters_2)
+	
+	border_animation_player.play("slide_in")
+	character_sprite_animation_player_1.play("slide_in")
+	character_sprite_animation_player_2.play("slide_in")
+	text_box_animation_player.play("slide_in")
+	await character_sprite_animation_player_2.animation_finished
+	return get_tree().create_timer(0.25).timeout
+
+func play_ui_slide_out_animation() -> Signal:
+	
+	border_animation_player.play_backwards("slide_in")
+	character_sprite_animation_player_1.play_backwards("slide_in")
+	character_sprite_animation_player_2.play_backwards("slide_in")
+	text_box_animation_player.play_backwards("slide_in")
+	await character_sprite_animation_player_2.animation_finished
+	
+	border_animation_player.play_backwards("slide_in")
+	await border_animation_player.animation_finished
+	
+	return get_tree().create_timer(0.25).timeout
