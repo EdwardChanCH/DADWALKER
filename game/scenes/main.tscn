@@ -32,3 +32,21 @@ offset_bottom = 23.0
 grow_horizontal = 0
 text = "0 FPS"
 horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Name" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2

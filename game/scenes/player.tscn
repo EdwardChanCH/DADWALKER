@@ -28,12 +28,12 @@ character_world_node = NodePath("SubViewport/DragoonWorld")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_0wfyh")
 
-[node name="PlayerShadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, 7.15256e-07)
 scale = Vector2(1, 1.33333)
 texture = SubResource("GradientTexture2D_jyhfs")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
+[node name="ViewportSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -64)
 texture = SubResource("ViewportTexture_g2els")

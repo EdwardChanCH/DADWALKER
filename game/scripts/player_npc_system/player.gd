@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 	# TODO
 	# Initialize variables.
-	can_player_control = true
+	in_player_control = true
 	move_speed = 400
 	pass
 
@@ -46,13 +46,7 @@ func _process(delta: float) -> void:
 	else:
 		input_vector.y = 0
 	
-	pass
-
-func _physics_process(_delta: float) -> void:
-	var direction: Vector2 = input_vector.normalized()
-	
-	self.velocity = direction * move_speed
-	self.move_and_slide()
-	
-	update_look_vector(direction)
+	# --- Update Move Vector --- #
+	if (in_player_control):
+		move_vector = input_vector
 	pass
