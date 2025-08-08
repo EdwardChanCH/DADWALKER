@@ -26,6 +26,6 @@ func setup_start(p_global_position: Vector2, p_velocity: Vector2, p_rotation: fl
 func despawn() -> void:
 	# TODO add animation
 	move_velocity = Vector2.ZERO
-	emit_signal("despawned")
+	despawned.emit()
 	self.queue_free()
 	pass

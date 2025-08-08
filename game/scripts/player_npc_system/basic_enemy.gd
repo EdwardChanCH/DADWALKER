@@ -21,6 +21,9 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	if (current_health <= 0):
+		return # Skip.
+	
 	super._process(delta)
 	
 	# -- Track Player Or Walk Straight--- #
@@ -28,6 +31,13 @@ func _process(delta: float) -> void:
 		move_vector = tracking_object.global_position - self.global_position
 	else:
 		move_vector = idle_vector
+	pass
+
+func _physics_process(delta: float) -> void:
+	if (current_health <= 0):
+		return # Skip.
+	
+	super._physics_process(delta)
 	pass
 
 ## Shoot one batch of projectiles.
@@ -55,10 +65,45 @@ func shoot_once(p_vector: Vector2) -> void:
 
 ## Hit detection.
 func _on_hit_detector_area_entered(area: Area2D) -> void:
-	# TODO
-	print("Enemy hit.")
+	# Prevent self damage.
+	#if (current_health <= 0):
+	#	return # Skip.
 	
 	var projectile := area as _Projectile
-	if (projectile):
-		shoot_batch(projectile.move_velocity, deg_to_rad(10), 2)
+	
+	if (current_health > 0 and projectile):
+		print("Enemy hit.")
+		if (projectile is _Feather):
+			current_health -= 1
+		elif (projectile is _Seed):
+			current_health = 0
+		elif (projectile is _Bullet):
+			current_health = 0
+		elif (projectile is _SonicBoom):
+			current_health = 0
+			
+		if (current_health <= 0):
+			_on_death()
+			
+			# Spawn seeds.
+			shoot_batch(projectile.move_velocity, deg_to_rad(15), 1)
+		
+		# Despawn incoming projectile.
+		projectile.despawn()
+	pass
+
+func _on_death() -> void:
+	# Disable collisions.
+	self.collision_layer = 0
+	self.collision_mask = 0
+	hit_detector_node.collision_layer = 0
+	hit_detector_node.collision_mask = 0
+	
+	# Disable controls.
+	in_sequence_control = false
+	in_logic_control = false
+	in_player_control = false
+	
+	# Play death animation.
+	character_world_node.start_death()
 	pass

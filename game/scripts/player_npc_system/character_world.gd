@@ -33,6 +33,8 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func start_death() -> void:
+	# Tilt upwards.
+	target_look_vector = target_look_vector * 0.001 + Vector3.UP
 	pass
 
 func update_health(new_health: int) -> void:

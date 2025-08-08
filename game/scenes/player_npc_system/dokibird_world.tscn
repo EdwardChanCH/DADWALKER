@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://ducdx3k7iena3"]
+
+[ext_resource type="Script" uid="uid://eorvkgedu4ls" path="res://scripts/player_npc_system/dokibird_world.gd" id="1_rcpg1"]
+[ext_resource type="PackedScene" uid="uid://10pf7yr28j7j" path="res://scenes/player_npc_system/dokibird.tscn" id="2_rcpg1"]
+
+[sub_resource type="Environment" id="Environment_g2els"]
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.25
+
+[node name="DokibirdWorld" type="Node3D" node_paths=PackedStringArray("character_node")]
+script = ExtResource("1_rcpg1")
+character_node = NodePath("Dokibird")
+
+[node name="AmbientLight" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g2els")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 1, 1, 1)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+directional_shadow_mode = 0
+sky_mode = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1, 1)
+projection = 1
+fov = 90.0
+size = 2.0
+
+[node name="Dokibird" parent="." instance=ExtResource("2_rcpg1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

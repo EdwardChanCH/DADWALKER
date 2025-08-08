@@ -22,10 +22,11 @@ height = 80
 [sub_resource type="ViewportTexture" id="ViewportTexture_g2els"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("character_world_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("character_world_node", "hit_detector_node")]
 motion_mode = 1
 script = ExtResource("1_1yq3d")
 character_world_node = NodePath("SubViewport/DragoonWorld")
+hit_detector_node = NodePath("HitDetector")
 projectile_scene = ExtResource("2_02p00")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
@@ -34,7 +35,7 @@ shape = SubResource("CircleShape2D_g2els")
 
 [node name="HitDetector" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 52
+collision_mask = 108
 
 [node name="HitBox" type="CollisionShape2D" parent="HitDetector"]
 shape = SubResource("CircleShape2D_qhqgy")
