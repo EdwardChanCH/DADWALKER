@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqpvrgytriqcp"
-path.s3tc="res://.godot/imported/niko_tomato_texturetomato.png-796155d341dc550032a04ad0a8370b8f.s3tc.ctex"
+uid="uid://bqjojqc31ifmy"
+path.s3tc="res://.godot/imported/tomato_texture.png-93a29a59beaf5c44580fd8c891953038.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/3d_models/niko_tomato_texturetomato.png"
-dest_files=["res://.godot/imported/niko_tomato_texturetomato.png-796155d341dc550032a04ad0a8370b8f.s3tc.ctex"]
+source_file="res://assets/textures/tomato_texture.png"
+dest_files=["res://.godot/imported/tomato_texture.png-93a29a59beaf5c44580fd8c891953038.s3tc.ctex"]
 
 [params]
 
