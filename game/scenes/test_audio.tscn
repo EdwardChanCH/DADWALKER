@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8mb2wo3jexl"]
+
+[ext_resource type="Script" uid="uid://drdlnq3s5kji2" path="res://scripts/test_audio.gd" id="1_kuyw6"]
+[ext_resource type="AudioStream" uid="uid://ccu1lbge1xe7h" path="res://assets/sound/sfx/test/bang.wav" id="2_27h1d"]
+
+[node name="TestAudio" type="Node2D"]
+script = ExtResource("1_kuyw6")
+audio = ExtResource("2_27h1d")
