@@ -2,15 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dts3foj5j1d" path="res://scripts/projectiles/feather.gd" id="1_0eak1"]
 
-[sub_resource type="Gradient" id="Gradient_e124b"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_101mb"]
-gradient = SubResource("Gradient_e124b")
-width = 20
-height = 10
-
 [sub_resource type="Gradient" id="Gradient_4bh5q"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0, 0, 0, 0.588235)
@@ -19,6 +10,15 @@ colors = PackedColorArray(0, 0, 0, 0.588235)
 gradient = SubResource("Gradient_4bh5q")
 width = 20
 height = 20
+
+[sub_resource type="Gradient" id="Gradient_e124b"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_101mb"]
+gradient = SubResource("Gradient_e124b")
+width = 20
+height = 10
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ocj2s"]
 
@@ -29,12 +29,14 @@ monitoring = false
 script = ExtResource("1_0eak1")
 sprite = NodePath("Sprite")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -30)
-texture = SubResource("GradientTexture2D_101mb")
-
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_e124b")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -30)
+texture = SubResource("GradientTexture2D_101mb")
 
 [node name="TriggerBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ocj2s")

@@ -123,6 +123,7 @@ transparent_bg = true
 y_sort_enabled = true
 
 [node name="GameObjectList" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Player" parent="YSorted/GameObjectList" instance=ExtResource("2_l1v76")]
 position = Vector2(960, 880)
@@ -147,6 +148,7 @@ max_health = 3
 current_health = 3
 
 [node name="ProjectileList" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Feather" parent="." instance=ExtResource("6_din8e")]
 position = Vector2(111, 808)

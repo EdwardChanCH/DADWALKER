@@ -44,6 +44,7 @@ shape = SubResource("CircleShape2D_fn5nn")
 texture = SubResource("GradientTexture2D_jyhfs")
 
 [node name="ViewportSprite" type="Sprite2D" parent="."]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -64)
 texture = SubResource("ViewportTexture_g2els")
