@@ -1,0 +1,2 @@
+class_name _DragoonWorld
+extends _CharacterWorld
