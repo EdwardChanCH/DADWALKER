@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=23 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_6q285"]
 [ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_jx1sv"]
@@ -6,7 +6,31 @@
 [ext_resource type="Texture2D" uid="uid://csygnkeas6ant" path="res://assets/textures/doki_temp.png" id="4_imsod"]
 [ext_resource type="Texture2D" uid="uid://cucbumpae4lpl" path="res://assets/textures/dad_temp.png" id="4_wlc0t"]
 [ext_resource type="Texture2D" uid="uid://qvktdvdaj5yq" path="res://icon.svg" id="6_wlc0t"]
-[ext_resource type="Texture2D" uid="uid://bvvxdlaa4e3mk" path="res://assets/textures/Heheh.png" id="7_x1ric"]
+
+[sub_resource type="Animation" id="Animation_tktbo"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackBorder1:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackBorder2:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(992.001, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_erym8"]
 resource_name = "slide_in"
@@ -32,31 +56,6 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(1080, -0.25, 0, 0.25, 0, 992.001, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.333333)
-}
-
-[sub_resource type="Animation" id="Animation_tktbo"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackBorder1:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlackBorder2:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(992.001, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x6yiq"]
@@ -88,6 +87,32 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(224, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_x6yiq"]
+resource_name = "shake"
+length = 0.333337
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1),
+"points": PackedFloat32Array(32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 32, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.0678118, 0.133686, 0.19956, 0.266403, 0.333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 0, 1),
+"points": PackedFloat32Array(224, 0, 0, 0, 0, 232, -0.166668, 0, 0.166668, 0, 224, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.266403, 0.333333)
 }
 
 [sub_resource type="Animation" id="Animation_x1ric"]
@@ -142,32 +167,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.166667, 0.333337)
 }
 
-[sub_resource type="Animation" id="Animation_x6yiq"]
-resource_name = "shake"
-length = 0.333337
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1),
-"points": PackedFloat32Array(32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 32, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.0678118, 0.133686, 0.19956, 0.266403, 0.333333)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(1, 0, 1),
-"points": PackedFloat32Array(224, 0, 0, 0, 0, 232, -0.166668, 0, 0.166668, 0, 224, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.266403, 0.333333)
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rn5aw"]
 _data = {
 &"RESET": SubResource("Animation_ecd83"),
@@ -199,6 +198,32 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(224, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_rqbxa"]
+resource_name = "shake"
+length = 0.333337
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1),
+"points": PackedFloat32Array(1432, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 1464, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 1464, 0, 0, 0, 0, 1432, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.066843, 0.134655, 0.19956, 0.267372, 0.333333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(224, -0.0005, 0, 0.0005, 0, 224, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0, 0.333333)
 }
 
 [sub_resource type="Animation" id="Animation_wlc0t"]
@@ -251,32 +276,6 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(224, -0.0005, 0, 0.0005, 0, 200, -0.0005, 0, 0.0005, 0, 224, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0, 0.166667, 0.333333)
-}
-
-[sub_resource type="Animation" id="Animation_rqbxa"]
-resource_name = "shake"
-length = 0.333337
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(1, 1, 1, 1, 1, 1),
-"points": PackedFloat32Array(1432, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 1464, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 1464, 0, 0, 0, 0, 1432, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.066843, 0.134655, 0.19956, 0.267372, 0.333333)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(224, -0.0005, 0, 0.0005, 0, 224, -0.0005, 0, 0.0005, 0),
-"times": PackedFloat32Array(0, 0.333333)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hypas"]
@@ -367,14 +366,13 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.08148
-offset_top = -87.9985
-offset_bottom = -87.9985
+offset_top = -87.999
+offset_bottom = -87.9991
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="CharacterSprite1" type="TextureRect" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -394,7 +392,6 @@ libraries = {
 }
 
 [node name="CharacterSprite2" type="TextureRect" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -466,7 +463,3 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
-
-[node name="Heheh" type="Sprite2D" parent="Control"]
-position = Vector2(960, 544)
-texture = ExtResource("7_x1ric")
