@@ -88,6 +88,10 @@ static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStr
 		_instance.create_sfx_channel(audio_steam)
 	
 	target_channel = __sfx_channels[audio_steam]
+	
+	if(target_channel.playing):
+		return target_channel
+		
 	target_channel.volume_linear = volume_linear
 	target_channel.play()
 	return target_channel

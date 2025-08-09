@@ -62,11 +62,13 @@ step = 0.1
 value = 0.5
 
 [node name="Label3" type="Label" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "UI"
 
 [node name="HSlider3" type="HSlider" parent="Control/VBoxContainer"]
+visible = false
 layout_mode = 2
 max_value = 1.0
 step = 0.1
@@ -123,11 +125,13 @@ offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 20
+selected = 0
 item_count = 4
 popup/item_0/text = "Play as sfx"
 popup/item_0/id = 0
 popup/item_1/text = "Play as ui"
 popup/item_1/id = 1
+popup/item_1/disabled = true
 popup/item_2/text = "Play as music"
 popup/item_2/id = 2
 popup/item_3/text = "Play as voice"
@@ -148,3 +152,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 400.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.52816, 0, 0.164663, 1)
+theme_override_font_sizes/font_size = 51
+text = "Audio tester 0.1b"
