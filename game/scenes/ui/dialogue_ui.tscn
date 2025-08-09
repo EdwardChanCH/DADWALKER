@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvhpyaj518tl8"]
+
+[ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
+[ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_d67fy"]
+[ext_resource type="Texture2D" uid="uid://bdhyevkmqjbsn" path="res://assets/textures/character_sprite/doki_1.png" id="3_mlkru"]
+[ext_resource type="Texture2D" uid="uid://bw6jyuy5jl4se" path="res://assets/textures/character_sprite/doki_2.png" id="4_h642u"]
+[ext_resource type="Texture2D" uid="uid://b2h7obwoywep1" path="res://assets/textures/character_sprite/doki_3.png" id="5_c5gvf"]
+[ext_resource type="PackedScene" uid="uid://b4gb4p6cibq17" path="res://scenes/ui/border.tscn" id="6_qy5q6"]
+[ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/character_sprite.tscn" id="7_gegk4"]
+
+[sub_resource type="Animation" id="Animation_rn5aw"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(640, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_imsod"]
+resource_name = "slide_in"
+length = 0.333337
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1200, -0.166669, 0, 0.166669, 0, 1200, -0.166669, 0, 0.0665667, -550.5, 640, -0.333333, -1, 0.166669, 0),
+"times": PackedFloat32Array(0, 0.0001, 0.333333)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8oo06"]
+_data = {
+&"RESET": SubResource("Animation_rn5aw"),
+&"slide_in": SubResource("Animation_imsod")
+}
+
+[node name="DialogueUI" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "character_sprite_1", "character_sprite_2", "border", "text_box_animation_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_86bo4")
+character_name_label = NodePath("TextBox/CharacterName")
+dialogue_text_label = NodePath("TextBox/DialogueText")
+dialogue = ExtResource("2_d67fy")
+character_sprite_1 = NodePath("CharacterSprite1")
+character_sprite_2 = NodePath("CharacterSprite2")
+border = NodePath("Borders")
+character_sprite_texture = Array[Texture2D]([ExtResource("3_mlkru"), ExtResource("4_h642u"), ExtResource("5_c5gvf")])
+text_box_animation_player = NodePath("TextBox/CharacterName/TextBoxAnimation")
+metadata/_edit_lock_ = true
+
+[node name="Borders" parent="Control" instance=ExtResource("6_qy5q6")]
+layer = 0
+
+[node name="CharacterSprite1" parent="Control" instance=ExtResource("7_gegk4")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 288.0
+offset_top = -376.0
+offset_right = 388.0
+offset_bottom = -276.0
+grow_horizontal = 1
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="CharacterSprite2" parent="Control" instance=ExtResource("7_gegk4")]
+layout_mode = 1
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 1680.0
+offset_top = -376.0
+offset_right = 1780.0
+offset_bottom = -276.0
+grow_horizontal = 1
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="TextBox" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 544.0
+offset_top = 640.0
+offset_right = -544.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+mouse_filter = 1
+metadata/_edit_lock_ = true
+
+[node name="DialogueText" type="Label" parent="Control/TextBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0192308
+anchor_top = 0.21131
+anchor_right = 0.983173
+anchor_bottom = 0.979167
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY "
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="CharacterName" type="Label" parent="Control/TextBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0192308
+anchor_top = 0.0238095
+anchor_right = 0.983517
+anchor_bottom = 0.1875
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 40
+text = "Name"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextBoxAnimation" type="AnimationPlayer" parent="Control/TextBox/CharacterName"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_8oo06")
+}
