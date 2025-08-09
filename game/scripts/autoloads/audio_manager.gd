@@ -18,6 +18,8 @@ static var __sfx_channels: Dictionary[AudioStream, AudioStreamPlayer]
 static var __voice_channel: AudioStreamPlayer
 static var __music_channel: AudioStreamPlayer
 
+static var audio_path_list: Array[String]
+
 func _ready() -> void:
 	
 	# Sington stuff
@@ -38,6 +40,7 @@ func _ready() -> void:
 	__music_channel = AudioStreamPlayer.new()
 	__music_channel.name = "MusicChannel"
 	__music_channel.bus = "Music"
+	__music_channel.finished.connect(_music_loop)
 	add_child(__music_channel)
 	
 	
@@ -47,6 +50,8 @@ func _ready() -> void:
 	for item in files:
 		var audio_steam: AudioStream = load(item)
 		__sound_cache.set(item, audio_steam)
+		
+	audio_path_list = files
 	pass
 
 func get_file_path(path: String, files: Array[String]) -> void:
@@ -69,6 +74,10 @@ func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
 	
 	__sfx_channels.set(sfx, sfx_channel)
 	return sfx_channel
+
+func _music_loop() -> void:
+	__music_channel.play()
+	pass
 
 static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:
 	
@@ -97,5 +106,9 @@ static func play_music(sound_path: String, volume_linear: float = 1.0) -> void:
 	__music_channel.stream = audio_steam
 	__music_channel.volume_linear = volume_linear
 	__music_channel.play()
+	pass
 
+static func set_volume(type: AudioType, volume_linear: float) -> void:
+	var index: int = type as int
+	AudioServer.set_bus_volume_linear(index, volume_linear)
 	pass
