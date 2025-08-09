@@ -8,7 +8,13 @@ extends _GameObject
 @export var tracking_object: Node2D = null
 
 ## Vector when not in tracking mode (not normalized).
-var idle_vector: Vector2 = Vector2.LEFT
+@export var idle_vector: Vector2 = Vector2.LEFT
+
+@export var push_speed: float = 3000
+
+## Slope of decay of smoothed push deceleration.
+@export_range(1, 25, Globals.STEP, "suffix:/s")
+var push_decay: float = 10
 
 func _ready() -> void:
 	super._ready()
@@ -36,6 +42,24 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if (current_health <= 0):
 		return # Skip.
+	
+	# Allow being pushed.
+	push_velocity = push_velocity.lerp(Vector2.ZERO, Globals.lerp_t(push_decay, delta))
+	for index: int in self.get_slide_collision_count():
+		var collision: KinematicCollision2D = self.get_slide_collision(index)
+		var collider: _GameObject = collision.get_collider() as _GameObject
+		var collider_normal: Vector2 = collision.get_normal()
+		
+		if (collider):
+			if (collider is _Player):
+				# Player can apply push velocity.
+				push_velocity = collider_normal * push_speed
+			elif (collider is _BasicEnemy):
+				# Use the larger vector instead of adding (to prevent sticking).
+				if (push_velocity.length_squared() < collider.push_velocity.length_squared()):
+					push_velocity = collider.push_velocity
+				else:
+					pass
 	
 	super._physics_process(delta)
 	pass

@@ -1,24 +1,23 @@
-[gd_scene load_steps=13 format=4 uid="uid://cktyiw0rex8h3"]
+[gd_scene load_steps=14 format=4 uid="uid://cktyiw0rex8h3"]
 
 [ext_resource type="Script" uid="uid://domxpyi12d2ja" path="res://scripts/player_npc_system/tomato.gd" id="1_schvm"]
-[ext_resource type="Texture2D" uid="uid://bqpvrgytriqcp" path="res://assets/3d_models/niko_tomato_texturetomato.png" id="1_tsxsy"]
-[ext_resource type="Texture2D" uid="uid://bqjojqc31ifmy" path="res://assets/textures/tomato_texture.png" id="2_lna8b"]
+[ext_resource type="Texture2D" uid="uid://bq4n7kx6hsvpx" path="res://assets/textures/tomato_tex_red.png" id="3_lna8b"]
+[ext_resource type="Texture2D" uid="uid://buot6p1nc4cs" path="res://assets/textures/tomato_tex_yellow.png" id="3_yrepj"]
+[ext_resource type="Texture2D" uid="uid://ipp3tgwiib11" path="res://assets/textures/tomato_tex_green.png" id="4_t5844"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4n0l7"]
-albedo_texture = ExtResource("2_lna8b")
+albedo_texture = ExtResource("3_lna8b")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yrepj"]
-albedo_color = Color(0, 0, 1, 1)
-albedo_texture = ExtResource("2_lna8b")
+albedo_texture = ExtResource("3_yrepj")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t5844"]
-albedo_color = Color(0, 1, 0, 1)
-albedo_texture = ExtResource("2_lna8b")
+albedo_texture = ExtResource("4_t5844")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvb75"]
 resource_name = "mattomato"
 cull_mode = 2
-albedo_texture = ExtResource("1_tsxsy")
+albedo_texture = ExtResource("3_lna8b")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sgmrs"]
 resource_name = "niko_tomato_Cube_007"

@@ -16,6 +16,9 @@ extends CharacterBody2D
 ## Max health.
 @export var max_health: int = 1
 
+## Minimum push speed, squared (for push speed to dominate).
+@export var push_speed_sq_min: float = 400
+
 # TODO
 ## Current health.
 @export var current_health: int = 1 :
@@ -48,8 +51,8 @@ var move_vector: Vector2 = Vector2.ZERO
 ## Movement speed.
 var move_speed: float = 0
 
-## Extra movement velocity (for pushing other game objects)
-var move_velocity_extra
+## Movement velocity from being pushed.
+var push_velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Check if missing export variables.
@@ -69,7 +72,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var move_direction: Vector2 = move_vector.normalized()
 	
-	self.velocity = move_direction * move_speed
+	if (push_velocity.length_squared() > push_speed_sq_min):
+		self.velocity = push_velocity
+	else:
+		self.velocity = move_direction * move_speed + push_velocity
 	self.move_and_slide()
 	
 	update_look_vector(move_direction)
