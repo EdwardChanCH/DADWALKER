@@ -123,6 +123,7 @@ transparent_bg = true
 y_sort_enabled = true
 
 [node name="GameObjectList" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Player" parent="YSorted/GameObjectList" instance=ExtResource("2_l1v76")]
 position = Vector2(960, 880)
@@ -133,20 +134,21 @@ in_tracking_mode = true
 tracking_object = NodePath("../Player")
 
 [node name="BasicEnemy2" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
-position = Vector2(1795, 807)
+position = Vector2(1319, 826)
 in_tracking_mode = true
 tracking_object = NodePath("../Player")
 max_health = 2
 current_health = 2
 
 [node name="BasicEnemy3" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
-position = Vector2(1796, 1022)
+position = Vector2(1429, 978)
 in_tracking_mode = true
 tracking_object = NodePath("../Player")
 max_health = 3
 current_health = 3
 
 [node name="ProjectileList" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="Feather" parent="." instance=ExtResource("6_din8e")]
 position = Vector2(111, 808)
