@@ -38,6 +38,7 @@ offset_bottom = -94.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
@@ -110,6 +111,7 @@ offset_bottom = 335.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 25
+metadata/_edit_lock_ = true
 
 [node name="OptionButton" type="OptionButton" parent="Control"]
 layout_mode = 1
@@ -136,6 +138,7 @@ popup/item_2/text = "Play as music"
 popup/item_2/id = 2
 popup/item_3/text = "Play as voice"
 popup/item_3/id = 3
+metadata/_edit_lock_ = true
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 1
@@ -152,6 +155,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 text = "Play"
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
@@ -162,3 +166,4 @@ offset_bottom = 128.0
 theme_override_colors/font_color = Color(0.52816, 0, 0.164663, 1)
 theme_override_font_sizes/font_size = 51
 text = "Audio tester 0.1b"
+metadata/_edit_lock_ = true

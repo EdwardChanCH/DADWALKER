@@ -70,6 +70,7 @@ func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
 	sfx_channel.bus = "SFX"
 	sfx_channel.stream = sfx
 	sfx_channel.process_mode = Node.PROCESS_MODE_PAUSABLE
+	sfx_channel.max_polyphony = 4
 	add_child(sfx_channel)
 	
 	__sfx_channels.set(sfx, sfx_channel)
@@ -84,16 +85,17 @@ static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStr
 	var target_channel: AudioStreamPlayer = null
 	var audio_steam: AudioStream = __sound_cache[sound_path]
 	
-	if(not __sfx_channels.has(audio_steam)):
+	if (not __sfx_channels.has(audio_steam)):
 		_instance.create_sfx_channel(audio_steam)
 	
 	target_channel = __sfx_channels[audio_steam]
-	
-	if(target_channel.playing):
-		return target_channel
+	#
+	#if (target_channel.playing):
+		#return target_channel
 		
 	target_channel.volume_linear = volume_linear
 	target_channel.play()
+
 	return target_channel
 
 static func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
