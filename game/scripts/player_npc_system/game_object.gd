@@ -4,6 +4,9 @@ extends CharacterBody2D
 ## Character world (handles model rotation and animation).
 @export var character_world_node: _CharacterWorld = null
 
+## Hit detector.
+@export var hit_detector_node: Area2D = null
+
 ## Projectile scene as weapon.
 @export var projectile_scene: PackedScene = null
 
@@ -13,9 +16,17 @@ extends CharacterBody2D
 ## Max health.
 @export var max_health: int = 1
 
+## Minimum push speed, squared (for push speed to dominate).
+@export var push_speed_sq_min: float = 400
+
 # TODO
 ## Current health.
-@export var current_health: int = 1
+@export var current_health: int = 1 :
+	get:
+		return current_health
+	set(value):
+		current_health = value
+		_on_health_changed(value)
 
 ## Delay before health can regenerate.
 @export_range(0, 100, Globals.STEP, "suffix:s")
@@ -40,8 +51,8 @@ var move_vector: Vector2 = Vector2.ZERO
 ## Movement speed.
 var move_speed: float = 0
 
-## Movement vector (not normalized).
-var movement_vector: Vector2 = Vector2.ZERO
+## Movement velocity from being pushed.
+var push_velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Check if missing export variables.
@@ -61,7 +72,10 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var move_direction: Vector2 = move_vector.normalized()
 	
-	self.velocity = move_direction * move_speed
+	if (push_velocity.length_squared() > push_speed_sq_min):
+		self.velocity = push_velocity
+	else:
+		self.velocity = move_direction * move_speed + push_velocity
 	self.move_and_slide()
 	
 	update_look_vector(move_direction)
@@ -73,5 +87,9 @@ func update_look_vector(direction: Vector2) -> void:
 	pass
 
 func _on_health_changed(new_health: int) -> void:
-	character_world_node.update_health(new_health)
+	if (not Engine.is_editor_hint()):
+		if (new_health > 0):
+			character_world_node.update_health(new_health)
+		else:
+			character_world_node.update_health(0)
 	pass

@@ -1,0 +1,2 @@
+class_name _DadWorld
+extends _CharacterWorld

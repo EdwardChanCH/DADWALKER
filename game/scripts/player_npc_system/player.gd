@@ -18,6 +18,9 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+	if (current_health <= 0):
+		return # Skip.
+	
 	super._process(delta)
 	
 	# --- Detect Player Input --- #
@@ -50,6 +53,13 @@ func _process(delta: float) -> void:
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
+	pass
+
+func _physics_process(delta: float) -> void:
+	if (current_health <= 0):
+		return # Skip.
+	
+	super._physics_process(delta)
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

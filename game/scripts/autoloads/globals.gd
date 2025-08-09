@@ -8,9 +8,10 @@ enum HitboxLayer {
 	WALL = 0,			# Layer 1
 	PLAYER = 1,			# Layer 2
 	ENEMY = 2,			# Layer 3
-	PLAYER_BULLET = 3,	# Layer 4
-	ENEMY_BULLET = 4,	# Layer 5
-	BOSS_BULLET = 5,	# Layer 6
+	BOSS = 3,			# Layer 4
+	PLAYER_BULLET = 4,	# Layer 5
+	ENEMY_BULLET = 5,	# Layer 6
+	BOSS_BULLET = 6,	# Layer 7
 }
 
 # --- Global Variables --- #

@@ -37,5 +37,5 @@ func update_health_bar(new_health: int) -> void:
 
 func start_walk() -> void:
 	# TODO
-	animation_player.play("dragoon_walk")
+	animation_player.play("Animation")
 	pass
