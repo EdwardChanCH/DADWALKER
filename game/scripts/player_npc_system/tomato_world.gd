@@ -1,0 +1,2 @@
+class_name _TomatoWorld
+extends _CharacterWorld

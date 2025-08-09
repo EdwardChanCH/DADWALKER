@@ -1,3 +1,32 @@
 extends Node
 ## Use this script for global functions and variables.
 ## Global variables should have getters & setters, and emit signals when changed.
+
+# --- Constants --- #
+
+enum HitboxLayer {
+	WALL = 0,			# Layer 1
+	PLAYER = 1,			# Layer 2
+	ENEMY = 2,			# Layer 3
+	BOSS = 3,			# Layer 4
+	PLAYER_BULLET = 4,	# Layer 5
+	ENEMY_BULLET = 5,	# Layer 6
+	BOSS_BULLET = 6,	# Layer 7
+}
+
+# --- Global Variables --- #
+
+var gameplay: _Gameplay = null
+
+# --- Math Functions --- #
+
+const STEP: float = 0.00001 # Epsilon
+
+## @GlobalScope.log() new implementation.
+func logg(x: float, base: float) -> float:
+	return log(x) / log(base)
+
+## Find lerp weight t using exponential decay.
+## [url]https://www.youtube.com/watch?v=LSNQuFEDOyQ[/url]
+func lerp_t(decay: float, delta: float) -> float:
+	return 1 - exp(-decay * delta)

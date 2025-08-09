@@ -1,0 +1,2 @@
+class_name _DokibirdWorld
+extends _CharacterWorld
