@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://b42hmvdparty7"]
 
-[ext_resource type="Texture2D" uid="uid://bdhyevkmqjbsn" path="res://assets/textures/character_sprite/doki_1.png" id="1_k8qwi"]
 [ext_resource type="Script" uid="uid://2rw8i13jd022" path="res://scripts/dialogue_system/character_sprite.gd" id="1_kciyk"]
+[ext_resource type="Texture2D" uid="uid://btp0tbv1vgwqw" path="res://assets/textures/character_sprite/doki/doki_1.png" id="2_2egrl"]
 
 [sub_resource type="Animation" id="Animation_ecd83"]
 length = 0.001
@@ -146,7 +146,7 @@ grow_vertical = 2
 script = ExtResource("1_kciyk")
 sprite = NodePath("AnimationRoot/CharacterSprite")
 sprite_animation = NodePath("CharacterSpriteAnimation")
-metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="AnimationRoot" type="Control" parent="."]
 layout_mode = 1
@@ -175,8 +175,9 @@ offset_right = 285.5
 offset_bottom = 379.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_k8qwi")
+texture = ExtResource("2_2egrl")
 flip_h = true
+metadata/_edit_lock_ = true
 
 [node name="CharacterSpriteAnimation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationRoot/CharacterSprite")

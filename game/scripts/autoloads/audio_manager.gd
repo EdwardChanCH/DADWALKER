@@ -45,7 +45,7 @@ func _ready() -> void:
 	
 	
 	var files: Array[String]
-	get_file_path("res://assets/sound/",files)
+	get_file_paths("res://assets/sound/",files)
 	
 	for item in files:
 		var audio_steam: AudioStream = load(item)
@@ -54,12 +54,12 @@ func _ready() -> void:
 	audio_path_list = files
 	pass
 
-func get_file_path(path: String, files: Array[String]) -> void:
+static func get_file_paths(path: String, files: Array[String]) -> void:
 	var list = ResourceLoader.list_directory(path)
 	for item in list:
 		if(item.ends_with("/")):
 			var new_path = path + item
-			get_file_path(new_path, files)
+			get_file_paths(new_path, files)
 			continue
 		files.append(path+item)
 	pass

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw6jyuy5jl4se"
-path="res://.godot/imported/doki_2.png-cde9adf4ab1064ddce7dc45fc436b873.ctex"
+uid="uid://c886gslpksvxy"
+path="res://.godot/imported/doki_2.png-cb4d63417ca4862c5e8b0a9f719bed35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/character_sprite/doki_2.png"
-dest_files=["res://.godot/imported/doki_2.png-cde9adf4ab1064ddce7dc45fc436b873.ctex"]
+source_file="res://assets/textures/character_sprite/doki/doki_2.png"
+dest_files=["res://.godot/imported/doki_2.png-cb4d63417ca4862c5e8b0a9f719bed35.ctex"]
 
 [params]
 
