@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="_CharacterData" load_steps=2 format=3 uid="uid://c5agvlg4rx74d"]
-
-[ext_resource type="Script" uid="uid://desrwdn6p5g1g" path="res://scripts/dialogue_system/character_data.gd" id="1_yt7pl"]
-
-[resource]
-script = ExtResource("1_yt7pl")
-sprite = Array[String](["", "", "", "", "", "", "", ""])
-metadata/_custom_type_script = "uid://desrwdn6p5g1g"

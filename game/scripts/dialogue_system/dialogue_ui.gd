@@ -1,22 +1,18 @@
 extends Control
 
+@export_category("Resources")
 @export var dialogue: _Dialogue
 @export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
 
-@export_category("Node Ref")
+@export_category("UI Node")
 @export var character_name_label: Label
 @export var dialogue_text_label: Label
 
-# I hate this I hate this I hate this
-# Should really make it in to a array but...
-# Actually this should be done dynamically
-# Can't overkill this
 @export var character_sprite_1: _CharacterSprite
 @export var character_sprite_2: _CharacterSprite
 @export var border : _Border
 @export var text_box_animation_player: AnimationPlayer
 
-#@export var character_sprite_texture: Array[Texture2D]
 
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
@@ -25,11 +21,10 @@ var __current_dialogue_index: int = 0
 # 0 is left and 1 and right
 # There is no such a thing as pair so array will have to do
 var __current_character_position: Array[_DialogueSequence.Characters] = [_DialogueSequence.Characters.NONE, _DialogueSequence.Characters.NONE]
+
 var __character_sprite_cache: Dictionary[String, Texture]
 
 func _enter_tree() -> void:
-	#character_sprite_folder_paths
-	
 	for character in character_sprite_folder_paths.keys():
 		var paths_list: Array[String] = []
 		_AudioManager.get_file_paths(character_sprite_folder_paths[character], paths_list)
@@ -41,7 +36,6 @@ func _enter_tree() -> void:
 			var name = key.split(".", false)
 			__character_sprite_cache.set(name[0], texture)
 			pass
-	
 	pass
 
 func _ready() -> void:
