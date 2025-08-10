@@ -19,3 +19,16 @@ func _on_play_button_pressed() -> void:
 	# Play exit main menu animation.
 	animation_player.play("close_popup")
 	pass
+
+
+func _on_options_button_pressed() -> void:
+	var menu: PackedScene = load("res://scenes/ui/setting_menu.tscn")
+	add_child(menu.instantiate())
+	pass
+
+
+func _on_credits_button_pressed() -> void:
+	var menu: PackedScene = load("res://scenes/ui/credit_menu.tscn")
+	add_child(menu.instantiate())
+	SceneTree
+	pass

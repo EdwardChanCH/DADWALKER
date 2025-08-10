@@ -311,7 +311,7 @@ width = 300
 height = 100
 
 [node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "buttons")]
-layer = 10
+layer = 30
 script = ExtResource("1_l6cm7")
 animation_player = NodePath("SceneTransition")
 buttons = [NodePath("UI/ButtonMover1/PlayButton"), NodePath("UI/ButtonMover2/OptionsButton"), NodePath("UI/ButtonMover3/CreditsButton")]
@@ -401,4 +401,6 @@ texture_pressed = SubResource("GradientTexture2D_bqqt6")
 texture_hover = SubResource("GradientTexture2D_wu84c")
 texture_disabled = SubResource("GradientTexture2D_rtw2f")
 
+[connection signal="pressed" from="UI/ButtonMover3/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="UI/ButtonMover2/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="UI/ButtonMover1/PlayButton" to="." method="_on_play_button_pressed"]
