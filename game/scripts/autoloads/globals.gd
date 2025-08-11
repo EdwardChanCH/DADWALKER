@@ -14,9 +14,14 @@ enum HitboxLayer {
 	BOSS_BULLET = 6,	# Layer 7
 }
 
+const SETTING_MENU_PATH: String = "res://scenes/ui/setting_menu.tscn"
+const CREDIT_MENU_PATH: String = "res://scenes/ui/credit_menu.tscn"
+
+
 # --- Global Variables --- #
 
 var gameplay: _Gameplay = null
+
 
 # --- Math Functions --- #
 

@@ -22,13 +22,12 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	var menu: PackedScene = load("res://scenes/ui/setting_menu.tscn")
+	var menu: PackedScene = load(Globals.SETTING_MENU_PATH)
 	add_child(menu.instantiate())
 	pass
 
 
 func _on_credits_button_pressed() -> void:
-	var menu: PackedScene = load("res://scenes/ui/credit_menu.tscn")
+	var menu: PackedScene = load(Globals.CREDIT_MENU_PATH)
 	add_child(menu.instantiate())
-	SceneTree
 	pass
