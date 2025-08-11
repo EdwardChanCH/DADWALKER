@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://beknnb6r0k3ew"]
+[gd_scene load_steps=15 format=3 uid="uid://beknnb6r0k3ew"]
 
 [ext_resource type="Script" uid="uid://dren52nmku3q4" path="res://scripts/credit_menu.gd" id="1_sileb"]
-[ext_resource type="Texture2D" uid="uid://desdcpr4571tq" path="res://assets/textures/credits_screen_close_button.png" id="2_s64q8"]
-[ext_resource type="Texture2D" uid="uid://67kbvksr5h2u" path="res://assets/textures/credits_screen.png" id="3_mn1b6"]
+[ext_resource type="Texture2D" uid="uid://swomdajmfujo" path="res://assets/textures/ui_sprites/credits.png" id="2_xwfye"]
+[ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="3_gpbg5"]
+[ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_mc2dd"]
+[ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="5_qjbvh"]
+[ext_resource type="Texture2D" uid="uid://c5u6f71gaynxr" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_disable.png" id="6_g6opb"]
 
 [sub_resource type="Animation" id="Animation_c5b21"]
 length = 0.001
@@ -47,7 +50,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -125,14 +128,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_mn1b6")
+texture = ExtResource("2_xwfye")
 
 [node name="Control" type="Control" parent="Control"]
 anchors_preset = 0
-offset_left = 808.0
-offset_top = 680.0
-offset_right = 1128.0
-offset_bottom = 1000.0
+offset_left = 800.0
+offset_top = 712.0
+offset_right = 1120.0
+offset_bottom = 1032.0
 metadata/_edit_group_ = true
 
 [node name="CloseButton" type="TextureButton" parent="Control/Control"]
@@ -142,17 +145,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -133.5
-offset_top = -139.5
-offset_right = 133.5
-offset_bottom = 139.5
+offset_left = -249.0
+offset_top = -249.0
+offset_right = 251.0
+offset_bottom = 251.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(133.5, 28.01)
-texture_normal = ExtResource("2_s64q8")
-texture_pressed = ExtResource("2_s64q8")
-texture_hover = ExtResource("2_s64q8")
-texture_disabled = ExtResource("2_s64q8")
+pivot_offset = Vector2(250, 89.56)
+texture_normal = ExtResource("3_gpbg5")
+texture_pressed = ExtResource("4_mc2dd")
+texture_hover = ExtResource("5_qjbvh")
+texture_disabled = ExtResource("6_g6opb")
+ignore_texture_size = true
+stretch_mode = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control"]
 root_node = NodePath("../CloseButton")

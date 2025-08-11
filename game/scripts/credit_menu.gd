@@ -1,3 +1,4 @@
+#TD: Added enter tree and exit tree animation
 extends CanvasLayer
 
 @export var close_button_animation_tree: AnimationTree

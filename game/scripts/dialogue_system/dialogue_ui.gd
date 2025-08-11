@@ -39,6 +39,7 @@ func _enter_tree() -> void:
 	pass
 
 func _ready() -> void:
+	# Move this to it's own function
 	await play_ui_slide_in_animation();
 	reset_dialogue_sequance()
 	pass
@@ -52,7 +53,6 @@ func _gui_input(event: InputEvent) -> void:
 		__current_dialogue_index += 1
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
-		
 		if ( not keep_going ):
 			await play_ui_slide_out_animation()
 			visible = false
@@ -103,11 +103,12 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 
 	return false
 
-## Set character sprite
+## Set the current character who are on screen
 func set_character_sequence(sequence: _CharacterSequence) -> void:
 	set_character_sprite(sequence.character_position, sequence.character_name, 1)
 	pass
-	
+
+## Set character sprite
 func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, epression_index: int):
 	var target_sprite: TextureRect = null
 	match(character_position):
@@ -132,6 +133,7 @@ func set_character_sprite(character_position: _DialogueSequence.Position, charac
 	target_sprite.texture = __character_sprite_cache[cache_key] as Texture2D
 	pass
 
+## Set text
 func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	# Set text and name of the sequence
 	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
@@ -155,6 +157,7 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
 	return _DialogueSequence.Position.NONE
 
+## Play simple sprite animation
 func play_sprite_ui_animation(character_position: _DialogueSequence.Position, animation_name: String, play_backwards: bool = false) -> AnimationPlayer:
 	var target_animation_player: AnimationPlayer = null
 	match(character_position):
@@ -171,6 +174,7 @@ func play_sprite_ui_animation(character_position: _DialogueSequence.Position, an
 	
 	return target_animation_player
 
+## Play ui slide in animation
 func play_ui_slide_in_animation() -> Signal:
 	
 	set_character_sequence(dialogue.starting_characters_1)
@@ -183,6 +187,7 @@ func play_ui_slide_in_animation() -> Signal:
 	await character_sprite_2.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
+## Play ui slide out animation
 func play_ui_slide_out_animation() -> Signal:
 	character_sprite_1.sprite_animation.play_backwards("slide_in_left")
 	character_sprite_2.sprite_animation.play_backwards("slide_in_right")

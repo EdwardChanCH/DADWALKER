@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
 [ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_d67fy"]
-[ext_resource type="PackedScene" uid="uid://b4gb4p6cibq17" path="res://scenes/ui/border.tscn" id="6_qy5q6"]
-[ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/character_sprite.tscn" id="7_gegk4"]
+[ext_resource type="PackedScene" uid="uid://b4gb4p6cibq17" path="res://scenes/ui/elements/border.tscn" id="6_qy5q6"]
+[ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/elements/character_sprite.tscn" id="7_gegk4"]
 
 [sub_resource type="Animation" id="Animation_rn5aw"]
 length = 0.001

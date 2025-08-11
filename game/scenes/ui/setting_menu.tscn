@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://qmng0anisnyy"]
 
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
-[ext_resource type="Texture2D" uid="uid://desdcpr4571tq" path="res://assets/textures/credits_screen_close_button.png" id="2_63sl1"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xbl1u"]
+load_path = "res://.godot/imported/credits_screen_close_button_temp.png-d1a15a581c512a2701828ec47f33852e.ctex"
 
 [node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider")]
 layer = 31
@@ -114,10 +116,10 @@ offset_right = 131.0
 offset_bottom = 435.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_63sl1")
-texture_pressed = ExtResource("2_63sl1")
-texture_hover = ExtResource("2_63sl1")
-texture_disabled = ExtResource("2_63sl1")
+texture_normal = SubResource("CompressedTexture2D_xbl1u")
+texture_pressed = SubResource("CompressedTexture2D_xbl1u")
+texture_hover = SubResource("CompressedTexture2D_xbl1u")
+texture_disabled = SubResource("CompressedTexture2D_xbl1u")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0

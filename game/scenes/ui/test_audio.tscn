@@ -1,0 +1,169 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8mb2wo3jexl"]
+
+[ext_resource type="Script" uid="uid://drdlnq3s5kji2" path="res://scripts/test_audio.gd" id="1_kuyw6"]
+[ext_resource type="AudioStream" uid="uid://ccu1lbge1xe7h" path="res://assets/sounds/sfx/test/bang.wav" id="2_27h1d"]
+
+[node name="TestAudio" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider", "audio_list", "audio_option", "play_button")]
+script = ExtResource("1_kuyw6")
+audio = ExtResource("2_27h1d")
+master_slider = NodePath("Control/VBoxContainer/HSlider")
+sfx_slider = NodePath("Control/VBoxContainer/HSlider2")
+ui_slider = NodePath("Control/VBoxContainer/HSlider3")
+music_slider = NodePath("Control/VBoxContainer/HSlider4")
+voice_slider = NodePath("Control/VBoxContainer/HSlider5")
+audio_list = NodePath("Control/ItemList")
+audio_option = NodePath("Control/OptionButton")
+play_button = NodePath("Control/Button")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -420.0
+offset_right = 822.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Master"
+
+[node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label2" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SFX"
+
+[node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label3" type="Label" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "UI"
+
+[node name="HSlider3" type="HSlider" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label4" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="HSlider4" type="HSlider" parent="Control/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label5" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Voice"
+
+[node name="HSlider5" type="HSlider" parent="Control/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -723.0
+offset_top = -393.0
+offset_right = 126.0
+offset_bottom = 335.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+metadata/_edit_lock_ = true
+
+[node name="OptionButton" type="OptionButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -28.0
+offset_right = 536.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+selected = 0
+item_count = 4
+popup/item_0/text = "Play as sfx"
+popup/item_0/id = 0
+popup/item_1/text = "Play as ui"
+popup/item_1/id = 1
+popup/item_1/disabled = true
+popup/item_2/text = "Play as music"
+popup/item_2/id = 2
+popup/item_3/text = "Play as voice"
+popup/item_3/id = 3
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 552.0
+offset_top = -28.0
+offset_right = 824.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Play"
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 400.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.52816, 0, 0.164663, 1)
+theme_override_font_sizes/font_size = 51
+text = "Audio tester 0.1b"
+metadata/_edit_lock_ = true
