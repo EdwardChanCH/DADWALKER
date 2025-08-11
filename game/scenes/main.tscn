@@ -33,6 +33,11 @@ grow_horizontal = 0
 text = "0 FPS"
 horizontal_alignment = 2
 
+[node name="Log" type="Label" parent="DebugCanvas/DebugUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3

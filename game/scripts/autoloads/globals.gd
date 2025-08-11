@@ -5,18 +5,41 @@ extends Node
 # --- Constants --- #
 
 enum HitboxLayer {
-	WALL = 0,			# Layer 1
-	PLAYER = 1,			# Layer 2
-	ENEMY = 2,			# Layer 3
-	BOSS = 3,			# Layer 4
-	PLAYER_BULLET = 4,	# Layer 5
-	ENEMY_BULLET = 5,	# Layer 6
-	BOSS_BULLET = 6,	# Layer 7
+	WALL	,			# Layer 1
+	PLAYER,			# Layer 2
+	ENEMY,			# Layer 3
+	BOSS	,			# Layer 4
+	PLAYER_BULLET,	# Layer 5
+	ENEMY_BULLET,	# Layer 6
+	BOSS_BULLET,		# Layer 7
 }
+
+enum Checkpoint {
+	MAINMENU,
+	INTRO,
+	MINI_BOSS,
+	FINAL_BOSS,
+	ENDING,
+}
+
+# --- Signals --- #
+
+signal progress_updated(value: Checkpoint)
 
 # --- Global Variables --- #
 
 var gameplay: _Gameplay = null
+
+var player: _Player = null
+
+var camera: _MainCamera = null
+
+var progress: Checkpoint = Checkpoint.MAINMENU :
+	get:
+		return progress
+	set(value):
+		progress = value
+		progress_updated.emit(value)
 
 # --- Math Functions --- #
 
