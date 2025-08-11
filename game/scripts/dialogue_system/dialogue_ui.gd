@@ -44,11 +44,8 @@ func _ready() -> void:
 	visible = false
 	pass
 
-func _gui_input(event: InputEvent) -> void:
+func _on_control_gui_input(event: InputEvent) -> void:
 	
-	if(not visible):
-		return
-		
 	if ( (  event is not InputEventMouseButton) or not dialogue ):
 		return
 

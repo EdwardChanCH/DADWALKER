@@ -59,6 +59,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 metadata/_edit_lock_ = true
 
 [node name="CharacterSprite1" parent="Control" instance=ExtResource("7_gegk4")]
@@ -138,3 +139,5 @@ metadata/_edit_lock_ = true
 libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
+
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
