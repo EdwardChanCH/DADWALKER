@@ -22,6 +22,9 @@ enum Checkpoint {
 	ENDING,
 }
 
+const SETTING_MENU_PATH: String = "res://scenes/ui/setting_menu.tscn"
+const CREDIT_MENU_PATH: String = "res://scenes/ui/credit_menu.tscn"
+
 # --- Signals --- #
 
 signal progress_updated(value: Checkpoint)

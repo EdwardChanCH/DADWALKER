@@ -1,19 +1,19 @@
+#TD: Add helper function for this
 extends Control
 
+@export_category("Resources")
+@export var dialogue: _Dialogue
+@export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
+
+@export_category("UI Node")
 @export var character_name_label: Label
 @export var dialogue_text_label: Label
-@export var dialogue: _Dialogue
 
-# I hate this I hate this I hate this
-# Should really make it in to a array but...
-# Actually this should be done dynamically
-# Can't overkill this
 @export var character_sprite_1: _CharacterSprite
 @export var character_sprite_2: _CharacterSprite
 @export var border : _Border
-
-@export var character_sprite_texture: Array[Texture2D]
 @export var text_box_animation_player: AnimationPlayer
+
 
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
@@ -23,7 +23,24 @@ var __current_dialogue_index: int = 0
 # There is no such a thing as pair so array will have to do
 var __current_character_position: Array[_DialogueSequence.Characters] = [_DialogueSequence.Characters.NONE, _DialogueSequence.Characters.NONE]
 
+var __character_sprite_cache: Dictionary[String, Texture]
+
+func _enter_tree() -> void:
+	for character in character_sprite_folder_paths.keys():
+		var paths_list: Array[String] = []
+		_AudioManager.get_file_paths(character_sprite_folder_paths[character], paths_list)
+		
+		for path in paths_list:
+			var texture: Texture = load(path)
+			var file_name = path.split("/", false)
+			var key = file_name[file_name.size() - 1]
+			var name = key.split(".", false)
+			__character_sprite_cache.set(name[0], texture)
+			pass
+	pass
+
 func _ready() -> void:
+	# Move this to it's own function
 	await play_ui_slide_in_animation();
 	reset_dialogue_sequance()
 	pass
@@ -37,7 +54,6 @@ func _gui_input(event: InputEvent) -> void:
 		__current_dialogue_index += 1
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
-		
 		if ( not keep_going ):
 			await play_ui_slide_out_animation()
 			visible = false
@@ -62,6 +78,7 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 	if(current_sequence is _TextSequence):
 		var character_position = set_text(current_sequence)
 		if(character_position != _DialogueSequence.Position.NONE):
+			set_character_sprite(character_position, current_sequence.character_name, current_sequence.expression)
 			await play_sprite_ui_animation(character_position, "talk").animation_finished
 			await get_tree().create_timer(0.25).timeout
 		return true
@@ -70,10 +87,10 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 		if(current_sequence.play_animation):
 			var string = _DialogueSequence.Position.find_key(current_sequence.character_position).to_lower()
 			await play_sprite_ui_animation(current_sequence.character_position, "slide_in_" + string, true).animation_finished
-			set_character_sprite(current_sequence)
+			set_character_sequence(current_sequence)
 			await play_sprite_ui_animation(current_sequence.character_position, "slide_in_" + string).animation_finished
 		else:
-			set_character_sprite(current_sequence)
+			set_character_sequence(current_sequence)
 
 		__current_dialogue_index += 1
 		set_dialogue_sequence(__current_dialogue_index)
@@ -87,39 +104,37 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 
 	return false
 
-## Set character sprite
-func set_character_sprite(sequence: _CharacterSequence) -> void:
-	
-	var target_sprite: TextureRect = null
+## Set the current character who are on screen
+func set_character_sequence(sequence: _CharacterSequence) -> void:
+	set_character_sprite(sequence.character_position, sequence.character_name, 1)
+	pass
 
-	match(sequence.character_position):
+## Set character sprite
+func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, epression_index: int):
+	var target_sprite: TextureRect = null
+	match(character_position):
 		_DialogueSequence.Position.LEFT:
 			target_sprite = character_sprite_1.sprite
-			__current_character_position[0] = sequence.character_name
+			__current_character_position[0] = character_name
 			
 		_DialogueSequence.Position.RIGHT:
 			target_sprite = character_sprite_2.sprite
-			__current_character_position[1] = sequence.character_name
+			__current_character_position[1] = character_name
 			
-	if( not target_sprite ):
-		return
-
-	## This is hardcoded to save time
-	## It would be better to have a character class for storing sprite and their expression
-	## Might actually do that later if needed
-	## But for the purpose of testing and showcasing it works
-	match(sequence.character_name):
-		_DialogueSequence.Characters.DOKI:
-			target_sprite.texture = character_sprite_texture[0]
-		_DialogueSequence.Characters.DAD:
-			target_sprite.texture = character_sprite_texture[1]
-		_DialogueSequence.Characters.DRAGOON:
-			target_sprite.texture = character_sprite_texture[2]
-		_:
-			target_sprite.texture = null
 	
+	var name: String = _DialogueSequence.Characters.find_key(character_name).to_lower()
+	var cache_key = name + "_" + str(epression_index)
+	if( not target_sprite):
+		return
+	
+	if (not __character_sprite_cache.has(cache_key)):
+		target_sprite.texture = null
+		return
+	
+	target_sprite.texture = __character_sprite_cache[cache_key] as Texture2D
 	pass
 
+## Set text
 func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	# Set text and name of the sequence
 	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
@@ -143,6 +158,7 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
 	return _DialogueSequence.Position.NONE
 
+## Play simple sprite animation
 func play_sprite_ui_animation(character_position: _DialogueSequence.Position, animation_name: String, play_backwards: bool = false) -> AnimationPlayer:
 	var target_animation_player: AnimationPlayer = null
 	match(character_position):
@@ -152,8 +168,6 @@ func play_sprite_ui_animation(character_position: _DialogueSequence.Position, an
 		_DialogueSequence.Position.RIGHT:
 			target_animation_player = character_sprite_2.sprite_animation
 	
-	var pos_str: String = _DialogueSequence.Position.find_key(character_position)
-	
 	if(play_backwards):
 		target_animation_player.play_backwards(animation_name)
 	else:
@@ -161,10 +175,11 @@ func play_sprite_ui_animation(character_position: _DialogueSequence.Position, an
 	
 	return target_animation_player
 
+## Play ui slide in animation
 func play_ui_slide_in_animation() -> Signal:
 	
-	set_character_sprite(dialogue.starting_characters_1)
-	set_character_sprite(dialogue.starting_characters_2)
+	set_character_sequence(dialogue.starting_characters_1)
+	set_character_sequence(dialogue.starting_characters_2)
 	
 	border.play_slide_in_animation()
 	character_sprite_1.sprite_animation.play("slide_in_left")
@@ -173,6 +188,7 @@ func play_ui_slide_in_animation() -> Signal:
 	await character_sprite_2.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
+## Play ui slide out animation
 func play_ui_slide_out_animation() -> Signal:
 	character_sprite_1.sprite_animation.play_backwards("slide_in_left")
 	character_sprite_2.sprite_animation.play_backwards("slide_in_right")
