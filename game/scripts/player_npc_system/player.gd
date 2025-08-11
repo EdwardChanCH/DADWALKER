@@ -1,6 +1,18 @@
 class_name _Player
 extends _GameObject
 
+@export var collision_box: CollisionShape2D = null
+
+@export var hit_box: CollisionShape2D = null
+
+@export var shadow: Sprite2D = null
+
+@export var shooting_delay: float = 0.2
+
+var __shooting_cooldown: float = 0
+
+var __shooting_pressed: bool = false
+
 ## Keyboard/Joystick input vector (not normalized).
 var input_vector: Vector2 = Vector2.ZERO
 
@@ -10,11 +22,25 @@ var null_cancelling_vector: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	super._ready()
 	
+	# Check if missing export variables.
+	if (not collision_box
+		or not hit_box
+		or not shadow):
+		push_error("Missing export variables in node '%s'." % [self.name])
+	
 	# TODO
 	# Initialize variables.
 	in_player_control = true
 	move_speed = 400
-	projectile_speed = 400
+	projectile_speed = 1000
+	max_health = 3
+	current_health = 3
+	
+	# TODO test only
+	# TODO set walking speed
+	character_world_node.start_walk()
+	
+	Globals.player = self
 	pass
 
 func _process(delta: float) -> void:
@@ -50,6 +76,20 @@ func _process(delta: float) -> void:
 	else:
 		input_vector.y = 0
 	
+	if Input.is_action_pressed("shoot"):
+		__shooting_pressed = true
+	
+	# --- Player Shooting --- #
+	if (__shooting_cooldown <= 0):
+		__shooting_cooldown = 0
+	else:
+		__shooting_cooldown -= delta
+	
+	if (__shooting_pressed and __shooting_cooldown <= 0):
+		__shooting_pressed = false
+		__shooting_cooldown = shooting_delay
+		shoot_once(get_global_mouse_position() - self.global_position)
+	
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
@@ -62,29 +102,44 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	pass
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		print("Player shoot.")
-		shoot_once(get_global_mouse_position() - self.global_position)
-	pass
-
 ## Shoot one projectile.
 func shoot_once(p_vector: Vector2) -> void:
+	if not projectile_scene:
+		return
+	
+	var projectile: _Projectile = projectile_scene.instantiate()
+	if not projectile:
+		return
+	
 	var p_velocity: Vector2 = p_vector.normalized() * projectile_speed
+	p_velocity += (move_vector * move_speed).project(p_velocity) # Add player velocity.
 	var p_angle: float = Vector2.RIGHT.angle_to(p_vector)
 	
-	var projectile: _Projectile = projectile_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
-	Globals.gameplay.add_projectie_to_scene(projectile)
+	
+	if Globals.gameplay:
+		Globals.gameplay.add_projectie_to_scene(projectile)
 	projectile.setup_start(self.global_position, p_velocity, p_angle)
+	pass
+
+## Stomped by final boss.
+func stomped() -> void:
+	current_health -= 1
 	pass
 
 ## Hit detection.
 func _on_hit_detector_area_entered(area: Area2D) -> void:
-	# TODO
-	print("Player hit.")
-	
 	var projectile := area as _Projectile
 	if (projectile):
 		projectile.despawn()
+		current_health -= 1
+	pass
+
+func _on_health_changed(new_health: int) -> void:
+	# Change scale.
+	var new_scale: Vector2 = Vector2.ONE * (float(new_health) / float(max_health))
+	collision_box.scale = new_scale
+	hit_box.scale = new_scale
+	shadow.scale = new_scale
 	
+	super._on_health_changed(new_health)
 	pass
