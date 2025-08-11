@@ -22,14 +22,20 @@ enum Checkpoint {
 	ENDING,
 }
 
-const SETTING_MENU_PATH: String = "res://scenes/ui/setting_menu.tscn"
-const CREDIT_MENU_PATH: String = "res://scenes/ui/credit_menu.tscn"
 
 # --- Signals --- #
 
 signal progress_updated(value: Checkpoint)
 
 # --- Global Variables --- #
+
+var main_menu: _MainMenu = null
+var setting_menu: _SettingMenu = null
+var credit_menu: _CreditMenu = null
+var dialogue_ui: _DialogueUI = null
+var win_menu: _WinMenu = null
+var lose_menu: _LoseMenu = null
+var pause_menu: _PauseMenu = null
 
 var gameplay: _Gameplay = null
 
@@ -56,3 +62,6 @@ func logg(x: float, base: float) -> float:
 ## [url]https://www.youtube.com/watch?v=LSNQuFEDOyQ[/url]
 func lerp_t(decay: float, delta: float) -> float:
 	return 1 - exp(-decay * delta)
+
+func start_game(checkpoint: Checkpoint) -> void:
+	pass

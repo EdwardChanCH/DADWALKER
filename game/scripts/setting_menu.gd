@@ -1,4 +1,4 @@
-#TD: Added enter tree and exit tree animation
+class_name _SettingMenu
 extends CanvasLayer
 
 @export_category("UI Node")
@@ -22,7 +22,11 @@ func _ready() -> void:
 	music_slider.drag_ended.connect(Callable(update_volume).bind(music_arg))
 	
 	var voice = [voice_slider, AudioManager.AudioType.VOICE]
-	voice_slider.drag_ended.connect(Callable(update_volume).bind(voice))	
+	voice_slider.drag_ended.connect(Callable(update_volume).bind(voice))
+	
+	visible = false
+	
+	Globals.setting_menu = self
 	pass
 	
 func update_volume(_changed: bool, arg_array: Array) -> void:
@@ -32,5 +36,5 @@ func update_volume(_changed: bool, arg_array: Array) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	queue_free()
+	visible = false
 	pass

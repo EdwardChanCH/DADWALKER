@@ -1,0 +1,2 @@
+class_name _PauseMenu
+extends CanvasLayer

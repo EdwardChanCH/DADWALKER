@@ -1,4 +1,4 @@
-#TD: Add helper function for this
+class_name _DialogueUI
 extends CanvasLayer
 
 signal finish_dialogue
@@ -42,6 +42,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	visible = false
+	Globals.dialogue_ui = self
 	pass
 
 func _on_control_gui_input(event: InputEvent) -> void:

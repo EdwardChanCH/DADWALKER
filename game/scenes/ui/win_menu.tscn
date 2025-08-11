@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://drw7xx0j7yjau"]
+
+[ext_resource type="Script" uid="uid://rx886t8o0lpq" path="res://scripts/win_menu.gd" id="1_d025o"]
+
+[node name="WinMenu" type="CanvasLayer"]
+script = ExtResource("1_d025o")

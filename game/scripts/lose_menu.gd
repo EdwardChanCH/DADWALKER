@@ -1,0 +1,2 @@
+class_name _LoseMenu
+extends CanvasLayer

@@ -1,10 +1,15 @@
-#TD: Added enter tree and exit tree animation
+class_name _CreditMenu
 extends CanvasLayer
 
 @export var close_button_animation_tree: AnimationTree
 
+func _ready() -> void:
+	visible = false
+	Globals.credit_menu = self
+	pass
+
 func _on_close_button_pressed() -> void:
-	queue_free()
+	visible = false
 	pass
 
 
