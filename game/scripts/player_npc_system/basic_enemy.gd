@@ -1,39 +1,29 @@
 class_name _BasicEnemy
 extends _GameObject
 
-## Can follow game objects or not.
-@export var in_tracking_mode: bool = false
-
-## Object to track (usually the player).
-@export var tracking_object: Node2D = null
-
-## Vector when not in tracking mode (not normalized).
-@export var idle_vector: Vector2 = Vector2.LEFT
-
-@export var push_speed: float = 3000
-
-## Slope of decay of smoothed push deceleration.
-@export_range(1, 25, Globals.STEP, "suffix:/s")
-var push_decay: float = 10
-
 func _ready() -> void:
 	super._ready()
+	
+	tracking_object = Globals.player
 	
 	# TODO
 	# Initialize variables.
 	in_logic_control = true
 	move_speed = 200
-	projectile_speed = 200
+	projectile_speed = 300
+	
+	# TODO test only
+	# TODO set walking speed
+	character_world_node.start_walk()
 	pass
 
 func _process(delta: float) -> void:
-	if (current_health <= 0):
-		return # Skip.
-	
 	super._process(delta)
 	
 	# -- Track Player Or Walk Straight--- #
-	if (in_tracking_mode and tracking_object):
+	if (current_health <= 0):
+		pass
+	elif (in_tracking_mode and tracking_object):
 		move_vector = tracking_object.global_position - self.global_position
 	else:
 		move_vector = idle_vector
@@ -54,6 +44,9 @@ func _physics_process(delta: float) -> void:
 			if (collider is _Player):
 				# Player can apply push velocity.
 				push_velocity = collider_normal * push_speed
+				
+				# Apply damage to player
+				collider.current_health -= 1
 			elif (collider is _BasicEnemy):
 				# Use the larger vector instead of adding (to prevent sticking).
 				if (push_velocity.length_squared() < collider.push_velocity.length_squared()):
@@ -79,12 +72,25 @@ func shoot_batch(incoming_vector: Vector2, p_spread: float, p_count: int) -> voi
 
 ## Shoot one projectile.
 func shoot_once(p_vector: Vector2) -> void:
+	if not projectile_scene:
+		return
+	
+	var projectile: _Projectile = projectile_scene.instantiate()
+	if not projectile:
+		return
+	
 	var p_velocity: Vector2 = p_vector.normalized() * projectile_speed
 	var p_angle: float = Vector2.RIGHT.angle_to(p_vector)
 	
-	var projectile: _Projectile = projectile_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
-	Globals.gameplay.add_projectie_to_scene(projectile)
+	if Globals.gameplay:
+		Globals.gameplay.add_projectie_to_scene(projectile)
 	projectile.setup_start(self.global_position, p_velocity, p_angle)
+	pass
+
+## Stomped by final boss.
+func stomped() -> void:
+	current_health = 0
+	shoot_batch(Vector2.RIGHT * projectile_speed, deg_to_rad(40), 1)
 	pass
 
 ## Hit detection.
@@ -107,27 +113,9 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 			current_health = 0
 			
 		if (current_health <= 0):
-			_on_death()
-			
 			# Spawn seeds.
 			shoot_batch(projectile.move_velocity, deg_to_rad(15), 1)
 		
 		# Despawn incoming projectile.
 		projectile.despawn()
-	pass
-
-func _on_death() -> void:
-	# Disable collisions.
-	self.collision_layer = 0
-	self.collision_mask = 0
-	hit_detector_node.collision_layer = 0
-	hit_detector_node.collision_mask = 0
-	
-	# Disable controls.
-	in_sequence_control = false
-	in_logic_control = false
-	in_player_control = false
-	
-	# Play death animation.
-	character_world_node.start_death()
 	pass

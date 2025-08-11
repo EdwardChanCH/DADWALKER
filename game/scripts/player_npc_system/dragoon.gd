@@ -12,8 +12,12 @@ func _ready() -> void:
 	pass
 
 func update_health_bar(new_health: int) -> void:
-	# TODO
-	print("Not implemented yet! (%s)" % ["dragoon:update_health_bar"])
+	if (new_health <= 1):
+		self.scale = Vector3(0.1, 0.1, 0.1)
+	elif (new_health == 2):
+		self.scale = Vector3(0.3, 0.3, 0.3)
+	elif (new_health >= 3):
+		self.scale = Vector3(0.5, 0.5, 0.5)
 	pass
 
 func start_walk() -> void:

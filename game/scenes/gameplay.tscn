@@ -1,163 +1,154 @@
-[gd_scene load_steps=23 format=3 uid="uid://df64whveplypg"]
+[gd_scene load_steps=14 format=3 uid="uid://df64whveplypg"]
 
 [ext_resource type="Script" uid="uid://ca6xflgxec3a0" path="res://scripts/gameplay.gd" id="1_00tan"]
 [ext_resource type="Script" uid="uid://cjqqp3av0j00n" path="res://scripts/camera_2d.gd" id="2_ct7aa"]
 [ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player_npc_system/player.tscn" id="2_l1v76"]
-[ext_resource type="PackedScene" uid="uid://cr2cn7iu36oei" path="res://scenes/test_cube_world.tscn" id="3_ct7aa"]
-[ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/player_npc_system/basic_enemy.tscn" id="5_ocj2s"]
-[ext_resource type="PackedScene" uid="uid://cy5pgh5s187uq" path="res://scenes/projectiles/feather.tscn" id="6_din8e"]
-[ext_resource type="PackedScene" uid="uid://v777emx0ysva" path="res://scenes/projectiles/bullet.tscn" id="7_101mb"]
-[ext_resource type="PackedScene" uid="uid://cp71so7s63jj6" path="res://scenes/projectiles/sonic_boom.tscn" id="8_hbo4f"]
-[ext_resource type="PackedScene" uid="uid://brixo5wuvafds" path="res://scenes/projectiles/seed.tscn" id="9_ctvyo"]
+[ext_resource type="Texture2D" uid="uid://6qpuam2dwmid" path="res://assets/textures/parallax_bg/scroll_sky_1.png" id="2_ocj2s"]
+[ext_resource type="Texture2D" uid="uid://bqsh3qokmbv8u" path="res://assets/textures/parallax_bg/scroll_ground_1.png" id="3_din8e"]
+[ext_resource type="PackedScene" uid="uid://comocvmoxgfwf" path="res://scenes/final_boss_fight.tscn" id="7_4bh5q"]
 
-[sub_resource type="Gradient" id="Gradient_din8e"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 0.588235, 0.784314, 1)
+[sub_resource type="Animation" id="Animation_ct7aa"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainCamera:zoom:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainCamera:zoom:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4bh5q"]
-gradient = SubResource("Gradient_din8e")
-width = 1920
-height = 720
+[sub_resource type="Animation" id="Animation_l1v76"]
+resource_name = "camera_shake"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainCamera:zoom:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MainCamera:zoom:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1.05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4)
+}
 
-[sub_resource type="Gradient" id="Gradient_l1v76"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.158472, 0.158472, 0.158472, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ct7aa"]
-gradient = SubResource("Gradient_l1v76")
-width = 1920
-height = 360
-
-[sub_resource type="Gradient" id="Gradient_ct7aa"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.784314, 0.784314, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ocj2s"]
-gradient = SubResource("Gradient_ct7aa")
-width = 1920
-height = 10
-
-[sub_resource type="Gradient" id="Gradient_ocj2s"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.784314, 0.784314, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_din8e"]
-gradient = SubResource("Gradient_ocj2s")
-width = 1920
-height = 15
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct7aa"]
+_data = {
+&"RESET": SubResource("Animation_ct7aa"),
+&"camera_shake": SubResource("Animation_l1v76")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1v76"]
-size = Vector2(1920, 720)
+size = Vector2(3840, 920)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct7aa"]
-size = Vector2(1920, 20)
+size = Vector2(3840, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocj2s"]
-size = Vector2(20, 360)
+size = Vector2(960, 360)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_din8e"]
-size = Vector2(20, 360)
+size = Vector2(960, 360)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ct7aa"]
-viewport_path = NodePath("TestSubViewport")
-
-[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("projectile_list")]
+[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("main_camera", "game_object_list", "projectile_list")]
 script = ExtResource("1_00tan")
-projectile_list = NodePath("YSorted/ProjectileList")
+main_camera = NodePath("MainCamera")
+game_object_list = NodePath("YSortedList/GameObjectList")
+projectile_list = NodePath("YSortedList/ProjectileList")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+[node name="ParallaxBackground" type="Node2D" parent="."]
+
+[node name="SkyLayer" type="Parallax2D" parent="ParallaxBackground"]
+z_index = -7
+repeat_size = Vector2(3840, 0)
+
+[node name="Sky" type="Sprite2D" parent="ParallaxBackground/SkyLayer"]
+texture = ExtResource("2_ocj2s")
+centered = false
+
+[node name="GroundLayer" type="Parallax2D" parent="ParallaxBackground"]
+z_index = -5
+repeat_size = Vector2(3840, 0)
+
+[node name="Ground" type="Sprite2D" parent="ParallaxBackground/GroundLayer"]
+position = Vector2(0, 720)
+texture = ExtResource("3_din8e")
+centered = false
+
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("camera_animation", "tracking_node")]
+position = Vector2(960, 540)
 process_callback = 0
 script = ExtResource("2_ct7aa")
+camera_animation = NodePath("CameraAnimation")
+tracking_node = NodePath(".")
 
-[node name="Background" type="Node2D" parent="."]
+[node name="CameraAnimation" type="AnimationPlayer" parent="MainCamera"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_ct7aa")
+}
 
-[node name="Sky" type="Sprite2D" parent="Background"]
-texture = SubResource("GradientTexture2D_4bh5q")
-centered = false
+[node name="StaticBoxUD" type="StaticBody2D" parent="MainCamera"]
+position = Vector2(-960, -540)
+collision_mask = 6
 
-[node name="Asphalt" type="Sprite2D" parent="Background"]
-position = Vector2(0, 720)
-texture = SubResource("GradientTexture2D_ct7aa")
-centered = false
-
-[node name="YellowLine1" type="Sprite2D" parent="Background/Asphalt"]
-position = Vector2(0, 160)
-texture = SubResource("GradientTexture2D_ocj2s")
-centered = false
-
-[node name="YellowLine2" type="Sprite2D" parent="Background/Asphalt"]
-position = Vector2(0, 190)
-texture = SubResource("GradientTexture2D_din8e")
-centered = false
-
-[node name="CollisionBoxSky" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D1" type="CollisionShape2D" parent="CollisionBoxSky"]
-position = Vector2(960, 360)
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
+position = Vector2(960, 260)
 shape = SubResource("RectangleShape2D_l1v76")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="CollisionBoxSky"]
-position = Vector2(960, 1090)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
+position = Vector2(960, 1180)
 shape = SubResource("RectangleShape2D_ct7aa")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="CollisionBoxSky"]
-position = Vector2(-10, 900)
+[node name="StaticBoxLR" type="StaticBody2D" parent="MainCamera"]
+position = Vector2(-960, -540)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
+position = Vector2(-480, 900)
 shape = SubResource("RectangleShape2D_ocj2s")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="CollisionBoxSky"]
-position = Vector2(1930, 900)
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
+position = Vector2(2400, 900)
 shape = SubResource("RectangleShape2D_din8e")
 
-[node name="TestCubeSprite" type="Sprite2D" parent="."]
-position = Vector2(960, 300)
-texture = SubResource("ViewportTexture_ct7aa")
-
-[node name="TestSubViewport" type="SubViewport" parent="."]
-own_world_3d = true
-transparent_bg = true
-
-[node name="TestCubeWorld" parent="TestSubViewport" instance=ExtResource("3_ct7aa")]
-
-[node name="YSorted" type="Node2D" parent="."]
+[node name="YSortedList" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="GameObjectList" type="Node2D" parent="YSorted"]
+[node name="Player" parent="YSortedList" instance=ExtResource("2_l1v76")]
+position = Vector2(960, 887)
+
+[node name="GameObjectList" type="Node2D" parent="YSortedList"]
 y_sort_enabled = true
 
-[node name="Player" parent="YSorted/GameObjectList" instance=ExtResource("2_l1v76")]
-position = Vector2(960, 880)
-
-[node name="BasicEnemy" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
-position = Vector2(1625, 913)
-in_tracking_mode = true
-tracking_object = NodePath("../Player")
-
-[node name="BasicEnemy2" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
-position = Vector2(1319, 826)
-in_tracking_mode = true
-tracking_object = NodePath("../Player")
-max_health = 2
-current_health = 2
-
-[node name="BasicEnemy3" parent="YSorted/GameObjectList" node_paths=PackedStringArray("tracking_object") instance=ExtResource("5_ocj2s")]
-position = Vector2(1429, 978)
-in_tracking_mode = true
-tracking_object = NodePath("../Player")
-max_health = 3
-current_health = 3
-
-[node name="ProjectileList" type="Node2D" parent="YSorted"]
+[node name="ProjectileList" type="Node2D" parent="YSortedList"]
 y_sort_enabled = true
 
-[node name="Feather" parent="." instance=ExtResource("6_din8e")]
-position = Vector2(111, 808)
-
-[node name="Bullet" parent="." instance=ExtResource("7_101mb")]
-position = Vector2(111, 1018)
-
-[node name="SonicBoom" parent="." instance=ExtResource("8_hbo4f")]
-position = Vector2(447, 1012)
-
-[node name="Seed" parent="." instance=ExtResource("9_ctvyo")]
-position = Vector2(451, 813)
+[node name="FinalBossFight" parent="." instance=ExtResource("7_4bh5q")]
