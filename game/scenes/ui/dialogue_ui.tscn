@@ -53,7 +53,9 @@ grow_vertical = 2
 script = ExtResource("1_86bo4")
 dialogue = ExtResource("2_d67fy")
 character_sprite_folder_paths = Dictionary[int, String]({
-1: "res://assets/textures/character_sprite/doki/"
+1: "res://assets/textures/character_sprites/doki/",
+2: "res://assets/textures/character_sprites/dad/",
+3: "res://assets/textures/character_sprites/dragoon/"
 })
 character_name_label = NodePath("TextBox/CharacterName")
 dialogue_text_label = NodePath("TextBox/DialogueText")
@@ -79,7 +81,6 @@ offset_right = 388.0
 offset_bottom = -276.0
 grow_horizontal = 1
 grow_vertical = 0
-mouse_filter = 2
 
 [node name="CharacterSprite2" parent="Control" instance=ExtResource("7_gegk4")]
 layout_mode = 1
@@ -94,7 +95,6 @@ offset_right = 1780.0
 offset_bottom = -276.0
 grow_horizontal = 1
 grow_vertical = 0
-mouse_filter = 2
 
 [node name="TextBox" type="Panel" parent="Control"]
 layout_mode = 1

@@ -143,6 +143,7 @@ offset_right = -860.0
 offset_bottom = -440.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_kciyk")
 sprite = NodePath("AnimationRoot/CharacterSprite")
 sprite_animation = NodePath("CharacterSpriteAnimation")
@@ -161,6 +162,7 @@ offset_right = -49.0
 offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CharacterSprite" type="TextureRect" parent="AnimationRoot"]
 layout_mode = 1
@@ -175,6 +177,7 @@ offset_right = 285.5
 offset_bottom = 379.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_2egrl")
 flip_h = true
 metadata/_edit_lock_ = true
