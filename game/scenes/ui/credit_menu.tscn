@@ -87,6 +87,7 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mn1b6"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xwfye"]
+graph_offset = Vector2(-331.919, 82.4019)
 nodes/Hover/node = SubResource("AnimationNodeAnimation_nts36")
 nodes/Hover/position = Vector2(-320, 400)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_c5b21")
@@ -119,6 +120,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
+metadata/_edit_lock_ = true
 
 [node name="Credit" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -129,6 +131,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_xwfye")
+metadata/_edit_lock_ = true
 
 [node name="ButtonRoot" type="Control" parent="Control"]
 anchors_preset = 0
