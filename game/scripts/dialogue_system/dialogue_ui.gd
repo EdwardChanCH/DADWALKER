@@ -1,3 +1,4 @@
+#TD: Add helper function for this
 extends Control
 
 @export_category("Resources")

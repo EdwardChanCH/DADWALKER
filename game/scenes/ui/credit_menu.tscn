@@ -101,7 +101,7 @@ node_connections = [&"Rotation", 0, &"Idle", &"Rotation", 1, &"TimeScale", &"Tim
 [node name="CreditMenu" type="CanvasLayer" node_paths=PackedStringArray("close_button_animation_tree")]
 layer = 31
 script = ExtResource("1_sileb")
-close_button_animation_tree = NodePath("Control/Control/AnimationTree")
+close_button_animation_tree = NodePath("Control/ButtonRoot/AnimationTree")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -130,27 +130,28 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_xwfye")
 
-[node name="Control" type="Control" parent="Control"]
+[node name="ButtonRoot" type="Control" parent="Control"]
 anchors_preset = 0
 offset_left = 800.0
-offset_top = 712.0
+offset_top = 808.0
 offset_right = 1120.0
-offset_bottom = 1032.0
+offset_bottom = 1128.0
 metadata/_edit_group_ = true
 
-[node name="CloseButton" type="TextureButton" parent="Control/Control"]
+[node name="CloseButton" type="TextureButton" parent="Control/ButtonRoot"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -249.0
-offset_top = -249.0
-offset_right = 251.0
-offset_bottom = 251.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.61, 0.61)
 pivot_offset = Vector2(250, 89.56)
 texture_normal = ExtResource("3_gpbg5")
 texture_pressed = ExtResource("4_mc2dd")
@@ -159,14 +160,14 @@ texture_disabled = ExtResource("6_g6opb")
 ignore_texture_size = true
 stretch_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Control"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/ButtonRoot"]
 root_node = NodePath("../CloseButton")
 libraries = {
 &"": SubResource("AnimationLibrary_c5b21")
 }
 playback_auto_capture_transition_type = 11
 
-[node name="AnimationTree" type="AnimationTree" parent="Control/Control"]
+[node name="AnimationTree" type="AnimationTree" parent="Control/ButtonRoot"]
 root_node = NodePath("../CloseButton")
 tree_root = SubResource("AnimationNodeBlendTree_xwfye")
 anim_player = NodePath("../AnimationPlayer")
@@ -175,6 +176,6 @@ parameters/Rotation/transition_request = ""
 parameters/Rotation/current_index = 0
 parameters/TimeScale/scale = 0.25
 
-[connection signal="mouse_entered" from="Control/Control/CloseButton" to="." method="_on_close_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/Control/CloseButton" to="." method="_on_close_button_mouse_exited"]
-[connection signal="pressed" from="Control/Control/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="mouse_entered" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_exited"]
+[connection signal="pressed" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
