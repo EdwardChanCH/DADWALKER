@@ -1,4 +1,4 @@
-class_name _AudioManager
+#class_name _AudioManager
 extends Node
 
 enum AudioType
@@ -10,7 +10,9 @@ enum AudioType
 	VOICE,
 }
 
-static var _instance: _AudioManager = null
+const SOUND_PATH: String = "res://assets/sounds/"
+
+static var _instance: AudioManager = null
 
 static var __sound_cache: Dictionary[String, AudioStream]
 
@@ -45,7 +47,7 @@ func _ready() -> void:
 	
 	
 	var files: Array[String]
-	get_file_paths("res://assets/sound/",files)
+	get_file_paths(SOUND_PATH,files)
 	
 	for item in files:
 		var audio_steam: AudioStream = load(item)
@@ -83,15 +85,17 @@ func _music_loop() -> void:
 static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:
 	
 	var target_channel: AudioStreamPlayer = null
+	
+	if (not __sound_cache.has(sound_path)):
+		return null
+	
 	var audio_steam: AudioStream = __sound_cache[sound_path]
+	
 	
 	if (not __sfx_channels.has(audio_steam)):
 		_instance.create_sfx_channel(audio_steam)
 	
 	target_channel = __sfx_channels[audio_steam]
-	#
-	#if (target_channel.playing):
-		#return target_channel
 		
 	target_channel.volume_linear = volume_linear
 	target_channel.play()
