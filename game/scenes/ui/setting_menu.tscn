@@ -1,16 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://qmng0anisnyy"]
+[gd_scene load_steps=6 format=3 uid="uid://qmng0anisnyy"]
 
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="2_63sl1"]
+[ext_resource type="StyleBox" uid="uid://s5xfe1dkrn45" path="res://themes/defualt_panel.tres" id="3_p50a0"]
+[ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="4_ub06a"]
+[ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="5_p50a0"]
 
 [node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider")]
 layer = 31
 script = ExtResource("1_xbl1u")
-master_slider = NodePath("Control/Volume/Master")
-sfx_slider = NodePath("Control/Volume/SFX")
-ui_slider = NodePath("Control/Volume/UI")
-music_slider = NodePath("Control/Volume/Music")
-voice_slider = NodePath("Control/Volume/Voice")
+master_slider = NodePath("Control/AudioPanel/Volume/Master")
+sfx_slider = NodePath("Control/AudioPanel/Volume/SFX")
+ui_slider = NodePath("Control/AudioPanel/Volume/UI")
+music_slider = NodePath("Control/AudioPanel/Volume/Music")
+voice_slider = NodePath("Control/AudioPanel/Volume/Voice")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -19,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -28,78 +32,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
+metadata/_edit_lock_ = true
 
-[node name="Volume" type="VBoxContainer" parent="Control"]
+[node name="AudioPanelTitle" type="RichTextLabel" parent="Control"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -872.0
-offset_top = -28.0
-offset_right = -200.0
-offset_bottom = 268.0
+offset_left = -168.0
+offset_top = 64.0
+offset_right = 168.0
+offset_bottom = 192.0
 grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="Control/Volume"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Master"
-
-[node name="Master" type="HSlider" parent="Control/Volume"]
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Label2" type="Label" parent="Control/Volume"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "SFX"
-
-[node name="SFX" type="HSlider" parent="Control/Volume"]
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Label3" type="Label" parent="Control/Volume"]
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "UI"
-
-[node name="UI" type="HSlider" parent="Control/Volume"]
-visible = false
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Label4" type="Label" parent="Control/Volume"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Music"
-
-[node name="Music" type="HSlider" parent="Control/Volume"]
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Label5" type="Label" parent="Control/Volume"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Voice"
-
-[node name="Voice" type="HSlider" parent="Control/Volume"]
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("4_ub06a")
+theme_override_font_sizes/normal_font_size = 85
+text = "Setting"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="CloseButton" type="TextureButton" parent="Control"]
 layout_mode = 1
@@ -108,27 +60,322 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -136.0
+offset_left = -192.0
 offset_top = 156.0
-offset_right = 131.0
-offset_bottom = 435.0
+offset_right = 319.0
+offset_bottom = 656.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.75, 0.75)
 texture_normal = ExtResource("2_63sl1")
 texture_pressed = ExtResource("2_63sl1")
 texture_hover = ExtResource("2_63sl1")
 texture_disabled = ExtResource("2_63sl1")
+metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 72.0
-offset_right = 1904.0
-offset_bottom = 492.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 91
-text = "WIP
-Waiting for design before doing more work"
-autowrap_mode = 2
+[node name="AudioPanel" type="Panel" parent="Control"]
+self_modulate = Color(0.721569, 0.878431, 1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 191.0
+offset_top = -340.0
+offset_right = 896.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_p50a0")
+metadata/_edit_lock_ = true
+
+[node name="AudioPanelTitle" type="RichTextLabel" parent="Control/AudioPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 132.0
+offset_bottom = 88.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("4_ub06a")
+theme_override_font_sizes/normal_font_size = 76
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" type="VBoxContainer" parent="Control/AudioPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -140.0
+offset_right = 196.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Master"
+
+[node name="Master" type="HSlider" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label2" type="Label" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "SFX"
+
+[node name="SFX" type="HSlider" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label3" type="Label" parent="Control/AudioPanel/Volume"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "UI"
+
+[node name="UI" type="HSlider" parent="Control/AudioPanel/Volume"]
+visible = false
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label4" type="Label" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+
+[node name="Music" type="HSlider" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Label5" type="Label" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Voice"
+
+[node name="Voice" type="HSlider" parent="Control/AudioPanel/Volume"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Debug" type="Panel" parent="Control"]
+self_modulate = Color(0.721569, 0.878431, 1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 164.0
+offset_right = 896.0
+offset_bottom = 484.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_p50a0")
+metadata/_edit_lock_ = true
+
+[node name="DebugPanelTitle" type="RichTextLabel" parent="Control/Debug"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = -40.0
+offset_right = 132.0
+offset_bottom = 88.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("4_ub06a")
+theme_override_font_sizes/normal_font_size = 76
+text = "DEBUG"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CheckButton" type="CheckButton" parent="Control/Debug"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -112.0
+offset_right = 64.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 30
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "God Mode"
+flat = true
+
+[node name="CheckButton2" type="CheckButton" parent="Control/Debug"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -194.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 30
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "FPS Counter"
+flat = true
+
+[node name="ControlPanel" type="Panel" parent="Control"]
+self_modulate = Color(1, 0.882353, 0.501961, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -340.0
+offset_right = -192.0
+offset_bottom = 484.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_p50a0")
+metadata/_edit_lock_ = true
+
+[node name="AudioPanelTitle" type="RichTextLabel" parent="Control/ControlPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -196.0
+offset_top = -40.0
+offset_right = 196.0
+offset_bottom = 88.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("4_ub06a")
+theme_override_font_sizes/normal_font_size = 76
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlList" type="VBoxContainer" parent="Control/ControlPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -356.0
+offset_right = 296.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Move - WASD/ARROW Key"
+
+[node name="Label2" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Aim - Cursor"
+
+[node name="Label3" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Shoot - Space / Left Click"
+
+[node name="Label4" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Next Dialogue - Left Click"
+
+[node name="Label5" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Pause - Esc"
+
+[node name="Label6" type="Label" parent="Control/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Exit Game - Alt + F4 / Power"
 
 [connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
