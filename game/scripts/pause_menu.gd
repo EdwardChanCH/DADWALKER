@@ -3,5 +3,5 @@ extends CanvasLayer
 
 func _ready() -> void:
 	visible = false
-	Globals.pause = self
+	Globals.pause_menu = self
 	pass

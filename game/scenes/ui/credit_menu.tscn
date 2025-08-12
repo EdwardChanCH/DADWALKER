@@ -133,6 +133,20 @@ mouse_filter = 2
 texture = ExtResource("2_xwfye")
 metadata/_edit_lock_ = true
 
+[node name="Control" type="Control" parent="Control/Credit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = 536.0
+offset_right = -1176.0
+offset_bottom = -456.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "失败了失败了失败了失败了失败了失败了失败了失败了失败了失败了失败了失败了"
+metadata/_edit_lock_ = true
+
 [node name="ButtonRoot" type="Control" parent="Control"]
 anchors_preset = 0
 offset_left = 800.0
