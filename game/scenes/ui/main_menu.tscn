@@ -1,7 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://djp7wfgsaovkx"]
+[gd_scene load_steps=33 format=3 uid="uid://djp7wfgsaovkx"]
 
 [ext_resource type="Script" uid="uid://3vyy3niascm2" path="res://scripts/main_menu.gd" id="1_m1kxf"]
-[ext_resource type="Texture2D" uid="uid://dn6t3mydcugia" path="res://assets/textures/placeholders/title_temp.png" id="2_uhagc"]
 [ext_resource type="Texture2D" uid="uid://bjy2waww8vinl" path="res://assets/textures/ui_sprites/feathers/feather_asset_1_yellow.png" id="2_x2yvf"]
 [ext_resource type="Texture2D" uid="uid://dmq246ggan1g3" path="res://assets/textures/ui_sprites/feathers/feather_asset_2_yellow.png" id="3_uhagc"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="3_x2yvf"]
@@ -484,7 +483,6 @@ offset_right = 600.0
 offset_bottom = 350.0
 grow_horizontal = 2
 tooltip_text = "i added tool tip to random ui element inorder to keep myself sane while being force to work on them"
-texture = ExtResource("2_uhagc")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/TitleMover"]
 layout_mode = 1
