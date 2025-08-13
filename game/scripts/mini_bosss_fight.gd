@@ -102,16 +102,18 @@ func start_fight() -> void:
 	projectile_despawner.monitorable = true
 	print("mbf: start_fight") # TODO
 	await boss_health.open_ui()
-	boss_timer.start(3)
-	await boss_timer.timeout
-	
 	__can_attack_again = true
 	__fight_ended = false
+	
+	boss_timer.start(0.5)
+	await boss_timer.timeout
+	tomato_attack()
 	pass
 
 func end_fight() -> void:
 	# Move back to the right side.
 	if (__is_on_left):
+		character_world.target_look_vector = Vector3.LEFT
 		boss_animation.play("boss_appear_right")
 		await boss_animation.animation_finished
 		__is_on_left = false
@@ -139,10 +141,12 @@ func tomato_attack() -> void:
 	
 	# Switch sides.
 	if (__is_on_left):
+		character_world.target_look_vector = Vector3.LEFT
 		boss_animation.play("boss_appear_right")
 		await boss_animation.animation_finished
 		__is_on_left = false
 	else:
+		character_world.target_look_vector = Vector3.RIGHT
 		boss_animation.play("boss_appear_left")
 		await boss_animation.animation_finished
 		__is_on_left = true
@@ -169,7 +173,7 @@ func tomato_attack() -> void:
 	# Shoot bullets.
 	for i in range(-1, 2, 1):
 		var direction: Vector2 = Vector2.RIGHT if __is_on_left else Vector2.LEFT
-		direction = direction.rotated(deg_to_rad(i * 15)).normalized()
+		direction = direction.rotated(deg_to_rad(i * 17)).normalized()
 		boss_timer.start(0.1)
 		await boss_timer.timeout
 		projectile_spawner.shoot_once(direction)
