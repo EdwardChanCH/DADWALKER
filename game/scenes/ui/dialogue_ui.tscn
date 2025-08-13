@@ -39,6 +39,7 @@ _data = {
 }
 
 [node name="DialogueUI" type="CanvasLayer" node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "character_sprite_1", "character_sprite_2", "text_box_animation_player")]
+layer = 31
 follow_viewport_enabled = true
 script = ExtResource("1_86bo4")
 character_sprite_folder_paths = Dictionary[int, String]({

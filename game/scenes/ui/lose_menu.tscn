@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://dw0we11wl8rya"]
+[gd_scene load_steps=3 format=3 uid="uid://dw0we11wl8rya"]
 
 [ext_resource type="Script" uid="uid://k02ynowhbj71" path="res://scripts/lose_menu.gd" id="1_6jrcj"]
+[ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_ifqll"]
 
 [node name="LoseMenu" type="CanvasLayer"]
+layer = 31
 script = ExtResource("1_6jrcj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_top = 64.0
+offset_right = 168.0
+offset_bottom = 192.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("2_ifqll")
+theme_override_font_sizes/normal_font_size = 85
+text = "Setting"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
