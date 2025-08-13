@@ -7,7 +7,7 @@ extends Node2D
 @export var projectile_speed: float = 500
 
 ## Shoot one projectile.
-func shoot_once(p_vector: Vector2) -> void:
+func shoot_once(p_vector: Vector2) -> _Projectile:
 	if not projectile_scene:
 		return
 	
@@ -21,4 +21,5 @@ func shoot_once(p_vector: Vector2) -> void:
 	if Globals.gameplay:
 		Globals.gameplay.add_projectie_to_scene(projectile)
 	projectile.setup_start(self.global_position, p_velocity, p_angle)
-	pass
+	
+	return projectile

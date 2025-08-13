@@ -12,5 +12,5 @@ func _ready() -> void:
 	pass
 
 func start_walk() -> void:
-	animation_player.play("dragoon_walk")
+	animation_player.play("dragoon_walk") # TODO
 	pass

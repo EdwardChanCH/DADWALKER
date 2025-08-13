@@ -1,30 +1,21 @@
 class_name _FinalBossFight
 extends _ScriptedSequence
 
-signal cutscene_finished
-signal final_boss_dialogue_1_started
-signal final_boss_dialogue_1_ended
+signal final_boss_dialogue_started
+signal final_boss_dialogue_ended
 signal final_boss_fight_started
 signal final_boss_fight_ended
 
 @export var character_world: _DadSkyWorld = null
-
 @export var boss_animation: AnimationPlayer = null
-
 @export var boss_health: _BossHealth = null
-
 @export var boss_hitbox_area: Area2D = null
-
 @export var ground_attack_area: Area2D = null
-
 @export var boss_sprite: Node2D = null
-
 @export var boss_timer: Timer = null
-
 @export var projectile_spawner: _ProjectileSpawner = null
-
+@export var enemy_spawner: _EnemySpawner = null
 @export var boss_sky_z_index: int = -6
-
 @export var boss_ground_z_index: int = 6
 
 ## Phases: 3 --> 2 --> 1 --> 0
@@ -51,10 +42,13 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
-	character_world.look_vector = Vector3.DOWN + Vector3.BACK * 0.01
-	character_world.target_look_vector = Vector3.DOWN + Vector3.BACK * 0.01
+	character_world.use_sky_camera()
+	character_world.look_vector = Vector3.UP * 2 + Vector3.BACK * 0.01
+	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
+	boss_hitbox_area.monitoring = false
+	boss_hitbox_area.monitorable = false
 	
-	enter_cutscene() # TODO
+	#enter_cutscene() # TODO
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -91,19 +85,20 @@ func _physics_process(delta: float) -> void:
 					__attack_pattern = 0
 	pass
 
-## [override] Entry point.
 func enter_cutscene() -> void:
+	if (Globals.camera):
+		Globals.camera.tracking_node = camera_target
 	start_dialogue()
 	pass
 
 func start_dialogue() -> void:
-	final_boss_dialogue_1_started.emit()
+	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
 	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
-	final_boss_dialogue_1_ended.emit()
+	final_boss_dialogue_ended.emit()
 	print("fbf: end_dialogue") # TODO
 	start_fight()
 	pass
@@ -113,20 +108,27 @@ func start_fight() -> void:
 	print("fbf: start_fight") # TODO
 	if (Globals.camera):
 		Globals.camera.shake_camera()
-	# TODO make builds retract
+	# TODO make buildings retract
+	character_world.use_sky_camera()
 	character_world.look_decay = 1
 	character_world.target_look_vector = Vector3.BACK
 	await boss_health.open_ui()
 	boss_timer.start(3)
 	await boss_timer.timeout
 	character_world.look_decay = 8
+	enemy_spawner.start_spawning()
 	__can_attack_again = true
+	boss_hitbox_area.monitoring = true
+	boss_hitbox_area.monitorable = true
 	__fight_ended = false
 	pass
 
 func end_fight() -> void:
 	final_boss_fight_ended.emit()
 	__can_attack_again = false
+	boss_hitbox_area.monitoring = false
+	boss_hitbox_area.monitorable = false
+	enemy_spawner.stop_spawning()
 	print("fbf: end_fight") # TODO
 	character_world.look_decay = 1
 	# TODO This breaks if the boss is killed before the start_fight animation is finished.
@@ -136,7 +138,7 @@ func end_fight() -> void:
 	if (Globals.camera):
 		Globals.camera.shake_camera()
 	cutscene_finished.emit()
-	# TODO
+	# TODO ending popup
 	if (Globals.camera):
 		Globals.camera.tracking_node = Globals.player
 	pass
@@ -148,6 +150,7 @@ func ground_pound_attack() -> void:
 	await boss_animation.animation_finished
 	
 	boss_hitbox_area.monitoring = false
+	boss_hitbox_area.monitorable = false
 	
 	character_world.use_ground_camera()
 	boss_sprite.z_index = boss_ground_z_index # In front of ground layer.
@@ -177,7 +180,8 @@ func ground_pound_attack() -> void:
 	boss_animation.play("sky_down")
 	await boss_animation.animation_finished
 	
-	boss_hitbox_area.monitoring = true
+	boss_hitbox_area.monitoring = false
+	boss_hitbox_area.monitorable = false
 	
 	__can_attack_again = true
 	__time_since_last_attack = 0
@@ -221,9 +225,4 @@ func _on_boss_hitbox_area_entered(area: Area2D) -> void:
 		boss_health.current_health -= 1
 	elif (game_object is _Seed):
 		boss_health.current_health -= 10_000
-	pass
-
-func _on_tomato_despawner_body_entered(body: Node2D) -> void:
-	if (body is _BasicEnemy):
-		body.queue_free()
 	pass

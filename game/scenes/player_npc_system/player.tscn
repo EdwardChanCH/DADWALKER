@@ -9,10 +9,10 @@
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
-radius = 30.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
-radius = 30.0
+radius = 20.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("collision_box", "hit_box", "shadow", "character_world_node", "hit_detector_node")]
 collision_layer = 2
