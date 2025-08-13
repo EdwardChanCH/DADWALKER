@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=6 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
-[ext_resource type="Resource" uid="uid://bihjrlk04fjoq" path="res://resources/test_dialogue.tres" id="2_d67fy"]
-[ext_resource type="PackedScene" uid="uid://b4gb4p6cibq17" path="res://scenes/ui/elements/border.tscn" id="6_qy5q6"]
 [ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/elements/character_sprite.tscn" id="7_gegk4"]
 
 [sub_resource type="Animation" id="Animation_rn5aw"]
@@ -40,33 +38,29 @@ _data = {
 &"slide_in": SubResource("Animation_imsod")
 }
 
-[node name="DialogueUI" type="CanvasLayer"]
+[node name="DialogueUI" type="CanvasLayer" node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "character_sprite_1", "character_sprite_2", "text_box_animation_player")]
 follow_viewport_enabled = true
+script = ExtResource("1_86bo4")
+character_sprite_folder_paths = Dictionary[int, String]({
+1: "res://assets/textures/character_sprites/doki/",
+2: "res://assets/textures/character_sprites/dad/",
+3: "res://assets/textures/character_sprites/dragoon/"
+})
+character_name_label = NodePath("Control/TextBox/CharacterName")
+dialogue_text_label = NodePath("Control/TextBox/DialogueText")
+character_sprite_1 = NodePath("Control/CharacterSprite1")
+character_sprite_2 = NodePath("Control/CharacterSprite2")
+text_box_animation_player = NodePath("Control/TextBox/TextBoxAnimation")
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "character_sprite_1", "character_sprite_2", "border", "text_box_animation_player")]
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_86bo4")
-dialogue = ExtResource("2_d67fy")
-character_sprite_folder_paths = Dictionary[int, String]({
-1: "res://assets/textures/character_sprites/doki/",
-2: "res://assets/textures/character_sprites/dad/",
-3: "res://assets/textures/character_sprites/dragoon/"
-})
-character_name_label = NodePath("TextBox/CharacterName")
-dialogue_text_label = NodePath("TextBox/DialogueText")
-character_sprite_1 = NodePath("CharacterSprite1")
-character_sprite_2 = NodePath("CharacterSprite2")
-border = NodePath("Borders")
-text_box_animation_player = NodePath("TextBox/CharacterName/TextBoxAnimation")
+mouse_filter = 1
 metadata/_edit_lock_ = true
-
-[node name="Borders" parent="Control" instance=ExtResource("6_qy5q6")]
-layer = 0
 
 [node name="CharacterSprite1" parent="Control" instance=ExtResource("7_gegk4")]
 layout_mode = 1
@@ -141,8 +135,9 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="TextBoxAnimation" type="AnimationPlayer" parent="Control/TextBox/CharacterName"]
-root_node = NodePath("../..")
+[node name="TextBoxAnimation" type="AnimationPlayer" parent="Control/TextBox"]
 libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
+
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

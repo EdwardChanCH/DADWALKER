@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://qmng0anisnyy"]
 
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xbl1u"]
-load_path = "res://.godot/imported/credits_screen_close_button_temp.png-d1a15a581c512a2701828ec47f33852e.ctex"
+[ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="2_63sl1"]
 
 [node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider")]
 layer = 31
@@ -116,10 +114,10 @@ offset_right = 131.0
 offset_bottom = 435.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = SubResource("CompressedTexture2D_xbl1u")
-texture_pressed = SubResource("CompressedTexture2D_xbl1u")
-texture_hover = SubResource("CompressedTexture2D_xbl1u")
-texture_disabled = SubResource("CompressedTexture2D_xbl1u")
+texture_normal = ExtResource("2_63sl1")
+texture_pressed = ExtResource("2_63sl1")
+texture_hover = ExtResource("2_63sl1")
+texture_disabled = ExtResource("2_63sl1")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
