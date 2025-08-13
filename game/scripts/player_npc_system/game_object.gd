@@ -46,7 +46,7 @@ var in_player_control: bool = false
 @export var in_tracking_mode: bool = false
 
 ## Object to track (usually the player).
-@export var tracking_object: Node2D = null
+@export var tracking_object: Node2D = null # TODO not implemented
 
 ## Vector when not in tracking mode (not normalized).
 @export var idle_vector: Vector2 = Vector2.LEFT

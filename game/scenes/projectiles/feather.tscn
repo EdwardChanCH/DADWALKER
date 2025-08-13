@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy5pgh5s187uq"]
 
 [ext_resource type="Script" uid="uid://dts3foj5j1d" path="res://scripts/projectiles/feather.gd" id="1_0eak1"]
-[ext_resource type="Texture2D" uid="uid://kd0kilu5rrn3" path="res://assets/textures/projectile_sprite/feather_fast.png" id="2_tau2l"]
-[ext_resource type="Texture2D" uid="uid://xnvb0qaaybn0" path="res://assets/textures/projectile_sprite/feather_medium.png" id="3_vwvh7"]
-[ext_resource type="Texture2D" uid="uid://hs8ecq1nckej" path="res://assets/textures/projectile_sprite/feather_slow.png" id="4_c2c2p"]
+[ext_resource type="Texture2D" uid="uid://kd0kilu5rrn3" path="res://assets/textures/projectile_sprites/feather_fast.png" id="2_tau2l"]
+[ext_resource type="Texture2D" uid="uid://xnvb0qaaybn0" path="res://assets/textures/projectile_sprites/feather_medium.png" id="3_vwvh7"]
+[ext_resource type="Texture2D" uid="uid://hs8ecq1nckej" path="res://assets/textures/projectile_sprites/feather_slow.png" id="4_c2c2p"]
 [ext_resource type="Texture2D" uid="uid://dgstmum1kdx5a" path="res://assets/textures/shadow_test.png" id="5_vwvh7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ocj2s"]

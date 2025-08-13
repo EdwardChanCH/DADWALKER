@@ -32,3 +32,9 @@ func _process(delta: float) -> void:
 func shake_camera() -> void:
 	camera_animation.play("camera_shake")
 	pass
+
+## Despawn tomatoes.
+func _on_tomato_despawner_body_entered(body: Node2D) -> void:
+	if (body is _BasicEnemy):
+		body.queue_free()
+	pass

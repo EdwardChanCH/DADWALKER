@@ -1,15 +1,38 @@
+class_name _EnemySpawner
 extends Node2D
 
 @export var game_object_scene: PackedScene = null
 
 @export var auto_spawn_timer: Timer = null
 
+## (not normalized)
+@export var direction: Vector2 = Vector2.LEFT
+
+@export var target_node: Node2D = null
+
+@export var push_velocity: Vector2 = Vector2.ZERO
+
 func _ready() -> void:
 	if (auto_spawn_timer):
 		auto_spawn_timer.timeout.connect(_on_auto_spawn_timer_timeout)
+		auto_spawn_timer.paused = true
 	pass
 
-func spawn_object() -> void:
+func start_spawning() -> void:
+	if (auto_spawn_timer):
+		auto_spawn_timer.paused = false
+		auto_spawn_timer.start()
+	else:
+		spawn_object()
+	pass
+
+func stop_spawning() -> void:
+	if (auto_spawn_timer):
+		auto_spawn_timer.paused = true
+		auto_spawn_timer.stop()
+	pass
+
+func spawn_object() -> _GameObject:
 	if not game_object_scene:
 		return
 	
@@ -22,8 +45,11 @@ func spawn_object() -> void:
 	
 	game_object.global_transform.origin = self.global_position
 	game_object.reset_physics_interpolation()
-	game_object.idle_vector = Vector2.LEFT.rotated(self.rotation)
-	pass
+	game_object.idle_vector = direction
+	game_object.tracking_object = target_node
+	game_object.push_velocity = push_velocity
+	
+	return game_object
 
 func _on_auto_spawn_timer_timeout() -> void:
 	spawn_object()
