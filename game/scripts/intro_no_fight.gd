@@ -14,6 +14,13 @@ func _ready() -> void:
 	self.visible = false
 	pass
 
+func exit_cutscene() -> void:
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+	
+	cutscene_finished.emit()
+	pass
+
 func enter_cutscene() -> void:
 	map_used_before = true
 	
@@ -40,8 +47,5 @@ func end_dialogue() -> void:
 	print("mbf: end_dialogue") # TODO
 	
 	#start_fight() # Does not have fight.
-	
-	cutscene_finished.emit()
-	if (Globals.gameplay):
-		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+	exit_cutscene()
 	pass

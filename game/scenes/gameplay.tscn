@@ -136,13 +136,14 @@ position = Vector2(8000, 0)
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
 position = Vector2(10000, 0)
 
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "map_trigger")]
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "map_trigger", "tracking_node")]
 position = Vector2(960, 540)
 process_callback = 0
 script = ExtResource("2_ct7aa")
 gameplay_node = NodePath("..")
 camera_animation = NodePath("CameraAnimation")
 map_trigger = NodePath("MapTrigger")
+tracking_node = NodePath("../YSortedList/Player")
 
 [node name="CameraAnimation" type="AnimationPlayer" parent="MainCamera"]
 root_node = NodePath("../..")

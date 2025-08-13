@@ -9,18 +9,23 @@ signal target_reached
 
 @export var map_trigger: Area2D = null
 
+@export var lerp_decay: float = 8
+
 @export var tracking_node: Node2D = null :
 	get:
 		return tracking_node
 	set(value):
-		__target_reached_emitted = false
-		map_trigger.monitoring = false
-		map_trigger.monitorable = false
 		tracking_node = value
+		if (value):
+			__target_reached_emitted = false
+			map_trigger.monitoring = false
+			map_trigger.monitorable = false
+			x_limit_min = value.global_position.x # Resets x-limit.
 
 var __target_reached_emitted: bool = true
 
-@export var lerp_decay: float = 10
+## How far the camera can move left.
+var x_limit_min: float = 0
 
 func _ready() -> void:
 	# Check if missing export variables.
@@ -32,31 +37,44 @@ func _ready() -> void:
 	map_trigger.monitorable = true
 	pass
 
-func _process(delta: float) -> void:
+
+func _physics_process(delta: float) -> void:
+	# DO NOT USE _process(), which causes screen jittering.
+	
 	if tracking_node:
-		# Track node position.
-		var target_pos: Vector2 = tracking_node.global_position
+		var current_pos_x: float = self.global_position.x
 		
-		if (abs(self.global_position.x - target_pos.x) < 20):
-			# Abruptly move the camera.
-			self.global_position.x = target_pos.x
+		# Node tracking with x-axis limit.
+		var target_pos_x: float = tracking_node.global_position.x
+		if (target_pos_x < x_limit_min):
+			target_pos_x = x_limit_min
+		else:
+			x_limit_min = target_pos_x
+		
+		if (abs(current_pos_x - target_pos_x) < 20):
+			# Very close to the target.
+			#current_pos_x = target_pos_x # Unnecessary.
 			if (not __target_reached_emitted):
 				__target_reached_emitted = true
 				map_trigger.monitoring = true
 				map_trigger.monitorable = true
 				target_reached.emit()
 		else:
-			# Smoothly move the camera.
-			self.global_position.x = lerpf(
-				self.global_position.x,
-				target_pos.x,
+			# Smoothly move the camera to the target.
+			current_pos_x = lerpf(
+				current_pos_x,
+				target_pos_x,
 				Globals.lerp_t(lerp_decay, delta)
 			)
-			# Teleports the player if lagging too far behind the camera.
-			if (gameplay_node.player.global_position.x < self.global_position.x - 1060):
-				gameplay_node.player.global_position.x = self.global_position.x - 1060
-			elif (gameplay_node.player.global_position.x > self.global_position.x + 1060):
-				gameplay_node.player.global_position.x = self.global_position.x + 1060
+		
+		# Teleports the player if lagging too far behind the camera. (1920/2 + 100)
+		if (gameplay_node.player.global_position.x < current_pos_x - 1060):
+			gameplay_node.player.global_position.x = current_pos_x - 1060
+		elif (gameplay_node.player.global_position.x > current_pos_x + 1060):
+			gameplay_node.player.global_position.x = current_pos_x + 1060
+		
+		# Update camera position.
+		self.global_transform.origin.x = current_pos_x
 	pass
 
 ## Shake the camera.

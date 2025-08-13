@@ -21,6 +21,11 @@ func enter_cutscene() -> void:
 	cutscene_finished.emit()
 	pass
 
+## Cleanup.
+func exit_cutscene() -> void:
+	cutscene_finished.emit()
+	pass
+
 ## Start dialogue sequence.
 func start_dialogue() -> void:
 	cutscene_finished.emit()
