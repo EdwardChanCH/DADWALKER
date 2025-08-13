@@ -86,8 +86,8 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func enter_cutscene() -> void:
-	if (Globals.camera):
-		Globals.camera.tracking_node = camera_target
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = camera_target
 	start_dialogue()
 	pass
 
@@ -106,8 +106,8 @@ func end_dialogue() -> void:
 func start_fight() -> void:
 	final_boss_fight_started.emit()
 	print("fbf: start_fight") # TODO
-	if (Globals.camera):
-		Globals.camera.shake_camera()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
 	# TODO make buildings retract
 	character_world.use_sky_camera()
 	character_world.look_decay = 1
@@ -135,12 +135,12 @@ func end_fight() -> void:
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
 	await boss_health.close_ui()
 	character_world.look_decay = 8
-	if (Globals.camera):
-		Globals.camera.shake_camera()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
 	cutscene_finished.emit()
 	# TODO ending popup
-	if (Globals.camera):
-		Globals.camera.tracking_node = Globals.player
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
 	pass
 
 func ground_pound_attack() -> void:
@@ -158,8 +158,8 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_down")
 	await boss_animation.animation_finished
 	
-	if (Globals.camera):
-		Globals.camera.shake_camera()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
 	
 	for node2d in ground_attack_area.get_overlapping_bodies():
 		var player := node2d as _Player

@@ -17,12 +17,16 @@ enum HitboxLayer {
 
 enum Checkpoint {
 	MAINMENU,
-	INTRO,
-	MINI_BOSS,
-	FINAL_BOSS,
+	INTRO_START,
+	INTRO_END,
+	MINI_BOSS_START,
+	MINI_BOSS_FIGHT,
+	MINI_BOSS_END,
+	FINAL_BOSS_START,
+	FINAL_BOSS_FIGHT,
+	FINAL_BOSS_END,
 	ENDING,
 }
-
 
 # --- Signals --- #
 
@@ -39,10 +43,6 @@ var lose_menu: _LoseMenu = null
 var pause_menu: _PauseMenu = null
 
 var gameplay: _Gameplay = null
-
-var player: _Player = null
-
-var camera: _MainCamera = null
 
 var progress: Checkpoint = Checkpoint.MAINMENU :
 	get:
@@ -66,5 +66,36 @@ func lerp_t(decay: float, delta: float) -> float:
 
 # --- Misc. Functions --- #
 
+## Start the game at any point.
 func start_game(checkpoint: Checkpoint) -> void:
+	match (checkpoint):
+		Checkpoint.MAINMENU:
+			pass
+		Checkpoint.INTRO_START:
+			pass
+		Checkpoint.INTRO_END:
+			pass
+		Checkpoint.MINI_BOSS_START:
+			pass
+		Checkpoint.MINI_BOSS_FIGHT:
+			pass
+		Checkpoint.MINI_BOSS_END:
+			pass
+		Checkpoint.FINAL_BOSS_START:
+			pass
+		Checkpoint.FINAL_BOSS_FIGHT:
+			pass
+		Checkpoint.FINAL_BOSS_END:
+			pass
+		Checkpoint.ENDING:
+			pass
+		_:
+			pass
+	pass
+
+## Reload the full map, then start the game at any point.
+func reload_game(checkpoint: Checkpoint) -> void:
+	# TODO reload the FullMap node.
+	
+	start_game(checkpoint)
 	pass

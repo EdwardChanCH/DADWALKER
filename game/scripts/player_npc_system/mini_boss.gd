@@ -14,6 +14,4 @@ func _ready() -> void:
 	move_speed = 400
 	max_health = 1
 	current_health = 1
-	
-	#Globals.player = self # TODO
 	pass

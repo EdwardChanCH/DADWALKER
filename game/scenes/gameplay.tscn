@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://df64whveplypg"]
+[gd_scene load_steps=16 format=3 uid="uid://df64whveplypg"]
 
 [ext_resource type="Script" uid="uid://ca6xflgxec3a0" path="res://scripts/gameplay.gd" id="1_00tan"]
 [ext_resource type="Script" uid="uid://cjqqp3av0j00n" path="res://scripts/camera_2d.gd" id="2_ct7aa"]
 [ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player_npc_system/player.tscn" id="2_l1v76"]
 [ext_resource type="Texture2D" uid="uid://6qpuam2dwmid" path="res://assets/textures/parallax_bg/scroll_sky_1.png" id="2_ocj2s"]
 [ext_resource type="Texture2D" uid="uid://bqsh3qokmbv8u" path="res://assets/textures/parallax_bg/scroll_ground_1.png" id="3_din8e"]
+[ext_resource type="PackedScene" uid="uid://bqsyw3aqo1s2r" path="res://scenes/full_map.tscn" id="6_din8e"]
 
 [sub_resource type="Animation" id="Animation_ct7aa"]
 length = 0.001
@@ -106,10 +107,11 @@ position = Vector2(0, 720)
 texture = ExtResource("3_din8e")
 centered = false
 
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("camera_animation", "tracking_node")]
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "tracking_node")]
 position = Vector2(960, 540)
 process_callback = 0
 script = ExtResource("2_ct7aa")
+gameplay_node = NodePath("..")
 camera_animation = NodePath("CameraAnimation")
 tracking_node = NodePath(".")
 
@@ -172,6 +174,6 @@ y_sort_enabled = true
 [node name="ProjectileList" type="Node2D" parent="YSortedList"]
 y_sort_enabled = true
 
-[node name="FullMap" type="Node2D" parent="."]
+[node name="FullMap" parent="." instance=ExtResource("6_din8e")]
 
 [connection signal="body_entered" from="MainCamera/TomatoDespawner" to="MainCamera" method="_on_tomato_despawner_body_entered"]

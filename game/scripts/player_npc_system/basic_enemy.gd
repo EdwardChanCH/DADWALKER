@@ -4,7 +4,8 @@ extends _GameObject
 func _ready() -> void:
 	super._ready()
 	
-	tracking_object = Globals.player
+	if (Globals.gameplay):
+		tracking_object = Globals.gameplay.player
 	
 	# TODO
 	# Initialize variables.

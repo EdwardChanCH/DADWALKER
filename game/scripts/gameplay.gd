@@ -1,11 +1,10 @@
 class_name _Gameplay
 extends Node2D
 
-@export var main_camera: _MainCamera = null
-
-@export var game_object_list: Node2D = null
-
-@export var projectile_list: Node2D = null
+@export var player: _Player = null # Never queue_free.
+@export var main_camera: _MainCamera = null # Never queue_free.
+@export var game_object_list: Node2D = null # Never queue_free; can free its childrens.
+@export var projectile_list: Node2D = null # Never queue_free; can free its childrens.
 
 func _ready() -> void:
 	# Check if missing export variables.

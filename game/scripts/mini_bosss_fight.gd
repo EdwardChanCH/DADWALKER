@@ -77,8 +77,8 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func enter_cutscene() -> void:
-	if (Globals.camera):
-		Globals.camera.tracking_node = camera_target
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = camera_target
 	start_dialogue()
 	pass
 
@@ -132,8 +132,8 @@ func end_fight() -> void:
 	
 	cutscene_finished.emit()
 	
-	if (Globals.camera):
-		Globals.camera.tracking_node = Globals.player
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
 	pass
 
 func tomato_attack() -> void:

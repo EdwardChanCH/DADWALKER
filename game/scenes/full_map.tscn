@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqsyw3aqo1s2r"]
+
+[ext_resource type="PackedScene" uid="uid://dcrp3wh853owp" path="res://scenes/intro_no_fight.tscn" id="1_it2i0"]
+
+[node name="FullMap" type="Node2D"]
+
+[node name="IntroNoFight" parent="." instance=ExtResource("1_it2i0")]
