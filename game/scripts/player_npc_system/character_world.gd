@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func start_walk() -> void:
+	character_node.start_walk()
 	pass
 
 func start_death() -> void:

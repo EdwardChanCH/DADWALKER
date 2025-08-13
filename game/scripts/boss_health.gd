@@ -35,7 +35,7 @@ func _ready() -> void:
 	animation.play("default")
 	current_health = max_health
 	boss_name_label.text = boss_name
-	health_label.text = str(ResourceLoader.list_directory("res://"))
+	health_label.text = str(max_health)
 	pass
 
 ## Open boss health UI.
@@ -46,6 +46,7 @@ func open_ui() -> void:
 
 ## Close boss health UI.
 func close_ui() -> void:
+	health_label.text = ""
 	animation.play("ui_close")
 	await animation.animation_finished
 	pass

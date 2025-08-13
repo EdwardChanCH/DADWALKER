@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://comocvmoxgfwf"]
+[gd_scene load_steps=19 format=3 uid="uid://comocvmoxgfwf"]
 
 [ext_resource type="PackedScene" uid="uid://hk5x5mvji4dk" path="res://scenes/player_npc_system/dad_sky_world.tscn" id="1_cmkb5"]
 [ext_resource type="Script" uid="uid://duyp6mutkdpfp" path="res://scripts/final_boss_fight.gd" id="1_k0qlo"]
@@ -285,19 +285,13 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_cmkb5"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2lg36"]
-size = Vector2(40, 1200)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1c10"]
-size = Vector2(40, 1200)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5mu0"]
 size = Vector2(400, 400)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0qlo"]
 radius = 180.0
 
-[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner")]
+[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "camera_target")]
 script = ExtResource("1_k0qlo")
 character_world = NodePath("SubViewport/DadSkyWorld")
 boss_animation = NodePath("BossMotion")
@@ -307,6 +301,11 @@ ground_attack_area = NodePath("GroundAttack")
 boss_sprite = NodePath("BossSprite")
 boss_timer = NodePath("BossTimer")
 projectile_spawner = NodePath("ProjectileSpawner")
+enemy_spawner = NodePath("EnemySpawner")
+camera_target = NodePath("CameraTarget")
+
+[node name="CameraTarget" type="Node2D" parent="."]
+position = Vector2(960, 540)
 
 [node name="BossHealth" parent="." instance=ExtResource("3_hpirs")]
 
@@ -333,17 +332,6 @@ size = Vector2i(1024, 1024)
 
 [node name="DadSkyWorld" parent="SubViewport" instance=ExtResource("1_cmkb5")]
 look_decay = 5.0
-
-[node name="TomatoDespawner" type="Area2D" parent="."]
-collision_mask = 4
-
-[node name="CollisionShapeL" type="CollisionShape2D" parent="TomatoDespawner"]
-position = Vector2(-200, 600)
-shape = SubResource("RectangleShape2D_2lg36")
-
-[node name="CollisionShapeR" type="CollisionShape2D" parent="TomatoDespawner"]
-position = Vector2(2120, 600)
-shape = SubResource("RectangleShape2D_y1c10")
 
 [node name="BossHitbox" type="Area2D" parent="."]
 collision_layer = 8
@@ -376,7 +364,5 @@ game_object_scene = ExtResource("8_2lg36")
 auto_spawn_timer = NodePath("EnemyTimer")
 
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
-autostart = true
 
-[connection signal="body_entered" from="TomatoDespawner" to="." method="_on_tomato_despawner_body_entered"]
 [connection signal="area_entered" from="BossHitbox" to="." method="_on_boss_hitbox_area_entered"]
