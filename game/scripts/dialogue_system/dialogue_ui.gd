@@ -106,15 +106,21 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 		set_dialogue_sequence(__current_dialogue_index)
 		return true
 
+	if(current_sequence is _SoundSequence):
+		__current_dialogue_index += 1
+		set_dialogue_sequence(__current_dialogue_index)
+		return true
+
 	return false
 
 ## Set the current character who are on screen
 func set_character_sequence(sequence: _CharacterSequence) -> void:
-	set_character_sprite(sequence.character_position, sequence.character_name, 1)
+	var sprite = set_character_sprite(sequence.character_position, sequence.character_name, 1)
+	sprite.flip_h = sequence.flip_sprite
 	pass
 
 ## Set character sprite
-func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, epression_index: int):
+func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, epression_index: int) -> TextureRect:
 	var target_sprite: TextureRect = null
 	match(character_position):
 		_DialogueSequence.Position.LEFT:
@@ -136,7 +142,7 @@ func set_character_sprite(character_position: _DialogueSequence.Position, charac
 		return
 	
 	target_sprite.texture = __character_sprite_cache[cache_key] as Texture2D
-	pass
+	return target_sprite
 
 ## Set text
 func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:

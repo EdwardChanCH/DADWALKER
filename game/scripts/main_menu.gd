@@ -25,10 +25,12 @@ func _on_play_button_pressed() -> void:
 
 func _on_options_button_pressed() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
+	Globals.setting_menu.visible = true
 	pass
 
 func _on_credits_button_pressed() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
+	Globals.credit_menu.visible = true
 	pass
 
 func _on_mouse_entered() -> void:

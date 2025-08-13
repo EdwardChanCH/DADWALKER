@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://beknnb6r0k3ew"]
+[gd_scene load_steps=19 format=3 uid="uid://beknnb6r0k3ew"]
 
 [ext_resource type="Script" uid="uid://dren52nmku3q4" path="res://scripts/credit_menu.gd" id="1_sileb"]
 [ext_resource type="Texture2D" uid="uid://swomdajmfujo" path="res://assets/textures/ui_sprites/credits.png" id="2_xwfye"]
@@ -99,10 +99,95 @@ nodes/TimeScale/position = Vector2(-160, 360)
 nodes/output/position = Vector2(200, 180)
 node_connections = [&"Rotation", 0, &"Idle", &"Rotation", 1, &"TimeScale", &"TimeScale", 0, &"Hover", &"output", 0, &"Rotation"]
 
-[node name="CreditMenu" type="CanvasLayer" node_paths=PackedStringArray("close_button_animation_tree")]
+[sub_resource type="Animation" id="Animation_gpbg5"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_xwfye"]
+resource_name = "slide_in"
+length = 0.66667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.666667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0, 0),
+"points": PackedFloat32Array(-1080, 0, 0, 0, 0, 0, 0, 0, 0, 0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.666667)
+}
+
+[sub_resource type="Animation" id="Animation_mc2dd"]
+resource_name = "slide_out"
+length = 0.66667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.66667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(1, 1),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 1080, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.66667)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mc2dd"]
+_data = {
+&"RESET": SubResource("Animation_gpbg5"),
+&"slide_in": SubResource("Animation_xwfye"),
+&"slide_out": SubResource("Animation_mc2dd")
+}
+
+[node name="CreditMenu" type="CanvasLayer" node_paths=PackedStringArray("close_button_animation_tree", "animation_player")]
 layer = 31
 script = ExtResource("1_sileb")
 close_button_animation_tree = NodePath("Control/ButtonRoot/AnimationTree")
+animation_player = NodePath("CreditMenuAnimation")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -140,6 +225,7 @@ offset_top = 808.0
 offset_right = 1120.0
 offset_bottom = 1128.0
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="CloseButton" type="TextureButton" parent="Control/ButtonRoot"]
 layout_mode = 1
@@ -178,6 +264,11 @@ parameters/Rotation/current_state = "Idle"
 parameters/Rotation/transition_request = ""
 parameters/Rotation/current_index = 0
 parameters/TimeScale/scale = 0.25
+
+[node name="CreditMenuAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mc2dd")
+}
 
 [connection signal="mouse_entered" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_exited"]

@@ -1,0 +1,330 @@
+[gd_resource type="Resource" script_class="_Dialogue" load_steps=50 format=3 uid="uid://dwj1w17ls8ogj"]
+
+[ext_resource type="Script" uid="uid://bgv01d7aiks5m" path="res://scripts/dialogue_system/dialogue.gd" id="1_7mrcq"]
+[ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/sequences/dialogue_sequence.gd" id="2_g88o3"]
+[ext_resource type="Script" uid="uid://cayfa5f7g08s6" path="res://scripts/dialogue_system/sequences/character_sequence.gd" id="3_g88o3"]
+[ext_resource type="Script" uid="uid://8if0smrkob6y" path="res://scripts/dialogue_system/sequences/text_sequence.gd" id="3_p3gox"]
+[ext_resource type="Script" uid="uid://tusq0thghmdp" path="res://scripts/dialogue_system/sequences/sound_sequence.gd" id="5_jrwte"]
+
+[sub_resource type="Resource" id="Resource_ecnw6"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "..."
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_a0tap"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "Oh, there you are! I thought I lost you."
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_5ytdx"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "..."
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_lbyae"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "…wait, what’s with the aura?"
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_awn8h"]
+script = ExtResource("3_g88o3")
+character_name = 3
+character_position = 1
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_74l0s"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "…?"
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_lanul"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "…you…."
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_exbco"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "!!!!!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_7cdq7"]
+script = ExtResource("3_g88o3")
+character_name = 1
+character_position = 1
+play_animation = true
+flip_sprite = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_v2ya8"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "Huh? Me?"
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_st3i3"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "You didn’t feed me before you left. I was so hungry, I could’ve eaten that tasty, juicy Dragoon."
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_78nqt"]
+script = ExtResource("3_g88o3")
+character_name = 3
+character_position = 1
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_djljc"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "!?"
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_gnmr0"]
+script = ExtResource("3_g88o3")
+character_name = 1
+character_position = 1
+play_animation = true
+flip_sprite = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_bxupg"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "HUH!?"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_icvef"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "What do you mean!? I told the Dragoon to get you food at the Mint Café!"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_kv3so"]
+script = ExtResource("3_g88o3")
+character_name = 3
+character_position = 1
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_ru1fv"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "?!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_2ya6e"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "No, you did not."
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_ju00v"]
+script = ExtResource("3_g88o3")
+character_name = 1
+character_position = 1
+play_animation = true
+flip_sprite = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_vs2s2"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "I did, though. "
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_h38s3"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "No, you didn’t."
+expression = 7
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_pcsbn"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "No, I did-"
+expression = 7
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_dpf1h"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "NO YOU DID NOT, YOU EGG-HEADED BIRDBRAIN!"
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_jhwt5"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "!!!!!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_lkyo6"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "And you!"
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_uf4jr"]
+script = ExtResource("3_g88o3")
+character_name = 3
+character_position = 1
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_xlpma"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "!!!!!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_gfulw"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "I had faith in you. If only you had let me have that dang tomato, I never would have had to do this."
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_qpi0k"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "....!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_tcg8p"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "Tomatoes are poisonous for dogs, you say?"
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_xmec8"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "That would be true if I were a dog, but these powers…"
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_qfwl4"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "I’ve never felt this much power in my life. It’s like…"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_2erf4"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "I feel so immortal…"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_hbam2"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "…like I have become a God."
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_4ip7y"]
+script = ExtResource("3_g88o3")
+character_name = 1
+character_position = 1
+play_animation = true
+flip_sprite = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_vkens"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "Oh shoot, I'm already late for my stream. "
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_003pn"]
+script = ExtResource("3_p3gox")
+character_name = 1
+sequence_text = "Dragoon, you can take care of this!"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_41rr1"]
+script = ExtResource("3_g88o3")
+character_name = 3
+character_position = 1
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_ochl2"]
+script = ExtResource("3_p3gox")
+character_name = 3
+sequence_text = "!?!?!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_vqfgi"]
+script = ExtResource("3_p3gox")
+character_name = 2
+sequence_text = "I’m not done with you yet! You both will feel my wrath!"
+expression = 4
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_d3k88"]
+script = ExtResource("5_jrwte")
+metadata/_custom_type_script = "uid://tusq0thghmdp"
+
+[sub_resource type="Resource" id="Resource_v4qe4"]
+script = ExtResource("3_g88o3")
+character_name = 1
+character_position = 1
+play_animation = true
+flip_sprite = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_p3gox"]
+script = ExtResource("3_g88o3")
+character_name = 2
+character_position = 2
+play_animation = true
+flip_sprite = false
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[resource]
+script = ExtResource("1_7mrcq")
+starting_characters_1 = SubResource("Resource_v4qe4")
+starting_characters_2 = SubResource("Resource_p3gox")
+sequence = Array[ExtResource("2_g88o3")]([SubResource("Resource_ecnw6"), SubResource("Resource_a0tap"), SubResource("Resource_5ytdx"), SubResource("Resource_lbyae"), SubResource("Resource_awn8h"), SubResource("Resource_74l0s"), SubResource("Resource_lanul"), SubResource("Resource_exbco"), SubResource("Resource_7cdq7"), SubResource("Resource_v2ya8"), SubResource("Resource_st3i3"), SubResource("Resource_78nqt"), SubResource("Resource_djljc"), SubResource("Resource_gnmr0"), SubResource("Resource_bxupg"), SubResource("Resource_icvef"), SubResource("Resource_kv3so"), SubResource("Resource_ru1fv"), SubResource("Resource_2ya6e"), SubResource("Resource_ju00v"), SubResource("Resource_vs2s2"), SubResource("Resource_h38s3"), SubResource("Resource_pcsbn"), SubResource("Resource_dpf1h"), SubResource("Resource_jhwt5"), SubResource("Resource_lkyo6"), SubResource("Resource_uf4jr"), SubResource("Resource_xlpma"), SubResource("Resource_gfulw"), SubResource("Resource_qpi0k"), SubResource("Resource_tcg8p"), SubResource("Resource_xmec8"), SubResource("Resource_qfwl4"), SubResource("Resource_2erf4"), SubResource("Resource_hbam2"), SubResource("Resource_4ip7y"), SubResource("Resource_vkens"), SubResource("Resource_003pn"), SubResource("Resource_41rr1"), SubResource("Resource_ochl2"), SubResource("Resource_vqfgi"), SubResource("Resource_d3k88")])
+metadata/_custom_type_script = "uid://bgv01d7aiks5m"
