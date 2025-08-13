@@ -1,0 +1,47 @@
+class_name _IntroNoFight
+extends _ScriptedSequence
+
+signal intro_dialogue_started
+signal intro_dialogue_ended
+
+func _ready() -> void:
+	super._ready()
+	
+	# Check if missing export variables.
+	if (false):
+		push_error("Missing export variables in node '%s'." % [self.name])
+	
+	self.visible = false
+	pass
+
+func enter_cutscene() -> void:
+	map_used_before = true
+	
+	self.visible = true
+	
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = camera_target
+	
+	start_dialogue()
+	pass
+
+func start_dialogue() -> void:
+	map_used_before = true
+	
+	intro_dialogue_started.emit()
+	print("mbf: start_dialogue") # TODO
+	end_dialogue() # TODO
+	pass
+
+func end_dialogue() -> void:
+	map_used_before = true
+	
+	intro_dialogue_ended.emit()
+	print("mbf: end_dialogue") # TODO
+	
+	#start_fight() # Does not have fight.
+	
+	cutscene_finished.emit()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+	pass

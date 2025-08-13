@@ -31,6 +31,8 @@ var __time_since_last_attack: float = 0
 var __fight_ended: bool = false
 
 func _ready() -> void:
+	super._ready()
+	
 	# Check if missing export variables.
 	if (not character_world
 		or not boss_animation
@@ -42,6 +44,7 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
+	self.visible = false
 	character_world.use_sky_camera()
 	character_world.look_vector = Vector3.UP * 2 + Vector3.BACK * 0.01
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
@@ -86,24 +89,35 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func enter_cutscene() -> void:
+	map_used_before = true
+	
+	self.visible = true
+	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.tracking_node = camera_target
+	
 	start_dialogue()
 	pass
 
 func start_dialogue() -> void:
+	map_used_before = true
+	
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
 	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
+	map_used_before = true
+	
 	final_boss_dialogue_ended.emit()
 	print("fbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
 func start_fight() -> void:
+	map_used_before = true
+	
 	final_boss_fight_started.emit()
 	print("fbf: start_fight") # TODO
 	if (Globals.gameplay):
@@ -124,6 +138,8 @@ func start_fight() -> void:
 	pass
 
 func end_fight() -> void:
+	map_used_before = true
+	
 	final_boss_fight_ended.emit()
 	__can_attack_again = false
 	boss_hitbox_area.monitoring = false

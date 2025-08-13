@@ -7,7 +7,18 @@ signal target_reached
 
 @export var camera_animation: AnimationPlayer = null
 
-@export var tracking_node: Node2D = null
+@export var map_trigger: Area2D = null
+
+@export var tracking_node: Node2D = null :
+	get:
+		return tracking_node
+	set(value):
+		__target_reached_emitted = false
+		map_trigger.monitoring = false
+		map_trigger.monitorable = false
+		tracking_node = value
+
+var __target_reached_emitted: bool = true
 
 @export var lerp_decay: float = 10
 
@@ -16,16 +27,24 @@ func _ready() -> void:
 	if (not gameplay_node
 		or not camera_animation):
 		push_error("Missing export variables in node '%s'." % [self.name])
+	
+	map_trigger.monitoring = true
+	map_trigger.monitorable = true
 	pass
 
 func _process(delta: float) -> void:
 	if tracking_node:
+		# Track node position.
 		var target_pos: Vector2 = tracking_node.global_position
 		
 		if (abs(self.global_position.x - target_pos.x) < 20):
 			# Abruptly move the camera.
 			self.global_position.x = target_pos.x
-			target_reached.emit()
+			if (not __target_reached_emitted):
+				__target_reached_emitted = true
+				map_trigger.monitoring = true
+				map_trigger.monitorable = true
+				target_reached.emit()
 		else:
 			# Smoothly move the camera.
 			self.global_position.x = lerpf(
@@ -33,9 +52,11 @@ func _process(delta: float) -> void:
 				target_pos.x,
 				Globals.lerp_t(lerp_decay, delta)
 			)
-			# Teleports player if lagging too far behind.
-			if (gameplay_node.player.global_position.x < self.global_position.x - 100):
-				gameplay_node.player.global_position.x = self.global_position.x - 100
+			# Teleports the player if lagging too far behind the camera.
+			if (gameplay_node.player.global_position.x < self.global_position.x - 1060):
+				gameplay_node.player.global_position.x = self.global_position.x - 1060
+			elif (gameplay_node.player.global_position.x > self.global_position.x + 1060):
+				gameplay_node.player.global_position.x = self.global_position.x + 1060
 	pass
 
 ## Shake the camera.

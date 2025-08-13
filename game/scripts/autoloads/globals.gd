@@ -66,36 +66,10 @@ func lerp_t(decay: float, delta: float) -> float:
 
 # --- Misc. Functions --- #
 
-## Start the game at any point.
-func start_game(checkpoint: Checkpoint) -> void:
-	match (checkpoint):
-		Checkpoint.MAINMENU:
-			pass
-		Checkpoint.INTRO_START:
-			pass
-		Checkpoint.INTRO_END:
-			pass
-		Checkpoint.MINI_BOSS_START:
-			pass
-		Checkpoint.MINI_BOSS_FIGHT:
-			pass
-		Checkpoint.MINI_BOSS_END:
-			pass
-		Checkpoint.FINAL_BOSS_START:
-			pass
-		Checkpoint.FINAL_BOSS_FIGHT:
-			pass
-		Checkpoint.FINAL_BOSS_END:
-			pass
-		Checkpoint.ENDING:
-			pass
-		_:
-			pass
-	pass
-
-## Reload the full map, then start the game at any point.
-func reload_game(checkpoint: Checkpoint) -> void:
-	# TODO reload the FullMap node.
-	
-	start_game(checkpoint)
+## Change the game to any section, auto-reload if section is used before.
+func load_game(checkpoint: Checkpoint) -> void:
+	if (Globals.gameplay):
+		gameplay.change_map_to(checkpoint)
+	else:
+		push_error("Globals.gameplay is null.")
 	pass

@@ -30,6 +30,8 @@ var __fight_ended: bool = false
 var __is_on_left: bool = false
 
 func _ready() -> void:
+	super._ready()
+	
 	# Check if missing export variables.
 	if (not character_world
 		or not boss_animation
@@ -43,14 +45,13 @@ func _ready() -> void:
 		or not projectile_despawner):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
+	self.visible = false
 	boss_hitbox_area.monitoring = false
 	boss_hitbox_area.monitorable = false
 	projectile_despawner.monitoring = false
 	projectile_despawner.monitorable = false
 	
 	character_world.start_walk() # TODO
-	
-	enter_cutscene() # TODO
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -77,24 +78,35 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func enter_cutscene() -> void:
+	map_used_before = true
+	
+	self.visible = true
+	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.tracking_node = camera_target
+	
 	start_dialogue()
 	pass
 
 func start_dialogue() -> void:
+	map_used_before = true
+	
 	mini_boss_dialogue_started.emit()
 	print("mbf: start_dialogue") # TODO
 	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
+	map_used_before = true
+	
 	mini_boss_dialogue_ended.emit()
 	print("mbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
 func start_fight() -> void:
+	map_used_before = true
+	
 	mini_boss_fight_started.emit()
 	boss_hitbox_area.monitoring = true
 	boss_hitbox_area.monitorable = true
@@ -111,6 +123,8 @@ func start_fight() -> void:
 	pass
 
 func end_fight() -> void:
+	map_used_before = true
+	
 	# Move back to the right side.
 	if (__is_on_left):
 		character_world.target_look_vector = Vector3.LEFT
