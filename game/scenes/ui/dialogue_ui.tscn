@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=7 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
+[ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_ysedr"]
 [ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/elements/character_sprite.tscn" id="7_gegk4"]
 
 [sub_resource type="Animation" id="Animation_rn5aw"]
@@ -114,8 +115,9 @@ anchor_top = 0.21131
 anchor_right = 0.983173
 anchor_bottom = 0.979167
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("3_ysedr")
 theme_override_font_sizes/font_size = 24
-text = "ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY "
+text = "ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY ALL WORK NO PLAY MAKE BEE A DULL BOY"
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
