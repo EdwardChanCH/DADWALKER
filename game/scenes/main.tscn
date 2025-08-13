@@ -36,7 +36,6 @@ visible = false
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 128
-visible = false
 
 [node name="DebugUI" type="Control" parent="DebugCanvas" node_paths=PackedStringArray("fps_node")]
 custom_minimum_size = Vector2(1920, 1080)
