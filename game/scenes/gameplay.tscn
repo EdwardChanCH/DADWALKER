@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player_npc_system/player.tscn" id="2_l1v76"]
 [ext_resource type="Texture2D" uid="uid://6qpuam2dwmid" path="res://assets/textures/parallax_bg/scroll_sky_1.png" id="2_ocj2s"]
 [ext_resource type="Texture2D" uid="uid://bqsh3qokmbv8u" path="res://assets/textures/parallax_bg/scroll_ground_1.png" id="3_din8e"]
-[ext_resource type="PackedScene" uid="uid://go565cse1ocx" path="res://scenes/mini_bosss_fight.tscn" id="6_din8e"]
 
 [sub_resource type="Animation" id="Animation_ct7aa"]
 length = 0.001
@@ -79,6 +78,9 @@ size = Vector2(960, 360)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bh5q"]
 size = Vector2(780, 1480)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e124b"]
+size = Vector2(1920, 360)
+
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("main_camera", "game_object_list", "projectile_list")]
 script = ExtResource("1_00tan")
 main_camera = NodePath("MainCamera")
@@ -121,11 +123,11 @@ libraries = {
 position = Vector2(-960, -540)
 collision_mask = 6
 
-[node name="CollisionShape2D1" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
+[node name="CollisionShapeU" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
 position = Vector2(960, 260)
 shape = SubResource("RectangleShape2D_l1v76")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
+[node name="CollisionShapeD" type="CollisionShape2D" parent="MainCamera/StaticBoxUD"]
 position = Vector2(960, 1180)
 shape = SubResource("RectangleShape2D_ct7aa")
 
@@ -134,11 +136,11 @@ position = Vector2(-960, -540)
 collision_layer = 16
 collision_mask = 2
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
+[node name="CollisionShapeL" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
 position = Vector2(-480, 900)
 shape = SubResource("RectangleShape2D_ocj2s")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
+[node name="CollisionShapeR" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
 position = Vector2(2400, 900)
 shape = SubResource("RectangleShape2D_din8e")
 
@@ -146,9 +148,17 @@ shape = SubResource("RectangleShape2D_din8e")
 position = Vector2(-960, -540)
 collision_mask = 4
 
-[node name="CollisionShapeL" type="CollisionShape2D" parent="MainCamera/TomatoDespawner"]
+[node name="CollisionShapeL2" type="CollisionShape2D" parent="MainCamera/TomatoDespawner"]
 position = Vector2(-570, 540)
 shape = SubResource("RectangleShape2D_4bh5q")
+
+[node name="SceneLoader" type="Area2D" parent="MainCamera"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShapeM" type="CollisionShape2D" parent="MainCamera/SceneLoader"]
+position = Vector2(0, 360)
+shape = SubResource("RectangleShape2D_e124b")
 
 [node name="YSortedList" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -162,6 +172,6 @@ y_sort_enabled = true
 [node name="ProjectileList" type="Node2D" parent="YSortedList"]
 y_sort_enabled = true
 
-[node name="MiniBosssFight" parent="." instance=ExtResource("6_din8e")]
+[node name="FullMap" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="MainCamera/TomatoDespawner" to="MainCamera" method="_on_tomato_despawner_body_entered"]

@@ -12,6 +12,7 @@ enum HitboxLayer {
 	PLAYER_BULLET,	# Layer 5
 	ENEMY_BULLET,	# Layer 6
 	BOSS_BULLET,		# Layer 7
+	LOADERS,			# Layer 8
 }
 
 enum Checkpoint {
@@ -62,6 +63,8 @@ func logg(x: float, base: float) -> float:
 ## [url]https://www.youtube.com/watch?v=LSNQuFEDOyQ[/url]
 func lerp_t(decay: float, delta: float) -> float:
 	return 1 - exp(-decay * delta)
+
+# --- Misc. Functions --- #
 
 func start_game(checkpoint: Checkpoint) -> void:
 	pass
