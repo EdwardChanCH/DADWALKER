@@ -1,0 +1,205 @@
+[gd_resource type="Resource" script_class="_Dialogue" load_steps=35 format=3 uid="uid://ch81pbxbe1wgh"]
+
+[ext_resource type="Script" uid="uid://bgv01d7aiks5m" path="res://scripts/dialogue_system/dialogue.gd" id="1_p5nak"]
+[ext_resource type="Script" uid="uid://c4mq2t0watni7" path="res://scripts/dialogue_system/sequences/dialogue_sequence.gd" id="2_l1r1q"]
+[ext_resource type="Script" uid="uid://cayfa5f7g08s6" path="res://scripts/dialogue_system/sequences/character_sequence.gd" id="3_l1r1q"]
+[ext_resource type="Script" uid="uid://8if0smrkob6y" path="res://scripts/dialogue_system/sequences/text_sequence.gd" id="3_w6mch"]
+[ext_resource type="Script" uid="uid://tusq0thghmdp" path="res://scripts/dialogue_system/sequences/sound_sequence.gd" id="5_1vkvu"]
+
+[sub_resource type="Resource" id="Resource_th63a"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_1vkvu"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Hey! Dragoon! Over here!"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_7mkfy"]
+script = ExtResource("3_l1r1q")
+character_name = 1
+character_position = 2
+play_animation = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_w8qgp"]
+script = ExtResource("5_1vkvu")
+metadata/_custom_type_script = "uid://tusq0thghmdp"
+
+[sub_resource type="Resource" id="Resource_n0b18"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Thanks again for walking DAD! None of my friends who usually walk with him are available, so I’m glad you can make it."
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_awovy"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Wait, you won’t be weird about it, will you? Getting paid to walk the doge of The Dokibird."
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_62tue"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_obtlr"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Good! Less work on my DokiBlade Kitchen Knife with a 67-layer Damascus steel construction and built-in iron sights with a-"
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_416d4"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_7c1qj"]
+script = ExtResource("5_1vkvu")
+metadata/_custom_type_script = "uid://tusq0thghmdp"
+
+[sub_resource type="Resource" id="Resource_2p526"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Oh! What am I up to? I’m headed to dance practice! Gotta get ready for the concert I’m performing! Surely you know about it, right?"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_pdnyc"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 7
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_e3n1l"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "You know, but you don’t have money? And you’re saving up for the ticket by working around town?"
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_77he3"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 3
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_7b5ch"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Aww, you sweet Dragoon. And doing this for me, too."
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_u17et"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Well…"
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_y0e5w"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "How about if you walk DAD for the next few weeks…"
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_oe1ex"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "…I can give you a ticket."
+expression = 2
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_3oxjm"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "!!!"
+expression = 6
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_ferew"]
+script = ExtResource("5_1vkvu")
+metadata/_custom_type_script = "uid://tusq0thghmdp"
+
+[sub_resource type="Resource" id="Resource_ex0cq"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "That’s my Dragoon, I knew I could count on you!"
+expression = 5
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_8nn5i"]
+script = ExtResource("3_w6mch")
+character_name = 3
+sequence_text = "..."
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_p5wwq"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "Anyways, it’ll be for a couple of hours until I’m back. There’s a park a few miles out that way that we usually walk around. It’ll be perfect for him. "
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_yxm0j"]
+script = ExtResource("3_w6mch")
+character_name = 1
+sequence_text = "I gotta get going now. Thanks, Dragoon! Bye DAD!"
+expression = 8
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_7plg3"]
+script = ExtResource("3_l1r1q")
+character_name = 2
+character_position = 2
+play_animation = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_pj3tn"]
+script = ExtResource("3_w6mch")
+character_name = 2
+sequence_text = "Woof"
+expression = 1
+metadata/_custom_type_script = "uid://8if0smrkob6y"
+
+[sub_resource type="Resource" id="Resource_py4kb"]
+script = ExtResource("5_1vkvu")
+metadata/_custom_type_script = "uid://tusq0thghmdp"
+
+[sub_resource type="Resource" id="Resource_w6mch"]
+script = ExtResource("3_l1r1q")
+character_name = 3
+character_position = 1
+play_animation = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[sub_resource type="Resource" id="Resource_l1r1q"]
+script = ExtResource("3_l1r1q")
+character_name = 0
+character_position = 2
+play_animation = true
+metadata/_custom_type_script = "uid://cayfa5f7g08s6"
+
+[resource]
+script = ExtResource("1_p5nak")
+starting_characters_1 = SubResource("Resource_w6mch")
+starting_characters_2 = SubResource("Resource_l1r1q")
+sequence = Array[ExtResource("2_l1r1q")]([SubResource("Resource_th63a"), SubResource("Resource_1vkvu"), SubResource("Resource_7mkfy"), SubResource("Resource_w8qgp"), SubResource("Resource_n0b18"), SubResource("Resource_awovy"), SubResource("Resource_62tue"), SubResource("Resource_obtlr"), SubResource("Resource_416d4"), SubResource("Resource_7c1qj"), SubResource("Resource_2p526"), SubResource("Resource_pdnyc"), SubResource("Resource_e3n1l"), SubResource("Resource_77he3"), SubResource("Resource_7b5ch"), SubResource("Resource_u17et"), SubResource("Resource_y0e5w"), SubResource("Resource_oe1ex"), SubResource("Resource_3oxjm"), SubResource("Resource_ferew"), SubResource("Resource_ex0cq"), SubResource("Resource_8nn5i"), SubResource("Resource_p5wwq"), SubResource("Resource_yxm0j"), SubResource("Resource_7plg3"), SubResource("Resource_pj3tn"), SubResource("Resource_py4kb")])
+metadata/_custom_type_script = "uid://bgv01d7aiks5m"
