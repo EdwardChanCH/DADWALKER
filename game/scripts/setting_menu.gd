@@ -65,3 +65,13 @@ func _on_visibility_changed() -> void:
 	ui_open.emit()
 	ui_control.process_mode = Node.PROCESS_MODE_INHERIT
 	pass
+
+
+func _on_god_mode_button_toggled(toggled_on: bool) -> void:
+	
+	pass
+
+
+func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
+	
+	pass

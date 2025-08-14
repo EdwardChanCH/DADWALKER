@@ -59,6 +59,7 @@ func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 		
 	counter += 1
 	if(counter >= 42):
-		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_pc_dragoonhit_fd1.ogg")
+		var tester: PackedScene = load("res://scenes/ui/test_audio.tscn") as PackedScene
+		add_sibling(tester.instantiate())
 		counter = 0
 	pass # Replace with function body.

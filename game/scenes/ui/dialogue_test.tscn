@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjmdsio11rbf3"]
+
+[ext_resource type="Script" uid="uid://chiu0217rjmt0" path="res://scripts/dialogue_test.gd" id="1_8bq8d"]
+[ext_resource type="PackedScene" uid="uid://cvhpyaj518tl8" path="res://scenes/ui/dialogue_ui.tscn" id="2_15df4"]
+
+[node name="DialogueTest" type="Node2D"]
+script = ExtResource("1_8bq8d")
+
+[node name="DialogueUI" parent="." instance=ExtResource("2_15df4")]

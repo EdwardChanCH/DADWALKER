@@ -470,6 +470,8 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="GameTitle" type="TextureRect" parent="UI/TitleMover"]
 visible = false

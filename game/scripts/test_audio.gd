@@ -31,6 +31,9 @@ func _ready() -> void:
 	voice_slider.drag_ended.connect(Callable(update_volume).bind(voice))	
 	
 	for path in AudioManager.audio_path_list:
+		if(path.contains("bgm")):
+			continue
+			
 		audio_list.add_item(path)
 		selected_audio = path
 		
@@ -63,3 +66,8 @@ func play_audio() -> void:
 		3:
 			AudioManager.play_voice(selected_audio)
 	pass
+
+
+func _on_back_button_pressed() -> void:
+	queue_free()
+	pass # Replace with function body.

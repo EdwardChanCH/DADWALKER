@@ -10,8 +10,8 @@ signal ui_open
 func _ready() -> void:
 	visible = false
 	Globals.credit_menu = self
-	#visibility_changed.connect(_play_slide_in_animation)
 	pass
+
 
 func _on_close_button_pressed() -> void:
 	animation_player.play("slide_out")

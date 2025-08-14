@@ -11,7 +11,8 @@ signal ui_open
 
 @export_category("UI Node")
 @export var character_name_label: RichTextLabel
-@export var dialogue_text_label: Label
+@export var dialogue_text_label: RichTextLabel
+@export var text_box_background: Panel
 
 @export var character_sprite_1: _CharacterSprite
 @export var character_sprite_2: _CharacterSprite
@@ -83,6 +84,25 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 	
 	if(current_sequence is _TextSequence):
 		var character_position = set_text(current_sequence)
+		
+		# Spelling colour the right way
+		# Hard coded in
+		# Don't have enengy for a system that set the character
+		var text_box_colour: Color = Color.GRAY
+		match current_sequence.character_name:
+			_DialogueSequence.Characters.DOKI:
+				text_box_colour = Color.from_rgba8(255, 200, 48)
+				pass
+			_DialogueSequence.Characters.DAD:
+				text_box_colour = Color.from_rgba8(65, 57, 96)
+				pass
+			_DialogueSequence.Characters.DRAGOON:
+				text_box_colour = Color.from_rgba8(255, 244, 193)
+				pass
+			
+		text_box_background.self_modulate = text_box_colour;
+		#character_name_label.self_modulate = text_box_colour;
+		
 		if(character_position != _DialogueSequence.Position.NONE):
 			set_character_sprite(character_position, current_sequence.character_name, current_sequence.expression)
 			await play_sprite_ui_animation(character_position, "talk").animation_finished
@@ -153,9 +173,10 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	
 	dialogue_text_label.text = sequence.sequence_text
 	
-	if(character_name != "None"):
+	if(sequence.character_name != _DialogueSequence.Characters.NONE):
 		character_name_label.text = character_name.capitalize()
 	
+	# Change the colour of the sprite depending on who is talking
 	if(__current_character_position[0] == sequence.character_name):
 		character_sprite_1.modulate = Color(1, 1, 1)
 		character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
@@ -203,6 +224,7 @@ func play_ui_slide_out_animation() -> Signal:
 	await character_sprite_2.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
+## Start dialogue
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
