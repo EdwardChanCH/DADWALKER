@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://drw7xx0j7yjau"]
+[gd_scene load_steps=13 format=3 uid="uid://drw7xx0j7yjau"]
 
 [ext_resource type="Script" uid="uid://rx886t8o0lpq" path="res://scripts/win_menu.gd" id="1_d025o"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_2hvk1"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_ao5t0"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_8ch8s"]
 [ext_resource type="Texture2D" uid="uid://btp0tbv1vgwqw" path="res://assets/textures/character_sprites/doki/doki_1.png" id="4_8t51i"]
 [ext_resource type="Texture2D" uid="uid://c886gslpksvxy" path="res://assets/textures/character_sprites/doki/doki_2.png" id="5_ao5t0"]
@@ -46,6 +47,7 @@ offset_right = 192.0
 offset_bottom = 192.0
 grow_horizontal = 2
 tooltip_text = "42"
+theme = ExtResource("2_ao5t0")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("2_2hvk1")
 theme_override_font_sizes/normal_font_size = 84
@@ -182,3 +184,5 @@ grow_vertical = 0
 texture = ExtResource("11_lldi1")
 expand_mode = 1
 flip_h = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

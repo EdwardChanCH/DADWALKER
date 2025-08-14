@@ -699,6 +699,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_l6cm7")
 }
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]

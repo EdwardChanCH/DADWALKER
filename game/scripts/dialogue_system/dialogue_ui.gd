@@ -2,13 +2,15 @@ class_name _DialogueUI
 extends CanvasLayer
 
 signal finish_dialogue
+signal ui_close
+signal ui_open
 
 @export_category("Resources")
 @export var dialogue: _Dialogue
 @export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
 
 @export_category("UI Node")
-@export var character_name_label: Label
+@export var character_name_label: RichTextLabel
 @export var dialogue_text_label: Label
 
 @export var character_sprite_1: _CharacterSprite
@@ -56,9 +58,9 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
 		if ( not keep_going ):
+			finish_dialogue.emit()
 			await play_ui_slide_out_animation()
 			visible = false
-			finish_dialogue.emit()
 		print("Clicked")
 		
 	pass
@@ -206,4 +208,11 @@ func start_dialgoue(new_dialogue: _Dialogue) -> void:
 	reset_dialogue_sequance()
 	visible = true
 	play_ui_slide_in_animation()
+	pass
+
+func _on_visibility_changed() -> void:
+	if (!visible):
+		ui_close.emit()
+		return
+	ui_open.emit()
 	pass

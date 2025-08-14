@@ -104,7 +104,7 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position:x")
+tracks/0/path = NodePath("UI/Forground:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,12 +115,23 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control:position:y")
+tracks/1/path = NodePath("UI/Forground:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Background:color:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.388235, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 
@@ -130,7 +141,7 @@ length = 0.66667
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position:x")
+tracks/0/path = NodePath("UI/Forground:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -141,13 +152,24 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control:position:y")
+tracks/1/path = NodePath("UI/Forground:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(1, 0, 0, 0),
 "points": PackedFloat32Array(-1080, 0, 0, 0, 0, 0, 0, 0, 0, 0, -30, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.4, 0.5, 0.666667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Background:color:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 1),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.388235, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.666667)
 }
 
 [sub_resource type="Animation" id="Animation_mc2dd"]
@@ -156,7 +178,7 @@ length = 0.66667
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position:x")
+tracks/0/path = NodePath("UI/Forground:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -167,13 +189,24 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control:position:y")
+tracks/1/path = NodePath("UI/Forground:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(1, 1),
 "points": PackedFloat32Array(0, 0, 0, 0, 0, 1080, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.66667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Background:color:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.388235, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.666667)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mc2dd"]
@@ -186,10 +219,10 @@ _data = {
 [node name="CreditMenu" type="CanvasLayer" node_paths=PackedStringArray("close_button_animation_tree", "animation_player")]
 layer = 31
 script = ExtResource("1_sileb")
-close_button_animation_tree = NodePath("Control/ButtonRoot/AnimationTree")
+close_button_animation_tree = NodePath("UI/Forground/ButtonRoot/AnimationTree")
 animation_player = NodePath("CreditMenuAnimation")
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,7 +230,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="Control"]
+[node name="Background" type="ColorRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,7 +240,15 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
 metadata/_edit_lock_ = true
 
-[node name="Credit" type="TextureRect" parent="Control"]
+[node name="Forground" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Credit" type="TextureRect" parent="UI/Forground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,7 +259,7 @@ mouse_filter = 2
 texture = ExtResource("2_xwfye")
 metadata/_edit_lock_ = true
 
-[node name="ButtonRoot" type="Control" parent="Control"]
+[node name="ButtonRoot" type="Control" parent="UI/Forground"]
 anchors_preset = 0
 offset_left = 800.0
 offset_top = 808.0
@@ -227,7 +268,7 @@ offset_bottom = 1128.0
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="CloseButton" type="TextureButton" parent="Control/ButtonRoot"]
+[node name="CloseButton" type="TextureButton" parent="UI/Forground/ButtonRoot"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -249,14 +290,14 @@ texture_disabled = ExtResource("6_g6opb")
 ignore_texture_size = true
 stretch_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/ButtonRoot"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Forground/ButtonRoot"]
 root_node = NodePath("../CloseButton")
 libraries = {
 &"": SubResource("AnimationLibrary_c5b21")
 }
 playback_auto_capture_transition_type = 11
 
-[node name="AnimationTree" type="AnimationTree" parent="Control/ButtonRoot"]
+[node name="AnimationTree" type="AnimationTree" parent="UI/Forground/ButtonRoot"]
 root_node = NodePath("../CloseButton")
 tree_root = SubResource("AnimationNodeBlendTree_xwfye")
 anim_player = NodePath("../AnimationPlayer")
@@ -270,6 +311,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_mc2dd")
 }
 
-[connection signal="mouse_entered" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_exited"]
-[connection signal="pressed" from="Control/ButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_exited"]
+[connection signal="pressed" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=8 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="3_awmck"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_ysedr"]
 [ext_resource type="PackedScene" uid="uid://b42hmvdparty7" path="res://scenes/ui/elements/character_sprite.tscn" id="7_gegk4"]
 
@@ -107,6 +108,28 @@ size_flags_vertical = 8
 mouse_filter = 1
 metadata/_edit_lock_ = true
 
+[node name="CharacterName" type="RichTextLabel" parent="Control/TextBox"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0192308
+anchor_top = 0.047619
+anchor_right = 0.983173
+anchor_bottom = 0.214286
+offset_left = -2.47955e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("3_awmck")
+theme_override_constants/shadow_outline_size = 15
+theme_override_font_sizes/normal_font_size = 45
+text = "Name"
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="DialogueText" type="Label" parent="Control/TextBox"]
 layout_mode = 1
 anchors_preset = -1
@@ -114,6 +137,7 @@ anchor_left = 0.0192308
 anchor_top = 0.21131
 anchor_right = 0.983173
 anchor_bottom = 0.979167
+offset_bottom = 5.00003
 mouse_filter = 1
 theme_override_fonts/font = ExtResource("3_ysedr")
 theme_override_font_sizes/font_size = 24
@@ -122,25 +146,10 @@ autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="CharacterName" type="Label" parent="Control/TextBox"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0192308
-anchor_top = 0.0238095
-anchor_right = 0.983517
-anchor_bottom = 0.1875
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme_override_font_sizes/font_size = 40
-text = "Name"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
-
 [node name="TextBoxAnimation" type="AnimationPlayer" parent="Control/TextBox"]
 libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]

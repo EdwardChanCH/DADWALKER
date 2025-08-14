@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw0we11wl8rya"]
+[gd_scene load_steps=7 format=3 uid="uid://dw0we11wl8rya"]
 
 [ext_resource type="Script" uid="uid://k02ynowhbj71" path="res://scripts/lose_menu.gd" id="1_6jrcj"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_ifqll"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_s6jrv"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_35fgp"]
 [ext_resource type="Texture2D" uid="uid://cir1of8y7635m" path="res://assets/textures/character_sprites/doki/doki_6.png" id="4_av3ar"]
 [ext_resource type="Texture2D" uid="uid://bkxuvb8f7biw5" path="res://assets/textures/character_sprites/dad/dad_2.png" id="5_s6jrv"]
@@ -40,6 +41,7 @@ offset_right = 293.0
 offset_bottom = 192.0
 grow_horizontal = 2
 tooltip_text = "42"
+theme = ExtResource("2_s6jrv")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("2_ifqll")
 theme_override_font_sizes/normal_font_size = 85
@@ -125,3 +127,7 @@ texture_pressed = ExtResource("5_s6jrv")
 texture_hover = ExtResource("5_s6jrv")
 texture_disabled = ExtResource("5_s6jrv")
 texture_focused = ExtResource("5_s6jrv")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Control/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Control/MenuButton" to="." method="_on_menu_button_pressed"]

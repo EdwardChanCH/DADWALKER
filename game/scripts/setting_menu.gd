@@ -1,14 +1,23 @@
 class_name _SettingMenu
 extends CanvasLayer
 
+signal ui_close
+signal ui_open
+
 @export_category("UI Node")
 @export var master_slider: Slider
 @export var sfx_slider: Slider
 @export var ui_slider: Slider
 @export var music_slider: Slider
 @export var voice_slider: Slider
+@export var ui_control: Control
+@export var ui_animation_player: AnimationPlayer
 
 func _ready() -> void:
+	
+	# Could have just done this in the editor itself
+	# But it takes too much time to change it now 
+	# So this will have to do
 	var master_arg = [master_slider, AudioManager.AudioType.MASTER]
 	master_slider.drag_ended.connect(Callable(update_volume).bind(master_arg))
 	
@@ -25,7 +34,6 @@ func _ready() -> void:
 	voice_slider.drag_ended.connect(Callable(update_volume).bind(voice))
 	
 	visible = false
-	
 	Globals.setting_menu = self
 	pass
 	
@@ -34,7 +42,26 @@ func update_volume(_changed: bool, arg_array: Array) -> void:
 	AudioManager.set_volume(arg_array[1], slider.value)
 	pass
 
-
 func _on_close_button_pressed() -> void:
+	ui_animation_player.play("slide_out", -1, 1.5)
+	await ui_animation_player.animation_finished
 	visible = false
+	pass
+
+# Get call when the visibility is changed
+func _on_visibility_changed() -> void:
+	
+	# Emit a singal and pause control node when visible is set to false
+	if (!visible):
+		ui_close.emit()
+		ui_control.process_mode = Node.PROCESS_MODE_DISABLED
+		return
+	
+	# Emit a singal and slide in animation when visible set to true
+	ui_animation_player.play("slide_in")
+	await ui_animation_player.animation_finished
+	
+	# Unpause control node after the animation is finish
+	ui_open.emit()
+	ui_control.process_mode = Node.PROCESS_MODE_INHERIT
 	pass

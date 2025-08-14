@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://bsve4bdv4h8e"]
+[gd_scene load_steps=44 format=3 uid="uid://bsve4bdv4h8e"]
 
 [ext_resource type="Script" uid="uid://v40novibl8yx" path="res://scripts/pause_menu.gd" id="1_6tw0m"]
 [ext_resource type="Texture2D" uid="uid://c4ngmaasd36j7" path="res://assets/textures/character_sprites/dad/dad_3.png" id="2_4inpj"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_6qnem"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_lrbnh"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="3_8fwbo"]
 [ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_2rlsb"]
@@ -316,7 +317,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
 metadata/_edit_lock_ = true
 
-[node name="AudioPanelTitle" type="RichTextLabel" parent="Control"]
+[node name="Title" type="RichTextLabel" parent="Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -327,6 +328,7 @@ offset_right = 168.0
 offset_bottom = 192.0
 grow_horizontal = 2
 tooltip_text = "42"
+theme = ExtResource("2_6qnem")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("2_lrbnh")
 theme_override_font_sizes/normal_font_size = 85
@@ -582,8 +584,10 @@ parameters/Transition/current_state = "idle"
 parameters/Transition/transition_request = ""
 parameters/Transition/current_index = 0
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="mouse_entered" from="Control/CloseButtonRoot/CloseButton" to="Control/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
 [connection signal="mouse_exited" from="Control/CloseButtonRoot/CloseButton" to="Control/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
+[connection signal="pressed" from="Control/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="mouse_entered" from="Control/ButtonMover1/PlayButton" to="Control/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="Control/ButtonMover1/PlayButton" to="Control/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
 [connection signal="mouse_entered" from="Control/ButtonMover2/SettingButton" to="Control/ButtonMover2/SettingButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
