@@ -62,13 +62,13 @@ func _physics_process(delta: float) -> void:
 				level_trigger.set_deferred("monitorable", true)
 				target_reached.emit()
 				print("Camera emitted 'target_reached'.") # TODO
-		else:
-			# Smoothly move the camera to the target.
-			current_pos_x = lerpf(
-				current_pos_x,
-				target_pos_x,
-				Globals.lerp_t(lerp_decay, delta)
-			)
+		
+		# Smoothly move the camera to the target.
+		current_pos_x = lerpf(
+			current_pos_x,
+			target_pos_x,
+			Globals.lerp_t(lerp_decay, delta)
+		)
 		
 		# Teleports the player if lagging too far behind the camera. (1920/2 + 100)
 		if (gameplay_node.player.global_position.x < current_pos_x - 1060):

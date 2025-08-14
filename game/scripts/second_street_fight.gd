@@ -8,7 +8,7 @@ func exit_cutscene() -> void:
 	cutscene_finished.emit()
 	pass
 
-func enter_cutscene(mode: int = 0) -> void:
+func enter_cutscene(_mode: int = 0) -> void:
 	map_used_before = true
 	
 	self.visible = true
