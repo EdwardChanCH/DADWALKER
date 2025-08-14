@@ -70,11 +70,11 @@ func _physics_process(delta: float) -> void:
 			Globals.lerp_t(lerp_decay, delta)
 		)
 		
-		# Teleports the player if lagging too far behind the camera. (1920/2 + 100)
-		if (gameplay_node.player.global_position.x < current_pos_x - 1060):
-			gameplay_node.player.global_position.x = current_pos_x - 1060
-		elif (gameplay_node.player.global_position.x > current_pos_x + 1060):
-			gameplay_node.player.global_position.x = current_pos_x + 1060
+		# Teleports the player if lagging too far behind the camera. (1920/2)
+		if (gameplay_node.player.global_position.x < current_pos_x - 960):
+			gameplay_node.player.global_position.x = current_pos_x - 960
+		elif (gameplay_node.player.global_position.x > current_pos_x + 960):
+			gameplay_node.player.global_position.x = current_pos_x + 960
 		
 		# Update camera position.
 		self.global_transform.origin.x = current_pos_x

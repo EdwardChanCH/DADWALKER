@@ -76,10 +76,10 @@ size = Vector2(3840, 920)
 size = Vector2(3840, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocj2s"]
-size = Vector2(960, 360)
+size = Vector2(960, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_din8e"]
-size = Vector2(960, 360)
+size = Vector2(960, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bh5q"]
 size = Vector2(780, 1480)
@@ -99,7 +99,6 @@ map_scenes = Array[PackedScene]([ExtResource("6_ctvyo"), ExtResource("6_din8e"),
 map_origins = Array[Vector2]([Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
-visible = false
 
 [node name="SkyLayer" type="Parallax2D" parent="ParallaxBackground"]
 z_index = -7
@@ -153,7 +152,6 @@ libraries = {
 }
 
 [node name="StaticBoxUD" type="StaticBody2D" parent="MainCamera"]
-visible = false
 position = Vector2(-960, -540)
 collision_mask = 6
 
@@ -166,17 +164,16 @@ position = Vector2(960, 1180)
 shape = SubResource("RectangleShape2D_ct7aa")
 
 [node name="StaticBoxLR" type="StaticBody2D" parent="MainCamera"]
-visible = false
 position = Vector2(-960, -540)
 collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShapeL" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
-position = Vector2(-480, 900)
+position = Vector2(-480, 540)
 shape = SubResource("RectangleShape2D_ocj2s")
 
 [node name="CollisionShapeR" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
-position = Vector2(2400, 900)
+position = Vector2(2400, 540)
 shape = SubResource("RectangleShape2D_din8e")
 
 [node name="TomatoDespawner" type="Area2D" parent="MainCamera"]
