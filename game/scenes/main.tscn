@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djp7wfgsaovkx" path="res://scenes/ui/main_menu.tscn" id="6_choun"]
 [ext_resource type="PackedScene" uid="uid://bsve4bdv4h8e" path="res://scenes/ui/pause_menu.tscn" id="7_choun"]
 [ext_resource type="PackedScene" uid="uid://dw0we11wl8rya" path="res://scenes/ui/lose_menu.tscn" id="8_ya4ey"]
-[ext_resource type="PackedScene" uid="uid://drw7xx0j7yjau" path="res://scenes/ui/win_menu.tscn" id="9_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://drw7xx0j7yjau" path="res://scenes/win_menu.tscn" id="9_eb6dy"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_o5qli")
