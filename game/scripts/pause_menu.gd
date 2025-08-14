@@ -21,5 +21,8 @@ func _on_visibility_changed() -> void:
 		ui_open
 		return
 	ui_close.emit()
-	get_tree().paused = false
+	
+	if(is_inside_tree()):
+		get_tree().paused = false
+		
 	pass # Replace with function body.

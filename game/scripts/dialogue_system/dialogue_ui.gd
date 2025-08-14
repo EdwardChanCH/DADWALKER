@@ -19,7 +19,7 @@ signal ui_open
 @export var text_box_animation_player: AnimationPlayer
 
 @export_category("Text Delay")
-@export var text_delay: float = 0.02
+#@export var text_delay: float = 0.02
 var is_typing: bool = false
 var should_skip_typing: bool = false
 var typeing_timer: SceneTreeTimer
@@ -232,7 +232,7 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 
 		
 		dialogue_text_label.text += character
-		typeing_timer = get_tree().create_timer(text_delay)
+		typeing_timer = get_tree().create_timer(Globals.text_display_speed)
 		await typeing_timer.timeout
 		
 	is_typing = false

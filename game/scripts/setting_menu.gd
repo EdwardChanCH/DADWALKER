@@ -12,6 +12,7 @@ signal ui_open
 @export var voice_slider: Slider
 @export var ui_control: Control
 @export var ui_animation_player: AnimationPlayer
+@export var display_speed : Label
 
 func _ready() -> void:
 	
@@ -66,12 +67,16 @@ func _on_visibility_changed() -> void:
 	ui_control.process_mode = Node.PROCESS_MODE_INHERIT
 	pass
 
-
 func _on_god_mode_button_toggled(toggled_on: bool) -> void:
-	
+	Globals.god_mode = toggled_on
 	pass
-
 
 func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
-	
+	Globals.show_fps_count = toggled_on
 	pass
+
+
+func _on_display_speed_slider_value_changed(value: float) -> void:
+	Globals.text_display_speed = value
+	display_speed.text = str(value).pad_decimals(2) + "S"
+	pass # Replace with function body.
