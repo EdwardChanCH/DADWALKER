@@ -17,6 +17,7 @@ script = ExtResource("1_l28h2")
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
+z_index = -100
 texture = SubResource("GradientTexture2D_l28h2")
 centered = false
 

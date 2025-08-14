@@ -138,6 +138,7 @@ projectile_despawner = NodePath("ProjectileDespawner")
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
+z_index = -100
 texture = SubResource("GradientTexture2D_xgy6f")
 centered = false
 

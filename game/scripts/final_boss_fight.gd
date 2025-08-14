@@ -15,6 +15,9 @@ signal final_boss_fight_ended
 @export var boss_timer: Timer = null
 @export var projectile_spawner: _ProjectileSpawner = null
 @export var enemy_spawner: _EnemySpawner = null
+@export var enemy_spawner_l1: _EnemySpawner = null
+@export var enemy_spawner_l2: _EnemySpawner = null
+@export var enemy_spawner_l3: _EnemySpawner = null
 @export var boss_sky_z_index: int = -6
 @export var boss_ground_z_index: int = 6
 
@@ -36,11 +39,16 @@ func _ready() -> void:
 	# Check if missing export variables.
 	if (not character_world
 		or not boss_animation
+		or not boss_health
 		or not boss_hitbox_area
 		or not ground_attack_area
 		or not boss_sprite
 		or not boss_timer
-		or not projectile_spawner):
+		or not projectile_spawner
+		or not enemy_spawner
+		or not enemy_spawner_l1
+		or not enemy_spawner_l2
+		or not enemy_spawner_l3):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
@@ -93,6 +101,7 @@ func exit_cutscene() -> void:
 		Globals.gameplay.queue_free_all_projectiles()
 		Globals.gameplay.queue_free_all_game_objects()
 		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+		Globals.gameplay.restore_sky()
 	
 	cutscene_finished.emit()
 	pass
@@ -136,6 +145,7 @@ func start_fight() -> void:
 	print("fbf: start_fight") # TODO
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
+		Globals.gameplay.destroy_sky()
 	# TODO make buildings retract
 	character_world.use_sky_camera()
 	character_world.look_decay = 1
@@ -184,6 +194,10 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_down")
 	await boss_animation.animation_finished
 	
+	enemy_spawner_l1.spawn_object()
+	enemy_spawner_l2.spawn_object()
+	enemy_spawner_l3.spawn_object()
+	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
 	
@@ -200,14 +214,14 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_up")
 	await boss_animation.animation_finished
 	
+	boss_hitbox_area.set_deferred("monitoring", true)
+	boss_hitbox_area.set_deferred("monitorable", true)
+	
 	character_world.use_sky_camera()
 	boss_sprite.z_index = boss_sky_z_index # Behind ground layer.
 	
 	boss_animation.play("sky_down")
 	await boss_animation.animation_finished
-	
-	boss_hitbox_area.set_deferred("monitoring", true)
-	boss_hitbox_area.set_deferred("monitorable", true)
 	
 	__can_attack_again = true
 	__time_since_last_attack = 0

@@ -8,9 +8,11 @@ extends Node2D
 ## (not normalized)
 @export var direction: Vector2 = Vector2.LEFT
 
-@export var target_node: Node2D = null
-
 @export var push_velocity: Vector2 = Vector2.ZERO
+
+@export var target_player: bool = false
+
+@export var health: int = -1
 
 func _ready() -> void:
 	if (auto_spawn_timer):
@@ -46,8 +48,14 @@ func spawn_object() -> _GameObject:
 	game_object.global_transform.origin = self.global_position
 	game_object.reset_physics_interpolation()
 	game_object.idle_vector = direction
-	game_object.tracking_object = target_node
 	game_object.push_velocity = push_velocity
+	if (target_player):
+		if (Globals.gameplay):
+			game_object.tracking_object = Globals.gameplay.player
+			game_object.in_tracking_mode = true
+	if (health > -1):
+		game_object.max_health = health
+		game_object.current_health = health
 	
 	return game_object
 
