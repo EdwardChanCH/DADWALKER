@@ -1,21 +1,337 @@
-[gd_scene load_steps=6 format=3 uid="uid://qmng0anisnyy"]
+[gd_scene load_steps=22 format=3 uid="uid://qmng0anisnyy"]
 
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="2_63sl1"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_inxim"]
 [ext_resource type="StyleBox" uid="uid://s5xfe1dkrn45" path="res://themes/defualt_panel.tres" id="3_p50a0"]
+[ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_187ex"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="4_ub06a"]
+[ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="5_inxim"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="5_p50a0"]
+[ext_resource type="Texture2D" uid="uid://c5u6f71gaynxr" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_disable.png" id="6_ftfws"]
 
-[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider")]
+[sub_resource type="Animation" id="Animation_c5b21"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mn1b6"]
+resource_name = "hover"
+length = 0.533337
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.175, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.175, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.572988, 0.572988, 0.572988, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5b21"]
+_data = {
+&"RESET": SubResource("Animation_c5b21"),
+&"hover": SubResource("Animation_mn1b6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nts36"]
+animation = &"hover"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5b21"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mn1b6"]
+xfade_time = 0.2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "hover"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mn1b6"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_c6yip"]
+graph_offset = Vector2(-445.992, 100.868)
+nodes/Hover/node = SubResource("AnimationNodeAnimation_nts36")
+nodes/Hover/position = Vector2(-320, 400)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_c5b21")
+nodes/Idle/position = Vector2(-320, 220)
+nodes/Rotation/node = SubResource("AnimationNodeTransition_mn1b6")
+nodes/Rotation/position = Vector2(0, 180)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_mn1b6")
+nodes/TimeScale/position = Vector2(-160, 360)
+nodes/output/position = Vector2(200, 180)
+node_connections = [&"Rotation", 0, &"Idle", &"Rotation", 1, &"TimeScale", &"TimeScale", 0, &"Hover", &"output", 0, &"Rotation"]
+
+[sub_resource type="Animation" id="Animation_ftfws"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ControlPanel:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(64, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Debug:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1152, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/AudioPanel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1151, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/CloseButtonRoot:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(808, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Title:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(64, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/Background:color:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.388235, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_inxim"]
+resource_name = "slide_in"
+length = 0.466673
+step = 0.0666667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ControlPanel:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-768, -0.25, 0, 0.25, 0, 64, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Debug:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1985, -0.25, 0, 0.25, 0, 1152, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/AudioPanel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1984, -0.25, 0, 0.25, 0, 1151, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/CloseButtonRoot:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1144, -0.25, 0, 0.25, 0, 808, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Title:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-168, 0, 0, 0, 0, 64, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/Background:color:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(1, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.388235, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.466667)
+}
+
+[sub_resource type="Animation" id="Animation_c6yip"]
+resource_name = "slide_out"
+step = 0.142857
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ControlPanel:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(64, 0, 0, 0, 0, -768, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Debug:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1152, 0, 0, 0, 0, 1985, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/AudioPanel:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1151, 0, 0, 0, 0, 1984, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/CloseButtonRoot:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(808, 0, 0, 0, 0, 1144, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Title:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(64, 0, 0, 0, 0, -168, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/Background:color:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.388235, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c6yip"]
+_data = {
+&"RESET": SubResource("Animation_ftfws"),
+&"slide_in": SubResource("Animation_inxim"),
+&"slide_out": SubResource("Animation_c6yip")
+}
+
+[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider", "ui_control", "ui_animation_player", "display_speed")]
 layer = 31
 script = ExtResource("1_xbl1u")
-master_slider = NodePath("Control/AudioPanel/Volume/Master")
-sfx_slider = NodePath("Control/AudioPanel/Volume/SFX")
-ui_slider = NodePath("Control/AudioPanel/Volume/UI")
-music_slider = NodePath("Control/AudioPanel/Volume/Music")
-voice_slider = NodePath("Control/AudioPanel/Volume/Voice")
+master_slider = NodePath("UI/AudioPanel/Volume/Master")
+sfx_slider = NodePath("UI/AudioPanel/Volume/SFX")
+ui_slider = NodePath("UI/AudioPanel/Volume/UI")
+music_slider = NodePath("UI/AudioPanel/Volume/Music")
+voice_slider = NodePath("UI/AudioPanel/Volume/Voice")
+ui_control = NodePath("UI")
+ui_animation_player = NodePath("AnimationPlayer")
+display_speed = NodePath("UI/Debug/DialogueDiaplayDelayOption/DisplaySpeed")
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +340,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="ColorRect" parent="Control"]
+[node name="Background" type="ColorRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +350,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
 metadata/_edit_lock_ = true
 
-[node name="AudioPanelTitle" type="RichTextLabel" parent="Control"]
+[node name="Title" type="RichTextLabel" parent="UI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -45,6 +361,7 @@ offset_right = 168.0
 offset_bottom = 192.0
 grow_horizontal = 2
 tooltip_text = "42"
+theme = ExtResource("2_inxim")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("4_ub06a")
 theme_override_font_sizes/normal_font_size = 85
@@ -53,27 +370,155 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="CloseButton" type="TextureButton" parent="Control"]
+[node name="CloseButtonRoot" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 800.0
+offset_top = 808.0
+offset_right = 1120.0
+offset_bottom = 1128.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CloseButton" type="TextureButton" parent="UI/CloseButtonRoot"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = 156.0
-offset_right = 319.0
-offset_bottom = 656.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.61, 0.61)
+pivot_offset = Vector2(250, 89.56)
 texture_normal = ExtResource("2_63sl1")
-texture_pressed = ExtResource("2_63sl1")
-texture_hover = ExtResource("2_63sl1")
-texture_disabled = ExtResource("2_63sl1")
+texture_pressed = ExtResource("4_187ex")
+texture_hover = ExtResource("5_inxim")
+texture_disabled = ExtResource("6_ftfws")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CloseButtonRoot"]
+root_node = NodePath("../CloseButton")
+libraries = {
+&"": SubResource("AnimationLibrary_c5b21")
+}
+playback_auto_capture_transition_type = 11
+
+[node name="AnimationTree" type="AnimationTree" parent="UI/CloseButtonRoot"]
+root_node = NodePath("../CloseButton")
+tree_root = SubResource("AnimationNodeBlendTree_c6yip")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Rotation/current_state = "idle"
+parameters/Rotation/transition_request = ""
+parameters/Rotation/current_index = 0
+parameters/TimeScale/scale = 0.25
+
+[node name="ControlPanel" type="Panel" parent="UI"]
+self_modulate = Color(1, 0.882353, 0.501961, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -340.0
+offset_right = -192.0
+offset_bottom = 484.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_p50a0")
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="AudioPanel" type="Panel" parent="Control"]
+[node name="AudioPanelTitle" type="RichTextLabel" parent="UI/ControlPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -196.0
+offset_top = -40.0
+offset_right = 196.0
+offset_bottom = 88.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("4_ub06a")
+theme_override_font_sizes/normal_font_size = 76
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlList" type="VBoxContainer" parent="UI/ControlPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.0
+offset_top = -356.0
+offset_right = 296.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Move - WASD / ARROW Key"
+metadata/_edit_group_ = true
+
+[node name="Label2" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Aim - Cursor"
+
+[node name="Label3" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Shoot - Space / Left Click"
+
+[node name="Label4" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Next Dialogue - Left Click"
+
+[node name="Label5" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Pause - Esc"
+
+[node name="Label6" type="Label" parent="UI/ControlPanel/ControlList"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Exit Game - Alt + F4 / Power"
+
+[node name="AudioPanel" type="Panel" parent="UI"]
 self_modulate = Color(0.721569, 0.878431, 1, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -84,13 +529,12 @@ anchor_bottom = 0.5
 offset_left = 191.0
 offset_top = -340.0
 offset_right = 896.0
-offset_bottom = 124.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_p50a0")
-metadata/_edit_lock_ = true
 
-[node name="AudioPanelTitle" type="RichTextLabel" parent="Control/AudioPanel"]
+[node name="AudioPanelTitle" type="RichTextLabel" parent="UI/AudioPanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -108,48 +552,48 @@ text = "AUDIO"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Volume" type="VBoxContainer" parent="Control/AudioPanel"]
+[node name="Volume" type="VBoxContainer" parent="UI/AudioPanel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -196.0
-offset_top = -140.0
-offset_right = 196.0
-offset_bottom = 140.0
+offset_left = -287.5
+offset_top = -132.0
+offset_right = 288.5
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="Control/AudioPanel/Volume"]
+[node name="Label" type="Label" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "Master"
 
-[node name="Master" type="HSlider" parent="Control/AudioPanel/Volume"]
+[node name="Master" type="HSlider" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label2" type="Label" parent="Control/AudioPanel/Volume"]
+[node name="Label2" type="Label" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "SFX"
 
-[node name="SFX" type="HSlider" parent="Control/AudioPanel/Volume"]
+[node name="SFX" type="HSlider" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label3" type="Label" parent="Control/AudioPanel/Volume"]
+[node name="Label3" type="Label" parent="UI/AudioPanel/Volume"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -157,40 +601,42 @@ theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "UI"
 
-[node name="UI" type="HSlider" parent="Control/AudioPanel/Volume"]
+[node name="UI" type="HSlider" parent="UI/AudioPanel/Volume"]
 visible = false
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label4" type="Label" parent="Control/AudioPanel/Volume"]
+[node name="Label4" type="Label" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "Music"
 
-[node name="Music" type="HSlider" parent="Control/AudioPanel/Volume"]
+[node name="Music" type="HSlider" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label5" type="Label" parent="Control/AudioPanel/Volume"]
+[node name="Label5" type="Label" parent="UI/AudioPanel/Volume"]
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "Voice"
 
-[node name="Voice" type="HSlider" parent="Control/AudioPanel/Volume"]
+[node name="Voice" type="HSlider" parent="UI/AudioPanel/Volume"]
+visible = false
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Debug" type="Panel" parent="Control"]
+[node name="Debug" type="Panel" parent="UI"]
 self_modulate = Color(0.721569, 0.878431, 1, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -199,7 +645,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 192.0
-offset_top = 164.0
+offset_top = 100.0
 offset_right = 896.0
 offset_bottom = 484.0
 grow_horizontal = 2
@@ -207,7 +653,7 @@ grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_p50a0")
 metadata/_edit_lock_ = true
 
-[node name="DebugPanelTitle" type="RichTextLabel" parent="Control/Debug"]
+[node name="DebugPanelTitle" type="RichTextLabel" parent="UI/Debug"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -226,47 +672,53 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="CheckButton" type="CheckButton" parent="Control/Debug"]
+[node name="GodModeOption" type="Control" parent="UI/Debug"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -196.0
-offset_top = -112.0
-offset_right = 64.0
-offset_bottom = -55.0
+offset_left = -288.0
+offset_top = -128.0
+offset_right = 256.0
+offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="Label2" type="Label" parent="UI/Debug/GodModeOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -28.5
+offset_right = -72.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 30
-shortcut_feedback = false
-shortcut_in_tooltip = false
+theme_override_font_sizes/font_size = 40
 text = "God Mode"
-flat = true
 
-[node name="CheckButton2" type="CheckButton" parent="Control/Debug"]
+[node name="GodModeButton" type="CheckButton" parent="UI/Debug/GodModeOption"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -194.0
-offset_top = 8.0
-offset_right = 66.0
-offset_bottom = 65.0
+offset_left = 192.0
+offset_top = -28.5
+offset_right = 236.0
+offset_bottom = -4.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -277,105 +729,162 @@ theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 30
 shortcut_feedback = false
 shortcut_in_tooltip = false
-text = "FPS Counter"
 flat = true
 
-[node name="ControlPanel" type="Panel" parent="Control"]
-self_modulate = Color(1, 0.882353, 0.501961, 1)
+[node name="ShowFPSOption" type="Control" parent="UI/Debug"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -896.0
-offset_top = -340.0
-offset_right = -192.0
-offset_bottom = 484.0
+offset_left = -288.0
+offset_top = -56.0
+offset_right = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("3_p50a0")
+metadata/_edit_group_ = true
+
+[node name="Label4" type="Label" parent="UI/Debug/ShowFPSOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -28.0
+offset_right = -72.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Show FPS"
+
+[node name="FPSCounterButton" type="CheckButton" parent="UI/Debug/ShowFPSOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = -28.0
+offset_right = 236.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 30
+shortcut_feedback = false
+shortcut_in_tooltip = false
+flat = true
+
+[node name="DialogueDiaplayDelayOption" type="Control" parent="UI/Debug"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = 20.0
+offset_right = 248.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label2" type="Label" parent="UI/Debug/DialogueDiaplayDelayOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -260.0
+offset_top = -58.5
+offset_right = 188.0
+offset_bottom = -1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 40
+text = "Dialogue Display Delay"
 metadata/_edit_lock_ = true
 
-[node name="AudioPanelTitle" type="RichTextLabel" parent="Control/ControlPanel"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -196.0
-offset_top = -40.0
-offset_right = 196.0
-offset_bottom = 88.0
-grow_horizontal = 2
-tooltip_text = "42"
-theme_override_constants/outline_size = 25
-theme_override_fonts/normal_font = ExtResource("4_ub06a")
-theme_override_font_sizes/normal_font_size = 76
-text = "CONTROLS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ControlList" type="VBoxContainer" parent="Control/ControlPanel"]
+[node name="DisplaySpeedSlider" type="HSlider" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -296.0
-offset_top = -356.0
-offset_right = 296.0
-offset_bottom = 340.0
+offset_left = -260.0
+offset_top = 10.5
+offset_right = 33.0
+offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+scale = Vector2(1.5, 1.5)
+min_value = 0.01
+max_value = 2.0
+step = 0.1
+value = 0.51
+metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
+[node name="DisplaySpeed" type="Label" parent="UI/Debug/DialogueDiaplayDelayOption"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = 10.5
+offset_right = 251.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Move - WASD/ARROW Key"
+theme_override_font_sizes/font_size = 30
+text = "2S"
+metadata/_edit_lock_ = true
 
-[node name="Label2" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Aim - Cursor"
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Debug"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label3" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Shoot - Space / Left Click"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c6yip")
+}
 
-[node name="Label4" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Next Dialogue - Left Click"
-
-[node name="Label5" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Pause - Esc"
-
-[node name="Label6" type="Label" parent="Control/ControlPanel/ControlList"]
-layout_mode = 2
-size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Exit Game - Alt + F4 / Power"
-
-[connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
+[connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
+[connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="toggled" from="UI/Debug/GodModeOption/GodModeButton" to="." method="_on_god_mode_button_toggled"]
+[connection signal="toggled" from="UI/Debug/ShowFPSOption/FPSCounterButton" to="." method="_on_fps_counter_button_toggled"]
+[connection signal="value_changed" from="UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider" to="." method="_on_display_speed_slider_value_changed"]

@@ -1,6 +1,189 @@
-[gd_scene load_steps=2 format=3 uid="uid://drw7xx0j7yjau"]
+[gd_scene load_steps=13 format=3 uid="uid://drw7xx0j7yjau"]
 
 [ext_resource type="Script" uid="uid://rx886t8o0lpq" path="res://scripts/win_menu.gd" id="1_d025o"]
+[ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_2hvk1"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_ao5t0"]
+[ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_8ch8s"]
+[ext_resource type="Texture2D" uid="uid://btp0tbv1vgwqw" path="res://assets/textures/character_sprites/doki/doki_1.png" id="4_8t51i"]
+[ext_resource type="Texture2D" uid="uid://c886gslpksvxy" path="res://assets/textures/character_sprites/doki/doki_2.png" id="5_ao5t0"]
+[ext_resource type="Texture2D" uid="uid://bj2ml4ycl5jhn" path="res://assets/textures/character_sprites/doki/doki_3.png" id="6_dfv5b"]
+[ext_resource type="Texture2D" uid="uid://bfg0judux2uwd" path="res://assets/textures/character_sprites/doki/doki_4.png" id="7_pcyyh"]
+[ext_resource type="Texture2D" uid="uid://dn02saihvxkm7" path="res://assets/textures/character_sprites/doki/doki_5.png" id="8_rpsk0"]
+[ext_resource type="Texture2D" uid="uid://cir1of8y7635m" path="res://assets/textures/character_sprites/doki/doki_6.png" id="9_rut6c"]
+[ext_resource type="Texture2D" uid="uid://cpumepo07oc4e" path="res://assets/textures/character_sprites/doki/doki_7.png" id="10_a6e7w"]
+[ext_resource type="Texture2D" uid="uid://b5dh4luh35ldm" path="res://assets/textures/character_sprites/doki/doki_8.png" id="11_lldi1"]
 
 [node name="WinMenu" type="CanvasLayer"]
+layer = 31
 script = ExtResource("1_d025o")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.388235)
+metadata/_edit_lock_ = true
+
+[node name="Title" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 192.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme = ExtResource("2_ao5t0")
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("2_2hvk1")
+theme_override_font_sizes/normal_font_size = 84
+text = "YOU WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="TBC Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -50.5
+offset_right = 180.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_8ch8s")
+theme_override_font_sizes/font_size = 66
+text = "END?"
+
+[node name="DokiSprites" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+metadata/_edit_group_ = true
+
+[node name="Doki_1" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -243.0
+offset_right = 184.0
+grow_vertical = 0
+texture = ExtResource("4_8t51i")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_2" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 134.0
+offset_top = -243.0
+offset_right = 318.0
+grow_vertical = 0
+texture = ExtResource("5_ao5t0")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_3" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 268.0
+offset_top = -243.0
+offset_right = 452.0
+grow_vertical = 0
+texture = ExtResource("6_dfv5b")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_4" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 410.0
+offset_top = -243.0
+offset_right = 594.0
+grow_vertical = 0
+texture = ExtResource("7_pcyyh")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_5" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 544.0
+offset_top = -243.0
+offset_right = 728.0
+grow_vertical = 0
+texture = ExtResource("8_rpsk0")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_6" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 678.0
+offset_top = -243.0
+offset_right = 862.0
+grow_vertical = 0
+texture = ExtResource("9_rut6c")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_7" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 812.0
+offset_top = -243.0
+offset_right = 996.0
+grow_vertical = 0
+texture = ExtResource("10_a6e7w")
+expand_mode = 1
+flip_h = true
+
+[node name="Doki_8" type="TextureRect" parent="Control/DokiSprites"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 946.0
+offset_top = -243.0
+offset_right = 1130.0
+grow_vertical = 0
+texture = ExtResource("11_lldi1")
+expand_mode = 1
+flip_h = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

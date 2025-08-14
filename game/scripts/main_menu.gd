@@ -1,9 +1,13 @@
 class_name _MainMenu
 extends CanvasLayer
 
-@export var animation_player: AnimationPlayer = null
+signal ui_close
+signal ui_open
 
+@export var animation_player: AnimationPlayer = null
 @export var buttons: Array[TextureButton] = []
+
+var counter: int = 0
 
 func _ready() -> void:
 	# Check if missing export variables.
@@ -21,6 +25,10 @@ func _on_play_button_pressed() -> void:
 	# Play exit main menu animation.
 	animation_player.play("close_popup")
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg")
+	
+	# Wait for animate to finish before emiting the close signal
+	await animation_player.animation_finished
+	visible = false
 	pass
 
 func _on_options_button_pressed() -> void:
@@ -36,3 +44,22 @@ func _on_credits_button_pressed() -> void:
 func _on_mouse_entered() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
 	pass
+	
+func _on_visibility_changed() -> void:
+	if (!visible):
+		ui_close.emit()
+		return
+	ui_open.emit()
+	pass
+
+
+func _on_rich_text_label_gui_input(event: InputEvent) -> void:
+	if ( event is not InputEventMouseButton ):
+		return
+		
+	counter += 1
+	if(counter >= 42):
+		var tester: PackedScene = load("res://scenes/ui/test_audio.tscn") as PackedScene
+		add_sibling(tester.instantiate())
+		counter = 0
+	pass # Replace with function body.

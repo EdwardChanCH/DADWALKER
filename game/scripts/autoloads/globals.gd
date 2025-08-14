@@ -35,6 +35,10 @@ signal progress_updated(value: Checkpoint)
 
 # --- Global Variables --- #
 
+var god_mode: bool = false
+var show_fps_count: bool = false
+var text_display_speed: bool = 0.02
+
 var main_menu: _MainMenu = null
 var setting_menu: _SettingMenu = null
 var credit_menu: _CreditMenu = null

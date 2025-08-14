@@ -22,7 +22,7 @@ static var __music_channel: AudioStreamPlayer
 
 static var audio_path_list: Array[String]
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	
 	# Sington stuff
 	if(_instance != null):
@@ -56,16 +56,6 @@ func _ready() -> void:
 	audio_path_list = files
 	pass
 
-static func get_file_paths(path: String, files: Array[String]) -> void:
-	var list = ResourceLoader.list_directory(path)
-	for item in list:
-		if(item.ends_with("/")):
-			var new_path = path + item
-			get_file_paths(new_path, files)
-			continue
-		files.append(path+item)
-	pass
-
 func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
 	var sfx_channel = AudioStreamPlayer.new()
 	sfx_channel.name = "SFXChannel" + str(__sfx_channels.size())
@@ -80,6 +70,30 @@ func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
 
 func _music_loop() -> void:
 	__music_channel.play()
+	pass
+
+static func get_audio_steam_player(sound_path: String) -> AudioStreamPlayer:
+	var target_channel: AudioStreamPlayer = null
+	if (not __sound_cache.has(sound_path)):
+		return null
+	
+	var audio_steam: AudioStream = __sound_cache[sound_path]
+	
+	
+	if (not __sfx_channels.has(audio_steam)):
+		_instance.create_sfx_channel(audio_steam)
+	
+	target_channel = __sfx_channels[audio_steam]
+	return target_channel
+
+static func get_file_paths(path: String, files: Array[String]) -> void:
+	var list = ResourceLoader.list_directory(path)
+	for item in list:
+		if(item.ends_with("/")):
+			var new_path = path + item
+			get_file_paths(new_path, files)
+			continue
+		files.append(path+item)
 	pass
 
 static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:

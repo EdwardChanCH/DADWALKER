@@ -2,19 +2,27 @@ class_name _DialogueUI
 extends CanvasLayer
 
 signal finish_dialogue
+signal ui_close
+signal ui_open
 
 @export_category("Resources")
 @export var dialogue: _Dialogue
 @export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
 
 @export_category("UI Node")
-@export var character_name_label: Label
-@export var dialogue_text_label: Label
+@export var character_name_label: RichTextLabel
+@export var dialogue_text_label: RichTextLabel
+@export var text_box_background: Panel
 
 @export var character_sprite_1: _CharacterSprite
 @export var character_sprite_2: _CharacterSprite
 @export var text_box_animation_player: AnimationPlayer
 
+@export_category("Text Delay")
+#@export var text_delay: float = 0.02
+var is_typing: bool = false
+var should_skip_typing: bool = false
+var typeing_timer: SceneTreeTimer
 
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
@@ -51,14 +59,18 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		return
 
 	if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
+		if (is_typing):
+			skip_text_type_effect()
+			return
+			
 		# Can't do current_dialogue_index++ pain
 		__current_dialogue_index += 1
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
 		if ( not keep_going ):
+			finish_dialogue.emit()
 			await play_ui_slide_out_animation()
 			visible = false
-			finish_dialogue.emit()
 		print("Clicked")
 		
 	pass
@@ -79,8 +91,27 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 	
 	var current_sequence = dialogue.sequence[new_sequence]
 	
-	if(current_sequence is _TextSequence):
+	if(current_sequence is _TextSequence):	
 		var character_position = set_text(current_sequence)
+		
+		# Spelling colour the right way
+		# Hard coded in
+		# Don't have enengy for a system that set the character
+		var text_box_colour: Color = Color.GRAY
+		match current_sequence.character_name:
+			_DialogueSequence.Characters.DOKI:
+				text_box_colour = Color.from_rgba8(255, 200, 48)
+				pass
+			_DialogueSequence.Characters.DAD:
+				text_box_colour = Color.from_rgba8(65, 57, 96)
+				pass
+			_DialogueSequence.Characters.DRAGOON:
+				text_box_colour = Color.from_rgba8(255, 244, 193)
+				pass
+			
+		text_box_background.self_modulate = text_box_colour;
+		#character_name_label.self_modulate = text_box_colour;
+		
 		if(character_position != _DialogueSequence.Position.NONE):
 			set_character_sprite(character_position, current_sequence.character_name, current_sequence.expression)
 			await play_sprite_ui_animation(character_position, "talk").animation_finished
@@ -149,11 +180,13 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	# Set text and name of the sequence
 	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
 	
-	dialogue_text_label.text = sequence.sequence_text
+	#dialogue_text_label.text = sequence.sequence_text
+	text_type_effect(sequence.sequence_text, sequence.character_name)
 	
-	if(character_name != "None"):
+	if(sequence.character_name != _DialogueSequence.Characters.NONE):
 		character_name_label.text = character_name.capitalize()
 	
+	# Change the colour of the sprite depending on who is talking
 	if(__current_character_position[0] == sequence.character_name):
 		character_sprite_1.modulate = Color(1, 1, 1)
 		character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
@@ -167,6 +200,50 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	character_sprite_1.modulate = Color(0.5, 0.5, 0.5)
 	character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
 	return _DialogueSequence.Position.NONE
+
+func text_type_effect(text: String, character_name: _DialogueSequence.Characters) -> void:
+	should_skip_typing = false
+	is_typing = true
+	dialogue_text_label.text = ""
+	
+	
+	var path: String
+	match character_name:
+		_DialogueSequence.Characters.DOKI:
+			path = "res://assets/sounds/sfx/sfx_npc_dokibirdblip1_fd1.ogg"
+			pass
+		_DialogueSequence.Characters.DAD:
+			path = "res://assets/sounds/sfx/sfx_npc_dadblip1_fd1.ogg"
+			pass
+		_DialogueSequence.Characters.DRAGOON:
+			path = "res://assets/sounds/sfx/sfx_pc_dragoonblip_fd1.ogg"
+			pass
+	
+	var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(path)
+	
+	for character in text:
+		if(should_skip_typing):
+			dialogue_text_label.text = text
+			break
+		
+		if (not audio_player.playing):
+			AudioManager.play_sfx(path, 0.25)
+			#audio_player.play()
+
+		
+		dialogue_text_label.text += character
+		typeing_timer = get_tree().create_timer(Globals.text_display_speed)
+		await typeing_timer.timeout
+		
+	is_typing = false
+	pass
+
+func skip_text_type_effect() -> void:
+	should_skip_typing = true
+	if (typeing_timer):
+		typeing_timer.timeout.emit()
+	return
+
 
 ## Play simple sprite animation
 func play_sprite_ui_animation(character_position: _DialogueSequence.Position, animation_name: String, play_backwards: bool = false) -> AnimationPlayer:
@@ -201,9 +278,17 @@ func play_ui_slide_out_animation() -> Signal:
 	await character_sprite_2.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
+## Start dialogue
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
 	visible = true
 	play_ui_slide_in_animation()
+	pass
+
+func _on_visibility_changed() -> void:
+	if (!visible):
+		ui_close.emit()
+		return
+	ui_open.emit()
 	pass
