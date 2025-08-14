@@ -301,7 +301,7 @@ size = Vector2(400, 400)
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0qlo"]
 radius = 180.0
 
-[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "camera_target")]
+[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "enemy_spawner_l1", "enemy_spawner_l2", "enemy_spawner_l3", "camera_target")]
 script = ExtResource("1_k0qlo")
 character_world = NodePath("SubViewport/DadSkyWorld")
 boss_animation = NodePath("BossMotion")
@@ -312,9 +312,13 @@ boss_sprite = NodePath("BossSprite")
 boss_timer = NodePath("BossTimer")
 projectile_spawner = NodePath("ProjectileSpawner")
 enemy_spawner = NodePath("EnemySpawner")
+enemy_spawner_l1 = NodePath("EnemySpawnerL1")
+enemy_spawner_l2 = NodePath("EnemySpawnerL2")
+enemy_spawner_l3 = NodePath("EnemySpawnerL3")
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
+z_index = -100
 texture = SubResource("GradientTexture2D_y1c10")
 centered = false
 
@@ -378,6 +382,27 @@ game_object_scene = ExtResource("8_2lg36")
 auto_spawn_timer = NodePath("EnemyTimer")
 
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
+
+[node name="EnemySpawnerL1" type="Node2D" parent="."]
+position = Vector2(-100, 800)
+script = ExtResource("7_mguhe")
+game_object_scene = ExtResource("8_2lg36")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerL2" type="Node2D" parent="."]
+position = Vector2(-50, 900)
+script = ExtResource("7_mguhe")
+game_object_scene = ExtResource("8_2lg36")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerL3" type="Node2D" parent="."]
+position = Vector2(-100, 1000)
+script = ExtResource("7_mguhe")
+game_object_scene = ExtResource("8_2lg36")
+target_player = true
+health = 2
 
 [node name="EndOfLevelMarker" parent="." instance=ExtResource("9_y1c10")]
 position = Vector2(2000, 900)

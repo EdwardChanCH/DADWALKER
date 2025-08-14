@@ -34,7 +34,10 @@ func setup_start(p_global_position: Vector2, p_velocity: Vector2, p_rotation: fl
 ## Despawn animation.
 func despawn() -> void:
 	# TODO add animation
-	move_velocity = Vector2.ZERO
+	
+	# This may cause issues if another enemy touches it at the same tick.
+	#move_velocity = Vector2.ZERO
+	
 	despawned.emit()
 	self.queue_free()
 	pass

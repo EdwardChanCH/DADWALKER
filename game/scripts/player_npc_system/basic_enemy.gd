@@ -90,8 +90,10 @@ func shoot_once(p_vector: Vector2) -> void:
 
 ## Stomped by final boss.
 func stomped() -> void:
-	current_health = 0
-	shoot_batch(Vector2.RIGHT * projectile_speed, deg_to_rad(40), 1)
+	# Prevent double-death.
+	if (current_health > 0):
+		current_health = 0
+		shoot_batch(Vector2.RIGHT * projectile_speed, deg_to_rad(40), 1)
 	pass
 
 ## Hit detection.
@@ -112,10 +114,14 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 			current_health = 0
 		elif (projectile is _SonicBoom):
 			current_health = 0
-			
+		
 		if (current_health <= 0):
 			# Spawn seeds.
-			shoot_batch(projectile.move_velocity, deg_to_rad(15), 1)
+			if (projectile.move_velocity.is_zero_approx()):
+				# Not sure why sometimes the vector is zero.
+				shoot_batch(Vector2.RIGHT * projectile_speed, deg_to_rad(15), 1)
+			else:
+				shoot_batch(projectile.move_velocity, deg_to_rad(15), 1)
 		
 		# Despawn incoming projectile.
 		projectile.despawn()

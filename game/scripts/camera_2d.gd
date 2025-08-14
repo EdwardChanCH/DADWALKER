@@ -53,6 +53,16 @@ func _physics_process(delta: float) -> void:
 		else:
 			x_limit_min = target_pos_x
 		
+		# Fix missed detection if Player is moving when a boss fight ends.
+		if (tracking_node is _Player):
+			if (not __target_reached_emitted):
+				__target_reached_emitted = true
+				level_trigger.set_deferred("monitoring", true)
+				level_trigger.set_deferred("monitorable", true)
+				target_reached.emit()
+				print("Camera emitted 'target_reached'.") # TODO
+		
+		# Checks if the camera is close enough to the target.
 		if (abs(current_pos_x - target_pos_x) < 1):
 			# Very close to the target.
 			#current_pos_x = target_pos_x # Unnecessary.

@@ -7,6 +7,7 @@ extends Node2D
 @export var game_object_list: Node2D = null # Never queue_free; can free its childrens.
 @export var projectile_list: Node2D = null # Never queue_free; can free its childrens.
 @export var map_list: Node2D = null # Never queue_free; can free its childrens.
+@export var sky_animation: AnimationPlayer = null
 
 # --- Map Sections --- #
 enum Maps {
@@ -24,9 +25,12 @@ enum Maps {
 
 func _ready() -> void:
 	# Check if missing export variables.
-	if (not main_camera
+	if (not player
+		or not main_camera
 		or not game_object_list
-		or not projectile_list):
+		or not projectile_list
+		or not map_list
+		or not sky_animation):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Remember map section origins.
@@ -35,6 +39,14 @@ func _ready() -> void:
 	
 	# Accessible from Globals to avoid awkward node paths.
 	Globals.gameplay = self
+	pass
+
+func destroy_sky() -> void:
+	sky_animation.play("destroy_sky")
+	pass
+
+func restore_sky() -> void:
+	sky_animation.play("restore_sky")
 	pass
 
 ## Add projectie to gameplay scene.
