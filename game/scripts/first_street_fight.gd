@@ -3,8 +3,9 @@ extends _ScriptedSequence
 
 func exit_cutscene() -> void:
 	if (Globals.gameplay):
+		Globals.gameplay.queue_free_all_projectiles()
+		Globals.gameplay.queue_free_all_game_objects()
 		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
-		await Globals.gameplay.main_camera.target_reached
 	
 	cutscene_finished.emit()
 	pass

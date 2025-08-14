@@ -47,6 +47,17 @@ func add_game_object_to_scene(new_game_object: _GameObject) -> void:
 	game_object_list.call_deferred("add_child", new_game_object)
 	pass
 
+func queue_free_all_projectiles() -> void:
+	for p in projectile_list.get_children():
+		p.queue_free()
+	pass
+
+func queue_free_all_game_objects() -> void:
+	# Except the player and cutscene characters.
+	for g in game_object_list.get_children():
+		g.queue_free()
+	pass
+
 ## Change the camera target and activate a scripted sequence.
 ## Automatically reloads if map section is null or is used before.
 func change_map_to(checkpoint: Globals.Checkpoint) -> void:
