@@ -85,7 +85,7 @@ size = Vector2(960, 360)
 size = Vector2(780, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctvyo"]
-size = Vector2(1800, 360)
+size = Vector2(1920, 360)
 
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("player", "main_camera", "game_object_list", "projectile_list", "map_list", "map_nodes")]
 script = ExtResource("1_00tan")
@@ -123,24 +123,19 @@ centered = false
 [node name="TitleNoFight" parent="MapList" instance=ExtResource("6_ctvyo")]
 
 [node name="IntroNoFight" parent="MapList" instance=ExtResource("6_din8e")]
-visible = false
-position = Vector2(2000, 0)
+position = Vector2(3000, 0)
 
 [node name="FirstStreetFight" parent="MapList" instance=ExtResource("7_hbo4f")]
-visible = false
 position = Vector2(6000, 0)
 
 [node name="MiniBosssFight" parent="MapList" instance=ExtResource("7_e124b")]
-visible = false
-position = Vector2(8000, 0)
+position = Vector2(9000, 0)
 
 [node name="SecondStreetFight" parent="MapList" instance=ExtResource("9_ctvyo")]
-visible = false
-position = Vector2(8000, 0)
+position = Vector2(12000, 0)
 
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
-visible = false
-position = Vector2(10000, 0)
+position = Vector2(15000, 0)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger", "tracking_node")]
 position = Vector2(960, 540)
@@ -148,7 +143,7 @@ process_callback = 0
 script = ExtResource("2_ct7aa")
 gameplay_node = NodePath("..")
 camera_animation = NodePath("CameraAnimation")
-level_trigger = NodePath("LevelTrigger")
+level_trigger = NodePath("EndOfLevelDetector")
 tracking_node = NodePath("../YSortedList/Player")
 
 [node name="CameraAnimation" type="AnimationPlayer" parent="MainCamera"]
@@ -193,12 +188,12 @@ collision_mask = 4
 position = Vector2(-570, 540)
 shape = SubResource("RectangleShape2D_4bh5q")
 
-[node name="LevelTrigger" type="Area2D" parent="MainCamera"]
+[node name="EndOfLevelDetector" type="Area2D" parent="MainCamera"]
 position = Vector2(-960, -540)
 collision_layer = 128
 collision_mask = 128
 
-[node name="CollisionShapeM" type="CollisionShape2D" parent="MainCamera/LevelTrigger"]
+[node name="CollisionShapeM" type="CollisionShape2D" parent="MainCamera/EndOfLevelDetector"]
 position = Vector2(960, 900)
 shape = SubResource("RectangleShape2D_ctvyo")
 
@@ -215,4 +210,4 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [connection signal="body_entered" from="MainCamera/TomatoDespawner" to="." method="_on_tomato_despawner_body_entered"]
-[connection signal="area_entered" from="MainCamera/LevelTrigger" to="." method="_on_level_trigger_area_entered"]
+[connection signal="area_entered" from="MainCamera/EndOfLevelDetector" to="." method="_on_end_of_level_detector_area_entered"]

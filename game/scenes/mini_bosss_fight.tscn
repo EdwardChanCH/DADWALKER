@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://go565cse1ocx"]
+[gd_scene load_steps=23 format=3 uid="uid://go565cse1ocx"]
 
 [ext_resource type="Script" uid="uid://c36krd8fknf4f" path="res://scripts/mini_bosss_fight.gd" id="1_tegxn"]
 [ext_resource type="PackedScene" uid="uid://ducdx3k7iena3" path="res://scenes/player_npc_system/dokibird_world.tscn" id="2_3lc08"]
@@ -8,10 +8,11 @@
 [ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="6_pnst7"]
 [ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/player_npc_system/basic_enemy.tscn" id="6_xgy6f"]
 [ext_resource type="PackedScene" uid="uid://v777emx0ysva" path="res://scenes/projectiles/bullet.tscn" id="7_pnst7"]
+[ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="9_10bs7"]
 
 [sub_resource type="Gradient" id="Gradient_vxo5s"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 0, 1, 0.196078)
+offsets = PackedFloat32Array(0.994382)
+colors = PackedColorArray(0, 1, 1, 0.196078)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xgy6f"]
 gradient = SubResource("Gradient_vxo5s")
@@ -137,11 +138,11 @@ projectile_despawner = NodePath("ProjectileDespawner")
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
-position = Vector2(0, 1080)
 texture = SubResource("GradientTexture2D_xgy6f")
 centered = false
 
 [node name="CameraTarget" type="Node2D" parent="."]
+position = Vector2(960, 540)
 
 [node name="BossHealth" parent="." instance=ExtResource("4_tbwyr")]
 boss_name = "DOKIBIRD"
@@ -229,5 +230,9 @@ game_object_scene = ExtResource("6_xgy6f")
 script = ExtResource("6_pnst7")
 projectile_scene = ExtResource("7_pnst7")
 projectile_speed = 1000.0
+
+[node name="EndOfLevelMarker" parent="." instance=ExtResource("9_10bs7")]
+position = Vector2(2000, 900)
+new_checkpoint = 5
 
 [connection signal="area_entered" from="BossMover/BossHitbox" to="." method="_on_boss_hitbox_area_entered"]

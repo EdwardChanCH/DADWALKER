@@ -46,10 +46,10 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	self.visible = false
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
-	projectile_despawner.monitoring = false
-	projectile_despawner.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
+	projectile_despawner.set_deferred("monitoring", false)
+	projectile_despawner.set_deferred("monitorable", false)
 	
 	character_world.start_walk() # TODO
 	pass
@@ -84,15 +84,18 @@ func exit_cutscene() -> void:
 	cutscene_finished.emit()
 	pass
 
-func enter_cutscene() -> void:
+func enter_cutscene(mode: int = 0) -> void:
 	map_used_before = true
-	
 	self.visible = true
 	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.tracking_node = camera_target
+		await Globals.gameplay.main_camera.target_reached
 	
-	start_dialogue()
+	if (mode == 1):
+		start_fight()
+	else:
+		start_dialogue()
 	pass
 
 func start_dialogue() -> void:
@@ -115,10 +118,10 @@ func start_fight() -> void:
 	map_used_before = true
 	
 	mini_boss_fight_started.emit()
-	boss_hitbox_area.monitoring = true
-	boss_hitbox_area.monitorable = true
-	projectile_despawner.monitoring = true
-	projectile_despawner.monitorable = true
+	boss_hitbox_area.set_deferred("monitoring", true)
+	boss_hitbox_area.set_deferred("monitorable", true)
+	projectile_despawner.set_deferred("monitoring", true)
+	projectile_despawner.set_deferred("monitorable", true)
 	print("mbf: start_fight") # TODO
 	await boss_health.open_ui()
 	__can_attack_again = true
@@ -142,10 +145,10 @@ func end_fight() -> void:
 	mini_boss_fight_ended.emit()
 	
 	__can_attack_again = false
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
-	projectile_despawner.monitoring = false
-	projectile_despawner.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
+	projectile_despawner.set_deferred("monitoring", false)
+	projectile_despawner.set_deferred("monitorable", false)
 	
 	print("mbf: end_fight") # TODO
 

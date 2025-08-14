@@ -106,15 +106,17 @@ func change_map_to(checkpoint: Globals.Checkpoint) -> void:
 		
 	# Activate the scripted sequence.
 	if (not map_nodes[map_id]):
-		reload_map_section(map_id)
+		__reload_map_section(map_id)
 	elif (map_nodes[map_id].map_used_before):
-		reload_map_section(map_id)
+		__reload_map_section(map_id)
 	
 	var scripted_sequence: _ScriptedSequence = map_nodes[map_id]
 	if (before_fight):
-		scripted_sequence.start_fight()
+		# Let _ready() execute first.
+		scripted_sequence.call_deferred("enter_cutscene", 1)
 	elif (before_cutscene):
-		scripted_sequence.enter_cutscene()
+		# Let _ready() execute first.
+		scripted_sequence.call_deferred("enter_cutscene", 0)
 	
 	if (show_credits):
 		#show_credits() # TODO Bee: open the credits menu.
@@ -122,16 +124,18 @@ func change_map_to(checkpoint: Globals.Checkpoint) -> void:
 	pass
 
 ## Queue free and instantiate a new map section instance.
-func reload_map_section(map_id: Maps) -> void:
+func __reload_map_section(map_id: Maps) -> void:
 	if (map_id >= Maps.MAX_VALUE):
 		push_error("Cannot reload a non-existing map section.")
 		return
 	
-	# TODO not sure if this will crash if animations are playing.
 	if (map_nodes[map_id]):
-		map_nodes[map_id].queue_free()
+		map_nodes[map_id].exit_cutscene() # This is safer.
+		map_nodes[map_id].queue_free() # Not sure if this will crash if animations are playing.
 	
-	map_nodes[map_id] = map_scenes[map_id].instantiate() as _ScriptedSequence
+	var new_map := map_scenes[map_id].instantiate() as _ScriptedSequence
+	map_nodes[map_id] = new_map
+	map_list.call_deferred("add_child", new_map) # Add node to scene tree.
 	
 	map_nodes[map_id].global_transform.origin = map_origins[map_id]
 	self.reset_physics_interpolation()
@@ -143,7 +147,11 @@ func _on_tomato_despawner_body_entered(body: Node2D) -> void:
 		body.queue_free()
 	pass
 
-
-func _on_level_trigger_area_entered(area: Area2D) -> void:
-	print("test 1")
-	pass # Replace with function body.
+func _on_end_of_level_detector_area_entered(area: Area2D) -> void:
+	print("End Of Level Marker detected.") # TODO
+	
+	var eol_marker := area as _EndOfLevelMarker
+	if (eol_marker):
+		Globals.progress = eol_marker.new_checkpoint
+		change_map_to(Globals.progress)
+	pass

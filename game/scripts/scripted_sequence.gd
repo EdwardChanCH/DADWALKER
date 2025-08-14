@@ -17,7 +17,10 @@ func _ready() -> void:
 	pass
 
 ## Entry point.
-func enter_cutscene() -> void:
+## Modes:
+## 0 --- start at the beginning.
+## 1 --- start at the boss fight if available, otherwise same as mode 0.
+func enter_cutscene(mode: int = 0) -> void:
 	cutscene_finished.emit()
 	pass
 

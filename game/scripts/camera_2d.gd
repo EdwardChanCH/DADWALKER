@@ -18,9 +18,10 @@ signal target_reached
 		tracking_node = value
 		if (value):
 			__target_reached_emitted = false
-			level_trigger.monitoring = false
-			level_trigger.monitorable = false
-			x_limit_min = value.global_position.x # Resets x-limit.
+			level_trigger.set_deferred("monitoring", false)
+			level_trigger.set_deferred("monitorable", false)
+			if not(value is _Player):
+				x_limit_min = value.global_position.x # Resets x-limit.
 
 var __target_reached_emitted: bool = true
 
@@ -34,8 +35,8 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	__target_reached_emitted = true
-	level_trigger.monitoring = true
-	level_trigger.monitorable = true
+	level_trigger.set_deferred("monitoring", true)
+	level_trigger.set_deferred("monitorable", true)
 	pass
 
 
@@ -47,19 +48,20 @@ func _physics_process(delta: float) -> void:
 		
 		# Node tracking with x-axis limit.
 		var target_pos_x: float = tracking_node.global_position.x
-		#if (target_pos_x < x_limit_min):
-		#	target_pos_x = x_limit_min
-		#else:
-		#	x_limit_min = target_pos_x
+		if (target_pos_x < x_limit_min):
+			target_pos_x = x_limit_min
+		else:
+			x_limit_min = target_pos_x
 		
-		if (abs(current_pos_x - target_pos_x) < 20):
+		if (abs(current_pos_x - target_pos_x) < 1):
 			# Very close to the target.
 			#current_pos_x = target_pos_x # Unnecessary.
 			if (not __target_reached_emitted):
 				__target_reached_emitted = true
-				level_trigger.monitoring = true
-				level_trigger.monitorable = true
+				level_trigger.set_deferred("monitoring", true)
+				level_trigger.set_deferred("monitorable", true)
 				target_reached.emit()
+				print("Camera emitted 'target_reached'.") # TODO
 		else:
 			# Smoothly move the camera to the target.
 			current_pos_x = lerpf(
@@ -76,6 +78,11 @@ func _physics_process(delta: float) -> void:
 		
 		# Update camera position.
 		self.global_transform.origin.x = current_pos_x
+	pass
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug"):
+		print("Camera at: " + str(self.global_position))
 	pass
 
 ## Shake the camera.
