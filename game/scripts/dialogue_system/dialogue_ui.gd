@@ -18,6 +18,11 @@ signal ui_open
 @export var character_sprite_2: _CharacterSprite
 @export var text_box_animation_player: AnimationPlayer
 
+@export_category("Text Delay")
+@export var text_delay: float = 0.02
+var is_typing: bool = false
+var should_skip_typing: bool = false
+var typeing_timer: SceneTreeTimer
 
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
@@ -54,6 +59,10 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		return
 
 	if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
+		if (is_typing):
+			skip_text_type_effect()
+			return
+			
 		# Can't do current_dialogue_index++ pain
 		__current_dialogue_index += 1
 		
@@ -82,7 +91,7 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 	
 	var current_sequence = dialogue.sequence[new_sequence]
 	
-	if(current_sequence is _TextSequence):
+	if(current_sequence is _TextSequence):	
 		var character_position = set_text(current_sequence)
 		
 		# Spelling colour the right way
@@ -171,7 +180,8 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	# Set text and name of the sequence
 	var character_name = _DialogueSequence.Characters.find_key(sequence.character_name)
 	
-	dialogue_text_label.text = sequence.sequence_text
+	#dialogue_text_label.text = sequence.sequence_text
+	text_type_effect(sequence.sequence_text, sequence.character_name)
 	
 	if(sequence.character_name != _DialogueSequence.Characters.NONE):
 		character_name_label.text = character_name.capitalize()
@@ -190,6 +200,50 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 	character_sprite_1.modulate = Color(0.5, 0.5, 0.5)
 	character_sprite_2.modulate = Color(0.5, 0.5, 0.5)
 	return _DialogueSequence.Position.NONE
+
+func text_type_effect(text: String, character_name: _DialogueSequence.Characters) -> void:
+	should_skip_typing = false
+	is_typing = true
+	dialogue_text_label.text = ""
+	
+	
+	var path: String
+	match character_name:
+		_DialogueSequence.Characters.DOKI:
+			path = "res://assets/sounds/sfx/sfx_npc_dokibirdblip1_fd1.ogg"
+			pass
+		_DialogueSequence.Characters.DAD:
+			path = "res://assets/sounds/sfx/sfx_npc_dadblip1_fd1.ogg"
+			pass
+		_DialogueSequence.Characters.DRAGOON:
+			path = "res://assets/sounds/sfx/sfx_pc_dragoonblip_fd1.ogg"
+			pass
+	
+	var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(path)
+	
+	for character in text:
+		if(should_skip_typing):
+			dialogue_text_label.text = text
+			break
+		
+		if (not audio_player.playing):
+			AudioManager.play_sfx(path, 0.25)
+			#audio_player.play()
+
+		
+		dialogue_text_label.text += character
+		typeing_timer = get_tree().create_timer(text_delay)
+		await typeing_timer.timeout
+		
+	is_typing = false
+	pass
+
+func skip_text_type_effect() -> void:
+	should_skip_typing = true
+	if (typeing_timer):
+		typeing_timer.timeout.emit()
+	return
+
 
 ## Play simple sprite animation
 func play_sprite_ui_animation(character_position: _DialogueSequence.Position, animation_name: String, play_backwards: bool = false) -> AnimationPlayer:
