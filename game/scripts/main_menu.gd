@@ -7,6 +7,8 @@ signal ui_open
 @export var animation_player: AnimationPlayer = null
 @export var buttons: Array[TextureButton] = []
 
+var counter: int = 0
+
 func _ready() -> void:
 	# Check if missing export variables.
 	if (not animation_player):
@@ -49,3 +51,14 @@ func _on_visibility_changed() -> void:
 		return
 	ui_open.emit()
 	pass
+
+
+func _on_rich_text_label_gui_input(event: InputEvent) -> void:
+	if ( event is not InputEventMouseButton ):
+		return
+		
+	counter += 1
+	if(counter >= 42):
+		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_pc_dragoonhit_fd1.ogg")
+		counter = 0
+	pass # Replace with function body.
