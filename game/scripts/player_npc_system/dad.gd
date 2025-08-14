@@ -12,7 +12,8 @@ func _ready() -> void:
 	pass
 
 func start_walk() -> void:
-	animation_player.play("dragoon_walk")
+	if (animation_player.has_animation("dragoon_walk")):
+		animation_player.play("dragoon_walk") # TODO
 	pass
 
 func start_t_pose() -> void:

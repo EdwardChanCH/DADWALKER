@@ -1,5 +1,5 @@
 class_name _BossHealth
-extends CanvasLayer
+extends Control
 
 @export var animation: AnimationPlayer = null
 

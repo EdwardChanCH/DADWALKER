@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://comocvmoxgfwf"]
+[gd_scene load_steps=22 format=3 uid="uid://comocvmoxgfwf"]
 
 [ext_resource type="PackedScene" uid="uid://hk5x5mvji4dk" path="res://scenes/player_npc_system/dad_sky_world.tscn" id="1_cmkb5"]
 [ext_resource type="Script" uid="uid://duyp6mutkdpfp" path="res://scripts/final_boss_fight.gd" id="1_k0qlo"]
@@ -8,6 +8,16 @@
 [ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="5_j5mu0"]
 [ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="7_mguhe"]
 [ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/player_npc_system/basic_enemy.tscn" id="8_2lg36"]
+[ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="9_y1c10"]
+
+[sub_resource type="Gradient" id="Gradient_2lg36"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 1, 0.196078)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y1c10"]
+gradient = SubResource("Gradient_2lg36")
+width = 1920
+height = 1080
 
 [sub_resource type="Animation" id="Animation_k0qlo"]
 length = 0.001
@@ -304,6 +314,10 @@ projectile_spawner = NodePath("ProjectileSpawner")
 enemy_spawner = NodePath("EnemySpawner")
 camera_target = NodePath("CameraTarget")
 
+[node name="DebugSprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_y1c10")
+centered = false
+
 [node name="CameraTarget" type="Node2D" parent="."]
 position = Vector2(960, 540)
 
@@ -364,5 +378,9 @@ game_object_scene = ExtResource("8_2lg36")
 auto_spawn_timer = NodePath("EnemyTimer")
 
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
+
+[node name="EndOfLevelMarker" parent="." instance=ExtResource("9_y1c10")]
+position = Vector2(2000, 900)
+new_checkpoint = 8
 
 [connection signal="area_entered" from="BossHitbox" to="." method="_on_boss_hitbox_area_entered"]

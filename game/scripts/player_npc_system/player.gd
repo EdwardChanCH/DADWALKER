@@ -40,7 +40,6 @@ func _ready() -> void:
 	# TODO set walking speed
 	character_world_node.start_walk()
 	
-	Globals.player = self
 	pass
 
 func _process(delta: float) -> void:

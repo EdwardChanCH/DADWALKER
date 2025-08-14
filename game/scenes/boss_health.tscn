@@ -269,8 +269,10 @@ gradient = SubResource("Gradient_3rbw0")
 width = 1600
 height = 20
 
-[node name="BossHealth" type="CanvasLayer" node_paths=PackedStringArray("animation", "health_label", "progress_bar", "boss_name_label")]
-layer = 20
+[node name="BossHealth" type="Control" node_paths=PackedStringArray("animation", "health_label", "progress_bar", "boss_name_label")]
+z_index = 20
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_sjw1h")
 animation = NodePath("HealthBarAnimation")
 health_label = NodePath("UI/BossHealthBar/BossHealthText")

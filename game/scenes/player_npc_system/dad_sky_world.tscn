@@ -43,8 +43,11 @@ projection = 1
 fov = 90.0
 size = 2.0
 
-[node name="Dad" type="Node3D" parent="."]
+[node name="Dad" type="Node3D" parent="." node_paths=PackedStringArray("animation_player")]
 script = ExtResource("2_78aax")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dad"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Dad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

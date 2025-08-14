@@ -30,6 +30,8 @@ var __fight_ended: bool = false
 var __is_on_left: bool = false
 
 func _ready() -> void:
+	super._ready()
+	
 	# Check if missing export variables.
 	if (not character_world
 		or not boss_animation
@@ -43,14 +45,13 @@ func _ready() -> void:
 		or not projectile_despawner):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
-	projectile_despawner.monitoring = false
-	projectile_despawner.monitorable = false
+	self.visible = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
+	projectile_despawner.set_deferred("monitoring", false)
+	projectile_despawner.set_deferred("monitorable", false)
 	
 	character_world.start_walk() # TODO
-	
-	enter_cutscene() # TODO
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -76,30 +77,53 @@ func _physics_process(delta: float) -> void:
 			tomato_attack()
 	pass
 
-func enter_cutscene() -> void:
-	if (Globals.camera):
-		Globals.camera.tracking_node = camera_target
-	start_dialogue()
+func exit_cutscene() -> void:
+	if (Globals.gameplay):
+		Globals.gameplay.queue_free_all_projectiles()
+		Globals.gameplay.queue_free_all_game_objects()
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+	
+	cutscene_finished.emit()
+	pass
+
+func enter_cutscene(_mode: int = 0) -> void:
+	map_used_before = true
+	self.visible = true
+	
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = camera_target
+		await Globals.gameplay.main_camera.target_reached
+	
+	if (_mode == 1):
+		start_fight()
+	else:
+		start_dialogue()
 	pass
 
 func start_dialogue() -> void:
+	map_used_before = true
+	
 	mini_boss_dialogue_started.emit()
 	print("mbf: start_dialogue") # TODO
 	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
+	map_used_before = true
+	
 	mini_boss_dialogue_ended.emit()
 	print("mbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
 func start_fight() -> void:
+	map_used_before = true
+	
 	mini_boss_fight_started.emit()
-	boss_hitbox_area.monitoring = true
-	boss_hitbox_area.monitorable = true
-	projectile_despawner.monitoring = true
-	projectile_despawner.monitorable = true
+	boss_hitbox_area.set_deferred("monitoring", true)
+	boss_hitbox_area.set_deferred("monitorable", true)
+	projectile_despawner.set_deferred("monitoring", true)
+	projectile_despawner.set_deferred("monitorable", true)
 	print("mbf: start_fight") # TODO
 	await boss_health.open_ui()
 	__can_attack_again = true
@@ -111,6 +135,8 @@ func start_fight() -> void:
 	pass
 
 func end_fight() -> void:
+	map_used_before = true
+	
 	# Move back to the right side.
 	if (__is_on_left):
 		character_world.target_look_vector = Vector3.LEFT
@@ -121,19 +147,16 @@ func end_fight() -> void:
 	mini_boss_fight_ended.emit()
 	
 	__can_attack_again = false
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
-	projectile_despawner.monitoring = false
-	projectile_despawner.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
+	projectile_despawner.set_deferred("monitoring", false)
+	projectile_despawner.set_deferred("monitorable", false)
 	
 	print("mbf: end_fight") # TODO
 
 	await boss_health.close_ui()
 	
-	cutscene_finished.emit()
-	
-	if (Globals.camera):
-		Globals.camera.tracking_node = Globals.player
+	exit_cutscene()
 	pass
 
 func tomato_attack() -> void:
