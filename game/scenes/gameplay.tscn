@@ -1,10 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://df64whveplypg"]
+[gd_scene load_steps=21 format=3 uid="uid://df64whveplypg"]
 
 [ext_resource type="Script" uid="uid://ca6xflgxec3a0" path="res://scripts/gameplay.gd" id="1_00tan"]
 [ext_resource type="Script" uid="uid://cjqqp3av0j00n" path="res://scripts/camera_2d.gd" id="2_ct7aa"]
 [ext_resource type="PackedScene" uid="uid://djks7sqgmdsrl" path="res://scenes/player_npc_system/player.tscn" id="2_l1v76"]
 [ext_resource type="Texture2D" uid="uid://6qpuam2dwmid" path="res://assets/textures/parallax_bg/scroll_sky_1.png" id="2_ocj2s"]
 [ext_resource type="Texture2D" uid="uid://bqsh3qokmbv8u" path="res://assets/textures/parallax_bg/scroll_ground_1.png" id="3_din8e"]
+[ext_resource type="PackedScene" uid="uid://tpqu08ogrepg" path="res://scenes/title_no_fight.tscn" id="6_ctvyo"]
+[ext_resource type="PackedScene" uid="uid://dcrp3wh853owp" path="res://scenes/intro_no_fight.tscn" id="6_din8e"]
+[ext_resource type="PackedScene" uid="uid://comocvmoxgfwf" path="res://scenes/final_boss_fight.tscn" id="7_4bh5q"]
+[ext_resource type="PackedScene" uid="uid://go565cse1ocx" path="res://scenes/mini_bosss_fight.tscn" id="7_e124b"]
+[ext_resource type="PackedScene" uid="uid://yjjdvbcqnar1" path="res://scenes/first_street_fight.tscn" id="7_hbo4f"]
+[ext_resource type="PackedScene" uid="uid://2hc00whcqidx" path="res://scenes/second_street_fight.tscn" id="9_ctvyo"]
 
 [sub_resource type="Animation" id="Animation_ct7aa"]
 length = 0.001
@@ -70,22 +76,27 @@ size = Vector2(3840, 920)
 size = Vector2(3840, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocj2s"]
-size = Vector2(960, 360)
+size = Vector2(960, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_din8e"]
-size = Vector2(960, 360)
+size = Vector2(960, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bh5q"]
 size = Vector2(780, 1480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e124b"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctvyo"]
 size = Vector2(1920, 360)
 
-[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("main_camera", "game_object_list", "projectile_list")]
+[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("player", "main_camera", "game_object_list", "projectile_list", "map_list", "map_nodes")]
 script = ExtResource("1_00tan")
+player = NodePath("YSortedList/Player")
 main_camera = NodePath("MainCamera")
 game_object_list = NodePath("YSortedList/GameObjectList")
 projectile_list = NodePath("YSortedList/ProjectileList")
+map_list = NodePath("MapList")
+map_nodes = [NodePath("MapList/TitleNoFight"), NodePath("MapList/IntroNoFight"), NodePath("MapList/FirstStreetFight"), NodePath("MapList/MiniBosssFight"), NodePath("MapList/SecondStreetFight"), NodePath("MapList/FinalBossFight")]
+map_scenes = Array[PackedScene]([ExtResource("6_ctvyo"), ExtResource("6_din8e"), ExtResource("7_hbo4f"), ExtResource("7_e124b"), ExtResource("9_ctvyo"), ExtResource("7_4bh5q")])
+map_origins = Array[Vector2]([Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
 
@@ -106,12 +117,33 @@ position = Vector2(0, 720)
 texture = ExtResource("3_din8e")
 centered = false
 
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("camera_animation", "tracking_node")]
+[node name="MapList" type="Node2D" parent="."]
+
+[node name="TitleNoFight" parent="MapList" instance=ExtResource("6_ctvyo")]
+
+[node name="IntroNoFight" parent="MapList" instance=ExtResource("6_din8e")]
+position = Vector2(3000, 0)
+
+[node name="FirstStreetFight" parent="MapList" instance=ExtResource("7_hbo4f")]
+position = Vector2(6000, 0)
+
+[node name="MiniBosssFight" parent="MapList" instance=ExtResource("7_e124b")]
+position = Vector2(9000, 0)
+
+[node name="SecondStreetFight" parent="MapList" instance=ExtResource("9_ctvyo")]
+position = Vector2(12000, 0)
+
+[node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
+position = Vector2(15000, 0)
+
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger", "tracking_node")]
 position = Vector2(960, 540)
 process_callback = 0
 script = ExtResource("2_ct7aa")
+gameplay_node = NodePath("..")
 camera_animation = NodePath("CameraAnimation")
-tracking_node = NodePath(".")
+level_trigger = NodePath("EndOfLevelDetector")
+tracking_node = NodePath("../YSortedList/Player")
 
 [node name="CameraAnimation" type="AnimationPlayer" parent="MainCamera"]
 root_node = NodePath("../..")
@@ -137,14 +169,15 @@ collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShapeL" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
-position = Vector2(-480, 900)
+position = Vector2(-480, 540)
 shape = SubResource("RectangleShape2D_ocj2s")
 
 [node name="CollisionShapeR" type="CollisionShape2D" parent="MainCamera/StaticBoxLR"]
-position = Vector2(2400, 900)
+position = Vector2(2400, 540)
 shape = SubResource("RectangleShape2D_din8e")
 
 [node name="TomatoDespawner" type="Area2D" parent="MainCamera"]
+visible = false
 position = Vector2(-960, -540)
 collision_mask = 4
 
@@ -152,13 +185,14 @@ collision_mask = 4
 position = Vector2(-570, 540)
 shape = SubResource("RectangleShape2D_4bh5q")
 
-[node name="SceneLoader" type="Area2D" parent="MainCamera"]
+[node name="EndOfLevelDetector" type="Area2D" parent="MainCamera"]
+position = Vector2(-960, -540)
 collision_layer = 128
 collision_mask = 128
 
-[node name="CollisionShapeM" type="CollisionShape2D" parent="MainCamera/SceneLoader"]
-position = Vector2(0, 360)
-shape = SubResource("RectangleShape2D_e124b")
+[node name="CollisionShapeM" type="CollisionShape2D" parent="MainCamera/EndOfLevelDetector"]
+position = Vector2(960, 900)
+shape = SubResource("RectangleShape2D_ctvyo")
 
 [node name="YSortedList" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -172,6 +206,5 @@ y_sort_enabled = true
 [node name="ProjectileList" type="Node2D" parent="YSortedList"]
 y_sort_enabled = true
 
-[node name="FullMap" type="Node2D" parent="."]
-
-[connection signal="body_entered" from="MainCamera/TomatoDespawner" to="MainCamera" method="_on_tomato_despawner_body_entered"]
+[connection signal="body_entered" from="MainCamera/TomatoDespawner" to="." method="_on_tomato_despawner_body_entered"]
+[connection signal="area_entered" from="MainCamera/EndOfLevelDetector" to="." method="_on_end_of_level_detector_area_entered"]

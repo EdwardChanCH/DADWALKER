@@ -17,6 +17,7 @@ script = ExtResource("1_o5qli")
 [node name="Gameplay" parent="." instance=ExtResource("2_0wfyh")]
 
 [node name="MainMenu" parent="." instance=ExtResource("6_choun")]
+visible = false
 
 [node name="CreditMenu" parent="." instance=ExtResource("3_o6xl0")]
 visible = false
@@ -28,10 +29,13 @@ visible = false
 visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_choun")]
+visible = false
 
 [node name="LoseMenu" parent="." instance=ExtResource("8_ya4ey")]
+visible = false
 
 [node name="WinMenu" parent="." instance=ExtResource("9_eb6dy")]
+visible = false
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 process_mode = 3

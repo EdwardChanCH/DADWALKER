@@ -31,6 +31,8 @@ var __time_since_last_attack: float = 0
 var __fight_ended: bool = false
 
 func _ready() -> void:
+	super._ready()
+	
 	# Check if missing export variables.
 	if (not character_world
 		or not boss_animation
@@ -42,11 +44,12 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
+	self.visible = false
 	character_world.use_sky_camera()
 	character_world.look_vector = Vector3.UP * 2 + Vector3.BACK * 0.01
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
 	
 	#enter_cutscene() # TODO
 	pass
@@ -85,29 +88,54 @@ func _physics_process(delta: float) -> void:
 					__attack_pattern = 0
 	pass
 
-func enter_cutscene() -> void:
-	if (Globals.camera):
-		Globals.camera.tracking_node = camera_target
-	start_dialogue()
+func exit_cutscene() -> void:
+	if (Globals.gameplay):
+		Globals.gameplay.queue_free_all_projectiles()
+		Globals.gameplay.queue_free_all_game_objects()
+		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
+	
+	cutscene_finished.emit()
+	pass
+
+func enter_cutscene(_mode: int = 0) -> void:
+	map_used_before = true
+	
+	self.visible = true
+	
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.tracking_node = camera_target
+		await Globals.gameplay.main_camera.target_reached
+	
+	if (_mode == 1):
+		start_fight()
+	else:
+		start_dialogue()
 	pass
 
 func start_dialogue() -> void:
+	map_used_before = true
+	
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
 	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
+	map_used_before = true
+	
 	final_boss_dialogue_ended.emit()
 	print("fbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
 func start_fight() -> void:
+	map_used_before = true
 	final_boss_fight_started.emit()
+	boss_hitbox_area.set_deferred("monitoring", true)
+	boss_hitbox_area.set_deferred("monitorable", true)
 	print("fbf: start_fight") # TODO
-	if (Globals.camera):
-		Globals.camera.shake_camera()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
 	# TODO make buildings retract
 	character_world.use_sky_camera()
 	character_world.look_decay = 1
@@ -118,16 +146,16 @@ func start_fight() -> void:
 	character_world.look_decay = 8
 	enemy_spawner.start_spawning()
 	__can_attack_again = true
-	boss_hitbox_area.monitoring = true
-	boss_hitbox_area.monitorable = true
 	__fight_ended = false
 	pass
 
 func end_fight() -> void:
+	map_used_before = true
+	
 	final_boss_fight_ended.emit()
 	__can_attack_again = false
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
 	enemy_spawner.stop_spawning()
 	print("fbf: end_fight") # TODO
 	character_world.look_decay = 1
@@ -135,12 +163,10 @@ func end_fight() -> void:
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
 	await boss_health.close_ui()
 	character_world.look_decay = 8
-	if (Globals.camera):
-		Globals.camera.shake_camera()
-	cutscene_finished.emit()
-	# TODO ending popup
-	if (Globals.camera):
-		Globals.camera.tracking_node = Globals.player
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
+	
+	exit_cutscene()
 	pass
 
 func ground_pound_attack() -> void:
@@ -149,8 +175,8 @@ func ground_pound_attack() -> void:
 	boss_animation.play("sky_up")
 	await boss_animation.animation_finished
 	
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", false)
+	boss_hitbox_area.set_deferred("monitorable", false)
 	
 	character_world.use_ground_camera()
 	boss_sprite.z_index = boss_ground_z_index # In front of ground layer.
@@ -158,8 +184,8 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_down")
 	await boss_animation.animation_finished
 	
-	if (Globals.camera):
-		Globals.camera.shake_camera()
+	if (Globals.gameplay):
+		Globals.gameplay.main_camera.shake_camera()
 	
 	for node2d in ground_attack_area.get_overlapping_bodies():
 		var player := node2d as _Player
@@ -180,8 +206,8 @@ func ground_pound_attack() -> void:
 	boss_animation.play("sky_down")
 	await boss_animation.animation_finished
 	
-	boss_hitbox_area.monitoring = false
-	boss_hitbox_area.monitorable = false
+	boss_hitbox_area.set_deferred("monitoring", true)
+	boss_hitbox_area.set_deferred("monitorable", true)
 	
 	__can_attack_again = true
 	__time_since_last_attack = 0
@@ -219,6 +245,7 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	pass
 
 func _on_boss_hitbox_area_entered(area: Area2D) -> void:
+	print("Final boss is hit.") # TODO
 	var game_object := area as _Projectile
 	
 	if (game_object is _Feather):

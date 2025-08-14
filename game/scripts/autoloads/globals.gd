@@ -1,3 +1,4 @@
+class_name _Globals
 extends Node
 ## Use this script for global functions and variables.
 ## Global variables should have getters & setters, and emit signals when changed.
@@ -17,12 +18,16 @@ enum HitboxLayer {
 
 enum Checkpoint {
 	MAINMENU,
-	INTRO,
-	MINI_BOSS,
-	FINAL_BOSS,
+	INTRO_START,
+	INTRO_END,
+	MINI_BOSS_START,
+	MINI_BOSS_FIGHT,
+	MINI_BOSS_END,
+	FINAL_BOSS_START,
+	FINAL_BOSS_FIGHT,
+	FINAL_BOSS_END,
 	ENDING,
 }
-
 
 # --- Signals --- #
 
@@ -39,10 +44,6 @@ var lose_menu: _LoseMenu = null
 var pause_menu: _PauseMenu = null
 
 var gameplay: _Gameplay = null
-
-var player: _Player = null
-
-var camera: _MainCamera = null
 
 var progress: Checkpoint = Checkpoint.MAINMENU :
 	get:
@@ -66,5 +67,10 @@ func lerp_t(decay: float, delta: float) -> float:
 
 # --- Misc. Functions --- #
 
-func start_game(checkpoint: Checkpoint) -> void:
+## Change the game to any section, auto-reload if section is used before.
+func load_game(checkpoint: Checkpoint) -> void:
+	if (Globals.gameplay):
+		gameplay.change_map_to(checkpoint)
+	else:
+		push_error("Globals.gameplay is null.")
 	pass

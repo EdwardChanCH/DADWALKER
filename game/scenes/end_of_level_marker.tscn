@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://tapmaj04tygs"]
+
+[ext_resource type="Script" uid="uid://chxbg425nar2h" path="res://scripts/end_of_level_marker.gd" id="1_lmqqa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxo5s"]
+radius = 40.0
+
+[node name="EndOfLevelMarker" type="Area2D"]
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_lmqqa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vxo5s")
