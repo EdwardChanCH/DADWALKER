@@ -136,3 +136,14 @@ func reload_map_section(map_id: Maps) -> void:
 	map_nodes[map_id].global_transform.origin = map_origins[map_id]
 	self.reset_physics_interpolation()
 	pass
+
+## Despawn tomatoes.
+func _on_tomato_despawner_body_entered(body: Node2D) -> void:
+	if (body is _BasicEnemy):
+		body.queue_free()
+	pass
+
+
+func _on_level_trigger_area_entered(area: Area2D) -> void:
+	print("test 1")
+	pass # Replace with function body.

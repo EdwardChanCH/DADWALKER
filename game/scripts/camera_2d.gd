@@ -7,7 +7,7 @@ signal target_reached
 
 @export var camera_animation: AnimationPlayer = null
 
-@export var map_trigger: Area2D = null
+@export var level_trigger: Area2D = null
 
 @export var lerp_decay: float = 8
 
@@ -18,8 +18,8 @@ signal target_reached
 		tracking_node = value
 		if (value):
 			__target_reached_emitted = false
-			map_trigger.monitoring = false
-			map_trigger.monitorable = false
+			level_trigger.monitoring = false
+			level_trigger.monitorable = false
 			x_limit_min = value.global_position.x # Resets x-limit.
 
 var __target_reached_emitted: bool = true
@@ -33,8 +33,9 @@ func _ready() -> void:
 		or not camera_animation):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	map_trigger.monitoring = true
-	map_trigger.monitorable = true
+	__target_reached_emitted = true
+	level_trigger.monitoring = true
+	level_trigger.monitorable = true
 	pass
 
 
@@ -46,18 +47,18 @@ func _physics_process(delta: float) -> void:
 		
 		# Node tracking with x-axis limit.
 		var target_pos_x: float = tracking_node.global_position.x
-		if (target_pos_x < x_limit_min):
-			target_pos_x = x_limit_min
-		else:
-			x_limit_min = target_pos_x
+		#if (target_pos_x < x_limit_min):
+		#	target_pos_x = x_limit_min
+		#else:
+		#	x_limit_min = target_pos_x
 		
 		if (abs(current_pos_x - target_pos_x) < 20):
 			# Very close to the target.
 			#current_pos_x = target_pos_x # Unnecessary.
 			if (not __target_reached_emitted):
 				__target_reached_emitted = true
-				map_trigger.monitoring = true
-				map_trigger.monitorable = true
+				level_trigger.monitoring = true
+				level_trigger.monitorable = true
 				target_reached.emit()
 		else:
 			# Smoothly move the camera to the target.
@@ -80,10 +81,4 @@ func _physics_process(delta: float) -> void:
 ## Shake the camera.
 func shake_camera() -> void:
 	camera_animation.play("camera_shake")
-	pass
-
-## Despawn tomatoes.
-func _on_tomato_despawner_body_entered(body: Node2D) -> void:
-	if (body is _BasicEnemy):
-		body.queue_free()
 	pass
