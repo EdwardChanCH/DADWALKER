@@ -7,12 +7,15 @@ signal ui_open
 @export_category("UI Node")
 @export var master_slider: Slider
 @export var sfx_slider: Slider
-@export var ui_slider: Slider
 @export var music_slider: Slider
-@export var voice_slider: Slider
 @export var ui_control: Control
 @export var ui_animation_player: AnimationPlayer
 @export var display_speed : Label
+@export var god_mode_button: CheckButton
+@export var show_fps_button: CheckButton
+@export var master_percentage: Label
+@export var sfx_percentage: Label
+@export var music_percentage: Label
 
 func _ready() -> void:
 	
@@ -25,17 +28,14 @@ func _ready() -> void:
 	var sfx_arg = [sfx_slider, AudioManager.AudioType.SFX]
 	sfx_slider.drag_ended.connect(Callable(update_volume).bind(sfx_arg))
 	
-	var ui_arg = [ui_slider, AudioManager.AudioType.UI]
-	ui_slider.drag_ended.connect(Callable(update_volume).bind(ui_arg))
-	
 	var music_arg = [music_slider, AudioManager.AudioType.MUSIC]
 	music_slider.drag_ended.connect(Callable(update_volume).bind(music_arg))
 	
-	var voice = [voice_slider, AudioManager.AudioType.VOICE]
-	voice_slider.drag_ended.connect(Callable(update_volume).bind(voice))
-	
 	visible = false
 	Globals.setting_menu = self
+	
+	Globals.god_mode = god_mode_button.button_pressed
+	Globals.show_fps_count = show_fps_button.button_pressed
 	pass
 	
 func update_volume(_changed: bool, arg_array: Array) -> void:
@@ -78,5 +78,14 @@ func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
 
 func _on_display_speed_slider_value_changed(value: float) -> void:
 	Globals.text_display_speed = value
-	display_speed.text = str(value).pad_decimals(2) + "S"
-	pass # Replace with function body.
+	display_speed.text = str(value).pad_decimals(1) + "s"
+	pass
+
+func _on_master_volume_slider_changed() -> void:
+	pass
+
+func _on_sfx_volume_slider_changed() -> void:
+	pass
+
+func _on_music_volume_slider_changed() -> void:
+	pass

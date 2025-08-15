@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="2_63sl1"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_inxim"]
-[ext_resource type="StyleBox" uid="uid://s5xfe1dkrn45" path="res://themes/defualt_panel.tres" id="3_p50a0"]
+[ext_resource type="StyleBox" path="res://themes/defualt_panel.tres" id="3_p50a0"]
 [ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_187ex"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="4_ub06a"]
 [ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="5_inxim"]
@@ -319,17 +319,17 @@ _data = {
 &"slide_out": SubResource("Animation_c6yip")
 }
 
-[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "ui_slider", "music_slider", "voice_slider", "ui_control", "ui_animation_player", "display_speed")]
+[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider", "ui_control", "ui_animation_player", "display_speed", "god_mode_button", "show_fps_button")]
 layer = 31
 script = ExtResource("1_xbl1u")
-master_slider = NodePath("UI/AudioPanel/Volume/Master")
-sfx_slider = NodePath("UI/AudioPanel/Volume/SFX")
-ui_slider = NodePath("UI/AudioPanel/Volume/UI")
-music_slider = NodePath("UI/AudioPanel/Volume/Music")
-voice_slider = NodePath("UI/AudioPanel/Volume/Voice")
+master_slider = NodePath("UI/AudioPanel/Volume/MasterVolumeSlider")
+sfx_slider = NodePath("UI/AudioPanel/Volume/SFXVolumeSlider")
+music_slider = NodePath("UI/AudioPanel/Volume/MusicVolumeSlider")
 ui_control = NodePath("UI")
 ui_animation_player = NodePath("AnimationPlayer")
 display_speed = NodePath("UI/Debug/DialogueDiaplayDelayOption/DisplaySpeed")
+god_mode_button = NodePath("UI/Debug/GodModeOption/GodModeButton")
+show_fps_button = NodePath("UI/Debug/ShowFPSOption/FPSCounterButton")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -338,7 +338,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="UI"]
 layout_mode = 1
@@ -348,16 +347,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.388235)
-metadata/_edit_lock_ = true
 
 [node name="Title" type="RichTextLabel" parent="UI"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -168.0
+offset_left = -175.0
 offset_top = 64.0
-offset_right = 168.0
+offset_right = 175.0
 offset_bottom = 192.0
 grow_horizontal = 2
 tooltip_text = "42"
@@ -365,10 +363,9 @@ theme = ExtResource("2_inxim")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("4_ub06a")
 theme_override_font_sizes/normal_font_size = 85
-text = "Setting"
+text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="CloseButtonRoot" type="Control" parent="UI"]
 layout_mode = 3
@@ -377,8 +374,6 @@ offset_left = 800.0
 offset_top = 808.0
 offset_right = 1120.0
 offset_bottom = 1128.0
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="CloseButton" type="TextureButton" parent="UI/CloseButtonRoot"]
 layout_mode = 1
@@ -433,8 +428,6 @@ offset_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_p50a0")
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="AudioPanelTitle" type="RichTextLabel" parent="UI/ControlPanel"]
 layout_mode = 1
@@ -475,8 +468,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Move - WASD / ARROW Key"
-metadata/_edit_group_ = true
+text = "Move: WASD / Arrow Keys"
 
 [node name="Label2" type="Label" parent="UI/ControlPanel/ControlList"]
 layout_mode = 2
@@ -484,7 +476,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Aim - Cursor"
+text = "Aim: Cursor"
 
 [node name="Label3" type="Label" parent="UI/ControlPanel/ControlList"]
 layout_mode = 2
@@ -492,7 +484,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Shoot - Space / Left Click"
+text = "Shoot: Space / Left Click"
 
 [node name="Label4" type="Label" parent="UI/ControlPanel/ControlList"]
 layout_mode = 2
@@ -500,7 +492,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Next Dialogue - Left Click"
+text = "Next Dialogue: Left Click"
 
 [node name="Label5" type="Label" parent="UI/ControlPanel/ControlList"]
 layout_mode = 2
@@ -508,7 +500,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Pause - Esc"
+text = "Pause: Esc"
 
 [node name="Label6" type="Label" parent="UI/ControlPanel/ControlList"]
 layout_mode = 2
@@ -516,7 +508,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Exit Game - Alt + F4 / Power"
+text = "Exit Game: Alt+F4"
 
 [node name="AudioPanel" type="Panel" parent="UI"]
 self_modulate = Color(0.721569, 0.878431, 1, 1)
@@ -533,7 +525,6 @@ offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_p50a0")
-metadata/_edit_lock_ = true
 
 [node name="AudioPanelTitle" type="RichTextLabel" parent="UI/AudioPanel"]
 layout_mode = 1
@@ -561,24 +552,24 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -287.5
-offset_top = -132.0
-offset_right = 288.5
-offset_bottom = 132.0
+offset_top = -143.0
+offset_right = 152.5
+offset_bottom = 146.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="UI/AudioPanel/Volume"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Master"
+text = "Master Volume"
 
-[node name="Master" type="HSlider" parent="UI/AudioPanel/Volume"]
+[node name="MasterVolumeSlider" type="HSlider" parent="UI/AudioPanel/Volume"]
+custom_minimum_size = Vector2(300, 32)
 layout_mode = 2
 max_value = 1.0
-step = 0.1
+step = 0.01
 value = 0.5
 
 [node name="Label2" type="Label" parent="UI/AudioPanel/Volume"]
@@ -586,27 +577,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "SFX"
+text = "SFX Volume"
 
-[node name="SFX" type="HSlider" parent="UI/AudioPanel/Volume"]
+[node name="SFXVolumeSlider" type="HSlider" parent="UI/AudioPanel/Volume"]
+custom_minimum_size = Vector2(300, 32)
 layout_mode = 2
 max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Label3" type="Label" parent="UI/AudioPanel/Volume"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "UI"
-
-[node name="UI" type="HSlider" parent="UI/AudioPanel/Volume"]
-visible = false
-layout_mode = 2
-max_value = 1.0
-step = 0.1
+step = 0.01
 value = 0.5
 
 [node name="Label4" type="Label" parent="UI/AudioPanel/Volume"]
@@ -614,28 +591,71 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Music"
+text = "Music Volume"
 
-[node name="Music" type="HSlider" parent="UI/AudioPanel/Volume"]
+[node name="MusicVolumeSlider" type="HSlider" parent="UI/AudioPanel/Volume"]
+custom_minimum_size = Vector2(300, 32)
 layout_mode = 2
 max_value = 1.0
-step = 0.1
+step = 0.01
 value = 0.5
 
-[node name="Label5" type="Label" parent="UI/AudioPanel/Volume"]
-visible = false
-layout_mode = 2
+[node name="Percentage1" type="Label" parent="UI/AudioPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 153.0
+offset_top = -93.0
+offset_right = 253.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
-theme_override_font_sizes/font_size = 40
-text = "Voice"
+theme_override_font_sizes/font_size = 30
+text = "50%"
+horizontal_alignment = 2
 
-[node name="Voice" type="HSlider" parent="UI/AudioPanel/Volume"]
-visible = false
-layout_mode = 2
-max_value = 1.0
-step = 0.1
-value = 0.5
+[node name="Percentage2" type="Label" parent="UI/AudioPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 153.0
+offset_top = 7.0
+offset_right = 253.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 30
+text = "50%"
+horizontal_alignment = 2
+
+[node name="Percentage3" type="Label" parent="UI/AudioPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 153.0
+offset_top = 107.0
+offset_right = 253.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_p50a0")
+theme_override_font_sizes/font_size = 30
+text = "50%"
+horizontal_alignment = 2
 
 [node name="Debug" type="Panel" parent="UI"]
 self_modulate = Color(0.721569, 0.878431, 1, 1)
@@ -652,7 +672,6 @@ offset_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("3_p50a0")
-metadata/_edit_lock_ = true
 
 [node name="DebugPanelTitle" type="RichTextLabel" parent="UI/Debug"]
 layout_mode = 1
@@ -668,10 +687,9 @@ tooltip_text = "42"
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("4_ub06a")
 theme_override_font_sizes/normal_font_size = 76
-text = "DEBUG"
+text = "MISC"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="GodModeOption" type="Control" parent="UI/Debug"]
 layout_mode = 1
@@ -686,7 +704,6 @@ offset_right = 256.0
 offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
 
 [node name="Label2" type="Label" parent="UI/Debug/GodModeOption"]
 layout_mode = 1
@@ -744,7 +761,6 @@ offset_top = -56.0
 offset_right = 256.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
 
 [node name="Label4" type="Label" parent="UI/Debug/ShowFPSOption"]
 layout_mode = 1
@@ -786,6 +802,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 30
+button_pressed = true
 shortcut_feedback = false
 shortcut_in_tooltip = false
 flat = true
@@ -803,7 +820,6 @@ offset_right = 248.0
 offset_bottom = 127.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
 
 [node name="Label2" type="Label" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
@@ -822,7 +838,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
 text = "Dialogue Display Delay"
-metadata/_edit_lock_ = true
 
 [node name="DisplaySpeedSlider" type="HSlider" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
@@ -833,16 +848,14 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -260.0
 offset_top = 10.5
-offset_right = 33.0
+offset_right = 180.0
 offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-min_value = 0.01
+min_value = 0.1
 max_value = 2.0
 step = 0.1
-value = 0.51
-metadata/_edit_lock_ = true
+value = 0.5
 
 [node name="DisplaySpeed" type="Label" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
@@ -852,16 +865,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 212.0
-offset_top = 10.5
-offset_right = 251.0
-offset_bottom = 53.5
+offset_top = 4.5
+offset_right = 276.0
+offset_bottom = 47.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 30
-text = "2S"
-metadata/_edit_lock_ = true
+text = "0.5s"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Debug"]
 layout_mode = 1
@@ -886,6 +898,9 @@ libraries = {
 [connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
 [connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="changed" from="UI/AudioPanel/Volume/MasterVolumeSlider" to="." method="_on_master_volume_slider_changed"]
+[connection signal="changed" from="UI/AudioPanel/Volume/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_changed"]
+[connection signal="changed" from="UI/AudioPanel/Volume/MusicVolumeSlider" to="." method="_on_music_volume_slider_changed"]
 [connection signal="toggled" from="UI/Debug/GodModeOption/GodModeButton" to="." method="_on_god_mode_button_toggled"]
 [connection signal="toggled" from="UI/Debug/ShowFPSOption/FPSCounterButton" to="." method="_on_fps_counter_button_toggled"]
 [connection signal="value_changed" from="UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider" to="." method="_on_display_speed_slider_value_changed"]

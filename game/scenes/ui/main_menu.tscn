@@ -9,43 +9,42 @@
 [ext_resource type="Texture2D" uid="uid://cvrma5kth62ve" path="res://assets/textures/ui_sprites/feathers/feather_asset_2_black.png" id="7_8g5eo"]
 [ext_resource type="Texture2D" uid="uid://bigvur8ft8vm4" path="res://assets/textures/ui_sprites/feathers/feather_asset_1_black.png" id="9_7suek"]
 
-[sub_resource type="Animation" id="Animation_8g5eo"]
+[sub_resource type="Animation" id="Animation_n4uci"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayButton/PlayButtonText:position:x")
+tracks/0/path = NodePath("CreditsButton/CreditButtonText:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(85, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(74.6667, 0, 0, 0, 0),
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_q85j6"]
+[sub_resource type="Animation" id="Animation_8ekit"]
 resource_name = "hover"
 length = 0.333337
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayButton/PlayButtonText:position:x")
+tracks/0/path = NodePath("CreditsButton/CreditButtonText:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(1, 0),
-"points": PackedFloat32Array(85, 0, 0, 0, 0, 40, 0, 0, 0, 0),
+"points": PackedFloat32Array(74.6667, 0, 0, 0, 0, 45, -0.166668, 0, 0.166668, 0),
 "times": PackedFloat32Array(0, 0.333333)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7suek"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_877pj"]
 _data = {
-&"RESET": SubResource("Animation_8g5eo"),
-&"hover": SubResource("Animation_q85j6")
+&"RESET": SubResource("Animation_n4uci"),
+&"hover": SubResource("Animation_8ekit")
 }
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_q85j6"]
-xfade_time = 0.15
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ayp64"]
 input_0/name = "idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -55,21 +54,20 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8g5eo"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y2j7i"]
 animation = &"hover"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7suek"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y1h5l"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_otr3d"]
-graph_offset = Vector2(-357.383, 119.019)
-nodes/Transition/node = SubResource("AnimationNodeTransition_q85j6")
-nodes/Transition/position = Vector2(240, 180)
-nodes/hover/node = SubResource("AnimationNodeAnimation_8g5eo")
-nodes/hover/position = Vector2(-60, 420)
-nodes/idle/node = SubResource("AnimationNodeAnimation_7suek")
-nodes/idle/position = Vector2(-60, 220)
-nodes/output/position = Vector2(400, 180)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8g5eo"]
+graph_offset = Vector2(-737.278, 68.7849)
+nodes/Transition/node = SubResource("AnimationNodeTransition_ayp64")
+nodes/Transition/position = Vector2(111.471, 247.473)
+nodes/hover/node = SubResource("AnimationNodeAnimation_y2j7i")
+nodes/hover/position = Vector2(-160, 340)
+nodes/idle/node = SubResource("AnimationNodeAnimation_y1h5l")
+nodes/idle/position = Vector2(-160, 140)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"hover", &"output", 0, &"Transition"]
 
 [sub_resource type="Animation" id="Animation_otr3d"]
@@ -125,7 +123,7 @@ input_1/reset = true
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q85j6"]
-graph_offset = Vector2(-157.3, 28.88)
+graph_offset = Vector2(-301.591, 62.4828)
 nodes/Hover/node = SubResource("AnimationNodeAnimation_q85j6")
 nodes/Hover/position = Vector2(80, 320)
 nodes/Transition/node = SubResource("AnimationNodeTransition_8g5eo")
@@ -135,42 +133,43 @@ nodes/idle/position = Vector2(100, 140)
 nodes/output/position = Vector2(600, 180)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"Hover", &"output", 0, &"Transition"]
 
-[sub_resource type="Animation" id="Animation_n4uci"]
+[sub_resource type="Animation" id="Animation_8g5eo"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CreditsButton/CreditButtonText:position:x")
+tracks/0/path = NodePath("PlayButton/PlayButtonText:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(74.6667, 0, 0, 0, 0),
+"points": PackedFloat32Array(85, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_8ekit"]
+[sub_resource type="Animation" id="Animation_q85j6"]
 resource_name = "hover"
 length = 0.333337
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CreditsButton/CreditButtonText:position:x")
+tracks/0/path = NodePath("PlayButton/PlayButtonText:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(1, 0),
-"points": PackedFloat32Array(74.6667, 0, 0, 0, 0, 45, -0.166668, 0, 0.166668, 0),
+"points": PackedFloat32Array(85, 0, 0, 0, 0, 40, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.333333)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_877pj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7suek"]
 _data = {
-&"RESET": SubResource("Animation_n4uci"),
-&"hover": SubResource("Animation_8ekit")
+&"RESET": SubResource("Animation_8g5eo"),
+&"hover": SubResource("Animation_q85j6")
 }
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ayp64"]
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_q85j6"]
+xfade_time = 0.15
 input_0/name = "idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -180,20 +179,21 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y2j7i"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8g5eo"]
 animation = &"hover"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y1h5l"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7suek"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8g5eo"]
-graph_offset = Vector2(-364.785, 42.6611)
-nodes/Transition/node = SubResource("AnimationNodeTransition_ayp64")
-nodes/Transition/position = Vector2(111.471, 247.473)
-nodes/hover/node = SubResource("AnimationNodeAnimation_y2j7i")
-nodes/hover/position = Vector2(-160, 340)
-nodes/idle/node = SubResource("AnimationNodeAnimation_y1h5l")
-nodes/idle/position = Vector2(-160, 140)
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_otr3d"]
+graph_offset = Vector2(-364.768, 99.7696)
+nodes/Transition/node = SubResource("AnimationNodeTransition_q85j6")
+nodes/Transition/position = Vector2(240, 180)
+nodes/hover/node = SubResource("AnimationNodeAnimation_8g5eo")
+nodes/hover/position = Vector2(-60, 420)
+nodes/idle/node = SubResource("AnimationNodeAnimation_7suek")
+nodes/idle/position = Vector2(-60, 220)
+nodes/output/position = Vector2(400, 180)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"hover", &"output", 0, &"Transition"]
 
 [sub_resource type="Animation" id="Animation_l6cm7"]
@@ -217,7 +217,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1670, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(1570, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
@@ -228,7 +228,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(480, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(280, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/3/type = "bezier"
@@ -250,7 +250,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1670, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(1570, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/5/type = "bezier"
@@ -261,7 +261,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(630, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(430, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/6/type = "bezier"
@@ -283,7 +283,7 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1670, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(1570, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/8/type = "bezier"
@@ -294,7 +294,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(780, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(580, -0.0005, 0, 0.0005, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/9/type = "bezier"
@@ -364,7 +364,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1670, -0.25, 0, 0.25, 0, 1670, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1570, -0.25, 0, 0.25, 0, 1570, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/4/type = "bezier"
@@ -375,7 +375,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(480, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(280, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/5/type = "bezier"
@@ -386,7 +386,7 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1670, -0.25, 0, 0.25, 0, 1670, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1570, -0.25, 0, 0.25, 0, 1570, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/6/type = "bezier"
@@ -397,7 +397,7 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(630, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(430, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/7/type = "bezier"
@@ -408,7 +408,7 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1670, -0.25, 0, 0.25, 0, 1670, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(1570, -0.25, 0, 0.25, 0, 1570, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/8/type = "bezier"
@@ -419,7 +419,7 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(780, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(580, -0.25, 0, 0.25, 0, 1200, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 2)
 }
 tracks/9/type = "bezier"
@@ -463,30 +463,14 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
-metadata/_edit_lock_ = true
 
 [node name="TitleMover" type="Control" parent="UI"]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
-[node name="GameTitle" type="TextureRect" parent="UI/TitleMover"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -600.0
-offset_top = 50.0
-offset_right = 600.0
-offset_bottom = 350.0
-grow_horizontal = 2
-tooltip_text = "i added tool tip to random ui element inorder to keep myself sane while being force to work on them"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/TitleMover"]
+[node name="GameTitleLabel" type="RichTextLabel" parent="UI/TitleMover"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -497,7 +481,6 @@ offset_right = 600.0
 offset_bottom = 352.0
 grow_horizontal = 2
 pivot_offset = Vector2(600, 136)
-tooltip_text = "Click on the title 42 times for easter egg"
 theme_override_constants/outline_size = 50
 theme_override_fonts/normal_font = ExtResource("3_x2yvf")
 theme_override_font_sizes/normal_font_size = 216
@@ -505,155 +488,26 @@ text = "DADWALKER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonMover1" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1670.0
-offset_top = 480.0
-offset_right = 3590.0
-offset_bottom = 1560.0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="PlayButton" type="TextureButton" parent="UI/ButtonMover1"]
-layout_mode = 0
-offset_left = -238.0
-offset_top = -24.0
-offset_right = 159.0
-offset_bottom = 127.0
-scale = Vector2(0.75, 0.75)
-tooltip_text = "T~G~W~Group~🙌"
-focus_mode = 0
-texture_normal = ExtResource("4_btxxm")
-texture_hover = ExtResource("4_q85j6")
-ignore_texture_size = true
-stretch_mode = 3
-metadata/_edit_lock_ = true
-
-[node name="PlayButtonText" type="RichTextLabel" parent="UI/ButtonMover1/PlayButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -113.5
-offset_top = -96.833
-offset_right = 110.5
-offset_bottom = -10.833
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/table_v_separation = 0
-theme_override_constants/outline_size = 25
-theme_override_constants/line_separation = 0
-theme_override_fonts/normal_font = ExtResource("3_x2yvf")
-theme_override_font_sizes/normal_font_size = 72
-text = "Start"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="PlayButtonAnimation" type="AnimationPlayer" parent="UI/ButtonMover1"]
-libraries = {
-&"": SubResource("AnimationLibrary_7suek")
-}
-
-[node name="PlayButtonAnimationTree" type="AnimationTree" parent="UI/ButtonMover1"]
-tree_root = SubResource("AnimationNodeBlendTree_otr3d")
-anim_player = NodePath("../PlayButtonAnimation")
-parameters/Transition/current_state = "idle"
-parameters/Transition/transition_request = ""
-parameters/Transition/current_index = 0
-
-[node name="ButtonMover2" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1670.0
-offset_top = 630.0
-offset_right = 3590.0
-offset_bottom = 1710.0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="SettingButton" type="TextureButton" parent="UI/ButtonMover2"]
-layout_mode = 0
-offset_left = -238.0
-offset_top = 2.0
-offset_right = 159.0
-offset_bottom = 164.0
-scale = Vector2(0.75, 0.75)
-texture_normal = ExtResource("3_uhagc")
-texture_hover = ExtResource("7_8g5eo")
-ignore_texture_size = true
-stretch_mode = 3
-metadata/_edit_lock_ = true
-
-[node name="SettingButtonText" type="RichTextLabel" parent="UI/ButtonMover2/SettingButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.5
-offset_top = -91.667
-offset_right = 139.5
-offset_bottom = -5.667
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/table_v_separation = 0
-theme_override_constants/outline_size = 25
-theme_override_constants/line_separation = 0
-theme_override_fonts/normal_font = ExtResource("3_x2yvf")
-theme_override_font_sizes/normal_font_size = 72
-text = "SETTING"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="SettingButtonAnimation" type="AnimationPlayer" parent="UI/ButtonMover2"]
-libraries = {
-&"": SubResource("AnimationLibrary_8ekit")
-}
-
-[node name="SettingButtonAnimationTree" type="AnimationTree" parent="UI/ButtonMover2"]
-tree_root = SubResource("AnimationNodeBlendTree_q85j6")
-anim_player = NodePath("../SettingButtonAnimation")
-parameters/Transition/current_state = "idle"
-parameters/Transition/transition_request = ""
-parameters/Transition/current_index = 0
-
 [node name="ButtonMover3" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1670.0
-offset_top = 780.0
-offset_right = 3590.0
-offset_bottom = 1860.0
+offset_left = 1570.0
+offset_top = 580.0
+offset_right = 3490.0
+offset_bottom = 1660.0
 mouse_filter = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="CreditsButton" type="TextureButton" parent="UI/ButtonMover3"]
 layout_mode = 0
-offset_left = -262.0
-offset_top = 28.0
-offset_right = 167.0
-offset_bottom = 154.0
+offset_left = -162.0
+offset_top = 228.0
+offset_right = 267.0
+offset_bottom = 354.0
 scale = Vector2(0.75, 0.75)
 texture_normal = ExtResource("2_x2yvf")
 texture_hover = ExtResource("9_7suek")
 ignore_texture_size = true
 stretch_mode = 3
-metadata/_edit_lock_ = true
 
 [node name="CreditButtonText" type="RichTextLabel" parent="UI/ButtonMover3/CreditsButton"]
 layout_mode = 1
@@ -674,7 +528,7 @@ theme_override_constants/outline_size = 25
 theme_override_constants/line_separation = 0
 theme_override_fonts/normal_font = ExtResource("3_x2yvf")
 theme_override_font_sizes/normal_font_size = 72
-text = "CrEDIT"
+text = "CREDITS"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
@@ -693,22 +547,142 @@ parameters/Transition/current_state = "idle"
 parameters/Transition/transition_request = ""
 parameters/Transition/current_index = 0
 
+[node name="ButtonMover2" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1570.0
+offset_top = 430.0
+offset_right = 3490.0
+offset_bottom = 1510.0
+mouse_filter = 2
+
+[node name="SettingButton" type="TextureButton" parent="UI/ButtonMover2"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = 202.0
+offset_right = 259.0
+offset_bottom = 364.0
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("3_uhagc")
+texture_hover = ExtResource("7_8g5eo")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="SettingButtonText" type="RichTextLabel" parent="UI/ButtonMover2/SettingButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.5
+offset_top = -91.667
+offset_right = 151.5
+offset_bottom = -5.667
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 25
+theme_override_constants/line_separation = 0
+theme_override_fonts/normal_font = ExtResource("3_x2yvf")
+theme_override_font_sizes/normal_font_size = 72
+text = "OPTIONS"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SettingButtonAnimation" type="AnimationPlayer" parent="UI/ButtonMover2"]
+libraries = {
+&"": SubResource("AnimationLibrary_8ekit")
+}
+
+[node name="SettingButtonAnimationTree" type="AnimationTree" parent="UI/ButtonMover2"]
+tree_root = SubResource("AnimationNodeBlendTree_q85j6")
+anim_player = NodePath("../SettingButtonAnimation")
+parameters/Transition/current_state = "idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+
+[node name="ButtonMover1" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1570.0
+offset_top = 280.0
+offset_right = 3490.0
+offset_bottom = 1360.0
+mouse_filter = 2
+
+[node name="PlayButton" type="TextureButton" parent="UI/ButtonMover1"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = 176.0
+offset_right = 259.0
+offset_bottom = 327.0
+scale = Vector2(0.75, 0.75)
+focus_mode = 0
+texture_normal = ExtResource("4_btxxm")
+texture_hover = ExtResource("4_q85j6")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="PlayButtonText" type="RichTextLabel" parent="UI/ButtonMover1/PlayButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.5
+offset_top = -96.833
+offset_right = 110.5
+offset_bottom = -10.833
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 25
+theme_override_constants/line_separation = 0
+theme_override_fonts/normal_font = ExtResource("3_x2yvf")
+theme_override_font_sizes/normal_font_size = 72
+text = "PLAY"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PlayButtonAnimation" type="AnimationPlayer" parent="UI/ButtonMover1"]
+libraries = {
+&"": SubResource("AnimationLibrary_7suek")
+}
+
+[node name="PlayButtonAnimationTree" type="AnimationTree" parent="UI/ButtonMover1"]
+tree_root = SubResource("AnimationNodeBlendTree_otr3d")
+anim_player = NodePath("../PlayButtonAnimation")
+parameters/Transition/current_state = "idle"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 0
+
 [node name="SceneTransition" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_l6cm7")
 }
 
+[connection signal="ui_open" from="." to="." method="_on_ui_open"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="gui_input" from="UI/TitleMover/RichTextLabel" to="." method="_on_rich_text_label_gui_input"]
-[connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="." method="_on_mouse_entered"]
-[connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
-[connection signal="mouse_exited" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
-[connection signal="pressed" from="UI/ButtonMover1/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="mouse_entered" from="UI/ButtonMover2/SettingButton" to="." method="_on_mouse_entered"]
-[connection signal="mouse_entered" from="UI/ButtonMover2/SettingButton" to="UI/ButtonMover2/SettingButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
-[connection signal="mouse_exited" from="UI/ButtonMover2/SettingButton" to="UI/ButtonMover2/SettingButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
-[connection signal="pressed" from="UI/ButtonMover2/SettingButton" to="." method="_on_options_button_pressed"]
+[connection signal="gui_input" from="UI/TitleMover/GameTitleLabel" to="." method="_on_rich_text_label_gui_input"]
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
 [connection signal="pressed" from="UI/ButtonMover3/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="UI/ButtonMover2/SettingButton" to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="UI/ButtonMover2/SettingButton" to="UI/ButtonMover2/SettingButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
+[connection signal="mouse_exited" from="UI/ButtonMover2/SettingButton" to="UI/ButtonMover2/SettingButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
+[connection signal="pressed" from="UI/ButtonMover2/SettingButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="." method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
+[connection signal="mouse_exited" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
+[connection signal="pressed" from="UI/ButtonMover1/PlayButton" to="." method="_on_play_button_pressed"]

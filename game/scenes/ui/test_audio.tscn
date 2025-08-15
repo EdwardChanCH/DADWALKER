@@ -18,7 +18,7 @@ music_slider = NodePath("Control/VBoxContainer/HSlider4")
 voice_slider = NodePath("Control/VBoxContainer/HSlider5")
 audio_list = NodePath("Control/ItemList")
 audio_option = NodePath("Control/OptionButton")
-play_button = NodePath("Control/Button")
+play_button = NodePath("Control/PlayAudioButton")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -46,17 +46,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 256.0
-offset_top = -420.0
+offset_top = -390.0
 offset_right = 822.0
-offset_bottom = -94.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
 text = "Master"
 
 [node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
@@ -67,7 +66,7 @@ value = 0.5
 
 [node name="Label2" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
 text = "SFX"
 
 [node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
@@ -79,7 +78,7 @@ value = 0.5
 [node name="Label3" type="Label" parent="Control/VBoxContainer"]
 visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
 text = "UI"
 
 [node name="HSlider3" type="HSlider" parent="Control/VBoxContainer"]
@@ -102,7 +101,7 @@ value = 0.5
 
 [node name="Label5" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
 text = "Voice"
 
 [node name="HSlider5" type="HSlider" parent="Control/VBoxContainer"]
@@ -134,55 +133,54 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 256.0
-offset_top = -28.0
-offset_right = 536.0
-offset_bottom = 36.0
+offset_left = 260.0
+offset_top = -60.0
+offset_right = 530.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
+alignment = 1
 selected = 0
 item_count = 4
-popup/item_0/text = "Play as sfx"
+popup/item_0/text = "Mode: SFX"
 popup/item_0/id = 0
-popup/item_1/text = "Play as ui"
+popup/item_1/text = "Mode: UI"
 popup/item_1/id = 1
 popup/item_1/disabled = true
-popup/item_2/text = "Play as music"
+popup/item_2/text = "Mode: Music"
 popup/item_2/id = 2
 popup/item_2/disabled = true
-popup/item_3/text = "Play as voice"
+popup/item_3/text = "Mode: Voice"
 popup/item_3/id = 3
 popup/item_3/disabled = true
-metadata/_edit_lock_ = true
 
-[node name="Button" type="Button" parent="Control"]
+[node name="PlayAudioButton" type="Button" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 552.0
-offset_top = -28.0
-offset_right = 824.0
-offset_bottom = 36.0
+offset_left = 550.0
+offset_top = -60.0
+offset_right = 820.0
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "Play"
-metadata/_edit_lock_ = true
+theme_override_font_sizes/font_size = 32
+text = "Play Audio"
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 904.0
-offset_right = 1222.0
-offset_bottom = 1047.0
-theme_override_colors/font_color = Color(0.52816, 0, 0.164663, 1)
-theme_override_font_sizes/font_size = 51
-text = "Audio tester v0.1
-this is not coded well use at your own discretion"
+offset_left = 300.0
+offset_top = 29.0
+offset_right = 1020.0
+offset_bottom = 129.0
+theme_override_font_sizes/font_size = 48
+text = "Audio Tester"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BackButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -191,13 +189,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 264.0
-offset_top = 76.0
-offset_right = 832.0
-offset_bottom = 379.0
+offset_left = -580.0
+offset_top = 410.0
+offset_right = 20.0
+offset_bottom = 474.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 216
-text = "BACK"
+theme_override_font_sizes/font_size = 32
+text = "Close"
+
+[node name="DisclaimerLabel" type="Label" parent="."]
+offset_left = 436.0
+offset_top = 900.0
+offset_right = 921.0
+offset_bottom = 923.0
+text = "( for developer use only, please hide this page from the public )"
 
 [connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]

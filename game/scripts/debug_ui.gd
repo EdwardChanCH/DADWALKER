@@ -11,5 +11,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	# Check if running in editor.
-	if not Engine.is_editor_hint():
-		fps_node.text = "%.0f FPS" % [Engine.get_frames_per_second()]
+	if (not Engine.is_editor_hint()):
+		if (Globals.show_fps_count):
+			fps_node.text = "%.0f FPS" % [Engine.get_frames_per_second()]
+		else:
+			fps_node.text = ""

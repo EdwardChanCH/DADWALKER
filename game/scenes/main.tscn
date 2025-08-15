@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dv8xc81ptsajr"]
+[gd_scene load_steps=12 format=3 uid="uid://dv8xc81ptsajr"]
 
 [ext_resource type="Script" uid="uid://yg2mptqj8a14" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://df64whveplypg" path="res://scenes/gameplay.tscn" id="2_0wfyh"]
@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://bsve4bdv4h8e" path="res://scenes/ui/pause_menu.tscn" id="7_choun"]
 [ext_resource type="PackedScene" uid="uid://dw0we11wl8rya" path="res://scenes/ui/lose_menu.tscn" id="8_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://drw7xx0j7yjau" path="res://scenes/win_menu.tscn" id="9_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://de8mb2wo3jexl" path="res://scenes/ui/test_audio.tscn" id="9_ya4ey"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_o5qli")
 
-[node name="Gameplay" parent="." instance=ExtResource("2_0wfyh")]
-
-[node name="MainMenu" parent="." instance=ExtResource("6_choun")]
+[node name="MainMenu" parent="." node_paths=PackedStringArray("audio_tester") instance=ExtResource("6_choun")]
 visible = false
+audio_tester = NodePath("../TestAudio")
 
 [node name="CreditMenu" parent="." instance=ExtResource("3_o6xl0")]
 visible = false
@@ -36,6 +36,8 @@ visible = false
 
 [node name="WinMenu" parent="." instance=ExtResource("9_eb6dy")]
 visible = false
+
+[node name="TestAudio" parent="." instance=ExtResource("9_ya4ey")]
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -66,3 +68,5 @@ horizontal_alignment = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Gameplay" parent="." instance=ExtResource("2_0wfyh")]
