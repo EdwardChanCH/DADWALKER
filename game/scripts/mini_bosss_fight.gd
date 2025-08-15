@@ -106,6 +106,9 @@ func start_dialogue() -> void:
 	
 	mini_boss_dialogue_started.emit()
 	print("mbf: start_dialogue") # TODO
+	
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
+	await Globals.dialogue_ui.finish_dialogue
 	end_dialogue() # TODO
 	pass
 

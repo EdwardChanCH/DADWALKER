@@ -26,4 +26,4 @@ position = Vector2(960, 540)
 
 [node name="EndOfLevelMarker" parent="." instance=ExtResource("2_7bycb")]
 position = Vector2(2000, 900)
-new_checkpoint = 6
+new_checkpoint = 3

@@ -42,9 +42,12 @@ func start_dialogue() -> void:
 	intro_dialogue_started.emit()
 	print("iof: start_dialogue") # TODO
 	
-	Globals.dialogue_ui.visible = true
-	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_1)
-	
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
+	await Globals.dialogue_ui.finish_dialogue
+	#Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
+	#await Globals.dialogue_ui.finish_dialogue
+	#Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_3)
+	#await Globals.dialogue_ui.finish_dialogue
 	end_dialogue()
 	pass
 

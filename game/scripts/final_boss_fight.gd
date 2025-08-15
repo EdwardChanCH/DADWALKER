@@ -128,10 +128,9 @@ func start_dialogue() -> void:
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
 	
-	#
-	#await Globals.dialogue_ui.finish_dialogue
-	
-	end_dialogue() # TODO
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_3)
+	await Globals.dialogue_ui.finish_dialogue
+	end_dialogue()
 	pass
 
 func end_dialogue() -> void:

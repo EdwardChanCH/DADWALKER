@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://comocvmoxgfwf"]
+[gd_scene load_steps=20 format=3 uid="uid://comocvmoxgfwf"]
 
 [ext_resource type="PackedScene" uid="uid://hk5x5mvji4dk" path="res://scenes/player_npc_system/dad_sky_world.tscn" id="1_cmkb5"]
 [ext_resource type="Script" uid="uid://duyp6mutkdpfp" path="res://scripts/final_boss_fight.gd" id="1_k0qlo"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b8ja340vkvie8" path="res://scenes/boss_health.tscn" id="3_hpirs"]
 [ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="5_j5mu0"]
 [ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="7_mguhe"]
-[ext_resource type="PackedScene" uid="uid://bwwjgfyf7ukyd" path="res://scenes/player_npc_system/basic_enemy.tscn" id="8_2lg36"]
 
 [sub_resource type="Gradient" id="Gradient_2lg36"]
 offsets = PackedFloat32Array(1)
@@ -377,7 +376,6 @@ projectile_scene = ExtResource("2_mrtcb")
 [node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("auto_spawn_timer")]
 position = Vector2(2000, 760)
 script = ExtResource("7_mguhe")
-game_object_scene = ExtResource("8_2lg36")
 auto_spawn_timer = NodePath("EnemyTimer")
 
 [node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
@@ -385,21 +383,18 @@ auto_spawn_timer = NodePath("EnemyTimer")
 [node name="EnemySpawnerL1" type="Node2D" parent="."]
 position = Vector2(-100, 800)
 script = ExtResource("7_mguhe")
-game_object_scene = ExtResource("8_2lg36")
 target_player = true
 health = 2
 
 [node name="EnemySpawnerL2" type="Node2D" parent="."]
 position = Vector2(-50, 900)
 script = ExtResource("7_mguhe")
-game_object_scene = ExtResource("8_2lg36")
 target_player = true
 health = 3
 
 [node name="EnemySpawnerL3" type="Node2D" parent="."]
 position = Vector2(-100, 1000)
 script = ExtResource("7_mguhe")
-game_object_scene = ExtResource("8_2lg36")
 target_player = true
 health = 2
 

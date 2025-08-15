@@ -71,11 +71,3 @@ func lerp_t(decay: float, delta: float) -> float:
 	return 1 - exp(-decay * delta)
 
 # --- Misc. Functions --- #
-
-## Change the game to any section, auto-reload if section is used before.
-func load_game(checkpoint: Checkpoint) -> void:
-	if (Globals.gameplay):
-		gameplay.change_map_to(checkpoint)
-	else:
-		push_error("Globals.gameplay is null.")
-	pass

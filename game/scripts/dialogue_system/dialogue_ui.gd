@@ -68,6 +68,7 @@ func _ready() -> void:
 	Globals.dialogue_ui = self
 	__character_limit = -0.5 # Hide all letters.
 	__dialogue_has_ended = true
+	__current_dialogue_index = 0
 	pass
 
 func _process(delta: float) -> void:
@@ -131,7 +132,11 @@ func reset_dialogue_sequance() -> void:
 func set_dialogue_sequence(new_sequence: int) -> bool:
 	
 	# Check if the sequence is valid
-	if ( dialogue.sequence.size() - 1 < new_sequence ):
+	#if ( dialogue.sequence.size() - 1 < new_sequence ):
+	#	return false
+	# The math is wrong, leading to one extra click at the end.
+	
+	if (new_sequence >= dialogue.sequence.size() - 1):
 		return false
 	
 	var current_sequence = dialogue.sequence[new_sequence]
@@ -160,7 +165,7 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 		if(character_position != _DialogueSequence.Position.NONE):
 			set_character_sprite(character_position, current_sequence.character_name, current_sequence.expression)
 			await play_sprite_ui_animation(character_position, "talk").animation_finished
-			await get_tree().create_timer(0.25).timeout
+			#await get_tree().create_timer(0.25).timeout
 		return true
 	
 	if(current_sequence is _CharacterSequence):
@@ -339,6 +344,7 @@ func play_ui_slide_out_animation() -> Signal:
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
 	self.visible = true
 	__dialogue_has_ended = false
+	__current_dialogue_index = 0
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
 	play_ui_slide_in_animation()
