@@ -438,6 +438,7 @@ size = Vector2(520, 1480)
 size = Vector2(1920, 360)
 
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("player", "main_camera", "game_object_list", "projectile_list", "map_list", "sky_animation", "map_nodes")]
+process_mode = 1
 script = ExtResource("1_00tan")
 player = NodePath("YSortedList/Player")
 main_camera = NodePath("MainCamera")

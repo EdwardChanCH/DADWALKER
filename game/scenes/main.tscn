@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://de8mb2wo3jexl" path="res://scenes/ui/test_audio.tscn" id="9_ya4ey"]
 
 [node name="Main" type="Node"]
+process_mode = 3
 script = ExtResource("1_o5qli")
 
 [node name="MainMenu" parent="." node_paths=PackedStringArray("audio_tester") instance=ExtResource("6_choun")]
@@ -29,6 +30,7 @@ layer = 32
 visible = false
 
 [node name="PauseMenu" parent="." instance=ExtResource("7_choun")]
+process_mode = 3
 layer = 33
 visible = false
 

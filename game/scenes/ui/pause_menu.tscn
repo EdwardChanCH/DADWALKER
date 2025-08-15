@@ -569,6 +569,7 @@ mouse_filter = 2
 texture = ExtResource("13_lrbnh")
 flip_h = true
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]

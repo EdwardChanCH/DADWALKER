@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if (is_inside_tree()):
-		get_tree().paused = visible # Pause game only when pause menu is visible.
+		get_tree().paused = visible
 	
 	if (visible):
 		ui_open.emit()

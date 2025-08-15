@@ -114,6 +114,7 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		if ( not keep_going ):
 			__dialogue_has_ended = true
 			await play_ui_slide_out_animation()
+			self.visible = false
 			finish_dialogue.emit()
 		#print("Clicked")
 		
@@ -259,19 +260,19 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 	dialogue_text_label.text = text
 	__character_limit = 0.001 # Show the first letter.
 	
-	var path: String
+	var _path: String
 	match character_name:
 		_DialogueSequence.Characters.DOKI:
-			path = "res://assets/sounds/sfx/sfx_npc_dokibirdblip1_fd1.ogg"
+			_path = "res://assets/sounds/sfx/sfx_npc_dokibirdblip1_fd1.ogg"
 			pass
 		_DialogueSequence.Characters.DAD:
-			path = "res://assets/sounds/sfx/sfx_npc_dadblip1_fd1.ogg"
+			_path = "res://assets/sounds/sfx/sfx_npc_dadblip1_fd1.ogg"
 			pass
 		_DialogueSequence.Characters.DRAGOON:
-			path = "res://assets/sounds/sfx/sfx_pc_dragoonblip_fd1.ogg"
+			_path = "res://assets/sounds/sfx/sfx_pc_dragoonblip_fd1.ogg"
 			pass
 	
-	#var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(path)
+	#var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(_path)
 	
 	#for character in text:
 		#if(should_skip_typing):
@@ -279,7 +280,7 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 		#	break
 		
 		#if (not audio_player.playing):
-		#	AudioManager.play_sfx(path, 0.25) # TODO
+		#	AudioManager.play_sfx(_path, 0.25) # TODO
 			#audio_player.play()
 
 		# This causes a bug where multiple dialogues type to the texet box at the same time...
@@ -336,7 +337,7 @@ func play_ui_slide_out_animation() -> Signal:
 
 ## Start dialogue
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
-	self.visible
+	self.visible = true
 	__dialogue_has_ended = false
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
