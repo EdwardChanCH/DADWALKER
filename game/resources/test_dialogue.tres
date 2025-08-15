@@ -66,6 +66,7 @@ script = ExtResource("5_ycaob")
 character_name = 2
 character_position = 1
 play_animation = false
+flip_sprite = false
 metadata/_custom_type_script = "uid://cayfa5f7g08s6"
 
 [sub_resource type="Resource" id="Resource_0luhg"]
@@ -73,6 +74,7 @@ script = ExtResource("5_ycaob")
 character_name = 3
 character_position = 2
 play_animation = false
+flip_sprite = false
 metadata/_custom_type_script = "uid://cayfa5f7g08s6"
 
 [resource]

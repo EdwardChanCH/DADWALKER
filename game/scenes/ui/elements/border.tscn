@@ -1,101 +1,125 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4gb4p6cibq17"]
+[gd_scene load_steps=6 format=3 uid="uid://b4gb4p6cibq17"]
 
 [ext_resource type="Script" uid="uid://cihnhiqeumef0" path="res://scripts/border.gd" id="1_mk52v"]
 
-[sub_resource type="Animation" id="Animation_ivodp"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TopBorder:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
-"times": PackedFloat32Array(0.001)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BottomBorder:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(992, -0.0005, 0, 0.0005, 0),
-"times": PackedFloat32Array(0.001)
-}
-
-[sub_resource type="Animation" id="Animation_mk52v"]
+[sub_resource type="Animation" id="Animation_aqcam"]
 resource_name = "slide_in"
-length = 0.500003
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TopBorder:position:y")
+tracks/0/path = NodePath("Border/TopBorder:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-96, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5)
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -100), Vector2(0, 0)]
 }
-tracks/1/type = "bezier"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BottomBorder:position:y")
+tracks/1/path = NodePath("Border/BottomBorder:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1080, -0.25, 0, 0.25, 0, 992, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.500003)
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 980)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5n360"]
+[sub_resource type="Animation" id="Animation_mgpew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Border/TopBorder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Border/BottomBorder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_qqcqp"]
+resource_name = "slide_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Border/TopBorder:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Border/BottomBorder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 980), Vector2(0, 1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qqcqp"]
 _data = {
-&"RESET": SubResource("Animation_ivodp"),
-&"slide_in": SubResource("Animation_mk52v")
+&"RESET": SubResource("Animation_mgpew"),
+&"slide_in": SubResource("Animation_aqcam"),
+&"slide_out": SubResource("Animation_qqcqp")
 }
 
 [node name="Border" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_mk52v")
-animation_player = NodePath("Border/AnimationPlayer")
+animation_player = NodePath("")
 
 [node name="Border" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
 mouse_filter = 2
-metadata/_edit_lock_ = true
 
 [node name="TopBorder" type="ColorRect" parent="Border"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.0888889
-anchor_right = 1.0
-offset_top = 96.0
-offset_bottom = 90.0
+custom_minimum_size = Vector2(1920, 100)
+layout_mode = 0
+offset_top = -100.0
+offset_right = 1920.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
 [node name="BottomBorder" type="ColorRect" parent="Border"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.983331
-anchor_right = 1.0
-anchor_bottom = 1.06481
-offset_top = -69.9976
-offset_bottom = -67.9949
+custom_minimum_size = Vector2(1920, 100)
+layout_mode = 0
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 1180.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Border"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_5n360")
+&"": SubResource("AnimationLibrary_qqcqp")
 }

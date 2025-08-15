@@ -1,7 +1,7 @@
 [gd_scene load_steps=44 format=3 uid="uid://bsve4bdv4h8e"]
 
 [ext_resource type="Script" uid="uid://v40novibl8yx" path="res://scripts/pause_menu.gd" id="1_6tw0m"]
-[ext_resource type="Texture2D" uid="uid://c4ngmaasd36j7" path="res://assets/textures/character_sprites/dad/dad_3.png" id="2_4inpj"]
+[ext_resource type="Texture2D" uid="uid://b8vqd8ix0evuv" path="res://assets/textures/character_sprites/dad/dad_3.png" id="2_4inpj"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_6qnem"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_lrbnh"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="3_8fwbo"]
