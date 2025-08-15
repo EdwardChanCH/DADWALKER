@@ -42,9 +42,8 @@ func start_dialogue() -> void:
 	intro_dialogue_started.emit()
 	print("iof: start_dialogue") # TODO
 	
-	#if (Globals.dialogue_ui):
-	#	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_3.tres") as _Dialogue)
-	#	await Globals.dialogue_ui.finish_dialogue
+	Globals.dialogue_ui.visible = true
+	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_3.tres") as _Dialogue)
 	
 	end_dialogue()
 	pass

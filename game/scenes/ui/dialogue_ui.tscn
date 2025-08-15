@@ -66,7 +66,6 @@ _data = {
 
 [node name="DialogueUI" type="CanvasLayer" node_paths=PackedStringArray("character_name_label", "dialogue_text_label", "text_box_background", "character_sprite_1", "character_sprite_2", "text_box_animation_player")]
 layer = 31
-follow_viewport_enabled = true
 script = ExtResource("1_86bo4")
 none_texture = ExtResource("2_pad14")
 character_sprite_folder_paths = Dictionary[int, String]({
@@ -184,5 +183,4 @@ libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="gui_input" from="UI" to="." method="_on_control_gui_input"]

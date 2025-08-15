@@ -1,11 +1,6 @@
 extends Node
 ## Use this script to initialize the game.
 
-func _ready() -> void:
-	#Globals.dialogue_ui.start_dialgoue(load("res://resources/test_dialogue.tres") as _Dialogue)
-	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_1.tres") as _Dialogue)
-	pass
-
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("pause_game")):
 		if (Globals.pause_menu

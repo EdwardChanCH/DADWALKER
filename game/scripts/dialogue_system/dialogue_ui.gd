@@ -104,9 +104,8 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
 		if ( not keep_going ):
-			finish_dialogue.emit()
 			await play_ui_slide_out_animation()
-			visible = false
+			finish_dialogue.emit()
 		#print("Clicked")
 		
 	pass
@@ -330,13 +329,12 @@ func play_ui_slide_out_animation() -> Signal:
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
-	visible = true
 	play_ui_slide_in_animation()
 	pass
 
-func _on_visibility_changed() -> void:
-	if (!visible):
-		ui_close.emit()
-		return
-	ui_open.emit()
-	pass
+#func _on_visibility_changed() -> void:
+	#if (!visible):
+		#ui_close.emit()
+		#return
+	#ui_open.emit()
+	#pass

@@ -127,6 +127,10 @@ func start_dialogue() -> void:
 	
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
+	
+	#
+	#await Globals.dialogue_ui.finish_dialogue
+	
 	end_dialogue() # TODO
 	pass
 
@@ -176,6 +180,12 @@ func end_fight() -> void:
 	character_world.look_decay = 8
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
+	
+	boss_timer.start(1)
+	await boss_timer.timeout
+	
+	Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
+	Globals.win_menu.visible = true
 	
 	exit_cutscene()
 	pass
