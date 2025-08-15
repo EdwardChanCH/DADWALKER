@@ -18,6 +18,10 @@ signal ui_open
 @export var character_sprite_2: _CharacterSprite
 @export var text_box_animation_player: AnimationPlayer
 
+@export var doki_color: Color = Color(255.0/255.0, 200.0/255.0, 48.0/255.0)
+@export var dad_color: Color = Color(90.0/255.0, 80.0/255.0, 130.0/255.0) #Color(65.0/255.0, 57.0/255.0, 96.0/255.0)
+@export var dragoon_color: Color = Color(255.0/255.0, 244.0/255.0, 193.0/255.0)
+
 @export_category("Text Delay")
 #@export var text_delay: float = 0.02
 var is_typing: bool = false
@@ -100,13 +104,13 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 		var text_box_colour: Color = Color.GRAY
 		match current_sequence.character_name:
 			_DialogueSequence.Characters.DOKI:
-				text_box_colour = Color.from_rgba8(255, 200, 48)
+				text_box_colour = doki_color
 				pass
 			_DialogueSequence.Characters.DAD:
-				text_box_colour = Color.from_rgba8(65, 57, 96)
+				text_box_colour = dad_color
 				pass
 			_DialogueSequence.Characters.DRAGOON:
-				text_box_colour = Color.from_rgba8(255, 244, 193)
+				text_box_colour = dragoon_color
 				pass
 			
 		text_box_background.self_modulate = text_box_colour;
