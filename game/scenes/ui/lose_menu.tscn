@@ -231,7 +231,6 @@ offset_top = 64.0
 offset_right = 250.0
 offset_bottom = 192.0
 grow_horizontal = 2
-tooltip_text = "42"
 theme = ExtResource("2_s6jrv")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("2_ifqll")

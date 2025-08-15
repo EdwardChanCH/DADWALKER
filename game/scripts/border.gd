@@ -14,22 +14,24 @@ func _ready() -> void:
 	Globals.border_ui = self
 	pass
 
-func play_slide_in_animation() -> Signal:
+func slide_in() -> void:
+	visible = true
 	animation_player.play("slide_in")
+	await animation_player.animation_finished
 	slide_in_animation_finish.emit()
-	return animation_player.animation_finished
+	pass
 
-func play_slide_out_animation() -> Signal:
+func slide_out() -> void:
 	animation_player.play("slide_out")
+	await animation_player.animation_finished
+	visible = false
 	slide_out_animation_finish.emit()
-	return animation_player.animation_finished
+	pass
 
 func _on_visibility_changed() -> void:
+	push_warning("Do not edit the visibility of the border directly!")
 	if (!visible):
-		play_slide_out_animation()
 		ui_close.emit()
 		return
-	
-	play_slide_in_animation()
 	ui_open.emit()
 	pass

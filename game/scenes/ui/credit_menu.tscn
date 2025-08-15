@@ -264,7 +264,6 @@ offset_left = 800.0
 offset_top = 808.0
 offset_right = 1120.0
 offset_bottom = 1128.0
-metadata/_edit_group_ = true
 
 [node name="CloseButton" type="TextureButton" parent="UI/Forground/ButtonRoot"]
 layout_mode = 1

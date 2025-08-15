@@ -128,6 +128,9 @@ func start_dialogue() -> void:
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
 	
+	Globals.border_ui.slide_in()
+	await Globals.border_ui.slide_in_animation_finish
+	
 	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_3)
 	await Globals.dialogue_ui.finish_dialogue
 	end_dialogue()
@@ -135,6 +138,9 @@ func start_dialogue() -> void:
 
 func end_dialogue() -> void:
 	map_used_before = true
+	
+	Globals.border_ui.slide_out()
+	await Globals.border_ui.slide_out_animation_finish
 	
 	final_boss_dialogue_ended.emit()
 	print("fbf: end_dialogue") # TODO

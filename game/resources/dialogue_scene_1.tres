@@ -177,7 +177,7 @@ metadata/_custom_type_script = "uid://cayfa5f7g08s6"
 [sub_resource type="Resource" id="Resource_pj3tn"]
 script = ExtResource("3_w6mch")
 character_name = 2
-sequence_text = "Woof"
+sequence_text = "Woof."
 expression = 1
 metadata/_custom_type_script = "uid://8if0smrkob6y"
 

@@ -42,17 +42,19 @@ func start_dialogue() -> void:
 	intro_dialogue_started.emit()
 	print("iof: start_dialogue") # TODO
 	
-	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
+	Globals.border_ui.slide_in()
+	await Globals.border_ui.slide_in_animation_finish
+	
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_1)
 	await Globals.dialogue_ui.finish_dialogue
-	#Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
-	#await Globals.dialogue_ui.finish_dialogue
-	#Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_3)
-	#await Globals.dialogue_ui.finish_dialogue
-	end_dialogue()
+	end_dialogue() # TODO
 	pass
 
 func end_dialogue() -> void:
 	map_used_before = true
+	
+	Globals.border_ui.slide_out()
+	await Globals.border_ui.slide_out_animation_finish
 	
 	intro_dialogue_ended.emit()
 	print("iof: end_dialogue") # TODO

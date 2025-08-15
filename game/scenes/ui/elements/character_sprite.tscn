@@ -162,6 +162,8 @@ sprite_animation = NodePath("CharacterSpriteAnimation")
 
 [node name="AnimationRoot" type="Control" parent="."]
 anchors_preset = 0
+offset_left = -600.0
+offset_right = -600.0
 mouse_filter = 2
 
 [node name="CharacterSprite" type="TextureRect" parent="AnimationRoot"]

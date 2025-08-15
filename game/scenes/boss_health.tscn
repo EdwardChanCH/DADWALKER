@@ -1,6 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8ja340vkvie8"]
+[gd_scene load_steps=15 format=3 uid="uid://b8ja340vkvie8"]
 
 [ext_resource type="Script" uid="uid://ct0d30r0pefea" path="res://scripts/boss_health.gd" id="1_sjw1h"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_s1xud"]
+[ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="3_b3opw"]
+[ext_resource type="FontFile" uid="uid://bqbrpm574w6i7" path="res://assets/fonts/lazy_dog.ttf" id="4_b3opw"]
 
 [sub_resource type="Animation" id="Animation_y1c10"]
 resource_name = "RESET"
@@ -245,12 +248,6 @@ _data = {
 &"ui_open": SubResource("Animation_mguhe")
 }
 
-[sub_resource type="LabelSettings" id="LabelSettings_k0qlo"]
-font_size = 72
-font_color = Color(0.823529, 0.666667, 0, 1)
-outline_size = 4
-outline_color = Color(1, 1, 0, 1)
-
 [sub_resource type="Gradient" id="Gradient_j5mu0"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.470588, 0.470588, 0.470588, 1)
@@ -303,12 +300,17 @@ offset_left = -800.0
 offset_right = 800.0
 offset_bottom = 100.0
 grow_horizontal = 2
+theme = ExtResource("2_s1xud")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("3_b3opw")
+theme_override_font_sizes/font_size = 85
 text = "DIVINE AMBER DOGE"
-label_settings = SubResource("LabelSettings_k0qlo")
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="BossHealthBar" type="TextureProgressBar" parent="UI"]
+custom_minimum_size = Vector2(1600, 20)
 layout_mode = 1
 offset_left = 160.0
 offset_top = 100.0
@@ -328,7 +330,8 @@ anchor_right = 1.0
 offset_left = -400.0
 offset_top = -40.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("4_b3opw")
+theme_override_font_sizes/font_size = 32
 text = "1000"
 horizontal_alignment = 2
 vertical_alignment = 2
