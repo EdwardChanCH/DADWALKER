@@ -43,7 +43,7 @@ func start_dialogue() -> void:
 	print("iof: start_dialogue") # TODO
 	
 	Globals.dialogue_ui.visible = true
-	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_3.tres") as _Dialogue)
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_1)
 	
 	end_dialogue()
 	pass

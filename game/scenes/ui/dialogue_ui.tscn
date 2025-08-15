@@ -129,9 +129,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -350.0
-offset_top = -439.998
+offset_top = 120.0
 offset_right = 350.0
-offset_bottom = -99.998
+offset_bottom = 460.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
@@ -183,4 +183,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="gui_input" from="UI" to="." method="_on_control_gui_input"]

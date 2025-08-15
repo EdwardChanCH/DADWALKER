@@ -7,6 +7,11 @@ signal ui_open
 
 @export var none_texture: Texture2D = null
 
+@export var dialogue_test: _Dialogue = preload("res://resources/test_dialogue.tres")
+@export var dialogue_1: _Dialogue = preload("res://resources/dialogue_scene_1.tres")
+@export var dialogue_2: _Dialogue = preload("res://resources/dialogue_scene_2.tres")
+@export var dialogue_3: _Dialogue = preload("res://resources/dialogue_scene_3.tres")
+
 @export_category("Resources")
 @export var dialogue: _Dialogue
 @export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
@@ -28,7 +33,7 @@ signal ui_open
 #@export var text_delay: float = 0.02
 var is_typing: bool = false
 var should_skip_typing: bool = false
-var typeing_timer: SceneTreeTimer
+var typing_timer: SceneTreeTimer
 
 # The current index of the dialogue sequance
 var __current_dialogue_index: int = 0
@@ -41,6 +46,8 @@ var __current_character_position: Array[_DialogueSequence.Characters] = [_Dialog
 var __character_sprite_cache: Dictionary[String, Texture]
 
 var __character_limit: float = -0.5 # Hide all letters.
+
+var __dialogue_has_ended: bool = true
 
 func _enter_tree() -> void:
 	for character in character_sprite_folder_paths.keys():
@@ -60,6 +67,7 @@ func _ready() -> void:
 	visible = false
 	Globals.dialogue_ui = self
 	__character_limit = -0.5 # Hide all letters.
+	__dialogue_has_ended = true
 	pass
 
 func _process(delta: float) -> void:
@@ -85,7 +93,7 @@ func _on_control_gui_input(event: InputEvent) -> void:
 	
 	# Unsafe type conversion.
 	#if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
-	if (event.is_action_pressed("next_dialogue")):
+	if (event.is_action_pressed("next_dialogue") and not __dialogue_has_ended):
 		# Double clicked.
 		# Finish all current animations.
 		if (text_box_animation_player.is_playing()):
@@ -104,6 +112,7 @@ func _on_control_gui_input(event: InputEvent) -> void:
 		
 		var keep_going: bool = await set_dialogue_sequence(__current_dialogue_index)
 		if ( not keep_going ):
+			__dialogue_has_ended = true
 			await play_ui_slide_out_animation()
 			finish_dialogue.emit()
 		#print("Clicked")
@@ -187,7 +196,7 @@ func set_character_sequence(sequence: _CharacterSequence) -> void:
 	pass
 
 ## Set character sprite
-func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, epression_index: int) -> TextureRect:
+func set_character_sprite(character_position: _DialogueSequence.Position, character_name: _DialogueSequence.Characters, expression_index: int) -> TextureRect:
 	var target_sprite: TextureRect = null
 	match(character_position):
 		_DialogueSequence.Position.LEFT:
@@ -200,7 +209,7 @@ func set_character_sprite(character_position: _DialogueSequence.Position, charac
 			
 	
 	var lower_name: String = _DialogueSequence.Characters.find_key(character_name).to_lower()
-	var cache_key = lower_name + "_" + str(epression_index)
+	var cache_key = lower_name + "_" + str(expression_index)
 	if( not target_sprite):
 		#print("set_character_sprite: Invalid character_position.")
 		return
@@ -275,8 +284,8 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 
 		# This causes a bug where multiple dialogues type to the texet box at the same time...
 		#dialogue_text_label.text += character
-		#typeing_timer = get_tree().create_timer(1.0 / Globals.text_display_speed)
-		#await typeing_timer.timeout
+		#typing_timer = get_tree().create_timer(1.0 / Globals.text_display_speed)
+		#await typing_timer.timeout
 		
 	#is_typing = false
 	pass
@@ -287,8 +296,8 @@ func skip_text_type_effect() -> void:
 	dialogue_text_label.visible_characters = -1
 	
 	should_skip_typing = true
-	if (typeing_timer):
-		typeing_timer.timeout.emit()
+	if (typing_timer):
+		typing_timer.timeout.emit()
 	return
 
 
@@ -327,14 +336,16 @@ func play_ui_slide_out_animation() -> Signal:
 
 ## Start dialogue
 func start_dialgoue(new_dialogue: _Dialogue) -> void:
+	self.visible
+	__dialogue_has_ended = false
 	dialogue = new_dialogue
 	reset_dialogue_sequance()
 	play_ui_slide_in_animation()
 	pass
 
-#func _on_visibility_changed() -> void:
-	#if (!visible):
-		#ui_close.emit()
-		#return
-	#ui_open.emit()
-	#pass
+func _on_visibility_changed() -> void:
+	if (!visible):
+		ui_close.emit()
+		return
+	ui_open.emit()
+	pass
