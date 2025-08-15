@@ -270,7 +270,7 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	pass
 
 func _on_boss_hitbox_area_entered(area: Area2D) -> void:
-	print("Final boss is hit.") # TODO
+	#print("Final boss hit.")
 	var game_object := area as _Projectile
 	
 	if (game_object is _Feather):

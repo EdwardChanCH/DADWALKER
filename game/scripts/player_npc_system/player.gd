@@ -128,6 +128,15 @@ func stomped() -> void:
 ## Restore to full health.
 func restore_health() -> void:
 	current_health = max_health
+	
+	# Enable collisions.
+	self.collision_layer = __scl
+	self.collision_mask = __scm
+	hit_detector_node.collision_layer = __hcl
+	hit_detector_node.collision_mask = __hcm
+	
+	# Enable controls.
+	in_player_control = true
 	pass
 
 ## Hit detection.
@@ -144,6 +153,9 @@ func _on_health_changed(new_health: int) -> void:
 	collision_box.scale = new_scale
 	hit_box.scale = new_scale
 	shadow.scale = new_scale
+	
+	if (new_health <= 0 and Globals.lose_menu):
+		Globals.lose_menu.visible = true
 	
 	super._on_health_changed(new_health)
 	pass

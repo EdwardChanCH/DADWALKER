@@ -105,7 +105,7 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 	var projectile := area as _Projectile
 	
 	if (current_health > 0 and projectile):
-		print("Enemy hit.")
+		#print("Enemy hit.")
 		if (projectile is _Feather):
 			current_health -= 1
 		elif (projectile is _Seed):

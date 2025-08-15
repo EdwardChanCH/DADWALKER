@@ -73,15 +73,24 @@ var push_decay: float = 10
 ## Fade out timer.
 var __fade_out_timer: float = 0
 
+var __scl: int = 0
+var __scm: int = 0
+var __hcl: int = 0
+var __hcm: int = 0
+
 func _ready() -> void:
 	# Check if missing export variables.
 	if (not character_world_node
 		or not projectile_scene):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
+	__scl = self.collision_layer
+	__scm = self.collision_mask
+	__hcl = hit_detector_node.collision_layer
+	__hcm = hit_detector_node.collision_mask
+	
 	# Initialize health bar.
 	_on_health_changed(current_health)
-	
 	pass
 
 @warning_ignore("unused_parameter")
@@ -131,9 +140,6 @@ func _on_death() -> void:
 	in_sequence_control = false
 	in_logic_control = false
 	in_player_control = false
-	
-	# Start queue free timer.
-
 	
 	# Play death animation.
 	character_world_node.start_death()

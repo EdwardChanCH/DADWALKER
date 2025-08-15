@@ -145,7 +145,7 @@ func change_map_to(checkpoint: Globals.Checkpoint) -> void:
 		scripted_sequence.call_deferred("enter_cutscene", 0)
 	
 	if (show_credits):
-		#show_credits() # TODO Bee: open the credits menu.
+		# Unused.
 		pass
 	pass
 

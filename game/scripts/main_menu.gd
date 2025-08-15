@@ -28,6 +28,11 @@ func _on_ui_open() -> void:
 		button.disabled = false
 	
 	__ignore_signals = false # Stop signal callbacks.
+	
+	if (Globals.dialogue_ui):
+		Globals.dialogue_ui.visible = false
+	
+	animation_player.play("RESET")
 	pass
 
 func _on_play_button_pressed() -> void:
