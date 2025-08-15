@@ -17,6 +17,9 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 		
 	Globals.main_menu = self
+	
+	# Always loaded first.
+	visible = true
 	pass
 
 func _on_ui_open() -> void:
@@ -42,6 +45,10 @@ func _on_play_button_pressed() -> void:
 	# Wait for animate to finish before emiting the close signal
 	await animation_player.animation_finished
 	visible = false
+	
+	# Load intro level.
+	Globals.progress = Globals.Checkpoint.INTRO_START
+	Globals.gameplay.change_map_to(Globals.progress)
 	pass
 
 func _on_options_button_pressed() -> void:
@@ -78,7 +85,7 @@ func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 	if (event is InputEventMouseButton):
 		counter += 1 # Also counts mouse release, scroll wheel, etc.
 	
-	if (counter >= 84):
+	if (counter >= 42):
 		#var tester: PackedScene = load("res://scenes/ui/test_audio.tscn") as PackedScene
 		#add_sibling(tester.instantiate())
 		audio_tester.show()

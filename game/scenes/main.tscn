@@ -50,6 +50,7 @@ visible = false
 
 [node name="TestAudio" parent="." instance=ExtResource("9_ya4ey")]
 layer = 38
+visible = false
 
 [node name="DebugCanvas" type="CanvasLayer" parent="."]
 process_mode = 3

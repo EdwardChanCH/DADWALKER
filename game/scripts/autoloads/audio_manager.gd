@@ -82,7 +82,7 @@ func get_audio_steam_player(sound_path: String) -> AudioStreamPlayer:
 	
 	
 	if (not AudioManager.__sfx_channels.has(audio_steam)):
-		AudioManager._instance.create_sfx_channel(audio_steam)
+		AudioManager.create_sfx_channel(audio_steam)
 	
 	target_channel = AudioManager.__sfx_channels[audio_steam]
 	return target_channel

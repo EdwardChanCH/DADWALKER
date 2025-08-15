@@ -8,11 +8,13 @@ signal ui_open
 @export var master_slider: Slider
 @export var sfx_slider: Slider
 @export var music_slider: Slider
+@export var text_delay_slider: Slider
+@export var god_mode_button: CheckButton
+@export var show_fps_button: CheckButton
+
 @export var ui_control: Control
 @export var ui_animation_player: AnimationPlayer
 @export var display_speed : Label
-@export var god_mode_button: CheckButton
-@export var show_fps_button: CheckButton
 @export var master_percentage: Label
 @export var sfx_percentage: Label
 @export var music_percentage: Label
@@ -42,6 +44,7 @@ func _ready() -> void:
 	
 	Globals.god_mode = god_mode_button.button_pressed
 	Globals.show_fps_count = show_fps_button.button_pressed
+	Globals.text_display_speed = int(text_delay_slider.value)
 	pass
 	
 #func update_volume(_changed: bool, arg_array: Array) -> void:
@@ -97,7 +100,7 @@ func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
 	pass
 
 func _on_display_speed_slider_value_changed(value: float) -> void:
-	Globals.text_display_speed = value
+	Globals.text_display_speed = int(value)
 	display_speed.text = str(value).pad_decimals(1) + "s"
 	pass
 

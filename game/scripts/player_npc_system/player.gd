@@ -125,6 +125,11 @@ func stomped() -> void:
 	current_health -= 1
 	pass
 
+## Restore to full health.
+func restore_health() -> void:
+	current_health = max_health
+	pass
+
 ## Hit detection.
 func _on_hit_detector_area_entered(area: Area2D) -> void:
 	var projectile := area as _Projectile

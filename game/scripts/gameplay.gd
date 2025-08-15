@@ -39,6 +39,9 @@ func _ready() -> void:
 	
 	# Accessible from Globals to avoid awkward node paths.
 	Globals.gameplay = self
+	
+	# Always loaded first.
+	Globals.gameplay.change_map_to(_Globals.Checkpoint.MAINMENU)
 	pass
 
 func destroy_sky() -> void:

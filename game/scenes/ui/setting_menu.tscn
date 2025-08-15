@@ -319,17 +319,18 @@ _data = {
 &"slide_out": SubResource("Animation_c6yip")
 }
 
-[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider", "ui_control", "ui_animation_player", "display_speed", "god_mode_button", "show_fps_button", "master_percentage", "sfx_percentage", "music_percentage")]
+[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider", "text_delay_slider", "god_mode_button", "show_fps_button", "ui_control", "ui_animation_player", "display_speed", "master_percentage", "sfx_percentage", "music_percentage")]
 layer = 31
 script = ExtResource("1_xbl1u")
 master_slider = NodePath("UI/AudioPanel/Volume/MasterVolumeSlider")
 sfx_slider = NodePath("UI/AudioPanel/Volume/SFXVolumeSlider")
 music_slider = NodePath("UI/AudioPanel/Volume/MusicVolumeSlider")
+text_delay_slider = NodePath("UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider")
+god_mode_button = NodePath("UI/Debug/GodModeOption/GodModeButton")
+show_fps_button = NodePath("UI/Debug/ShowFPSOption/FPSCounterButton")
 ui_control = NodePath("UI")
 ui_animation_player = NodePath("AnimationPlayer")
 display_speed = NodePath("UI/Debug/DialogueDiaplayDelayOption/DisplaySpeed")
-god_mode_button = NodePath("UI/Debug/GodModeOption/GodModeButton")
-show_fps_button = NodePath("UI/Debug/ShowFPSOption/FPSCounterButton")
 master_percentage = NodePath("UI/AudioPanel/Percentage1")
 sfx_percentage = NodePath("UI/AudioPanel/Percentage2")
 music_percentage = NodePath("UI/AudioPanel/Percentage3")
@@ -834,14 +835,14 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -260.0
 offset_top = -58.5
-offset_right = 188.0
+offset_right = 286.0
 offset_bottom = -1.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 40
-text = "Dialogue Display Delay"
+text = "Typewriter Speed (letter/s)"
 
 [node name="DisplaySpeedSlider" type="HSlider" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
@@ -856,10 +857,9 @@ offset_right = 180.0
 offset_bottom = 42.5
 grow_horizontal = 2
 grow_vertical = 2
-min_value = 0.1
-max_value = 2.0
-step = 0.1
-value = 0.5
+min_value = 1.0
+max_value = 200.0
+value = 50.0
 
 [node name="DisplaySpeed" type="Label" parent="UI/Debug/DialogueDiaplayDelayOption"]
 layout_mode = 1
@@ -877,7 +877,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_p50a0")
 theme_override_font_sizes/font_size = 30
-text = "0.5s"
+text = "50"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Debug"]
 layout_mode = 1

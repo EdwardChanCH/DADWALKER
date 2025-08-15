@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cvhpyaj518tl8"]
+[gd_scene load_steps=10 format=3 uid="uid://cvhpyaj518tl8"]
 
 [ext_resource type="Script" uid="uid://cfg00ab1f0qd7" path="res://scripts/dialogue_system/dialogue_ui.gd" id="1_86bo4"]
+[ext_resource type="Texture2D" uid="uid://f1keb4plq72i" path="res://assets/textures/character_sprites/none_1.png" id="2_pad14"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="3_awmck"]
 [ext_resource type="StyleBox" uid="uid://s5xfe1dkrn45" path="res://themes/defualt_panel.tres" id="3_yi6h4"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_ysedr"]
@@ -11,28 +12,50 @@ length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
+tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(640, -0.0005, 0, 0.0005, 0),
+"points": PackedFloat32Array(610, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1200, -0.15, 0, 0.15, 0),
 "times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_imsod"]
 resource_name = "slide_in"
-length = 0.333337
+length = 0.3
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:y")
+tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1200, -0.166669, 0, 0.0665667, -550.5, 640, -0.333333, -1, 0.166669, 0),
-"times": PackedFloat32Array(0, 0.333333)
+"points": PackedFloat32Array(610, -0.15, 0, 0.15, 0, 610, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1200, -0.15, 0, 0.15, 0, 640, -0.15, 0, 0.15, 0),
+"times": PackedFloat32Array(0, 0.3)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8oo06"]
@@ -45,6 +68,7 @@ _data = {
 layer = 31
 follow_viewport_enabled = true
 script = ExtResource("1_86bo4")
+none_texture = ExtResource("2_pad14")
 character_sprite_folder_paths = Dictionary[int, String]({
 1: "res://assets/textures/character_sprites/doki/",
 2: "res://assets/textures/character_sprites/dad/",
@@ -106,9 +130,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -350.0
-offset_top = -440.0
+offset_top = -439.998
 offset_right = 350.0
-offset_bottom = -100.0
+offset_bottom = -99.998
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8

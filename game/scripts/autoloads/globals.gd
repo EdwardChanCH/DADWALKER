@@ -37,7 +37,7 @@ signal progress_updated(value: Checkpoint)
 
 var god_mode: bool = false
 var show_fps_count: bool = true
-var text_display_speed: bool = 0.02
+var text_display_speed: int = 50 # Letters per second.
 
 var main_menu: _MainMenu = null
 var setting_menu: _SettingMenu = null

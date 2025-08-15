@@ -29,6 +29,7 @@ func enter_cutscene(_mode: int = 0) -> void:
 	self.visible = true
 	
 	if (Globals.gameplay):
+		Globals.gameplay.player.restore_health()
 		Globals.gameplay.main_camera.tracking_node = camera_target
 		await Globals.gameplay.main_camera.target_reached
 	
@@ -40,7 +41,12 @@ func start_dialogue() -> void:
 	
 	intro_dialogue_started.emit()
 	print("iof: start_dialogue") # TODO
-	end_dialogue() # TODO
+	
+	#if (Globals.dialogue_ui):
+	#	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_3.tres") as _Dialogue)
+	#	await Globals.dialogue_ui.finish_dialogue
+	
+	end_dialogue()
 	pass
 
 func end_dialogue() -> void:

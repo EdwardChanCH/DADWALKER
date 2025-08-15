@@ -5,6 +5,8 @@ signal finish_dialogue
 signal ui_close
 signal ui_open
 
+@export var none_texture: Texture2D = null
+
 @export_category("Resources")
 @export var dialogue: _Dialogue
 @export var character_sprite_folder_paths: Dictionary[_DialogueSequence.Characters, String]
@@ -38,6 +40,8 @@ var __current_character_position: Array[_DialogueSequence.Characters] = [_Dialog
 
 var __character_sprite_cache: Dictionary[String, Texture]
 
+var __character_limit: float = -0.5 # Hide all letters.
+
 func _enter_tree() -> void:
 	for character in character_sprite_folder_paths.keys():
 		var paths_list: Array[String] = []
@@ -55,14 +59,42 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	visible = false
 	Globals.dialogue_ui = self
+	__character_limit = -0.5 # Hide all letters.
+	pass
+
+func _process(delta: float) -> void:
+	if (__character_limit <= -1):
+		__character_limit = -1
+		pass # Show all letters.
+	elif (__character_limit < 0):
+		__character_limit = -0.5
+		pass # Hide all letters.
+	else:
+		__character_limit += Globals.text_display_speed * delta
+		if (dialogue_text_label.visible_characters > dialogue_text_label.text.length()):
+			dialogue_text_label.visible_characters = -1
+			is_typing = false
+		else:
+			dialogue_text_label.visible_characters = int(__character_limit)
 	pass
 
 func _on_control_gui_input(event: InputEvent) -> void:
 	
 	if ( (  event is not InputEventMouseButton) or not dialogue ):
 		return
-
-	if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
+	
+	# Unsafe type conversion.
+	#if ( (event.button_index == MOUSE_BUTTON_LEFT) and event.pressed):
+	if (event.is_action_pressed("next_dialogue")):
+		# Double clicked.
+		# Finish all current animations.
+		if (text_box_animation_player.is_playing()):
+			text_box_animation_player.advance(0)
+		if (character_sprite_1.sprite_animation.is_playing()):
+			character_sprite_1.sprite_animation.advance(0)
+		if (character_sprite_2.sprite_animation.is_playing()):
+			character_sprite_2.sprite_animation.advance(0)
+		
 		if (is_typing):
 			skip_text_type_effect()
 			return
@@ -75,7 +107,7 @@ func _on_control_gui_input(event: InputEvent) -> void:
 			finish_dialogue.emit()
 			await play_ui_slide_out_animation()
 			visible = false
-		print("Clicked")
+		#print("Clicked")
 		
 	pass
 
@@ -150,7 +182,8 @@ func set_dialogue_sequence(new_sequence: int) -> bool:
 
 ## Set the current character who are on screen
 func set_character_sequence(sequence: _CharacterSequence) -> void:
-	var sprite = set_character_sprite(sequence.character_position, sequence.character_name, 1)
+	var sprite: TextureRect = set_character_sprite(sequence.character_position, sequence.character_name, 1)
+	
 	sprite.flip_h = sequence.flip_sprite
 	pass
 
@@ -170,11 +203,17 @@ func set_character_sprite(character_position: _DialogueSequence.Position, charac
 	var lower_name: String = _DialogueSequence.Characters.find_key(character_name).to_lower()
 	var cache_key = lower_name + "_" + str(epression_index)
 	if( not target_sprite):
+		#print("set_character_sprite: Invalid character_position.")
 		return
 	
 	if (not __character_sprite_cache.has(cache_key)):
-		target_sprite.texture = null
-		return
+		#print("set_character_sprite: Invalid cache_key.")
+		#target_sprite.texture = null
+		#return
+		
+		# This costed 2 hours to fix.
+		target_sprite.texture = none_texture
+		return target_sprite
 	
 	target_sprite.texture = __character_sprite_cache[cache_key] as Texture2D
 	return target_sprite
@@ -208,8 +247,9 @@ func set_text(sequence: _TextSequence) -> _DialogueSequence.Position:
 func text_type_effect(text: String, character_name: _DialogueSequence.Characters) -> void:
 	should_skip_typing = false
 	is_typing = true
-	dialogue_text_label.text = ""
-	
+	#dialogue_text_label.text = ""
+	dialogue_text_label.text = text
+	__character_limit = 0.001 # Show the first letter.
 	
 	var path: String
 	match character_name:
@@ -223,26 +263,30 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 			path = "res://assets/sounds/sfx/sfx_pc_dragoonblip_fd1.ogg"
 			pass
 	
-	var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(path)
+	#var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(path)
 	
-	for character in text:
-		if(should_skip_typing):
-			dialogue_text_label.text = text
-			break
+	#for character in text:
+		#if(should_skip_typing):
+		#	dialogue_text_label.text = text
+		#	break
 		
-		if (not audio_player.playing):
-			AudioManager.play_sfx(path, 0.25)
+		#if (not audio_player.playing):
+		#	AudioManager.play_sfx(path, 0.25) # TODO
 			#audio_player.play()
 
+		# This causes a bug where multiple dialogues type to the texet box at the same time...
+		#dialogue_text_label.text += character
+		#typeing_timer = get_tree().create_timer(1.0 / Globals.text_display_speed)
+		#await typeing_timer.timeout
 		
-		dialogue_text_label.text += character
-		typeing_timer = get_tree().create_timer(Globals.text_display_speed)
-		await typeing_timer.timeout
-		
-	is_typing = false
+	#is_typing = false
 	pass
 
 func skip_text_type_effect() -> void:
+	is_typing = false
+	__character_limit = -1.0
+	dialogue_text_label.visible_characters = -1
+	
 	should_skip_typing = true
 	if (typeing_timer):
 		typeing_timer.timeout.emit()
@@ -271,7 +315,7 @@ func play_ui_slide_in_animation() -> Signal:
 	character_sprite_1.sprite_animation.play("slide_in_left")
 	character_sprite_2.sprite_animation.play("slide_in_right")
 	text_box_animation_player.play("slide_in")
-	await character_sprite_2.sprite_animation.animation_finished
+	await character_sprite_1.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
 ## Play ui slide out animation
@@ -279,7 +323,7 @@ func play_ui_slide_out_animation() -> Signal:
 	character_sprite_1.sprite_animation.play_backwards("slide_in_left")
 	character_sprite_2.sprite_animation.play_backwards("slide_in_right")
 	text_box_animation_player.play_backwards("slide_in")
-	await character_sprite_2.sprite_animation.animation_finished
+	await character_sprite_1.sprite_animation.animation_finished
 	return get_tree().create_timer(0.25).timeout
 
 ## Start dialogue

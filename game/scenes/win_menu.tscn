@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://drw7xx0j7yjau"]
 
 [ext_resource type="Script" uid="uid://rx886t8o0lpq" path="res://scripts/win_menu.gd" id="1_d025o"]
-[ext_resource type="Texture2D" uid="uid://7mhoj57s47yq" path="res://assets/textures/character_sprites/family_photo.png" id="2_1xbon"]
+[ext_resource type="Texture2D" uid="uid://7mhoj57s47yq" path="res://assets/textures/family_photo.png" id="2_1xbon"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_2hvk1"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_ao5t0"]
 [ext_resource type="Texture2D" uid="uid://bvuklfxlgsttq" path="res://assets/textures/ui_sprites/feathers/feather_asset_3_yellow.png" id="2_dmaew"]

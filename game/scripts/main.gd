@@ -2,12 +2,8 @@ extends Node
 ## Use this script to initialize the game.
 
 func _ready() -> void:
-	# Start at main menu.
-	if (Globals.gameplay and Globals.main_menu):
-		Globals.gameplay.change_map_to(_Globals.Checkpoint.MAINMENU)
-		Globals.win_menu.visible = true
-	else:
-		push_error("'Main' node failed to start the game.")
+	#Globals.dialogue_ui.start_dialgoue(load("res://resources/test_dialogue.tres") as _Dialogue)
+	Globals.dialogue_ui.start_dialgoue(load("res://resources/dialogue_scene_1.tres") as _Dialogue)
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
