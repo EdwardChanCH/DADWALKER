@@ -29,7 +29,7 @@ func slide_out() -> void:
 	pass
 
 func _on_visibility_changed() -> void:
-	push_warning("Do not edit the visibility of the border directly!")
+	#push_warning("Do not edit the visibility of the border directly!")
 	if (!visible):
 		ui_close.emit()
 		return

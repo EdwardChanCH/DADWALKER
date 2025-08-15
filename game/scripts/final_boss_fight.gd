@@ -120,8 +120,10 @@ func enter_cutscene(_mode: int = 0) -> void:
 		await Globals.gameplay.main_camera.target_reached
 	
 	if (_mode == 1):
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
 		start_fight()
 	else:
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_START
 		start_dialogue()
 	pass
 
@@ -174,6 +176,7 @@ func start_fight() -> void:
 
 func end_fight() -> void:
 	map_used_before = true
+	Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
 	
 	final_boss_fight_ended.emit()
 	__can_attack_again = false
@@ -192,7 +195,7 @@ func end_fight() -> void:
 	boss_timer.start(1)
 	await boss_timer.timeout
 	
-	Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
+	Globals.progress = Globals.Checkpoint.ENDING
 	Globals.win_menu.visible = true
 	
 	exit_cutscene()

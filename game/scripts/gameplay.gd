@@ -41,6 +41,7 @@ func _ready() -> void:
 	Globals.gameplay = self
 	
 	# Always loaded first.
+	Globals.progress = Globals.Checkpoint.MAINMENU
 	Globals.gameplay.change_map_to(_Globals.Checkpoint.MAINMENU)
 	pass
 

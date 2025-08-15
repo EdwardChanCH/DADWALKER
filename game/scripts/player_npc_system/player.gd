@@ -1,6 +1,8 @@
 class_name _Player
 extends _GameObject
 
+@export var hurt_animation: AnimationPlayer = null
+
 @export var collision_box: CollisionShape2D = null
 
 @export var hit_box: CollisionShape2D = null
@@ -13,6 +15,10 @@ var __shooting_cooldown: float = 0
 
 var __shooting_pressed: bool = false
 
+@export var hurting_delay: float = 0.5
+
+var __hurting_cooldown: float = 0
+
 ## Keyboard/Joystick input vector (not normalized).
 var input_vector: Vector2 = Vector2.ZERO
 
@@ -23,7 +29,8 @@ func _ready() -> void:
 	super._ready()
 	
 	# Check if missing export variables.
-	if (not collision_box
+	if (not hurt_animation
+		or not collision_box
 		or not hit_box
 		or not shadow):
 		push_error("Missing export variables in node '%s'." % [self.name])
@@ -89,6 +96,12 @@ func _process(delta: float) -> void:
 		__shooting_cooldown = shooting_delay
 		shoot_once(get_global_mouse_position() - self.global_position)
 	
+	# --- Player Damage Invulnerability --- #
+	if (__hurting_cooldown <= 0):
+		__hurting_cooldown = 0
+	else:
+		__hurting_cooldown -= delta
+	
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
@@ -99,6 +112,18 @@ func _physics_process(delta: float) -> void:
 		return # Skip.
 	
 	super._physics_process(delta)
+	pass
+
+## Add damage to current health.
+func add_damage(amount: int = 1) -> void:
+	if (not Globals.god_mode
+		and __hurting_cooldown <= 0
+		and current_health > 0
+		and amount > 0):
+		# TODO hurt animation, hurt sound.
+		hurt_animation.play("hurt_flash")
+		__hurting_cooldown = hurting_delay
+		current_health -= amount
 	pass
 
 ## Shoot one projectile.
@@ -122,7 +147,7 @@ func shoot_once(p_vector: Vector2) -> void:
 
 ## Stomped by final boss.
 func stomped() -> void:
-	current_health -= 1
+	add_damage(1)
 	pass
 
 ## Restore to full health.
@@ -144,7 +169,7 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 	var projectile := area as _Projectile
 	if (projectile):
 		projectile.despawn()
-		current_health -= 1
+		add_damage(1)
 	pass
 
 func _on_health_changed(new_health: int) -> void:

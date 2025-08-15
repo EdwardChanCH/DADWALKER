@@ -99,8 +99,10 @@ func enter_cutscene(_mode: int = 0) -> void:
 		await Globals.gameplay.main_camera.target_reached
 	
 	if (_mode == 1):
+		Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
 		start_fight()
 	else:
+		Globals.progress = Globals.Checkpoint.MINI_BOSS_START
 		start_dialogue()
 	pass
 

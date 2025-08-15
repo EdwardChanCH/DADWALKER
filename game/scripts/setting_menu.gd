@@ -101,7 +101,7 @@ func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
 
 func _on_display_speed_slider_value_changed(value: float) -> void:
 	Globals.text_display_speed = int(value)
-	display_speed.text = str(value).pad_decimals(1) + "s"
+	display_speed.text = str(int(value))
 	pass
 
 func _on_master_volume_slider_value_changed(value: float) -> void:
