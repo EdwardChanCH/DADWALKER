@@ -9,16 +9,13 @@ func _ready() -> void:
 	Globals.lose_menu = self
 	pass
 
-
 func _on_retry_button_pressed() -> void:
 	visible = false
-	pass # Replace with function body.
-
+	pass
 
 func _on_menu_button_pressed() -> void:
 	visible = false
-	pass # Replace with function body.
-
+	pass
 
 func _on_visibility_changed() -> void:
 	if (!visible):

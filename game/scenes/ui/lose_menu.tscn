@@ -18,7 +18,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="Background" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -28,7 +27,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.588235)
-metadata/_edit_lock_ = true
 
 [node name="Title" type="RichTextLabel" parent="Control"]
 layout_mode = 1
@@ -45,10 +43,9 @@ theme = ExtResource("2_s6jrv")
 theme_override_constants/outline_size = 25
 theme_override_fonts/normal_font = ExtResource("2_ifqll")
 theme_override_font_sizes/normal_font_size = 85
-text = "SKILL ISSUE"
+text = "Whoops..."
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="RetryButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -57,16 +54,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -488.0
-offset_top = -68.0
-offset_right = -128.0
-offset_bottom = 33.0
+offset_left = -268.0
+offset_top = -84.0
+offset_right = 272.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_35fgp")
 theme_override_font_sizes/font_size = 66
-text = "Retry"
-metadata/_edit_lock_ = true
+text = "That's Not Fair!"
 
 [node name="MenuButton" type="Button" parent="Control"]
 layout_mode = 1
@@ -75,53 +71,52 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 128.0
-offset_top = -68.0
-offset_right = 495.0
-offset_bottom = 33.0
+offset_left = -164.0
+offset_top = 234.0
+offset_right = 203.0
+offset_bottom = 335.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_35fgp")
 theme_override_font_sizes/font_size = 66
 text = "Main Menu"
-metadata/_edit_lock_ = true
 
 [node name="Doki" type="TextureButton" parent="Control"]
+custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -84.0
-offset_right = -368.0
-offset_bottom = 698.0
+offset_left = -1190.0
+offset_top = -210.0
+offset_right = -190.0
+offset_bottom = 790.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.8, 0.8)
 texture_normal = ExtResource("4_av3ar")
 texture_pressed = ExtResource("4_av3ar")
 texture_hover = ExtResource("4_av3ar")
 texture_disabled = ExtResource("4_av3ar")
 texture_focused = ExtResource("4_av3ar")
 flip_h = true
-metadata/_edit_lock_ = true
 
 [node name="Dad" type="TextureButton" parent="Control"]
+custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 504.0
-offset_top = -4.0
-offset_right = 1404.0
-offset_bottom = 896.0
+offset_left = 360.0
+offset_top = -160.0
+offset_right = 1360.0
+offset_bottom = 840.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.7, 0.7)
 texture_normal = ExtResource("5_s6jrv")
 texture_pressed = ExtResource("5_s6jrv")
 texture_hover = ExtResource("5_s6jrv")
