@@ -63,6 +63,9 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if (__fight_ended):
+		return
+	
 	var percentage: float = boss_health.progress_bar.value
 	
 	if (percentage > 0.7):
@@ -79,8 +82,8 @@ func _physics_process(delta: float) -> void:
 		__time_since_last_attack += delta
 		
 		if (__boss_phase == 0 and not __fight_ended):
-			end_fight()
 			__fight_ended = true
+			end_fight()
 		elif __time_since_last_attack > (1.0 * __boss_phase):
 			match __attack_pattern:
 				0:

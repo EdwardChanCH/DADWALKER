@@ -451,7 +451,6 @@ map_scenes = Array[PackedScene]([ExtResource("6_ctvyo"), ExtResource("6_din8e"),
 map_origins = Array[Vector2]([Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
-visible = false
 
 [node name="SkyAnimation" type="AnimationPlayer" parent="ParallaxBackground"]
 root_node = NodePath("../..")
