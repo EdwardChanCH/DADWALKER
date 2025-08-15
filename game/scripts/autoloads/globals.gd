@@ -43,6 +43,7 @@ var main_menu: _MainMenu = null
 var setting_menu: _SettingMenu = null
 var credit_menu: _CreditMenu = null
 var dialogue_ui: _DialogueUI = null
+var border_ui: _Border = null
 var win_menu: _WinMenu = null
 var lose_menu: _LoseMenu = null
 var pause_menu: _PauseMenu = null

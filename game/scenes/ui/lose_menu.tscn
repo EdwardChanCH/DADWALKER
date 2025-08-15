@@ -4,8 +4,8 @@
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_ifqll"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_s6jrv"]
 [ext_resource type="FontFile" uid="uid://u4h64u8aqg8p" path="res://assets/fonts/comic_relief_bold.ttf" id="3_35fgp"]
-[ext_resource type="Texture2D" uid="uid://cir1of8y7635m" path="res://assets/textures/character_sprites/doki/doki_6.png" id="4_av3ar"]
-[ext_resource type="Texture2D" uid="uid://bkxuvb8f7biw5" path="res://assets/textures/character_sprites/dad/dad_2.png" id="5_s6jrv"]
+[ext_resource type="Texture2D" uid="uid://cjudxd4tfgxh4" path="res://assets/textures/character_sprites/doki/doki_6.png" id="4_av3ar"]
+[ext_resource type="Texture2D" uid="uid://cyslb12meuwam" path="res://assets/textures/character_sprites/dad/dad_2.png" id="5_s6jrv"]
 
 [node name="LoseMenu" type="CanvasLayer"]
 layer = 31
