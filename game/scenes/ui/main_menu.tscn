@@ -45,6 +45,7 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ayp64"]
+xfade_time = 0.15
 input_0/name = "idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -61,7 +62,7 @@ animation = &"hover"
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8g5eo"]
-graph_offset = Vector2(-737.278, 68.7849)
+graph_offset = Vector2(-636.483, 68.7002)
 nodes/Transition/node = SubResource("AnimationNodeTransition_ayp64")
 nodes/Transition/position = Vector2(111.471, 247.473)
 nodes/hover/node = SubResource("AnimationNodeAnimation_y2j7i")
@@ -123,7 +124,7 @@ input_1/reset = true
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q85j6"]
-graph_offset = Vector2(-301.591, 62.4828)
+graph_offset = Vector2(-388.733, 47.3954)
 nodes/Hover/node = SubResource("AnimationNodeAnimation_q85j6")
 nodes/Hover/position = Vector2(80, 320)
 nodes/Transition/node = SubResource("AnimationNodeTransition_8g5eo")
@@ -186,7 +187,7 @@ animation = &"hover"
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_otr3d"]
-graph_offset = Vector2(-364.768, 99.7696)
+graph_offset = Vector2(-401.425, 76.336)
 nodes/Transition/node = SubResource("AnimationNodeTransition_q85j6")
 nodes/Transition/position = Vector2(240, 180)
 nodes/hover/node = SubResource("AnimationNodeAnimation_8g5eo")
@@ -458,6 +459,7 @@ animation_player = NodePath("SceneTransition")
 buttons = [NodePath("UI/ButtonMover1/PlayButton"), NodePath("UI/ButtonMover2/SettingButton"), NodePath("UI/ButtonMover3/CreditsButton")]
 
 [node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0

@@ -18,7 +18,7 @@ func _on_close_button_pressed() -> void:
 func _on_visibility_changed() -> void:
 	if (visible):
 		get_tree().paused = true
-		ui_open
+		ui_open.emit()
 		return
 	ui_close.emit()
 	

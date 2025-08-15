@@ -22,14 +22,20 @@ func _ready() -> void:
 	# Could have just done this in the editor itself
 	# But it takes too much time to change it now 
 	# So this will have to do
-	var master_arg = [master_slider, AudioManager.AudioType.MASTER]
-	master_slider.drag_ended.connect(Callable(update_volume).bind(master_arg))
+	#var master_arg = [master_slider, AudioManager.AudioType.MASTER]
+	#master_slider.drag_ended.connect(Callable(update_volume).bind(master_arg))
+	#var sfx_arg = [sfx_slider, AudioManager.AudioType.SFX]
+	#sfx_slider.drag_ended.connect(Callable(update_volume).bind(sfx_arg))
+	#var music_arg = [music_slider, AudioManager.AudioType.MUSIC]
+	#music_slider.drag_ended.connect(Callable(update_volume).bind(music_arg))
 	
-	var sfx_arg = [sfx_slider, AudioManager.AudioType.SFX]
-	sfx_slider.drag_ended.connect(Callable(update_volume).bind(sfx_arg))
+	master_slider.drag_ended.connect(Callable(update_volume).bind(master_slider, AudioManager.AudioType.MASTER))
+	sfx_slider.drag_ended.connect(Callable(update_volume).bind(sfx_slider, AudioManager.AudioType.SFX))
+	music_slider.drag_ended.connect(Callable(update_volume).bind(music_slider, AudioManager.AudioType.MUSIC))
 	
-	var music_arg = [music_slider, AudioManager.AudioType.MUSIC]
-	music_slider.drag_ended.connect(Callable(update_volume).bind(music_arg))
+	update_volume(true, master_slider, AudioManager.AudioType.MASTER)
+	update_volume(true, sfx_slider, AudioManager.AudioType.SFX)
+	update_volume(true, music_slider, AudioManager.AudioType.MUSIC)
 	
 	visible = false
 	Globals.setting_menu = self
@@ -38,9 +44,24 @@ func _ready() -> void:
 	Globals.show_fps_count = show_fps_button.button_pressed
 	pass
 	
-func update_volume(_changed: bool, arg_array: Array) -> void:
-	var slider: Slider = arg_array[0] as Slider
-	AudioManager.set_volume(arg_array[1], slider.value)
+#func update_volume(_changed: bool, arg_array: Array) -> void:
+#	var slider: Slider = arg_array[0] as Slider
+#	AudioManager.set_volume(arg_array[1], slider.value)
+#	pass
+
+func update_volume(_changed: bool, slider: Slider, audio_type: AudioManager.AudioType) -> void:
+	AudioManager.set_volume(audio_type, slider.value)
+	
+	# Need to update the labels as well.
+	match audio_type:
+		AudioManager.AudioType.MASTER:
+			_on_master_volume_slider_value_changed(slider.value)
+		AudioManager.AudioType.SFX:
+			_on_sfx_volume_slider_value_changed(slider.value)
+		AudioManager.AudioType.MUSIC:
+			_on_music_volume_slider_value_changed(slider.value)
+		_:
+			pass
 	pass
 
 func _on_close_button_pressed() -> void:
@@ -75,17 +96,19 @@ func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
 	Globals.show_fps_count = toggled_on
 	pass
 
-
 func _on_display_speed_slider_value_changed(value: float) -> void:
 	Globals.text_display_speed = value
 	display_speed.text = str(value).pad_decimals(1) + "s"
 	pass
 
-func _on_master_volume_slider_changed() -> void:
+func _on_master_volume_slider_value_changed(value: float) -> void:
+	master_percentage.text = "%d%%" % [roundf(value * 100)]
 	pass
 
-func _on_sfx_volume_slider_changed() -> void:
+func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	sfx_percentage.text = "%d%%" % [roundf(value * 100)]
 	pass
 
-func _on_music_volume_slider_changed() -> void:
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	music_percentage.text = "%d%%" % [roundf(value * 100)]
 	pass

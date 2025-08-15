@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://5fjd4b7cqf4o" path="res://scripts/setting_menu.gd" id="1_xbl1u"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="2_63sl1"]
 [ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_inxim"]
-[ext_resource type="StyleBox" path="res://themes/defualt_panel.tres" id="3_p50a0"]
+[ext_resource type="StyleBox" uid="uid://s5xfe1dkrn45" path="res://themes/defualt_panel.tres" id="3_p50a0"]
 [ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_187ex"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="4_ub06a"]
 [ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="5_inxim"]
@@ -319,7 +319,7 @@ _data = {
 &"slide_out": SubResource("Animation_c6yip")
 }
 
-[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider", "ui_control", "ui_animation_player", "display_speed", "god_mode_button", "show_fps_button")]
+[node name="SettingMenu" type="CanvasLayer" node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider", "ui_control", "ui_animation_player", "display_speed", "god_mode_button", "show_fps_button", "master_percentage", "sfx_percentage", "music_percentage")]
 layer = 31
 script = ExtResource("1_xbl1u")
 master_slider = NodePath("UI/AudioPanel/Volume/MasterVolumeSlider")
@@ -330,6 +330,9 @@ ui_animation_player = NodePath("AnimationPlayer")
 display_speed = NodePath("UI/Debug/DialogueDiaplayDelayOption/DisplaySpeed")
 god_mode_button = NodePath("UI/Debug/GodModeOption/GodModeButton")
 show_fps_button = NodePath("UI/Debug/ShowFPSOption/FPSCounterButton")
+master_percentage = NodePath("UI/AudioPanel/Percentage1")
+sfx_percentage = NodePath("UI/AudioPanel/Percentage2")
+music_percentage = NodePath("UI/AudioPanel/Percentage3")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -898,9 +901,9 @@ libraries = {
 [connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
 [connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="changed" from="UI/AudioPanel/Volume/MasterVolumeSlider" to="." method="_on_master_volume_slider_changed"]
-[connection signal="changed" from="UI/AudioPanel/Volume/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_changed"]
-[connection signal="changed" from="UI/AudioPanel/Volume/MusicVolumeSlider" to="." method="_on_music_volume_slider_changed"]
+[connection signal="value_changed" from="UI/AudioPanel/Volume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="UI/AudioPanel/Volume/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="UI/AudioPanel/Volume/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="toggled" from="UI/Debug/GodModeOption/GodModeButton" to="." method="_on_god_mode_button_toggled"]
 [connection signal="toggled" from="UI/Debug/ShowFPSOption/FPSCounterButton" to="." method="_on_fps_counter_button_toggled"]
 [connection signal="value_changed" from="UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider" to="." method="_on_display_speed_slider_value_changed"]
