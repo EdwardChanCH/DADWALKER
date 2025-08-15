@@ -9,28 +9,28 @@ func _ready() -> void:
 	Globals.pause_menu = self
 	pass
 
-func _on_close_button_pressed() -> void:
-	visible = false
-	pass
-
 func _on_visibility_changed() -> void:
-	if (visible):
-		get_tree().paused = true
-		ui_open.emit()
-		return
-	ui_close.emit()
-	
 	if (is_inside_tree()):
-		get_tree().paused = visible
+		get_tree().paused = visible # Pause game only when pause menu is visible.
+	
+	if (visible):
+		ui_open.emit()
+	else:
+		ui_close.emit()
 	pass
 
 func _on_mouse_entered() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
 	pass
 
+func _on_close_button_pressed() -> void:
+	visible = false
+	pass
+
 func _on_exit_button_pressed() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
 	Globals.main_menu.visible = true
+	Globals.gameplay.change_map_to(Globals.Checkpoint.MAINMENU)
 	visible = false
 	pass
 

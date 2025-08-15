@@ -223,6 +223,7 @@ close_button_animation_tree = NodePath("UI/Forground/ButtonRoot/AnimationTree")
 animation_player = NodePath("CreditMenuAnimation")
 
 [node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

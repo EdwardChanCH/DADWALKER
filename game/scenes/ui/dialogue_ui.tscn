@@ -50,15 +50,16 @@ character_sprite_folder_paths = Dictionary[int, String]({
 2: "res://assets/textures/character_sprites/dad/",
 3: "res://assets/textures/character_sprites/dragoon/"
 })
-character_name_label = NodePath("Control/TextBoxBackground/CharacterName")
-dialogue_text_label = NodePath("Control/TextBoxBackground/DialogueText")
-text_box_background = NodePath("Control/TextBoxBackground")
-character_sprite_1 = NodePath("Control/CharacterSprite1")
-character_sprite_2 = NodePath("Control/CharacterSprite2")
-text_box_animation_player = NodePath("Control/TextBoxBackground/TextBoxAnimation")
+character_name_label = NodePath("UI/TextBoxBackground/CharacterName")
+dialogue_text_label = NodePath("UI/TextBoxBackground/DialogueText")
+text_box_background = NodePath("UI/TextBoxBackground")
+character_sprite_1 = NodePath("UI/CharacterSprite1")
+character_sprite_2 = NodePath("UI/CharacterSprite2")
+text_box_animation_player = NodePath("UI/TextBoxBackground/TextBoxAnimation")
 dad_color = Color(0.353138, 0.314033, 0.507669, 1)
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,7 +68,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="CharacterSprite1" parent="Control" instance=ExtResource("7_gegk4")]
+[node name="CharacterSprite1" parent="UI" instance=ExtResource("7_gegk4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -81,7 +82,7 @@ offset_bottom = 1080.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="CharacterSprite2" parent="Control" instance=ExtResource("7_gegk4")]
+[node name="CharacterSprite2" parent="UI" instance=ExtResource("7_gegk4")]
 layout_mode = 1
 anchors_preset = 2
 anchor_left = 0.0
@@ -95,7 +96,7 @@ offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="TextBoxBackground" type="Panel" parent="Control"]
+[node name="TextBoxBackground" type="Panel" parent="UI"]
 self_modulate = Color(0.493545, 0.493546, 0.493546, 1)
 custom_minimum_size = Vector2(700, 340)
 layout_mode = 1
@@ -114,7 +115,7 @@ size_flags_vertical = 8
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("3_yi6h4")
 
-[node name="CharacterName" type="RichTextLabel" parent="Control/TextBoxBackground"]
+[node name="CharacterName" type="RichTextLabel" parent="UI/TextBoxBackground"]
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -136,7 +137,7 @@ shortcut_keys_enabled = false
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="DialogueText" type="RichTextLabel" parent="Control/TextBoxBackground"]
+[node name="DialogueText" type="RichTextLabel" parent="UI/TextBoxBackground"]
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -154,10 +155,10 @@ scroll_active = false
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextBoxAnimation" type="AnimationPlayer" parent="Control/TextBoxBackground"]
+[node name="TextBoxAnimation" type="AnimationPlayer" parent="UI/TextBoxBackground"]
 libraries = {
 &"": SubResource("AnimationLibrary_8oo06")
 }
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
+[connection signal="gui_input" from="UI" to="." method="_on_control_gui_input"]

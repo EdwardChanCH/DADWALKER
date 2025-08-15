@@ -1,12 +1,18 @@
-[gd_scene load_steps=30 format=3 uid="uid://bsve4bdv4h8e"]
+[gd_scene load_steps=44 format=3 uid="uid://bsve4bdv4h8e"]
 
 [ext_resource type="Script" uid="uid://v40novibl8yx" path="res://scripts/pause_menu.gd" id="1_6tw0m"]
+[ext_resource type="Theme" uid="uid://bpa8p14dbcdny" path="res://themes/title_text.tres" id="2_6qnem"]
 [ext_resource type="FontFile" uid="uid://fa15p2nfhjfs" path="res://assets/fonts/luckist_guy.ttf" id="2_lrbnh"]
 [ext_resource type="Texture2D" uid="uid://bvuklfxlgsttq" path="res://assets/textures/ui_sprites/feathers/feather_asset_3_yellow.png" id="8_6qnem"]
+[ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="9_7yca1"]
 [ext_resource type="Texture2D" uid="uid://dnq14l6ydup5b" path="res://assets/textures/ui_sprites/feathers/feather_asset_3_black.png" id="9_ynwdf"]
+[ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="10_lrbnh"]
 [ext_resource type="Texture2D" uid="uid://dmq246ggan1g3" path="res://assets/textures/ui_sprites/feathers/feather_asset_2_yellow.png" id="10_p4b6u"]
 [ext_resource type="Texture2D" uid="uid://cvrma5kth62ve" path="res://assets/textures/ui_sprites/feathers/feather_asset_2_black.png" id="11_3fvc3"]
+[ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="11_6qnem"]
 [ext_resource type="Texture2D" uid="uid://bjy2waww8vinl" path="res://assets/textures/ui_sprites/feathers/feather_asset_1_yellow.png" id="12_kk5q1"]
+[ext_resource type="Texture2D" uid="uid://c5u6f71gaynxr" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_disable.png" id="12_ynwdf"]
+[ext_resource type="Texture2D" uid="uid://b8vqd8ix0evuv" path="res://assets/textures/character_sprites/dad/dad_3.png" id="13_lrbnh"]
 [ext_resource type="Texture2D" uid="uid://bigvur8ft8vm4" path="res://assets/textures/ui_sprites/feathers/feather_asset_1_black.png" id="13_ukr1j"]
 
 [sub_resource type="Animation" id="Animation_n4uci"]
@@ -197,6 +203,98 @@ nodes/idle/position = Vector2(-60, 220)
 nodes/output/position = Vector2(400, 180)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"hover", &"output", 0, &"Transition"]
 
+[sub_resource type="Animation" id="Animation_c5b21"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mn1b6"]
+resource_name = "hover"
+length = 0.533337
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(1, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.175, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.175, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.572988, 0.572988, 0.572988, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c5b21"]
+_data = {
+&"RESET": SubResource("Animation_c5b21"),
+&"hover": SubResource("Animation_mn1b6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nts36"]
+animation = &"hover"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5b21"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mn1b6"]
+xfade_time = 0.2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "hover"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mn1b6"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p4b6u"]
+graph_offset = Vector2(-445.992, 100.868)
+nodes/Hover/node = SubResource("AnimationNodeAnimation_nts36")
+nodes/Hover/position = Vector2(-320, 400)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_c5b21")
+nodes/Idle/position = Vector2(-320, 220)
+nodes/Rotation/node = SubResource("AnimationNodeTransition_mn1b6")
+nodes/Rotation/position = Vector2(0, 180)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_mn1b6")
+nodes/TimeScale/position = Vector2(-160, 360)
+nodes/output/position = Vector2(200, 180)
+node_connections = [&"Rotation", 0, &"Idle", &"Rotation", 1, &"TimeScale", &"TimeScale", 0, &"Hover", &"output", 0, &"Rotation"]
+
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 31
 script = ExtResource("1_6tw0m")
@@ -208,6 +306,31 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="UI"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Title" type="RichTextLabel" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -175.0
+offset_top = 64.0
+offset_right = 175.0
+offset_bottom = 192.0
+grow_horizontal = 2
+tooltip_text = "42"
+theme = ExtResource("2_6qnem")
+theme_override_constants/outline_size = 25
+theme_override_fonts/normal_font = ExtResource("2_lrbnh")
+theme_override_font_sizes/normal_font_size = 85
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ButtonMover3" type="Control" parent="UI"]
 layout_mode = 3
@@ -387,6 +510,64 @@ parameters/Transition/current_state = "idle"
 parameters/Transition/transition_request = ""
 parameters/Transition/current_index = 0
 
+[node name="CloseButtonRoot" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 800.0
+offset_top = 808.0
+offset_right = 1120.0
+offset_bottom = 1128.0
+
+[node name="CloseButton" type="TextureButton" parent="UI/CloseButtonRoot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.61, 0.61)
+pivot_offset = Vector2(250, 89.56)
+texture_normal = ExtResource("9_7yca1")
+texture_pressed = ExtResource("10_lrbnh")
+texture_hover = ExtResource("11_6qnem")
+texture_disabled = ExtResource("12_ynwdf")
+ignore_texture_size = true
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CloseButtonRoot"]
+root_node = NodePath("../CloseButton")
+libraries = {
+&"": SubResource("AnimationLibrary_c5b21")
+}
+playback_auto_capture_transition_type = 11
+
+[node name="AnimationTree" type="AnimationTree" parent="UI/CloseButtonRoot"]
+root_node = NodePath("../CloseButton")
+tree_root = SubResource("AnimationNodeBlendTree_p4b6u")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Rotation/current_state = "idle"
+parameters/Rotation/transition_request = ""
+parameters/Rotation/current_index = 0
+parameters/TimeScale/scale = 0.25
+
+[node name="DadSprite" type="TextureRect" parent="UI"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 0
+offset_left = 420.0
+offset_top = 580.0
+offset_right = 1420.0
+offset_bottom = 1580.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("13_lrbnh")
+flip_h = true
+
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover3/CreditsButton" to="UI/ButtonMover3/CreditButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
@@ -399,3 +580,6 @@ parameters/Transition/current_index = 0
 [connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
 [connection signal="pressed" from="UI/ButtonMover1/PlayButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
+[connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
+[connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]

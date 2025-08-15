@@ -32,19 +32,19 @@ visible = false
 layer = 33
 visible = false
 
-[node name="CreditMenu" parent="." instance=ExtResource("3_o6xl0")]
+[node name="LoseMenu" parent="." instance=ExtResource("8_ya4ey")]
 layer = 34
 visible = false
 
-[node name="SettingMenu" parent="." instance=ExtResource("5_85g3d")]
+[node name="WinMenu" parent="." instance=ExtResource("9_eb6dy")]
 layer = 35
 visible = false
 
-[node name="LoseMenu" parent="." instance=ExtResource("8_ya4ey")]
+[node name="CreditMenu" parent="." instance=ExtResource("3_o6xl0")]
 layer = 36
 visible = false
 
-[node name="WinMenu" parent="." instance=ExtResource("9_eb6dy")]
+[node name="SettingMenu" parent="." instance=ExtResource("5_85g3d")]
 layer = 37
 visible = false
 

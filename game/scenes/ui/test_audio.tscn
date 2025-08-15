@@ -11,16 +11,17 @@ mix_rate = 22050
 layer = 31
 script = ExtResource("1_kuyw6")
 audio = SubResource("AudioStreamWAV_0ba24")
-master_slider = NodePath("Control/VBoxContainer/HSlider")
-sfx_slider = NodePath("Control/VBoxContainer/HSlider2")
-ui_slider = NodePath("Control/VBoxContainer/HSlider3")
-music_slider = NodePath("Control/VBoxContainer/HSlider4")
-voice_slider = NodePath("Control/VBoxContainer/HSlider5")
-audio_list = NodePath("Control/ItemList")
-audio_option = NodePath("Control/OptionButton")
-play_button = NodePath("Control/PlayAudioButton")
+master_slider = NodePath("UI/VBoxContainer/HSlider")
+sfx_slider = NodePath("UI/VBoxContainer/HSlider2")
+ui_slider = NodePath("UI/VBoxContainer/HSlider3")
+music_slider = NodePath("UI/VBoxContainer/HSlider4")
+voice_slider = NodePath("UI/VBoxContainer/HSlider5")
+audio_list = NodePath("UI/ItemList")
+audio_option = NodePath("UI/OptionButton")
+play_button = NodePath("UI/PlayAudioButton")
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="ColorRect" parent="Control"]
+[node name="Background" type="ColorRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.588235)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,64 +54,64 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Master"
 
-[node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="UI/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label2" type="Label" parent="Control/VBoxContainer"]
+[node name="Label2" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "SFX"
 
-[node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider2" type="HSlider" parent="UI/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label3" type="Label" parent="Control/VBoxContainer"]
+[node name="Label3" type="Label" parent="UI/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "UI"
 
-[node name="HSlider3" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider3" type="HSlider" parent="UI/VBoxContainer"]
 visible = false
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label4" type="Label" parent="Control/VBoxContainer"]
+[node name="Label4" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
-[node name="HSlider4" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider4" type="HSlider" parent="UI/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="Label5" type="Label" parent="Control/VBoxContainer"]
+[node name="Label5" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Voice"
 
-[node name="HSlider5" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider5" type="HSlider" parent="UI/VBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.1
 value = 0.5
 
-[node name="ItemList" type="ItemList" parent="Control"]
+[node name="ItemList" type="ItemList" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -126,7 +127,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 25
 metadata/_edit_lock_ = true
 
-[node name="OptionButton" type="OptionButton" parent="Control"]
+[node name="OptionButton" type="OptionButton" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,7 +156,7 @@ popup/item_3/text = "Mode: Voice"
 popup/item_3/id = 3
 popup/item_3/disabled = true
 
-[node name="PlayAudioButton" type="Button" parent="Control"]
+[node name="PlayAudioButton" type="Button" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,7 +172,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Play Audio"
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="UI"]
 layout_mode = 0
 offset_left = 300.0
 offset_top = 29.0
@@ -182,7 +183,7 @@ text = "Audio Tester"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="Control"]
+[node name="BackButton" type="Button" parent="UI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -203,6 +204,6 @@ offset_left = 436.0
 offset_top = 900.0
 offset_right = 921.0
 offset_bottom = 923.0
-text = "( for developer use only, please hide this page from the public )"
+text = "( For developer use only, this is not part of the gameplay. )"
 
-[connection signal="pressed" from="Control/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]

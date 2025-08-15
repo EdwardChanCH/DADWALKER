@@ -15,3 +15,15 @@ func _on_visibility_changed() -> void:
 		return
 	ui_open.emit()
 	pass
+
+func _on_mouse_entered() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
+	pass
+
+func _on_to_be_continued_button_pressed() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
+	Globals.gameplay.change_map_to(Globals.Checkpoint.ENDING)
+	Globals.main_menu.visible = true
+	Globals.credit_menu.visible = true
+	visible = false
+	pass

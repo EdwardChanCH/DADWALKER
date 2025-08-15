@@ -5,14 +5,14 @@ func _ready() -> void:
 	# Start at main menu.
 	if (Globals.gameplay and Globals.main_menu):
 		Globals.gameplay.change_map_to(_Globals.Checkpoint.MAINMENU)
-		Globals.main_menu.visible = true
+		Globals.win_menu.visible = true
 	else:
 		push_error("'Main' node failed to start the game.")
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("pause_game")):
-		if (true or Globals.pause_menu
+		if (Globals.pause_menu
 			and Globals.main_menu and not Globals.main_menu.visible
 			and Globals.win_menu and not Globals.win_menu.visible
 			and Globals.lose_menu and not Globals.lose_menu.visible):
