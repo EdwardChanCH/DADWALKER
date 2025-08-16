@@ -91,6 +91,10 @@ func _ready() -> void:
 	
 	# Initialize health bar.
 	_on_health_changed(current_health)
+	
+	# Have sunglasses or not.
+	if (in_tracking_mode):
+		self.character_world_node.character_node.sunglasses_off()
 	pass
 
 @warning_ignore("unused_parameter")

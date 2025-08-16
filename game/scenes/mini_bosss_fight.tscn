@@ -234,7 +234,7 @@ projectile_scene = ExtResource("7_pnst7")
 projectile_speed = 1000.0
 
 [node name="EndOfLevelMarker" parent="." instance=ExtResource("9_10bs7")]
-position = Vector2(2000, 900)
+position = Vector2(2020, 900)
 new_checkpoint = 5
 
 [connection signal="area_entered" from="BossMover/BossHitboxL" to="." method="_on_boss_hitbox_area_entered"]

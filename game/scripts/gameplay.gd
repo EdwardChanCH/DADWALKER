@@ -181,6 +181,8 @@ func _on_end_of_level_detector_area_entered(area: Area2D) -> void:
 	
 	var eol_marker := area as _EndOfLevelMarker
 	if (eol_marker):
-		Globals.progress = eol_marker.new_checkpoint
-		change_map_to(eol_marker.new_checkpoint) # TODO
+		if (Globals.progress != eol_marker.new_checkpoint):
+			Globals.progress = eol_marker.new_checkpoint
+			eol_marker.queue_free()
+			change_map_to(Globals.progress)
 	pass

@@ -451,6 +451,7 @@ map_scenes = Array[PackedScene]([ExtResource("6_ctvyo"), ExtResource("6_din8e"),
 map_origins = Array[Vector2]([Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)])
 
 [node name="ParallaxBackground" type="Node2D" parent="."]
+visible = false
 
 [node name="SkyAnimation" type="AnimationPlayer" parent="ParallaxBackground"]
 root_node = NodePath("../..")
@@ -498,19 +499,19 @@ centered = false
 [node name="TitleNoFight" parent="MapList" instance=ExtResource("6_ctvyo")]
 
 [node name="IntroNoFight" parent="MapList" instance=ExtResource("6_din8e")]
-position = Vector2(3000, 0)
+position = Vector2(1920, 0)
 
 [node name="FirstStreetFight" parent="MapList" instance=ExtResource("7_hbo4f")]
-position = Vector2(6000, 0)
+position = Vector2(3940, 0)
 
 [node name="MiniBosssFight" parent="MapList" instance=ExtResource("7_e124b")]
-position = Vector2(9000, 0)
+position = Vector2(7780, 0)
 
 [node name="SecondStreetFight" parent="MapList" instance=ExtResource("9_ctvyo")]
-position = Vector2(12000, 0)
+position = Vector2(7880, 0)
 
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
-position = Vector2(15000, 0)
+position = Vector2(11720, 0)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger")]
 position = Vector2(960, 540)

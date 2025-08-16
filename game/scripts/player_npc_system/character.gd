@@ -25,3 +25,6 @@ func start_bullet() -> void:
 
 func start_tomato() -> void:
 	pass
+
+func sunglasses_off() -> void:
+	pass
