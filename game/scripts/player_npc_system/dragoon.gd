@@ -11,7 +11,7 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-func update_health_bar(new_health: int) -> void:
+func update_health(new_health: int) -> void:
 	if (new_health <= 1):
 		self.scale = Vector3(0.1, 0.1, 0.1)
 	elif (new_health == 2):
@@ -22,4 +22,8 @@ func update_health_bar(new_health: int) -> void:
 
 func start_walk() -> void:
 	animation_player.play("dragoon_walk")
+	pass
+
+func start_idle() -> void:
+	animation_player.play("dragoon_iddle")
 	pass

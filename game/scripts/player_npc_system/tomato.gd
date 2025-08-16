@@ -18,9 +18,8 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-# TODO
 ## Update the texture based on new health.
-func update_health_bar(new_health: int) -> void:
+func update_health(new_health: int) -> void:
 	var new_material: StandardMaterial3D
 	match new_health:
 		[0, 1]:
@@ -36,6 +35,5 @@ func update_health_bar(new_health: int) -> void:
 	pass
 
 func start_walk() -> void:
-	# TODO
-	animation_player.play("Animation")
+	animation_player.play("tomato_walk")
 	pass

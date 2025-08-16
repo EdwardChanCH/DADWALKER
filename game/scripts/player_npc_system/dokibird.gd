@@ -11,6 +11,18 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-func start_walk() -> void:
-	animation_player.play("dragoon_walk") # TODO
+func start_idle() -> void:
+	animation_player.play("standing pose")
+	pass
+
+func start_handsup() -> void:
+	animation_player.play("handsup")
+	pass
+
+func start_seed() -> void:
+	animation_player.play("trow seed")
+	pass
+
+func start_tomato() -> void:
+	animation_player.play("trow tomato")
 	pass
