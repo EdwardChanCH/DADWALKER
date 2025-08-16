@@ -102,10 +102,10 @@ func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlay
 	var target_channel: AudioStreamPlayer = null
 	
 	if (not AudioManager.__sound_cache.has(sound_path)):
+		push_warning("Audio Manager's sound_cache does not have this sound_path.")
 		return null
 	
 	var audio_steam: AudioStream = AudioManager.__sound_cache[sound_path]
-	
 	
 	if (not AudioManager.__sfx_channels.has(audio_steam)):
 		AudioManager.create_sfx_channel(audio_steam)

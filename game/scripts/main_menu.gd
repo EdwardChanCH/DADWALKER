@@ -43,7 +43,7 @@ func _on_play_button_pressed() -> void:
 	
 	# Play exit main menu animation.
 	animation_player.play("close_popup")
-	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg")
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
 	# Note: It is impossible to disable the animation tree,
 	#       with the way that the signals are currently connected.
 	
@@ -96,4 +96,4 @@ func _on_rich_text_label_gui_input(event: InputEvent) -> void:
 		audio_tester.show()
 		
 		counter = 0
-	pass # Replace with function body.
+	pass

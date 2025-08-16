@@ -221,6 +221,7 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_down")
 	await boss_animation.animation_finished
 	
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dadgroundstomp_fd1.ogg", 0.5)
 	enemy_spawner_l1.spawn_object()
 	enemy_spawner_l2.spawn_object()
 	enemy_spawner_l3.spawn_object()
@@ -270,6 +271,7 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	boss_timer.start(0.5)
 	await boss_timer.timeout
 	
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dadsonicwave_fd1.ogg", 0.5)
 	# Start spawning projectiles.
 	for i in range(0, 11, 1):
 		boss_timer.start(0.1)

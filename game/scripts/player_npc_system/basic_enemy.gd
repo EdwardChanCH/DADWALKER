@@ -48,6 +48,10 @@ func _physics_process(delta: float) -> void:
 				
 				# Apply damage to player
 				if (Globals.gameplay):
+					if (Globals.gameplay.player.current_health > 0):
+						# Overlaps with player hit, so lower this volume a lot.
+						AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_enemyattack_fd1.ogg", 0.1)
+						
 					Globals.gameplay.player.add_damage(1)
 			elif (collider is _BasicEnemy):
 				# Use the larger vector instead of adding (to prevent sticking).
@@ -63,6 +67,8 @@ func _physics_process(delta: float) -> void:
 ## p_count must be an odd number.
 ## Total projectiles = (1 + 2 * p_count).
 func shoot_batch(incoming_vector: Vector2, p_spread: float, p_count: int) -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_tomatodeath_fd1.ogg", 0.5)
+	
 	# Straight shot.
 	shoot_once(incoming_vector)
 	
@@ -106,7 +112,6 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 	var projectile := area as _Projectile
 	
 	if (current_health > 0 and projectile):
-		#print("Enemy hit.")
 		if (projectile is _Feather):
 			current_health -= 1
 		elif (projectile is _Seed):
@@ -123,6 +128,9 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 				shoot_batch(Vector2.RIGHT * projectile_speed, deg_to_rad(15), 1)
 			else:
 				shoot_batch(projectile.move_velocity, deg_to_rad(15), 1)
+		else:
+			# Only play hit sounds when not killed.
+			AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_enemyhit_fd1.ogg", 0.1)
 		
 		# Despawn incoming projectile.
 		projectile.despawn()

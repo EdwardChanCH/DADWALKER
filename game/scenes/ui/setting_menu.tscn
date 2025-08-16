@@ -904,12 +904,17 @@ libraries = {
 }
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
 [connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="drag_ended" from="UI/AudioPanel/Volume/MasterVolumeSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="UI/AudioPanel/Volume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="drag_ended" from="UI/AudioPanel/Volume/SFXVolumeSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="UI/AudioPanel/Volume/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="drag_ended" from="UI/AudioPanel/Volume/MusicVolumeSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="UI/AudioPanel/Volume/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="toggled" from="UI/Debug/GodModeOption/GodModeButton" to="." method="_on_god_mode_button_toggled"]
 [connection signal="toggled" from="UI/Debug/ShowFPSOption/FPSCounterButton" to="." method="_on_fps_counter_button_toggled"]
+[connection signal="drag_ended" from="UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="UI/Debug/DialogueDiaplayDelayOption/DisplaySpeedSlider" to="." method="_on_display_speed_slider_value_changed"]
