@@ -20,6 +20,9 @@ signal final_boss_fight_ended
 @export var enemy_spawner_l3: _EnemySpawner = null
 @export var boss_sky_z_index: int = -6
 @export var boss_ground_z_index: int = 6
+@export var npc_dokibird_world: _DokibirdWorld = null
+@export var npc_dad_world: _DadWorld = null
+@export var npc_animation: AnimationPlayer = null
 
 ## Phases: 3 --> 2 --> 1 --> 0
 var __boss_phase: int = 3
@@ -48,7 +51,10 @@ func _ready() -> void:
 		or not enemy_spawner
 		or not enemy_spawner_l1
 		or not enemy_spawner_l2
-		or not enemy_spawner_l3):
+		or not enemy_spawner_l3
+		or not npc_dokibird_world
+		or not npc_dad_world
+		or not npc_animation):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
@@ -59,6 +65,8 @@ func _ready() -> void:
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	
+	npc_dokibird_world.target_look_vector = Vector3.RIGHT
+	npc_dad_world.target_look_vector = Vector3.LEFT
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -143,6 +151,14 @@ func start_dialogue() -> void:
 
 func end_dialogue() -> void:
 	map_used_before = true
+	
+	# Move the NPCs away and queue free them.
+	npc_dokibird_world.target_look_vector = Vector3.LEFT
+	npc_dad_world.target_look_vector = Vector3.BACK
+	boss_timer.start(0.1)
+	await boss_timer.timeout
+	npc_animation.play("npc_slide_out")
+	await npc_animation.animation_finished
 	
 	Globals.border_ui.slide_out()
 	await Globals.border_ui.slide_out_animation_finish

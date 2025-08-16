@@ -12,6 +12,7 @@ signal mini_boss_fight_ended
 @export var boss_hitbox_left: Area2D = null
 @export var boss_hitbox_right: Area2D = null
 @export var boss_shadow_left: Sprite2D = null
+@export var boss_shadow_right: Sprite2D = null
 @export var boss_sprite_left: Node2D = null
 @export var boss_sprite_right: Node2D = null
 @export var boss_timer: Timer = null
@@ -40,6 +41,7 @@ func _ready() -> void:
 		or not boss_hitbox_left
 		or not boss_hitbox_right
 		or not boss_shadow_left
+		or not boss_shadow_right
 		or not boss_sprite_left
 		or not boss_sprite_right
 		or not boss_timer
@@ -47,7 +49,7 @@ func _ready() -> void:
 		or not enemy_spawner):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	self.visible = false
+	self.visible = true # TODO
 	boss_sprite_left.visible = false
 	boss_shadow_left.visible = false
 	boss_hitbox_left.set_deferred("monitoring", false)
@@ -172,6 +174,8 @@ func end_fight() -> void:
 		boss_sprite_left.visible = false
 		boss_shadow_left.visible = false
 	
+	character_world.start_death()
+	
 	mini_boss_fight_ended.emit()
 	
 	__can_attack_again = false
@@ -181,6 +185,23 @@ func end_fight() -> void:
 	boss_hitbox_right.set_deferred("monitorable", false)
 
 	await boss_health.close_ui()
+	
+	Globals.border_ui.slide_in()
+	await Globals.border_ui.slide_in_animation_finish
+	
+	# Spawn a defeated tomato on Doki's body.
+	enemy_spawner.global_position = boss_shadow_right.global_position
+	enemy_spawner.direction = Vector2.RIGHT
+	enemy_spawner.push_velocity = Vector2.ZERO
+	var game_object: _GameObject = enemy_spawner.spawn_object()
+	game_object.max_health = 10000
+	game_object.current_health = 10000
+	
+	boss_timer.start(2)
+	await boss_timer.timeout
+	
+	Globals.border_ui.slide_out()
+	await Globals.border_ui.slide_out_animation_finish
 	
 	exit_cutscene()
 	pass
