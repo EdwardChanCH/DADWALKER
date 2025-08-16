@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://cb1lgypf1lt6r"]
 
-[ext_resource type="Texture2D" uid="uid://1ynglg4qeese" path="res://assets/textures/glassestexture.png" id="1_0vjjq"]
+[ext_resource type="Texture2D" uid="uid://1ynglg4qeese" path="res://assets/textures/textureglasses.png" id="1_0vjjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcdv4"]
 resource_name = "matsunglases"
