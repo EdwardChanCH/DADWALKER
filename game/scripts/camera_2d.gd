@@ -60,7 +60,6 @@ func _physics_process(delta: float) -> void:
 				level_trigger.set_deferred("monitoring", true)
 				level_trigger.set_deferred("monitorable", true)
 				target_reached.emit()
-				print("Camera emitted 'target_reached'.") # TODO
 		
 		# Checks if the camera is close enough to the target.
 		if (abs(current_pos_x - target_pos_x) < 1):
@@ -71,7 +70,6 @@ func _physics_process(delta: float) -> void:
 				level_trigger.set_deferred("monitoring", true)
 				level_trigger.set_deferred("monitorable", true)
 				target_reached.emit()
-				print("Camera emitted 'target_reached'.") # TODO
 		
 		# Smoothly move the camera to the target.
 		current_pos_x = lerpf(

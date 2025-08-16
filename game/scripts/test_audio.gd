@@ -62,7 +62,7 @@ func play_audio() -> void:
 		0:
 			AudioManager.play_sfx(selected_audio)
 		1:
-			print("No ui function yet; too lazy to make it") # TODO
+			#print("No ui function yet; too lazy to make it")
 			pass
 		2:
 			AudioManager.play_music(selected_audio)

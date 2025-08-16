@@ -1,7 +1,362 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcrp3wh853owp"]
+[gd_scene load_steps=18 format=3 uid="uid://dcrp3wh853owp"]
 
 [ext_resource type="Script" uid="uid://c2alh6o8rf51u" path="res://scripts/intro_no_fight.gd" id="1_jdbq4"]
-[ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="2_7bycb"]
+[ext_resource type="Texture2D" uid="uid://fgtcplghf3gd" path="res://assets/textures/final_boss_shadow_test.png" id="3_jb5uc"]
+[ext_resource type="Texture2D" uid="uid://d1k4dochnr44y" path="res://assets/textures/parallax_bg_decals/road_marking_right.png" id="3_moxx4"]
+[ext_resource type="PackedScene" uid="uid://dd7wjxfy21jiq" path="res://scenes/player_npc_system/dad_rolling_world.tscn" id="3_y6dau"]
+[ext_resource type="Texture2D" uid="uid://dgstmum1kdx5a" path="res://assets/textures/shadow_test.png" id="4_nt440"]
+[ext_resource type="PackedScene" uid="uid://ducdx3k7iena3" path="res://scenes/player_npc_system/dokibird_world.tscn" id="4_y6dau"]
+[ext_resource type="PackedScene" uid="uid://s1la4opwttd5" path="res://scenes/player_npc_system/tomato_world.tscn" id="6_qi73r"]
+
+[sub_resource type="Gradient" id="Gradient_nt440"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.470588, 0.352941, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_67gmh"]
+gradient = SubResource("Gradient_nt440")
+width = 20
+height = 20
+
+[sub_resource type="Animation" id="Animation_qi73r"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DokiSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DokiSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DokiSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DokiSpriteShadow:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DokiSpriteShadow:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DokiSpriteShadow:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DadSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(530, 810)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DadSpriteShadow:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(530, 820)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TomatoSprite:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2000, 670)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TomatoShadow:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2000, 760)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TomatoShadow:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("TomatoSprite:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("DadSprite:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("DadSpriteShadow:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_jb5uc"]
+resource_name = "intro"
+length = 3.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DokiSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0, 2500, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DokiSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0, 810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DokiSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DokiSpriteShadow:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0, 2500, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DokiSpriteShadow:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(900, -0.25, 0, 0.25, 0, 900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DokiSpriteShadow:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DadSprite:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.7, 2, 3.3, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(530, 810), Vector2(1530, 810), Vector2(1530, 810), Vector2(2100, 810)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DadSpriteShadow:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.7, 2, 3.3, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(530, 820), Vector2(1530, 820), Vector2(1530, 820), Vector2(2100, 820)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TomatoSprite:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.2, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2000, 670), Vector2(2000, 670), Vector2(1640, 670), Vector2(1640, 670), Vector2(1640, 670), Vector2(2000, 670)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TomatoShadow:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.2, 3, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2000, 760), Vector2(2000, 760), Vector2(1640, 760), Vector2(1640, 760), Vector2(1640, 760), Vector2(2000, 760)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("TomatoShadow:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("TomatoSprite:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("DadSprite:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("DadSpriteShadow:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qi73r"]
+_data = {
+&"RESET": SubResource("Animation_qi73r"),
+&"intro": SubResource("Animation_jb5uc")
+}
 
 [sub_resource type="Gradient" id="Gradient_vxo5s"]
 offsets = PackedFloat32Array(1)
@@ -12,9 +367,36 @@ gradient = SubResource("Gradient_vxo5s")
 width = 1920
 height = 1080
 
-[node name="IntroNoFight" type="Node2D" node_paths=PackedStringArray("camera_target")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jb5uc"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qi73r"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nt440"]
+viewport_path = NodePath("SubViewport3")
+
+[node name="IntroNoFight" type="Node2D" node_paths=PackedStringArray("animation_player", "boss_timer", "dad", "doki", "tomato", "leash", "leash_holder_1", "leash_holder_2", "camera_target")]
 script = ExtResource("1_jdbq4")
+animation_player = NodePath("AnimationPlayer")
+boss_timer = NodePath("BossTimer")
+dad = NodePath("SubViewport/NpcDadRollingWorld")
+doki = NodePath("SubViewport2/NpcDokibirdWorld")
+tomato = NodePath("SubViewport3/NpcTomatoWorld")
+leash = NodePath("Line2D")
+leash_holder_1 = NodePath("DadSpriteShadow/LeashDad")
+leash_holder_2 = NodePath("DokiSpriteShadow/LeashDoki")
 camera_target = NodePath("CameraTarget")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 5.0
+texture = SubResource("GradientTexture2D_67gmh")
+texture_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qi73r")
+}
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
 z_index = -100
@@ -24,6 +406,63 @@ centered = false
 [node name="CameraTarget" type="Node2D" parent="."]
 position = Vector2(960, 540)
 
-[node name="EndOfLevelMarker" parent="." instance=ExtResource("2_7bycb")]
-position = Vector2(2000, 900)
-new_checkpoint = 3
+[node name="RoadMarking" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.705882)
+texture = ExtResource("3_moxx4")
+centered = false
+offset = Vector2(1664, 1016)
+
+[node name="DadSpriteShadow" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(530, 820)
+scale = Vector2(0.3, 0.4)
+texture = ExtResource("3_jb5uc")
+
+[node name="LeashDad" type="Node2D" parent="DadSpriteShadow"]
+position = Vector2(0, -110)
+
+[node name="DadSprite" type="Sprite2D" parent="."]
+position = Vector2(530, 810)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("ViewportTexture_jb5uc")
+
+[node name="DokiSpriteShadow" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(1390, 900)
+scale = Vector2(0.4, 0.3)
+texture = ExtResource("3_jb5uc")
+
+[node name="LeashDoki" type="Node2D" parent="DokiSpriteShadow"]
+position = Vector2(0, -190)
+
+[node name="DokiSprite" type="Sprite2D" parent="."]
+position = Vector2(1390, 810)
+texture = SubResource("ViewportTexture_qi73r")
+
+[node name="TomatoShadow" type="Sprite2D" parent="."]
+position = Vector2(2000, 760)
+texture = ExtResource("4_nt440")
+
+[node name="TomatoSprite" type="Sprite2D" parent="."]
+position = Vector2(2000, 670)
+texture = SubResource("ViewportTexture_nt440")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="NpcDadRollingWorld" parent="SubViewport" instance=ExtResource("3_y6dau")]
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="NpcDokibirdWorld" parent="SubViewport2" instance=ExtResource("4_y6dau")]
+
+[node name="SubViewport3" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="NpcTomatoWorld" parent="SubViewport3" instance=ExtResource("6_qi73r")]
+
+[node name="BossTimer" type="Timer" parent="."]

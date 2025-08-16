@@ -1,24 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://hk5x5mvji4dk"]
+[gd_scene load_steps=4 format=3 uid="uid://hk5x5mvji4dk"]
 
 [ext_resource type="Script" uid="uid://b7en76d5vy26r" path="res://scripts/player_npc_system/dad_sky_world.gd" id="1_yrs6y"]
-[ext_resource type="Script" uid="uid://bkxk2d3v1ah1d" path="res://scripts/player_npc_system/dad.gd" id="2_78aax"]
+[ext_resource type="PackedScene" uid="uid://dwcsbop24pbo3" path="res://scenes/player_npc_system/dad.tscn" id="3_m0tm2"]
 
 [sub_resource type="Environment" id="Environment_g2els"]
 background_color = Color(1, 1, 1, 1)
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.25
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_m0tm2"]
-radius = 0.3
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_78aax"]
-radius = 0.1
-height = 0.5
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_csuns"]
-radius = 0.1
-height = 0.5
 
 [node name="DadSkyWorld" type="Node3D" node_paths=PackedStringArray("camera", "character_node")]
 script = ExtResource("1_yrs6y")
@@ -38,35 +27,9 @@ directional_shadow_mode = 0
 sky_mode = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 0.939692, -0.34202, 0, 0.34202, 0.939692, 0, 0.1, 2)
 projection = 1
 fov = 90.0
 size = 2.0
 
-[node name="Dad" type="Node3D" parent="." node_paths=PackedStringArray("animation_player")]
-script = ExtResource("2_78aax")
-animation_player = NodePath("AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Dad"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Dad"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_m0tm2")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Dad"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.25, 0)
-mesh = SubResource("CapsuleMesh_78aax")
-skeleton = NodePath("../MeshInstance3D")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Dad"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.25, 0)
-mesh = SubResource("CapsuleMesh_78aax")
-skeleton = NodePath("../MeshInstance3D")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Dad"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.5, 1.2, 0)
-mesh = SubResource("CapsuleMesh_csuns")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Dad"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 1.2, 0)
-mesh = SubResource("CapsuleMesh_csuns")
+[node name="Dad" parent="." instance=ExtResource("3_m0tm2")]

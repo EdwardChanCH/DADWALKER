@@ -67,7 +67,12 @@ func update_volume(_changed: bool, slider: Slider, audio_type: AudioManager.Audi
 			pass
 	pass
 
+func _on_mouse_entered() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
+	pass
+
 func _on_close_button_pressed() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_back_fd1.ogg", 0.5)
 	ui_animation_player.play("slide_out", -1, 1.5)
 	await ui_animation_player.animation_finished
 	visible = false
@@ -92,10 +97,12 @@ func _on_visibility_changed() -> void:
 	pass
 
 func _on_god_mode_button_toggled(toggled_on: bool) -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
 	Globals.god_mode = toggled_on
 	pass
 
 func _on_fps_counter_button_toggled(toggled_on: bool) -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
 	Globals.show_fps_count = toggled_on
 	pass
 
@@ -114,4 +121,8 @@ func _on_sfx_volume_slider_value_changed(value: float) -> void:
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	music_percentage.text = "%d%%" % [roundf(value * 100)]
+	pass
+
+func _on_slider_drag_ended(_value_changed: bool) -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
 	pass

@@ -13,7 +13,13 @@ func _ready() -> void:
 	pass
 
 
+func _on_mouse_entered() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_cursor_fd1.ogg", 0.5)
+	pass
+
+
 func _on_close_button_pressed() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_back_fd1.ogg", 0.5)
 	animation_player.play("slide_out")
 	await animation_player.animation_finished
 	visible = false

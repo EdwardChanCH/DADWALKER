@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://yjjdvbcqnar1"]
+[gd_scene load_steps=8 format=3 uid="uid://yjjdvbcqnar1"]
 
 [ext_resource type="Script" uid="uid://d0v0r2dwoymip" path="res://scripts/first_street_fight.gd" id="1_mosub"]
 [ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="2_tkx16"]
+[ext_resource type="Script" uid="uid://iy6i42i6eydc" path="res://scripts/enemy_trigger.gd" id="3_4gf8b"]
+[ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="4_bkexm"]
 
 [sub_resource type="Gradient" id="Gradient_mosub"]
 offsets = PackedFloat32Array(1)
@@ -9,11 +11,17 @@ colors = PackedColorArray(0, 1, 0, 0.196078)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tkx16"]
 gradient = SubResource("Gradient_mosub")
-width = 1920
+width = 5760
 height = 1080
 
-[node name="FirstStreetFight" type="Node2D" node_paths=PackedStringArray("camera_target")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_tkx16"]
+radius = 40.0
+
+[node name="FirstStreetFight" type="Node2D" node_paths=PackedStringArray("spawner_group_1", "spawner_group_2", "spawner_group_3", "camera_target")]
 script = ExtResource("1_mosub")
+spawner_group_1 = [NodePath("EnemySpawnerA1"), NodePath("EnemySpawnerA2"), NodePath("EnemySpawnerA3")]
+spawner_group_2 = [NodePath("EnemySpawnerB1"), NodePath("EnemySpawnerB2"), NodePath("EnemySpawnerB3"), NodePath("EnemySpawnerB4"), NodePath("EnemySpawnerB5"), NodePath("EnemySpawnerB6"), NodePath("EnemySpawnerB7"), NodePath("EnemySpawnerB8"), NodePath("EnemySpawnerB9"), NodePath("EnemySpawnerB10"), NodePath("EnemySpawnerB11"), NodePath("EnemySpawnerB12")]
+spawner_group_3 = [NodePath("EnemySpawnerC1"), NodePath("EnemySpawnerC2"), NodePath("EnemySpawnerC3"), NodePath("EnemySpawnerC4"), NodePath("EnemySpawnerC5"), NodePath("EnemySpawnerC6"), NodePath("EnemySpawnerC7")]
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
@@ -25,5 +33,153 @@ centered = false
 position = Vector2(960, 540)
 
 [node name="EndOfLevelMarker" parent="." instance=ExtResource("2_tkx16")]
-position = Vector2(2000, 900)
+position = Vector2(5660, 900)
 new_checkpoint = 3
+
+[node name="EnemyTrigger1" type="Area2D" parent="."]
+position = Vector2(2020, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_4gf8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger1"]
+shape = SubResource("CircleShape2D_tkx16")
+
+[node name="EnemyTrigger2" type="Area2D" parent="."]
+position = Vector2(2980, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_4gf8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger2"]
+shape = SubResource("CircleShape2D_tkx16")
+
+[node name="EnemyTrigger3" type="Area2D" parent="."]
+position = Vector2(3940, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_4gf8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger3"]
+shape = SubResource("CircleShape2D_tkx16")
+
+[node name="EnemySpawnerA1" type="Node2D" parent="."]
+position = Vector2(2100, 900)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerA2" type="Node2D" parent="."]
+position = Vector2(2200, 850)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerA3" type="Node2D" parent="."]
+position = Vector2(2200, 950)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB1" type="Node2D" parent="."]
+position = Vector2(3060, 840)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB2" type="Node2D" parent="."]
+position = Vector2(3150, 940)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB3" type="Node2D" parent="."]
+position = Vector2(3060, 1040)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB4" type="Node2D" parent="."]
+position = Vector2(3260, 840)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB5" type="Node2D" parent="."]
+position = Vector2(3350, 940)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB6" type="Node2D" parent="."]
+position = Vector2(3260, 1040)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB7" type="Node2D" parent="."]
+position = Vector2(3460, 840)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB8" type="Node2D" parent="."]
+position = Vector2(3550, 940)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB9" type="Node2D" parent="."]
+position = Vector2(3460, 1040)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB10" type="Node2D" parent="."]
+position = Vector2(3660, 840)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB11" type="Node2D" parent="."]
+position = Vector2(3750, 940)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerB12" type="Node2D" parent="."]
+position = Vector2(3660, 1040)
+script = ExtResource("4_bkexm")
+health = 1
+
+[node name="EnemySpawnerC1" type="Node2D" parent="."]
+position = Vector2(4020, 750)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC2" type="Node2D" parent="."]
+position = Vector2(4070, 800)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC3" type="Node2D" parent="."]
+position = Vector2(4020, 850)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC4" type="Node2D" parent="."]
+position = Vector2(4070, 900)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC5" type="Node2D" parent="."]
+position = Vector2(4020, 950)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC6" type="Node2D" parent="."]
+position = Vector2(4070, 1000)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[node name="EnemySpawnerC7" type="Node2D" parent="."]
+position = Vector2(4020, 1050)
+script = ExtResource("4_bkexm")
+target_player = true
+health = 1
+
+[connection signal="camera_in_range" from="EnemyTrigger1" to="." method="_on_enemy_trigger_1_camera_in_range"]
+[connection signal="camera_in_range" from="EnemyTrigger2" to="." method="_on_enemy_trigger_2_camera_in_range"]
+[connection signal="camera_in_range" from="EnemyTrigger3" to="." method="_on_enemy_trigger_3_camera_in_range"]

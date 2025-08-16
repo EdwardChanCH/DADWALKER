@@ -581,6 +581,7 @@ flip_h = true
 [connection signal="mouse_entered" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/ButtonMover1/PlayButton" to="UI/ButtonMover1/PlayButtonAnimationTree" method="set" binds= ["parameters/Transition/transition_request", "idle"]]
 [connection signal="pressed" from="UI/ButtonMover1/PlayButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "hover"]]
 [connection signal="mouse_exited" from="UI/CloseButtonRoot/CloseButton" to="UI/CloseButtonRoot/AnimationTree" method="set" binds= ["parameters/Rotation/transition_request", "idle"]]
 [connection signal="pressed" from="UI/CloseButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]

@@ -9,5 +9,4 @@ func _unhandled_input(event: InputEvent) -> void:
 			and Globals.lose_menu and not Globals.lose_menu.visible):
 			# Open the pause menu.
 			Globals.pause_menu.visible = not Globals.pause_menu.visible
-			print(Globals.pause_menu.visible)
 	pass

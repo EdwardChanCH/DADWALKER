@@ -8,7 +8,6 @@ func _ready() -> void:
 	if (false):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	# TODO
 	# Initialize variables.
 	in_player_control = false
 	move_speed = 400

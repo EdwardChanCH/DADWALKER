@@ -1,6 +1,5 @@
 class_name _TestCubeWorld
 extends Node3D
-# TODO test only.
 
 @export var cube_node: MeshInstance3D = null
 
