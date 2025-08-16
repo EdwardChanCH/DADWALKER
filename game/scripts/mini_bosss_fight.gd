@@ -17,7 +17,6 @@ signal mini_boss_fight_ended
 @export var boss_timer: Timer = null
 @export var projectile_spawner: _ProjectileSpawner = null
 @export var enemy_spawner: _EnemySpawner = null
-@export var projectile_despawner: Area2D = null
 
 ## Phases: 3 --> 2 --> 1 --> 0
 var __boss_phase: int = 3
@@ -45,8 +44,7 @@ func _ready() -> void:
 		or not boss_sprite_right
 		or not boss_timer
 		or not projectile_spawner
-		or not enemy_spawner
-		or not projectile_despawner):
+		or not enemy_spawner):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	self.visible = false
@@ -56,8 +54,6 @@ func _ready() -> void:
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", false)
 	boss_hitbox_right.set_deferred("monitorable", false)
-	projectile_despawner.set_deferred("monitoring", false)
-	projectile_despawner.set_deferred("monitorable", false)
 	
 	character_world.target_look_vector = Vector3.LEFT
 	character_world.start_walk() # TODO
@@ -157,8 +153,6 @@ func start_fight() -> void:
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", true)
 	boss_hitbox_right.set_deferred("monitorable", true)
-	projectile_despawner.set_deferred("monitoring", true)
-	projectile_despawner.set_deferred("monitorable", true)
 	print("mbf: start_fight") # TODO
 	await boss_health.open_ui()
 	__can_attack_again = true
@@ -188,8 +182,6 @@ func end_fight() -> void:
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", false)
 	boss_hitbox_right.set_deferred("monitorable", false)
-	projectile_despawner.set_deferred("monitoring", false)
-	projectile_despawner.set_deferred("monitorable", false)
 	
 	print("mbf: end_fight") # TODO
 

@@ -186,3 +186,11 @@ func _on_end_of_level_detector_area_entered(area: Area2D) -> void:
 			eol_marker.queue_free()
 			change_map_to(Globals.progress)
 	pass
+
+func _on_projectile_despawner_area_entered(area: Area2D) -> void:
+	if (area is _Feather
+		or area is _Seed
+		or area is _Bullet):
+		# Exclude sonic waves.
+		area.queue_free()
+	pass
