@@ -12,9 +12,11 @@ func _ready() -> void:
 	pass
 
 func start_idle() -> void:
+	animation_player.stop()
 	animation_player.play("dad_iddle")
 	pass
 
 func start_t_pose() -> void:
+	animation_player.stop()
 	animation_player.play("dad_tpose")
 	pass

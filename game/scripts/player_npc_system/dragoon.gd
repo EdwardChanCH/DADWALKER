@@ -21,9 +21,13 @@ func update_health(new_health: int) -> void:
 	pass
 
 func start_walk() -> void:
-	animation_player.play("dragoon_walk")
+	if (animation_player.current_animation != "dragoon_walk"):
+		animation_player.stop()
+		animation_player.play("dragoon_walk", -1, 1.5)
 	pass
 
 func start_idle() -> void:
-	animation_player.play("dragoon_iddle")
+	if (animation_player.current_animation != "dragoon_iddle"):
+		animation_player.stop()
+		animation_player.play("dragoon_iddle")
 	pass

@@ -264,7 +264,7 @@ func tomato_attack() -> void:
 		projectile_spawner.shoot_once(direction)
 		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dokibirdattack_fd1.ogg", 0.2)
 	
-	character_world.start_idle() # TODO
+	character_world.start_idle()
 	character_world.target_look_vector = Vector3.RIGHT if __is_on_left else Vector3.LEFT
 	
 	#boss_timer.start(0.5)

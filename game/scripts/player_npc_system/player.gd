@@ -42,11 +42,6 @@ func _ready() -> void:
 	projectile_speed = 1000
 	max_health = 3
 	current_health = 3
-	
-	# TODO test only
-	# TODO set walking speed
-	#character_world_node.start_walk()
-	
 	pass
 
 func _process(delta: float) -> void:
@@ -105,6 +100,11 @@ func _process(delta: float) -> void:
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
+		# Player character animation.
+		if (input_vector.is_zero_approx()):
+			character_world_node.start_idle()
+		else:
+			character_world_node.start_walk()
 	pass
 
 func _physics_process(delta: float) -> void:
