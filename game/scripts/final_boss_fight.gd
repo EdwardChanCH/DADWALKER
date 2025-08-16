@@ -203,7 +203,7 @@ func end_fight() -> void:
 		Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
 		Globals.win_menu.visible = true
 	
-	exit_cutscene()
+	exit_cutscene() # This line may have caused the tomato blackhole incident...
 	pass
 
 func ground_pound_attack() -> void:

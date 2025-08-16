@@ -161,6 +161,7 @@ func restore_health() -> void:
 	hit_detector_node.collision_mask = __hcm
 	
 	# Enable controls.
+	character_world_node.target_look_vector = Vector3.BACK
 	in_player_control = true
 	pass
 
