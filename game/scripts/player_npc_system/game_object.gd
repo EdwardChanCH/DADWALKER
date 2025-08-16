@@ -11,13 +11,10 @@ extends CharacterBody2D
 @export var projectile_scene: PackedScene = null
 
 ## Projectile speed.
-@export var projectile_speed: float = 50
+@export var projectile_speed: float = 100
 
 ## Max health.
 @export var max_health: int = 1
-
-## Minimum push speed, squared (for push speed to dominate).
-@export var push_speed_sq_min: float = 400
 
 # TODO
 ## Current health.
@@ -45,6 +42,15 @@ var in_logic_control: bool = false
 ## Can accept player input.
 var in_player_control: bool = false
 
+## Can follow game objects or not.
+@export var in_tracking_mode: bool = false
+
+## Object to track (usually the player).
+@export var tracking_object: Node2D = null
+
+## Vector when not in tracking mode (not normalized).
+@export var idle_vector: Vector2 = Vector2.LEFT
+
 ## Movement vector. (not normalized)
 var move_vector: Vector2 = Vector2.ZERO
 
@@ -54,11 +60,34 @@ var move_speed: float = 0
 ## Movement velocity from being pushed.
 var push_velocity: Vector2 = Vector2.ZERO
 
+## Movement speed from being pushed.
+@export var push_speed: float = 3000
+
+## Minimum push speed, squared (for push speed to dominate).
+@export var push_speed_sq_min: float = 400
+
+## Slope of decay of smoothed push deceleration.
+@export_range(1, 25, Globals.STEP, "suffix:/s")
+var push_decay: float = 10
+
+## Fade out timer.
+var __fade_out_timer: float = 0
+
+var __scl: int = 0
+var __scm: int = 0
+var __hcl: int = 0
+var __hcm: int = 0
+
 func _ready() -> void:
 	# Check if missing export variables.
 	if (not character_world_node
 		or not projectile_scene):
 		push_error("Missing export variables in node '%s'." % [self.name])
+	
+	__scl = self.collision_layer
+	__scm = self.collision_mask
+	__hcl = hit_detector_node.collision_layer
+	__hcm = hit_detector_node.collision_mask
 	
 	# Initialize health bar.
 	_on_health_changed(current_health)
@@ -66,6 +95,11 @@ func _ready() -> void:
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	if (current_health <= 0):
+		__fade_out_timer += delta
+		self.modulate.a = 1 - clampf(__fade_out_timer - 0.5, 0, 1)
+		if is_zero_approx(self.modulate.a):
+			self.queue_free()
 	pass
 
 @warning_ignore("unused_parameter")
@@ -92,4 +126,21 @@ func _on_health_changed(new_health: int) -> void:
 			character_world_node.update_health(new_health)
 		else:
 			character_world_node.update_health(0)
+			_on_death()
+	pass
+
+func _on_death() -> void:
+	# Disable collisions.
+	self.collision_layer = 0
+	self.collision_mask = 0
+	hit_detector_node.collision_layer = 0
+	hit_detector_node.collision_mask = 0
+	
+	# Disable controls.
+	in_sequence_control = false
+	in_logic_control = false
+	in_player_control = false
+	
+	# Play death animation.
+	character_world_node.start_death()
 	pass

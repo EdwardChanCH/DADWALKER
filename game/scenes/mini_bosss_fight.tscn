@@ -1,0 +1,240 @@
+[gd_scene load_steps=21 format=3 uid="uid://go565cse1ocx"]
+
+[ext_resource type="Script" uid="uid://c36krd8fknf4f" path="res://scripts/mini_bosss_fight.gd" id="1_tegxn"]
+[ext_resource type="PackedScene" uid="uid://ducdx3k7iena3" path="res://scenes/player_npc_system/dokibird_world.tscn" id="2_3lc08"]
+[ext_resource type="Texture2D" uid="uid://fgtcplghf3gd" path="res://assets/textures/final_boss_shadow_test.png" id="2_m8mgc"]
+[ext_resource type="PackedScene" uid="uid://b8ja340vkvie8" path="res://scenes/boss_health.tscn" id="4_tbwyr"]
+[ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="5_70jnc"]
+[ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="6_pnst7"]
+[ext_resource type="PackedScene" uid="uid://v777emx0ysva" path="res://scenes/projectiles/bullet.tscn" id="7_pnst7"]
+[ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="9_10bs7"]
+
+[sub_resource type="Gradient" id="Gradient_vxo5s"]
+offsets = PackedFloat32Array(0.994382)
+colors = PackedColorArray(0, 1, 1, 0.196078)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xgy6f"]
+gradient = SubResource("Gradient_vxo5s")
+width = 1920
+height = 1080
+
+[sub_resource type="Animation" id="Animation_tbwyr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossMover:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-150, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossMover:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_m8mgc"]
+resource_name = "boss_appear_left"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossMover:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-150, -0.25, 0, 0.25, 0, 150, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossMover:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_xgy6f"]
+resource_name = "boss_appear_right"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossMover:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(150, -0.25, 0, 0.25, 0, -150, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossMover:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbwyr"]
+_data = {
+&"RESET": SubResource("Animation_tbwyr"),
+&"boss_appear_left": SubResource("Animation_m8mgc"),
+&"boss_appear_right": SubResource("Animation_xgy6f")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xgy6f"]
+size = Vector2(200, 100)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3lc08"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d33jg"]
+size = Vector2(150, 1480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak86i"]
+size = Vector2(150, 1480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyxm"]
+size = Vector2(2020, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_savtk"]
+size = Vector2(2020, 150)
+
+[node name="MiniBosssFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_left", "boss_hitbox_right", "boss_sprite_left", "boss_sprite_right", "boss_timer", "projectile_spawner", "enemy_spawner", "projectile_despawner", "camera_target")]
+y_sort_enabled = true
+script = ExtResource("1_tegxn")
+character_world = NodePath("SubViewport/DokibirdWorld")
+boss_animation = NodePath("BossMotion")
+boss_health = NodePath("BossHealth")
+boss_hitbox_left = NodePath("BossMover/BossHitboxL")
+boss_hitbox_right = NodePath("BossMover/BossHitboxR")
+boss_sprite_left = NodePath("BossMover/BossSpriteL")
+boss_sprite_right = NodePath("BossMover/BossSpriteR")
+boss_timer = NodePath("BossTimer")
+projectile_spawner = NodePath("ProjectileSpawner")
+enemy_spawner = NodePath("EnemySpawner")
+projectile_despawner = NodePath("ProjectileDespawner")
+camera_target = NodePath("CameraTarget")
+
+[node name="DebugSprite" type="Sprite2D" parent="."]
+z_index = -100
+texture = SubResource("GradientTexture2D_xgy6f")
+centered = false
+
+[node name="CameraTarget" type="Node2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="BossHealth" parent="." instance=ExtResource("4_tbwyr")]
+boss_name = "DOKIBIRD"
+max_health = 10000
+
+[node name="BossMotion" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tbwyr")
+}
+
+[node name="BossMover" type="Node2D" parent="."]
+position = Vector2(-150, 0)
+
+[node name="BossHitboxL" type="Area2D" parent="BossMover"]
+collision_layer = 8
+collision_mask = 48
+
+[node name="CollisionShapeL" type="CollisionShape2D" parent="BossMover/BossHitboxL"]
+position = Vector2(0, 950)
+shape = SubResource("RectangleShape2D_xgy6f")
+
+[node name="BossHitboxR" type="Area2D" parent="BossMover"]
+collision_layer = 8
+collision_mask = 48
+
+[node name="CollisionShapeR" type="CollisionShape2D" parent="BossMover/BossHitboxR"]
+position = Vector2(1920, 950)
+shape = SubResource("RectangleShape2D_xgy6f")
+
+[node name="BossSpriteL" type="Sprite2D" parent="BossMover"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, 880)
+texture = SubResource("ViewportTexture_3lc08")
+metadata/_edit_lock_ = true
+
+[node name="BossShadowL" type="Sprite2D" parent="BossMover"]
+y_sort_enabled = true
+position = Vector2(0, 950)
+scale = Vector2(0.4, 0.3)
+texture = ExtResource("2_m8mgc")
+
+[node name="BossSpriteR" type="Sprite2D" parent="BossMover"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1920, 880)
+texture = SubResource("ViewportTexture_3lc08")
+metadata/_edit_lock_ = true
+
+[node name="BossShadowR" type="Sprite2D" parent="BossMover"]
+y_sort_enabled = true
+position = Vector2(1920, 950)
+scale = Vector2(0.4, 0.3)
+texture = ExtResource("2_m8mgc")
+
+[node name="ProjectileDespawner" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 112
+
+[node name="CollisionShapeL" type="CollisionShape2D" parent="ProjectileDespawner"]
+position = Vector2(-125, 540)
+shape = SubResource("RectangleShape2D_d33jg")
+
+[node name="CollisionShapeR" type="CollisionShape2D" parent="ProjectileDespawner"]
+position = Vector2(2045, 540)
+shape = SubResource("RectangleShape2D_ak86i")
+
+[node name="CollisionShapeT" type="CollisionShape2D" parent="ProjectileDespawner"]
+position = Vector2(960, -125)
+shape = SubResource("RectangleShape2D_dfyxm")
+
+[node name="CollisionShapeB" type="CollisionShape2D" parent="ProjectileDespawner"]
+position = Vector2(960, 1205)
+shape = SubResource("RectangleShape2D_savtk")
+
+[node name="BossTimer" type="Timer" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="DokibirdWorld" parent="SubViewport" instance=ExtResource("2_3lc08")]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("5_70jnc")
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+script = ExtResource("6_pnst7")
+projectile_scene = ExtResource("7_pnst7")
+projectile_speed = 1000.0
+
+[node name="EndOfLevelMarker" parent="." instance=ExtResource("9_10bs7")]
+position = Vector2(2000, 900)
+new_checkpoint = 5
+
+[connection signal="area_entered" from="BossMover/BossHitboxL" to="." method="_on_boss_hitbox_area_entered"]
+[connection signal="area_entered" from="BossMover/BossHitboxR" to="." method="_on_boss_hitbox_area_entered"]

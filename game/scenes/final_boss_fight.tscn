@@ -1,0 +1,401 @@
+[gd_scene load_steps=20 format=3 uid="uid://comocvmoxgfwf"]
+
+[ext_resource type="PackedScene" uid="uid://hk5x5mvji4dk" path="res://scenes/player_npc_system/dad_sky_world.tscn" id="1_cmkb5"]
+[ext_resource type="Script" uid="uid://duyp6mutkdpfp" path="res://scripts/final_boss_fight.gd" id="1_k0qlo"]
+[ext_resource type="PackedScene" uid="uid://cp71so7s63jj6" path="res://scenes/projectiles/sonic_boom.tscn" id="2_mrtcb"]
+[ext_resource type="Texture2D" uid="uid://fgtcplghf3gd" path="res://assets/textures/final_boss_shadow_test.png" id="3_3rbw0"]
+[ext_resource type="PackedScene" uid="uid://b8ja340vkvie8" path="res://scenes/boss_health.tscn" id="3_hpirs"]
+[ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="5_j5mu0"]
+[ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="7_mguhe"]
+
+[sub_resource type="Gradient" id="Gradient_2lg36"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 1, 0.196078)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y1c10"]
+gradient = SubResource("Gradient_2lg36")
+width = 1920
+height = 1080
+
+[sub_resource type="Animation" id="Animation_k0qlo"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(540, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossShadow:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossShadow:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3rbw0"]
+resource_name = "camera_shake"
+
+[sub_resource type="Animation" id="Animation_mrtcb"]
+resource_name = "ground_down"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-540, -0.25, 0, 0.25, 0, 600, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.75, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.5, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossShadow:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossShadow:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1e-05, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_j5mu0"]
+resource_name = "ground_up"
+length = 1.2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 0.7)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(600, -0.25, 0, 0.25, 0, -540, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 0.7)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossSprite:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 0.7)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossSprite:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.75, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 0.7)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossShadow:scale:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 1.2)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossShadow:scale:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.2, 1.2)
+}
+
+[sub_resource type="Animation" id="Animation_hpirs"]
+resource_name = "sky_down"
+length = 0.8
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-540, -0.25, 0, 0.25, 0, 540, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_cmkb5"]
+resource_name = "sky_up"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(960, -0.25, 0, 0.25, 0, 960, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(540, -0.25, 0, 0.25, 0, -540, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hpirs"]
+_data = {
+&"RESET": SubResource("Animation_k0qlo"),
+&"camera_shake": SubResource("Animation_3rbw0"),
+&"ground_down": SubResource("Animation_mrtcb"),
+&"ground_up": SubResource("Animation_j5mu0"),
+&"sky_down": SubResource("Animation_hpirs"),
+&"sky_up": SubResource("Animation_cmkb5")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cmkb5"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mguhe"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k0qlo"]
+radius = 180.0
+
+[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "enemy_spawner_l1", "enemy_spawner_l2", "enemy_spawner_l3", "camera_target")]
+script = ExtResource("1_k0qlo")
+character_world = NodePath("SubViewport/DadSkyWorld")
+boss_animation = NodePath("BossMotion")
+boss_health = NodePath("BossHealth")
+boss_hitbox_area = NodePath("BossHitbox")
+ground_attack_area = NodePath("GroundAttack")
+boss_sprite = NodePath("BossSprite")
+boss_timer = NodePath("BossTimer")
+projectile_spawner = NodePath("ProjectileSpawner")
+enemy_spawner = NodePath("EnemySpawner")
+enemy_spawner_l1 = NodePath("EnemySpawnerL1")
+enemy_spawner_l2 = NodePath("EnemySpawnerL2")
+enemy_spawner_l3 = NodePath("EnemySpawnerL3")
+camera_target = NodePath("CameraTarget")
+
+[node name="DebugSprite" type="Sprite2D" parent="."]
+z_index = -100
+texture = SubResource("GradientTexture2D_y1c10")
+centered = false
+
+[node name="CameraTarget" type="Node2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="BossHealth" parent="." instance=ExtResource("3_hpirs")]
+
+[node name="BossMotion" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hpirs")
+}
+
+[node name="BossSprite" type="Sprite2D" parent="."]
+z_index = -6
+position = Vector2(960, 540)
+texture = SubResource("ViewportTexture_cmkb5")
+
+[node name="BossShadow" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(960, 900)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_3rbw0")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(1024, 1024)
+
+[node name="DadSkyWorld" parent="SubViewport" instance=ExtResource("1_cmkb5")]
+look_decay = 5.0
+
+[node name="BossHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 112
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossHitbox"]
+position = Vector2(960, 300)
+shape = SubResource("CircleShape2D_mguhe")
+
+[node name="GroundAttack" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundAttack"]
+position = Vector2(960, 900)
+shape = SubResource("CircleShape2D_k0qlo")
+
+[node name="BossTimer" type="Timer" parent="."]
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+position = Vector2(960, 300)
+rotation = 2.35619
+script = ExtResource("5_j5mu0")
+projectile_scene = ExtResource("2_mrtcb")
+
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("auto_spawn_timer")]
+position = Vector2(2000, 760)
+script = ExtResource("7_mguhe")
+auto_spawn_timer = NodePath("EnemyTimer")
+
+[node name="EnemyTimer" type="Timer" parent="EnemySpawner"]
+
+[node name="EnemySpawnerL1" type="Node2D" parent="."]
+position = Vector2(-100, 800)
+script = ExtResource("7_mguhe")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerL2" type="Node2D" parent="."]
+position = Vector2(-50, 900)
+script = ExtResource("7_mguhe")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerL3" type="Node2D" parent="."]
+position = Vector2(-100, 1000)
+script = ExtResource("7_mguhe")
+target_player = true
+health = 2
+
+[connection signal="area_entered" from="BossHitbox" to="." method="_on_boss_hitbox_area_entered"]

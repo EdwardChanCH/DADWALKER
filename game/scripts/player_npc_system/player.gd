@@ -1,6 +1,24 @@
 class_name _Player
 extends _GameObject
 
+@export var hurt_animation: AnimationPlayer = null
+
+@export var collision_box: CollisionShape2D = null
+
+@export var hit_box: CollisionShape2D = null
+
+@export var shadow: Sprite2D = null
+
+@export var shooting_delay: float = 0.2
+
+var __shooting_cooldown: float = 0
+
+var __shooting_pressed: bool = false
+
+@export var hurting_delay: float = 0.5
+
+var __hurting_cooldown: float = 0
+
 ## Keyboard/Joystick input vector (not normalized).
 var input_vector: Vector2 = Vector2.ZERO
 
@@ -10,11 +28,25 @@ var null_cancelling_vector: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	super._ready()
 	
+	# Check if missing export variables.
+	if (not hurt_animation
+		or not collision_box
+		or not hit_box
+		or not shadow):
+		push_error("Missing export variables in node '%s'." % [self.name])
+	
 	# TODO
 	# Initialize variables.
 	in_player_control = true
 	move_speed = 400
-	projectile_speed = 400
+	projectile_speed = 1000
+	max_health = 3
+	current_health = 3
+	
+	# TODO test only
+	# TODO set walking speed
+	character_world_node.start_walk()
+	
 	pass
 
 func _process(delta: float) -> void:
@@ -50,6 +82,26 @@ func _process(delta: float) -> void:
 	else:
 		input_vector.y = 0
 	
+	if Input.is_action_pressed("shoot"):
+		__shooting_pressed = true
+	
+	# --- Player Shooting --- #
+	if (__shooting_cooldown <= 0):
+		__shooting_cooldown = 0
+	else:
+		__shooting_cooldown -= delta
+	
+	if (__shooting_pressed and __shooting_cooldown <= 0):
+		__shooting_pressed = false
+		__shooting_cooldown = shooting_delay
+		shoot_once(get_global_mouse_position() - self.global_position)
+	
+	# --- Player Damage Invulnerability --- #
+	if (__hurting_cooldown <= 0):
+		__hurting_cooldown = 0
+	else:
+		__hurting_cooldown -= delta
+	
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
@@ -62,29 +114,74 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	pass
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot"):
-		print("Player shoot.")
-		shoot_once(get_global_mouse_position() - self.global_position)
+## Add damage to current health.
+func add_damage(amount: int = 1) -> void:
+	if (not Globals.god_mode
+		and __hurting_cooldown <= 0
+		and current_health > 0
+		and amount > 0):
+		# TODO hurt animation, hurt sound.
+		hurt_animation.play("hurt_flash")
+		__hurting_cooldown = hurting_delay
+		current_health -= amount
 	pass
 
 ## Shoot one projectile.
 func shoot_once(p_vector: Vector2) -> void:
+	if not projectile_scene:
+		return
+	
+	var projectile: _Projectile = projectile_scene.instantiate()
+	if not projectile:
+		return
+	
 	var p_velocity: Vector2 = p_vector.normalized() * projectile_speed
+	p_velocity += (move_vector * move_speed).project(p_velocity) # Add player velocity.
 	var p_angle: float = Vector2.RIGHT.angle_to(p_vector)
 	
-	var projectile: _Projectile = projectile_scene.instantiate(PackedScene.GEN_EDIT_STATE_INSTANCE)
-	Globals.gameplay.add_projectie_to_scene(projectile)
+	
+	if Globals.gameplay:
+		Globals.gameplay.add_projectie_to_scene(projectile)
 	projectile.setup_start(self.global_position, p_velocity, p_angle)
+	pass
+
+## Stomped by final boss.
+func stomped() -> void:
+	add_damage(1)
+	pass
+
+## Restore to full health.
+func restore_health() -> void:
+	current_health = max_health
+	
+	# Enable collisions.
+	self.collision_layer = __scl
+	self.collision_mask = __scm
+	hit_detector_node.collision_layer = __hcl
+	hit_detector_node.collision_mask = __hcm
+	
+	# Enable controls.
+	character_world_node.target_look_vector = Vector3.BACK
+	in_player_control = true
 	pass
 
 ## Hit detection.
 func _on_hit_detector_area_entered(area: Area2D) -> void:
-	# TODO
-	print("Player hit.")
-	
 	var projectile := area as _Projectile
 	if (projectile):
 		projectile.despawn()
+		add_damage(1)
+	pass
+
+func _on_health_changed(new_health: int) -> void:
+	# Change scale.
+	var new_scale: Vector2 = Vector2.ONE * (float(new_health) / float(max_health))
+	collision_box.scale = new_scale
+	hit_box.scale = new_scale
+	shadow.scale = new_scale
 	
+	if (new_health <= 0 and Globals.lose_menu):
+		Globals.lose_menu.visible = true
+	
+	super._on_health_changed(new_health)
 	pass

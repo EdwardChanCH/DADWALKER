@@ -1,0 +1,2 @@
+class_name _SoundSequence
+extends _DialogueSequence

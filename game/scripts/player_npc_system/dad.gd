@@ -11,11 +11,11 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-func update_health_bar(new_health: int) -> void:
-	# TODO
-	print("Not implemented yet! (%s)" % ["dokibird:update_health_bar"])
+func start_walk() -> void:
+	if (animation_player.has_animation("dragoon_walk")):
+		animation_player.play("dragoon_walk") # TODO
 	pass
 
-func start_walk() -> void:
-	animation_player.play("dragoon_walk")
+func start_t_pose() -> void:
+	print("dad: Not implemented yet!")
 	pass

@@ -1,24 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://v777emx0ysva"]
+[gd_scene load_steps=5 format=3 uid="uid://v777emx0ysva"]
 
 [ext_resource type="Script" uid="uid://bycgxp20saf3d" path="res://scripts/bullet.gd" id="1_yvfy2"]
-
-[sub_resource type="Gradient" id="Gradient_4bh5q"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 0, 0, 0.588235)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_e124b"]
-gradient = SubResource("Gradient_4bh5q")
-width = 20
-height = 20
-
-[sub_resource type="Gradient" id="Gradient_mkf8s"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.783523, 0.783523, 0.783523, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y25gk"]
-gradient = SubResource("Gradient_mkf8s")
-width = 20
-height = 10
+[ext_resource type="Texture2D" uid="uid://dgstmum1kdx5a" path="res://assets/textures/shadow_test.png" id="2_48g2p"]
+[ext_resource type="Texture2D" uid="uid://ctbf3ebmjqwjm" path="res://assets/textures/projectile_sprites/seed_fast.png" id="3_k5ji7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ocj2s"]
 
@@ -30,13 +14,16 @@ script = ExtResource("1_yvfy2")
 sprite = NodePath("Sprite")
 
 [node name="Shadow" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_e124b")
+scale = Vector2(0.3, 0.2)
+texture = ExtResource("2_48g2p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -30)
-texture = SubResource("GradientTexture2D_y25gk")
+position = Vector2(0, -20)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_k5ji7")
+flip_h = true
 
 [node name="TriggerBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ocj2s")

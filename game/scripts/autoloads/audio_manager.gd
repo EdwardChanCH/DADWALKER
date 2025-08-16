@@ -1,4 +1,4 @@
-class_name _AudioManager
+#class_name _AudioManager
 extends Node
 
 enum AudioType
@@ -10,25 +10,28 @@ enum AudioType
 	VOICE,
 }
 
-static var _instance: _AudioManager = null
+const SOUND_PATH: String = "res://assets/sounds/"
 
-static var __sound_cache: Dictionary[String, AudioStream]
+var __sound_cache: Dictionary[String, AudioStream]
 
-static var __sfx_channels: Dictionary[AudioStream, AudioStreamPlayer]
-static var __voice_channel: AudioStreamPlayer
-static var __music_channel: AudioStreamPlayer
+var __sfx_channels: Dictionary[AudioStream, AudioStreamPlayer]
+var __voice_channel: AudioStreamPlayer
+var __music_channel: AudioStreamPlayer
 
-static var audio_path_list: Array[String]
+var audio_path_list: Array[String]
 
-func _ready() -> void:
+func _enter_tree() -> void:
+	
+	# Note: AudioManager is already a singleton node.
+	#       Access it with AudioManager instead of AudioManager._instance.
 	
 	# Sington stuff
-	if(_instance != null):
-		push_warning("There is already an audio manager")
-		queue_free()
-		return
+	#if(_instance != null):
+	#	push_warning("There is already an audio manager")
+	#	queue_free()
+	#	return
 		
-	_instance = self
+	#_instance = self
 	
 	#ProcessMode = ProcessMode.
 	
@@ -45,23 +48,13 @@ func _ready() -> void:
 	
 	
 	var files: Array[String]
-	get_file_path("res://assets/sound/",files)
+	get_file_paths(SOUND_PATH,files)
 	
 	for item in files:
 		var audio_steam: AudioStream = load(item)
 		__sound_cache.set(item, audio_steam)
 		
 	audio_path_list = files
-	pass
-
-func get_file_path(path: String, files: Array[String]) -> void:
-	var list = ResourceLoader.list_directory(path)
-	for item in list:
-		if(item.ends_with("/")):
-			var new_path = path + item
-			get_file_path(new_path, files)
-			continue
-		files.append(path+item)
 	pass
 
 func create_sfx_channel(sfx: AudioStream) -> AudioStreamPlayer:
@@ -80,25 +73,51 @@ func _music_loop() -> void:
 	__music_channel.play()
 	pass
 
-static func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:
+func get_audio_steam_player(sound_path: String) -> AudioStreamPlayer:
+	var target_channel: AudioStreamPlayer = null
+	if (not AudioManager.__sound_cache.has(sound_path)):
+		return null
+	
+	var audio_steam: AudioStream = AudioManager.__sound_cache[sound_path]
+	
+	
+	if (not AudioManager.__sfx_channels.has(audio_steam)):
+		AudioManager.create_sfx_channel(audio_steam)
+	
+	target_channel = AudioManager.__sfx_channels[audio_steam]
+	return target_channel
+
+func get_file_paths(path: String, files: Array[String]) -> void:
+	var list = ResourceLoader.list_directory(path)
+	for item in list:
+		if(item.ends_with("/")):
+			var new_path = path + item
+			get_file_paths(new_path, files)
+			continue
+		files.append(path+item)
+	pass
+
+func play_sfx(sound_path: String, volume_linear: float = 1.0) -> AudioStreamPlayer:
 	
 	var target_channel: AudioStreamPlayer = null
-	var audio_steam: AudioStream = __sound_cache[sound_path]
 	
-	if (not __sfx_channels.has(audio_steam)):
-		_instance.create_sfx_channel(audio_steam)
+	if (not AudioManager.__sound_cache.has(sound_path)):
+		return null
 	
-	target_channel = __sfx_channels[audio_steam]
-	#
-	#if (target_channel.playing):
-		#return target_channel
+	var audio_steam: AudioStream = AudioManager.__sound_cache[sound_path]
+	
+	
+	if (not AudioManager.__sfx_channels.has(audio_steam)):
+		AudioManager.create_sfx_channel(audio_steam)
+	
+	target_channel = AudioManager.__sfx_channels[audio_steam]
 		
 	target_channel.volume_linear = volume_linear
 	target_channel.play()
 
 	return target_channel
 
-static func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
+func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
 	var audio_steam: AudioStream = __sound_cache[sound_path]
 	__voice_channel.stop()
 	__voice_channel.stream = audio_steam
@@ -106,15 +125,15 @@ static func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
 	__voice_channel.play()
 	pass
 	
-static func play_music(sound_path: String, volume_linear: float = 1.0) -> void:
-	var audio_steam: AudioStream = __sound_cache[sound_path]
+func play_music(sound_path: String, volume_linear: float = 1.0) -> void:
+	var audio_steam: AudioStream = AudioManager.__sound_cache[sound_path]
 	__music_channel.stop()
 	__music_channel.stream = audio_steam
 	__music_channel.volume_linear = volume_linear
 	__music_channel.play()
 	pass
 
-static func set_volume(type: AudioType, volume_linear: float) -> void:
+func set_volume(type: AudioType, volume_linear: float) -> void:
 	var index: int = type as int
 	AudioServer.set_bus_volume_linear(index, volume_linear)
 	pass

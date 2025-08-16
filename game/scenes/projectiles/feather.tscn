@@ -1,24 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy5pgh5s187uq"]
 
 [ext_resource type="Script" uid="uid://dts3foj5j1d" path="res://scripts/projectiles/feather.gd" id="1_0eak1"]
-
-[sub_resource type="Gradient" id="Gradient_4bh5q"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 0, 0, 0.588235)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_e124b"]
-gradient = SubResource("Gradient_4bh5q")
-width = 20
-height = 20
-
-[sub_resource type="Gradient" id="Gradient_e124b"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_101mb"]
-gradient = SubResource("Gradient_e124b")
-width = 20
-height = 10
+[ext_resource type="Texture2D" uid="uid://kd0kilu5rrn3" path="res://assets/textures/projectile_sprites/feather_fast.png" id="2_tau2l"]
+[ext_resource type="Texture2D" uid="uid://xnvb0qaaybn0" path="res://assets/textures/projectile_sprites/feather_medium.png" id="3_vwvh7"]
+[ext_resource type="Texture2D" uid="uid://hs8ecq1nckej" path="res://assets/textures/projectile_sprites/feather_slow.png" id="4_c2c2p"]
+[ext_resource type="Texture2D" uid="uid://dgstmum1kdx5a" path="res://assets/textures/shadow_test.png" id="5_vwvh7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ocj2s"]
 
@@ -27,16 +13,21 @@ collision_layer = 16
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_0eak1")
+texture_fast = ExtResource("2_tau2l")
+texture_medium = ExtResource("3_vwvh7")
+texture_slow = ExtResource("4_c2c2p")
 sprite = NodePath("Sprite")
 
 [node name="Shadow" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_e124b")
+scale = Vector2(0.3, 0.2)
+texture = ExtResource("5_vwvh7")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -30)
-texture = SubResource("GradientTexture2D_101mb")
+position = Vector2(5, -20)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_tau2l")
 
 [node name="TriggerBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ocj2s")

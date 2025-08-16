@@ -507,3 +507,5 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/godot,linux,macos,windows,visualstudio,visualstudiocode
+game/assets/textures/placeholders/title_temp.png
+game/assets/textures/placeholders/title_temp.png.import

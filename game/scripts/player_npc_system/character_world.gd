@@ -8,8 +8,8 @@ extends Node3D
 ## Use this to rotate the character.
 var target_look_vector: Vector3 = Vector3.BACK
 
-## [private] Current 2D look direction.
-var __look_vector: Vector3 = Vector3.BACK
+## Current 33D look direction.
+var look_vector: Vector3 = Vector3.BACK
 
 ## Slope of decay of smoothed look direction.
 @export_range(1, 25, Globals.STEP, "suffix:/s")
@@ -19,22 +19,22 @@ func _ready() -> void:
 	# Check if missing export variables.
 	if (not character_node):
 		push_error("Missing export variables in node '%s'." % [self.name])
-	
-	# TODO test only
-	# TODO set walking speed
-	character_node.start_walk()
 	pass
 
 func _physics_process(delta: float) -> void:
 	# --- Update Look Direction --- #
-	if (not __look_vector.is_equal_approx(target_look_vector)):
-		__look_vector = __look_vector.slerp(target_look_vector, Globals.lerp_t(look_decay, delta))
-		character_node.look_at(__look_vector, Vector3.UP, true)
+	if (not look_vector.is_equal_approx(target_look_vector)):
+		look_vector = look_vector.slerp(target_look_vector, Globals.lerp_t(look_decay, delta))
+		character_node.look_at(look_vector, Vector3.UP, true)
+	pass
+
+func start_walk() -> void:
+	character_node.start_walk()
 	pass
 
 func start_death() -> void:
 	# Tilt upwards.
-	target_look_vector = target_look_vector * 0.001 + Vector3.UP
+	target_look_vector = target_look_vector * 0.01 + Vector3.UP
 	pass
 
 func update_health(new_health: int) -> void:
