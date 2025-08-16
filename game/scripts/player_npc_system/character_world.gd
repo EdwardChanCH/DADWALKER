@@ -63,7 +63,7 @@ func start_handsup() -> void:
 	character_node.start_handsup()
 	pass
 
-func start_backflip(reversed: bool) -> void:
+func start_backflip(_reversed: bool) -> void:
 	pass
 
 func start_bullet() -> void:

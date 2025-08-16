@@ -158,7 +158,7 @@ func start_fight() -> void:
 	__can_attack_again = true
 	__fight_ended = false
 	
-	boss_timer.start(1)
+	boss_timer.start(0.5)
 	await boss_timer.timeout
 	tomato_attack()
 	pass

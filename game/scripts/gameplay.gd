@@ -177,14 +177,16 @@ func _on_tomato_despawner_body_entered(body: Node2D) -> void:
 	pass
 
 func _on_end_of_level_detector_area_entered(area: Area2D) -> void:
-	print("End Of Level Marker detected.") # TODO
-	
 	var eol_marker := area as _EndOfLevelMarker
 	if (eol_marker):
 		if (Globals.progress != eol_marker.new_checkpoint):
 			Globals.progress = eol_marker.new_checkpoint
 			eol_marker.queue_free()
 			change_map_to(Globals.progress)
+	
+	var enemy_trigger := area as _EnemyTrigger
+	if (enemy_trigger):
+		enemy_trigger.trigger()
 	pass
 
 func _on_projectile_despawner_area_entered(area: Area2D) -> void:

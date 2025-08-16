@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://2hc00whcqidx"]
+[gd_scene load_steps=8 format=3 uid="uid://2hc00whcqidx"]
 
 [ext_resource type="Script" uid="uid://cs053msnhjsfi" path="res://scripts/second_street_fight.gd" id="1_l28h2"]
 [ext_resource type="PackedScene" uid="uid://tapmaj04tygs" path="res://scenes/end_of_level_marker.tscn" id="2_frry6"]
+[ext_resource type="Script" uid="uid://iy6i42i6eydc" path="res://scripts/enemy_trigger.gd" id="3_rpmqy"]
+[ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="3_tdknq"]
 
 [sub_resource type="Gradient" id="Gradient_vxo5s"]
 offsets = PackedFloat32Array(1)
@@ -12,8 +14,14 @@ gradient = SubResource("Gradient_vxo5s")
 width = 5760
 height = 1080
 
-[node name="SecondStreetFight" type="Node2D" node_paths=PackedStringArray("camera_target")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_frry6"]
+radius = 40.0
+
+[node name="SecondStreetFight" type="Node2D" node_paths=PackedStringArray("spawner_group_1", "spawner_group_2", "spawner_group_3", "camera_target")]
 script = ExtResource("1_l28h2")
+spawner_group_1 = [NodePath("EnemySpawnerD1"), NodePath("EnemySpawnerD2")]
+spawner_group_2 = [NodePath("EnemySpawnerE1"), NodePath("EnemySpawnerE2"), NodePath("EnemySpawnerE3")]
+spawner_group_3 = [NodePath("EnemySpawnerF1"), NodePath("EnemySpawnerF2"), NodePath("EnemySpawnerF3"), NodePath("EnemySpawnerF4"), NodePath("EnemySpawnerF5"), NodePath("EnemySpawnerF6"), NodePath("EnemySpawnerF7"), NodePath("EnemySpawnerF8"), NodePath("EnemySpawnerF9"), NodePath("EnemySpawnerF10"), NodePath("EnemySpawnerF11"), NodePath("EnemySpawnerF12"), NodePath("EnemySpawnerF13"), NodePath("EnemySpawnerF14")]
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
@@ -27,3 +35,145 @@ position = Vector2(960, 540)
 [node name="EndOfLevelMarker" parent="." instance=ExtResource("2_frry6")]
 position = Vector2(5660, 900)
 new_checkpoint = 6
+
+[node name="EnemyTrigger1" type="Area2D" parent="."]
+position = Vector2(2020, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_rpmqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger1"]
+shape = SubResource("CircleShape2D_frry6")
+
+[node name="EnemyTrigger2" type="Area2D" parent="."]
+position = Vector2(2980, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_rpmqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger2"]
+shape = SubResource("CircleShape2D_frry6")
+
+[node name="EnemyTrigger3" type="Area2D" parent="."]
+position = Vector2(3940, 900)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_rpmqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyTrigger3"]
+shape = SubResource("CircleShape2D_frry6")
+
+[node name="EnemySpawnerD1" type="Node2D" parent="."]
+position = Vector2(2100, 750)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerD2" type="Node2D" parent="."]
+position = Vector2(2200, 1050)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerE1" type="Node2D" parent="."]
+position = Vector2(3100, 800)
+script = ExtResource("3_tdknq")
+health = 3
+
+[node name="EnemySpawnerE2" type="Node2D" parent="."]
+position = Vector2(3100, 1000)
+script = ExtResource("3_tdknq")
+health = 3
+
+[node name="EnemySpawnerE3" type="Node2D" parent="."]
+position = Vector2(3060, 900)
+script = ExtResource("3_tdknq")
+health = 3
+
+[node name="EnemySpawnerF1" type="Node2D" parent="."]
+position = Vector2(3990, 750)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF2" type="Node2D" parent="."]
+position = Vector2(4040, 800)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF3" type="Node2D" parent="."]
+position = Vector2(3990, 850)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF4" type="Node2D" parent="."]
+position = Vector2(4040, 900)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF5" type="Node2D" parent="."]
+position = Vector2(3990, 950)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF6" type="Node2D" parent="."]
+position = Vector2(4040, 1000)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF7" type="Node2D" parent="."]
+position = Vector2(3990, 1050)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 3
+
+[node name="EnemySpawnerF8" type="Node2D" parent="."]
+position = Vector2(4090, 750)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF9" type="Node2D" parent="."]
+position = Vector2(4140, 800)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF10" type="Node2D" parent="."]
+position = Vector2(4090, 850)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF11" type="Node2D" parent="."]
+position = Vector2(4140, 900)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF12" type="Node2D" parent="."]
+position = Vector2(4090, 950)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF13" type="Node2D" parent="."]
+position = Vector2(4140, 1000)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[node name="EnemySpawnerF14" type="Node2D" parent="."]
+position = Vector2(4090, 1050)
+script = ExtResource("3_tdknq")
+target_player = true
+health = 2
+
+[connection signal="camera_in_range" from="EnemyTrigger1" to="." method="_on_enemy_trigger_1_camera_in_range"]
+[connection signal="camera_in_range" from="EnemyTrigger2" to="." method="_on_enemy_trigger_2_camera_in_range"]
+[connection signal="camera_in_range" from="EnemyTrigger3" to="." method="_on_enemy_trigger_3_camera_in_range"]
