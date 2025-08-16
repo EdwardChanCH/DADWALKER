@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://go565cse1ocx"]
+[gd_scene load_steps=21 format=3 uid="uid://go565cse1ocx"]
 
 [ext_resource type="Script" uid="uid://c36krd8fknf4f" path="res://scripts/mini_bosss_fight.gd" id="1_tegxn"]
 [ext_resource type="PackedScene" uid="uid://ducdx3k7iena3" path="res://scenes/player_npc_system/dokibird_world.tscn" id="2_3lc08"]
@@ -103,9 +103,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgy6f"]
 size = Vector2(200, 100)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_10bs7"]
-size = Vector2(200, 100)
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_3lc08"]
 viewport_path = NodePath("SubViewport")
 
@@ -121,13 +118,14 @@ size = Vector2(2020, 150)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_savtk"]
 size = Vector2(2020, 150)
 
-[node name="MiniBosssFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "boss_sprite_left", "boss_sprite_right", "boss_timer", "projectile_spawner", "enemy_spawner", "projectile_despawner", "camera_target")]
+[node name="MiniBosssFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_left", "boss_hitbox_right", "boss_sprite_left", "boss_sprite_right", "boss_timer", "projectile_spawner", "enemy_spawner", "projectile_despawner", "camera_target")]
 y_sort_enabled = true
 script = ExtResource("1_tegxn")
 character_world = NodePath("SubViewport/DokibirdWorld")
 boss_animation = NodePath("BossMotion")
 boss_health = NodePath("BossHealth")
-boss_hitbox_area = NodePath("BossMover/BossHitbox")
+boss_hitbox_left = NodePath("BossMover/BossHitboxL")
+boss_hitbox_right = NodePath("BossMover/BossHitboxR")
 boss_sprite_left = NodePath("BossMover/BossSpriteL")
 boss_sprite_right = NodePath("BossMover/BossSpriteR")
 boss_timer = NodePath("BossTimer")
@@ -156,17 +154,21 @@ libraries = {
 [node name="BossMover" type="Node2D" parent="."]
 position = Vector2(-150, 0)
 
-[node name="BossHitbox" type="Area2D" parent="BossMover"]
+[node name="BossHitboxL" type="Area2D" parent="BossMover"]
 collision_layer = 8
 collision_mask = 48
 
-[node name="CollisionShapeL" type="CollisionShape2D" parent="BossMover/BossHitbox"]
+[node name="CollisionShapeL" type="CollisionShape2D" parent="BossMover/BossHitboxL"]
 position = Vector2(0, 950)
 shape = SubResource("RectangleShape2D_xgy6f")
 
-[node name="CollisionShapeR" type="CollisionShape2D" parent="BossMover/BossHitbox"]
+[node name="BossHitboxR" type="Area2D" parent="BossMover"]
+collision_layer = 8
+collision_mask = 48
+
+[node name="CollisionShapeR" type="CollisionShape2D" parent="BossMover/BossHitboxR"]
 position = Vector2(1920, 950)
-shape = SubResource("RectangleShape2D_10bs7")
+shape = SubResource("RectangleShape2D_xgy6f")
 
 [node name="BossSpriteL" type="Sprite2D" parent="BossMover"]
 z_index = 1
@@ -234,4 +236,5 @@ projectile_speed = 1000.0
 position = Vector2(2000, 900)
 new_checkpoint = 5
 
-[connection signal="area_entered" from="BossMover/BossHitbox" to="." method="_on_boss_hitbox_area_entered"]
+[connection signal="area_entered" from="BossMover/BossHitboxL" to="." method="_on_boss_hitbox_area_entered"]
+[connection signal="area_entered" from="BossMover/BossHitboxR" to="." method="_on_boss_hitbox_area_entered"]

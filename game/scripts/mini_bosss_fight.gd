@@ -9,7 +9,8 @@ signal mini_boss_fight_ended
 @export var character_world: _DokibirdWorld = null
 @export var boss_animation: AnimationPlayer = null
 @export var boss_health: _BossHealth = null
-@export var boss_hitbox_area: Area2D = null
+@export var boss_hitbox_left: Area2D = null
+@export var boss_hitbox_right: Area2D = null
 @export var boss_sprite_left: Node2D = null
 @export var boss_sprite_right: Node2D = null
 @export var boss_timer: Timer = null
@@ -36,7 +37,8 @@ func _ready() -> void:
 	if (not character_world
 		or not boss_animation
 		or not boss_health
-		or not boss_hitbox_area
+		or not boss_hitbox_left
+		or not boss_hitbox_right
 		or not boss_sprite_left
 		or not boss_sprite_right
 		or not boss_timer
@@ -46,8 +48,10 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	self.visible = false
-	boss_hitbox_area.set_deferred("monitoring", false)
-	boss_hitbox_area.set_deferred("monitorable", false)
+	boss_hitbox_left.set_deferred("monitoring", false)
+	boss_hitbox_left.set_deferred("monitorable", false)
+	boss_hitbox_right.set_deferred("monitoring", false)
+	boss_hitbox_right.set_deferred("monitorable", false)
 	projectile_despawner.set_deferred("monitoring", false)
 	projectile_despawner.set_deferred("monitorable", false)
 	
@@ -136,8 +140,10 @@ func start_fight() -> void:
 	Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
 	
 	mini_boss_fight_started.emit()
-	boss_hitbox_area.set_deferred("monitoring", true)
-	boss_hitbox_area.set_deferred("monitorable", true)
+	boss_hitbox_left.set_deferred("monitoring", false)
+	boss_hitbox_left.set_deferred("monitorable", false)
+	boss_hitbox_right.set_deferred("monitoring", true)
+	boss_hitbox_right.set_deferred("monitorable", true)
 	projectile_despawner.set_deferred("monitoring", true)
 	projectile_despawner.set_deferred("monitorable", true)
 	print("mbf: start_fight") # TODO
@@ -145,7 +151,7 @@ func start_fight() -> void:
 	__can_attack_again = true
 	__fight_ended = false
 	
-	boss_timer.start(0.5)
+	boss_timer.start(1)
 	await boss_timer.timeout
 	tomato_attack()
 	pass
@@ -163,8 +169,10 @@ func end_fight() -> void:
 	mini_boss_fight_ended.emit()
 	
 	__can_attack_again = false
-	boss_hitbox_area.set_deferred("monitoring", false)
-	boss_hitbox_area.set_deferred("monitorable", false)
+	boss_hitbox_left.set_deferred("monitoring", false)
+	boss_hitbox_left.set_deferred("monitorable", false)
+	boss_hitbox_right.set_deferred("monitoring", false)
+	boss_hitbox_right.set_deferred("monitorable", false)
 	projectile_despawner.set_deferred("monitoring", false)
 	projectile_despawner.set_deferred("monitorable", false)
 	
@@ -177,6 +185,11 @@ func end_fight() -> void:
 
 func tomato_attack() -> void:
 	__can_attack_again = false
+	
+	boss_hitbox_left.set_deferred("monitoring", true)
+	boss_hitbox_left.set_deferred("monitorable", true)
+	boss_hitbox_right.set_deferred("monitoring", true)
+	boss_hitbox_right.set_deferred("monitorable", true)
 	
 	# Switch sides.
 	if (__is_on_left):
@@ -193,9 +206,13 @@ func tomato_attack() -> void:
 	if (__is_on_left):
 		projectile_spawner.global_position = boss_sprite_left.global_position
 		enemy_spawner.global_position = boss_sprite_left.global_position
+		boss_hitbox_right.set_deferred("monitoring", false)
+		boss_hitbox_right.set_deferred("monitorable", false)
 	else:
 		projectile_spawner.global_position = boss_sprite_right.global_position
 		enemy_spawner.global_position = boss_sprite_right.global_position
+		boss_hitbox_left.set_deferred("monitoring", false)
+		boss_hitbox_left.set_deferred("monitorable", false)
 	
 	# Throw tomatoes.
 	for i in range(-1, 2, 1):
@@ -231,4 +248,5 @@ func _on_boss_hitbox_area_entered(area: Area2D) -> void:
 		boss_health.current_health -= 1
 	elif (game_object is _Seed):
 		boss_health.current_health -= 1000
+		game_object.despawn()
 	pass

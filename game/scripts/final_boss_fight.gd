@@ -186,7 +186,7 @@ func end_fight() -> void:
 	enemy_spawner.stop_spawning()
 	print("fbf: end_fight") # TODO
 	character_world.look_decay = 1
-	# TODO This breaks if the boss is killed before the start_fight animation is finished.
+	# This could break if the boss is killed before the start_fight animation is finished.
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
 	await boss_health.close_ui()
 	character_world.look_decay = 8
@@ -196,8 +196,10 @@ func end_fight() -> void:
 	boss_timer.start(1)
 	await boss_timer.timeout
 	
-	Globals.progress = Globals.Checkpoint.ENDING
-	Globals.win_menu.visible = true
+	# Prevent win screen if player died during the boss exit animation.
+	if (not Globals.lose_menu.visible):
+		Globals.progress = Globals.Checkpoint.ENDING
+		Globals.win_menu.visible = true
 	
 	exit_cutscene()
 	pass
@@ -282,11 +284,11 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	pass
 
 func _on_boss_hitbox_area_entered(area: Area2D) -> void:
-	#print("Final boss hit.")
 	var game_object := area as _Projectile
 	
 	if (game_object is _Feather):
 		boss_health.current_health -= 1
 	elif (game_object is _Seed):
 		boss_health.current_health -= 10_000
+		game_object.despawn()
 	pass
