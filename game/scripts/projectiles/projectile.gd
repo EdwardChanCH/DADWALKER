@@ -7,7 +7,7 @@ signal despawned
 @export var sprite: Sprite2D = null
 
 ## Automatic queue free.
-@export var lifetime_max: float = 10
+@export var lifetime_max: float = 15
 
 var __lifetime_timer: float = 0
 
