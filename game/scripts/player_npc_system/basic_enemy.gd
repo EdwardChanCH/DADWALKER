@@ -7,14 +7,11 @@ func _ready() -> void:
 	if (Globals.gameplay):
 		tracking_object = Globals.gameplay.player
 	
-	# TODO
 	# Initialize variables.
 	in_logic_control = true
 	move_speed = 200
 	projectile_speed = 300
 	
-	# TODO test only
-	# TODO set walking speed
 	character_world_node.start_walk()
 	pass
 

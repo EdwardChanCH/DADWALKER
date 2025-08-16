@@ -56,7 +56,7 @@ func _ready() -> void:
 	boss_hitbox_right.set_deferred("monitorable", false)
 	
 	character_world.target_look_vector = Vector3.LEFT
-	character_world.start_walk() # TODO
+	character_world.start_walk()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -120,14 +120,13 @@ func start_dialogue() -> void:
 	map_used_before = true
 	
 	mini_boss_dialogue_started.emit()
-	print("mbf: start_dialogue") # TODO
 	
 	Globals.border_ui.slide_in()
 	await Globals.border_ui.slide_in_animation_finish
 	
 	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_2)
 	await Globals.dialogue_ui.finish_dialogue
-	end_dialogue() # TODO
+	end_dialogue()
 	pass
 
 func end_dialogue() -> void:
@@ -137,7 +136,6 @@ func end_dialogue() -> void:
 	await Globals.border_ui.slide_out_animation_finish
 	
 	mini_boss_dialogue_ended.emit()
-	print("mbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
@@ -153,7 +151,6 @@ func start_fight() -> void:
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", true)
 	boss_hitbox_right.set_deferred("monitorable", true)
-	print("mbf: start_fight") # TODO
 	await boss_health.open_ui()
 	__can_attack_again = true
 	__fight_ended = false
@@ -182,8 +179,6 @@ func end_fight() -> void:
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", false)
 	boss_hitbox_right.set_deferred("monitorable", false)
-	
-	print("mbf: end_fight") # TODO
 
 	await boss_health.close_ui()
 	

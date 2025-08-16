@@ -35,7 +35,6 @@ func _ready() -> void:
 		or not shadow):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	# TODO
 	# Initialize variables.
 	in_player_control = true
 	move_speed = 400

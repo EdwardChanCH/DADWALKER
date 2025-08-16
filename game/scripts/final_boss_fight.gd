@@ -132,7 +132,6 @@ func start_dialogue() -> void:
 	map_used_before = true
 	
 	final_boss_dialogue_started.emit()
-	print("fbf: start_dialogue") # TODO
 	
 	Globals.border_ui.slide_in()
 	await Globals.border_ui.slide_in_animation_finish
@@ -149,7 +148,6 @@ func end_dialogue() -> void:
 	await Globals.border_ui.slide_out_animation_finish
 	
 	final_boss_dialogue_ended.emit()
-	print("fbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
@@ -161,11 +159,11 @@ func start_fight() -> void:
 	final_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)
 	boss_hitbox_area.set_deferred("monitorable", true)
-	print("fbf: start_fight") # TODO
+	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
 		Globals.gameplay.destroy_sky()
-	# TODO make buildings retract
+	
 	character_world.use_sky_camera()
 	character_world.look_decay = 1
 	character_world.target_look_vector = Vector3.BACK
@@ -186,7 +184,7 @@ func end_fight() -> void:
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	enemy_spawner.stop_spawning()
-	print("fbf: end_fight") # TODO
+	
 	character_world.look_decay = 1
 	# This could break if the boss is killed before the start_fight animation is finished.
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01

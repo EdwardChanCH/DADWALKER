@@ -140,11 +140,9 @@ func change_map_to(checkpoint: Globals.Checkpoint) -> void:
 	var scripted_sequence: _ScriptedSequence = map_nodes[map_id]
 	if (before_fight):
 		# Let _ready() execute first.
-		print("before_fight confirmed") # TODO
 		scripted_sequence.call_deferred("enter_cutscene", 1)
 	elif (before_cutscene):
 		# Let _ready() execute first.
-		print("before_cutscene confirmed") # TODO
 		scripted_sequence.call_deferred("enter_cutscene", 0)
 	
 	if (show_credits):

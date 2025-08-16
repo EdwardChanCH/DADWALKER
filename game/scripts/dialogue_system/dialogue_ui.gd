@@ -117,7 +117,6 @@ func _on_control_gui_input(event: InputEvent) -> void:
 			await play_ui_slide_out_animation()
 			self.visible = false
 			finish_dialogue.emit()
-		#print("Clicked")
 		
 	pass
 

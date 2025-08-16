@@ -16,7 +16,6 @@ extends CharacterBody2D
 ## Max health.
 @export var max_health: int = 1
 
-# TODO
 ## Current health.
 @export var current_health: int = 1 :
 	get:

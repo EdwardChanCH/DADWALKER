@@ -42,14 +42,13 @@ func start_dialogue() -> void:
 	map_used_before = true
 	
 	intro_dialogue_started.emit()
-	print("iof: start_dialogue") # TODO
 	
 	Globals.border_ui.slide_in()
 	await Globals.border_ui.slide_in_animation_finish
 	
 	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_1)
 	await Globals.dialogue_ui.finish_dialogue
-	end_dialogue() # TODO
+	end_dialogue()
 	pass
 
 func end_dialogue() -> void:
@@ -59,7 +58,6 @@ func end_dialogue() -> void:
 	await Globals.border_ui.slide_out_animation_finish
 	
 	intro_dialogue_ended.emit()
-	print("iof: end_dialogue") # TODO
 	
 	#start_fight() # Does not have fight.
 	exit_cutscene()
