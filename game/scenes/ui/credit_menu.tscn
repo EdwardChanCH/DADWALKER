@@ -87,7 +87,6 @@ input_1/reset = true
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_mn1b6"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_xwfye"]
-graph_offset = Vector2(-331.919, 82.4019)
 nodes/Hover/node = SubResource("AnimationNodeAnimation_nts36")
 nodes/Hover/position = Vector2(-320, 400)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_c5b21")

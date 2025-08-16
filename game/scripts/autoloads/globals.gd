@@ -64,3 +64,13 @@ func lerp_t(decay: float, delta: float) -> float:
 	return 1 - exp(-decay * delta)
 
 # --- Misc. Functions --- #
+
+var __current_bgm_path: String = ""
+
+## Safely change the background music.
+func change_bgm(filepath: String) -> void:
+	# e.g. "res://assets/sounds/bgm/bgm_dadboss_fd3.ogg"
+	if (filepath != __current_bgm_path):
+		AudioManager.play_music(filepath, 0.25)
+		__current_bgm_path = filepath
+	pass

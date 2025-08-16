@@ -26,6 +26,7 @@ func exit_cutscene() -> void:
 func enter_cutscene(_mode: int = 0) -> void:
 	map_used_before = true
 	Globals.progress = Globals.Checkpoint.INTRO_START
+	Globals.change_bgm("res://assets/sounds/bgm/bgm_gameplay_rd2.ogg")
 	
 	self.visible = true
 	

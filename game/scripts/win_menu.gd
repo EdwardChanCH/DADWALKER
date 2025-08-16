@@ -13,6 +13,8 @@ func _on_visibility_changed() -> void:
 	if (!visible):
 		ui_close.emit()
 		return
+	
+	Globals.change_bgm("res://assets/sounds/bgm/bgm_gameplay_rd2.ogg")
 	ui_open.emit()
 	pass
 

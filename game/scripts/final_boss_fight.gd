@@ -120,9 +120,11 @@ func enter_cutscene(_mode: int = 0) -> void:
 	
 	if (_mode == 1):
 		Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_dadboss_fd3.ogg")
 		start_fight()
 	else:
 		Globals.progress = Globals.Checkpoint.FINAL_BOSS_START
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_gameplay_rd2.ogg")
 		start_dialogue()
 	pass
 
@@ -154,6 +156,7 @@ func end_dialogue() -> void:
 func start_fight() -> void:
 	map_used_before = true
 	Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
+	Globals.change_bgm("res://assets/sounds/bgm/bgm_dadboss_fd3.ogg")
 	
 	final_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)

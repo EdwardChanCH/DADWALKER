@@ -127,10 +127,10 @@ func play_voice(sound_path: String, volume_linear: float = 1.0) -> void:
 	
 func play_music(sound_path: String, volume_linear: float = 1.0) -> void:
 	var audio_steam: AudioStream = AudioManager.__sound_cache[sound_path]
-	AudioManager.__music_channel.stop()
-	AudioManager.__music_channel.stream = audio_steam
-	AudioManager.__music_channel.volume_linear = volume_linear
-	AudioManager.__music_channel.play()
+	__music_channel.stop()
+	__music_channel.stream = audio_steam
+	__music_channel.volume_linear = volume_linear
+	__music_channel.play()
 	pass
 
 func set_volume(type: AudioType, volume_linear: float) -> void:

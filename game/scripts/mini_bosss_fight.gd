@@ -104,9 +104,11 @@ func enter_cutscene(_mode: int = 0) -> void:
 	
 	if (_mode == 1):
 		Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_dokiboss_fd1.ogg")
 		start_fight()
 	else:
 		Globals.progress = Globals.Checkpoint.MINI_BOSS_START
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_gameplay_rd2.ogg")
 		start_dialogue()
 	pass
 
@@ -138,6 +140,7 @@ func end_dialogue() -> void:
 func start_fight() -> void:
 	map_used_before = true
 	Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
+	Globals.change_bgm("res://assets/sounds/bgm/bgm_dokiboss_fd1.ogg")
 	
 	mini_boss_fight_started.emit()
 	boss_hitbox_left.set_deferred("monitoring", false)

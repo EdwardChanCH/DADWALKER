@@ -279,7 +279,7 @@ func text_type_effect(text: String, character_name: _DialogueSequence.Characters
 	
 	var audio_player: AudioStreamPlayer = AudioManager.get_audio_steam_player(_path)
 	if (not audio_player.playing):
-		AudioManager.play_sfx(_path, 0.25)
+		AudioManager.play_sfx(_path, 0.1)
 		audio_player.play()
 	
 	#for character in text:
