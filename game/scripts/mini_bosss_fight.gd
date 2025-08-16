@@ -49,7 +49,7 @@ func _ready() -> void:
 		or not enemy_spawner):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	self.visible = true # TODO
+	self.visible = true
 	boss_sprite_left.visible = false
 	boss_shadow_left.visible = false
 	boss_hitbox_left.set_deferred("monitoring", false)

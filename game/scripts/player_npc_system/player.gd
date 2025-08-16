@@ -1,6 +1,8 @@
 class_name _Player
 extends _GameObject
 
+@export var leash_dragoon: Node2D = null
+
 @export var hurt_animation: AnimationPlayer = null
 
 @export var collision_box: CollisionShape2D = null

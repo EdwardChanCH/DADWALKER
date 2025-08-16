@@ -513,16 +513,16 @@ centered = false
 position = Vector2(1920, 0)
 
 [node name="FirstStreetFight" parent="MapList" instance=ExtResource("7_hbo4f")]
-position = Vector2(3940, 0)
+position = Vector2(2020, 0)
 
 [node name="MiniBosssFight" parent="MapList" instance=ExtResource("7_e124b")]
-position = Vector2(7780, 0)
+position = Vector2(5860, 0)
 
 [node name="SecondStreetFight" parent="MapList" instance=ExtResource("9_ctvyo")]
-position = Vector2(7880, 0)
+position = Vector2(5960, 0)
 
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
-position = Vector2(11720, 0)
+position = Vector2(9800, 0)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger")]
 position = Vector2(960, 540)
