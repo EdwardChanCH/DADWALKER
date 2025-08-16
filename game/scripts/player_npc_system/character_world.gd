@@ -19,6 +19,9 @@ func _ready() -> void:
 	# Check if missing export variables.
 	if (not character_node):
 		push_error("Missing export variables in node '%s'." % [self.name])
+	
+	# Plays idle animation by default.
+	start_idle()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -60,8 +63,11 @@ func start_handsup() -> void:
 	character_node.start_handsup()
 	pass
 
-func start_seed() -> void:
-	character_node.start_seed()
+func start_backflip(reversed: bool) -> void:
+	pass
+
+func start_bullet() -> void:
+	character_node.start_bullet()
 	pass
 
 func start_tomato() -> void:

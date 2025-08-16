@@ -12,17 +12,21 @@ func _ready() -> void:
 	pass
 
 func start_idle() -> void:
+	animation_player.stop()
 	animation_player.play("standing pose")
 	pass
 
 func start_handsup() -> void:
+	animation_player.stop()
 	animation_player.play("handsup")
 	pass
 
-func start_seed() -> void:
-	animation_player.play("trow seed")
+func start_bullet() -> void:
+	animation_player.stop()
+	animation_player.play("trow seed", -1, 0.5)
 	pass
 
 func start_tomato() -> void:
-	animation_player.play("trow tomato")
+	animation_player.stop()
+	animation_player.play("trow tomato", -1, 0.5)
 	pass

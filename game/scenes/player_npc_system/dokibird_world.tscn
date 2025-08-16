@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ducdx3k7iena3"]
+[gd_scene load_steps=7 format=3 uid="uid://ducdx3k7iena3"]
 
 [ext_resource type="Script" uid="uid://eorvkgedu4ls" path="res://scripts/player_npc_system/dokibird_world.gd" id="1_rcpg1"]
 [ext_resource type="PackedScene" uid="uid://10pf7yr28j7j" path="res://scenes/player_npc_system/dokibird.tscn" id="2_rcpg1"]
@@ -9,9 +9,88 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.25
 
-[node name="DokibirdWorld" type="Node3D" node_paths=PackedStringArray("character_node")]
+[sub_resource type="Animation" id="Animation_rcpg1"]
+resource_name = "roll_forward"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterOfMass:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterOfMass:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterOfMass:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 6.2832, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_xdnpv"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterOfMass:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterOfMass:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterOfMass:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xdnpv"]
+_data = {
+&"RESET": SubResource("Animation_xdnpv"),
+&"roll_forward": SubResource("Animation_rcpg1")
+}
+
+[node name="DokibirdWorld" type="Node3D" node_paths=PackedStringArray("animation_player", "character_node")]
 script = ExtResource("1_rcpg1")
-character_node = NodePath("Dokibird")
+animation_player = NodePath("AnimationPlayer")
+character_node = NodePath("CenterOfMass/Dokibird")
 
 [node name="AmbientLight" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g2els")
@@ -30,5 +109,13 @@ projection = 1
 fov = 90.0
 size = 2.0
 
-[node name="Dokibird" parent="." instance=ExtResource("2_rcpg1")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+[node name="CenterOfMass" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+
+[node name="Dokibird" parent="CenterOfMass" instance=ExtResource("2_rcpg1")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, -0.45, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xdnpv")
+}

@@ -208,14 +208,18 @@ func tomato_attack() -> void:
 	
 	# Switch sides.
 	if (__is_on_left):
-		character_world.target_look_vector = Vector3.LEFT
+		character_world.start_backflip(false)
 		boss_animation.play("boss_appear_right")
 		await boss_animation.animation_finished
+		character_world.start_idle()
+		#character_world.target_look_vector = Vector3.LEFT
 		__is_on_left = false
 	else:
-		character_world.target_look_vector = Vector3.RIGHT
+		character_world.start_backflip(true)
 		boss_animation.play("boss_appear_left")
 		await boss_animation.animation_finished
+		character_world.start_idle()
+		#character_world.target_look_vector = Vector3.RIGHT
 		__is_on_left = true
 	
 	if (__is_on_left):
@@ -235,8 +239,12 @@ func tomato_attack() -> void:
 		direction = direction.rotated(deg_to_rad(i * 15)).normalized()
 		# This audio has a bit of lag, so play it before of the timer starts.
 		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
+		character_world.target_look_vector = Vector3(direction.x, 0, direction.y)
+		
+		character_world.start_tomato()
 		boss_timer.start(0.2)
 		await boss_timer.timeout
+		
 		enemy_spawner.direction = direction
 		# DO NOT CHANGE THIS VALUE,
 		# OTHERWISE THE BOSS WILL HIT ITSELF IN CONFUSION.
@@ -247,10 +255,17 @@ func tomato_attack() -> void:
 	for i in range(-1, 2, 1):
 		var direction: Vector2 = Vector2.RIGHT if __is_on_left else Vector2.LEFT
 		direction = direction.rotated(deg_to_rad(i * 17)).normalized()
+		character_world.target_look_vector = Vector3(direction.x, 0, direction.y)
+		
+		character_world.start_bullet()
 		boss_timer.start(0.1)
 		await boss_timer.timeout
+		
 		projectile_spawner.shoot_once(direction)
 		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dokibirdattack_fd1.ogg", 0.2)
+	
+	character_world.start_idle() # TODO
+	character_world.target_look_vector = Vector3.RIGHT if __is_on_left else Vector3.LEFT
 	
 	#boss_timer.start(0.5)
 	#await boss_timer.timeout

@@ -20,7 +20,7 @@ func start_t_pose() -> void:
 func start_handsup() -> void:
 	pass
 
-func start_seed() -> void:
+func start_bullet() -> void:
 	pass
 
 func start_tomato() -> void:

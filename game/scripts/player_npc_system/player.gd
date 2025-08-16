@@ -45,7 +45,7 @@ func _ready() -> void:
 	
 	# TODO test only
 	# TODO set walking speed
-	character_world_node.start_walk()
+	#character_world_node.start_walk()
 	
 	pass
 
