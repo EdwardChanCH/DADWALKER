@@ -20,6 +20,9 @@ signal final_boss_fight_ended
 @export var enemy_spawner_l3: _EnemySpawner = null
 @export var boss_sky_z_index: int = -6
 @export var boss_ground_z_index: int = 6
+@export var npc_dokibird_world: _DokibirdWorld = null
+@export var npc_dad_world: _DadWorld = null
+@export var npc_animation: AnimationPlayer = null
 
 ## Phases: 3 --> 2 --> 1 --> 0
 var __boss_phase: int = 3
@@ -48,17 +51,22 @@ func _ready() -> void:
 		or not enemy_spawner
 		or not enemy_spawner_l1
 		or not enemy_spawner_l2
-		or not enemy_spawner_l3):
+		or not enemy_spawner_l3
+		or not npc_dokibird_world
+		or not npc_dad_world
+		or not npc_animation):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
-	self.visible = false
+	self.visible = true
 	character_world.use_sky_camera()
 	character_world.look_vector = Vector3.UP * 2 + Vector3.BACK * 0.01
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	
+	npc_dokibird_world.target_look_vector = Vector3.RIGHT
+	npc_dad_world.target_look_vector = Vector3.LEFT
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -105,6 +113,7 @@ func exit_cutscene() -> void:
 		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
 		Globals.gameplay.restore_sky()
 	
+	self.visible = false
 	cutscene_finished.emit()
 	pass
 
@@ -132,7 +141,6 @@ func start_dialogue() -> void:
 	map_used_before = true
 	
 	final_boss_dialogue_started.emit()
-	print("fbf: start_dialogue") # TODO
 	
 	Globals.border_ui.slide_in()
 	await Globals.border_ui.slide_in_animation_finish
@@ -145,11 +153,18 @@ func start_dialogue() -> void:
 func end_dialogue() -> void:
 	map_used_before = true
 	
+	# Move the NPCs away and queue free them.
+	npc_dokibird_world.target_look_vector = Vector3.LEFT
+	npc_dad_world.target_look_vector = Vector3.BACK
+	boss_timer.start(0.1)
+	await boss_timer.timeout
+	npc_animation.play("npc_slide_out")
+	await npc_animation.animation_finished
+	
 	Globals.border_ui.slide_out()
 	await Globals.border_ui.slide_out_animation_finish
 	
 	final_boss_dialogue_ended.emit()
-	print("fbf: end_dialogue") # TODO
 	start_fight()
 	pass
 
@@ -161,11 +176,11 @@ func start_fight() -> void:
 	final_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)
 	boss_hitbox_area.set_deferred("monitorable", true)
-	print("fbf: start_fight") # TODO
+	
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
 		Globals.gameplay.destroy_sky()
-	# TODO make buildings retract
+	
 	character_world.use_sky_camera()
 	character_world.look_decay = 1
 	character_world.target_look_vector = Vector3.BACK
@@ -186,7 +201,7 @@ func end_fight() -> void:
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	enemy_spawner.stop_spawning()
-	print("fbf: end_fight") # TODO
+	
 	character_world.look_decay = 1
 	# This could break if the boss is killed before the start_fight animation is finished.
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
@@ -221,6 +236,7 @@ func ground_pound_attack() -> void:
 	boss_animation.play("ground_down")
 	await boss_animation.animation_finished
 	
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dadgroundstomp_fd1.ogg", 0.5)
 	enemy_spawner_l1.spawn_object()
 	enemy_spawner_l2.spawn_object()
 	enemy_spawner_l3.spawn_object()
@@ -270,6 +286,7 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	boss_timer.start(0.5)
 	await boss_timer.timeout
 	
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_npc_dadsonicwave_fd1.ogg", 0.5)
 	# Start spawning projectiles.
 	for i in range(0, 11, 1):
 		boss_timer.start(0.1)

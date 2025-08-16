@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://df64whveplypg"]
+[gd_scene load_steps=31 format=3 uid="uid://df64whveplypg"]
 
 [ext_resource type="Script" uid="uid://ca6xflgxec3a0" path="res://scripts/gameplay.gd" id="1_00tan"]
 [ext_resource type="Script" uid="uid://cjqqp3av0j00n" path="res://scripts/camera_2d.gd" id="2_ct7aa"]
@@ -437,6 +437,18 @@ size = Vector2(520, 1480)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctvyo"]
 size = Vector2(1920, 360)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nt65e"]
+size = Vector2(150, 1480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhmdk"]
+size = Vector2(150, 1480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5y6v"]
+size = Vector2(2020, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_407ns"]
+size = Vector2(2020, 150)
+
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("player", "main_camera", "game_object_list", "projectile_list", "map_list", "sky_animation", "map_nodes")]
 process_mode = 1
 script = ExtResource("1_00tan")
@@ -498,19 +510,19 @@ centered = false
 [node name="TitleNoFight" parent="MapList" instance=ExtResource("6_ctvyo")]
 
 [node name="IntroNoFight" parent="MapList" instance=ExtResource("6_din8e")]
-position = Vector2(3000, 0)
+position = Vector2(1920, 0)
 
 [node name="FirstStreetFight" parent="MapList" instance=ExtResource("7_hbo4f")]
-position = Vector2(6000, 0)
+position = Vector2(2020, 0)
 
 [node name="MiniBosssFight" parent="MapList" instance=ExtResource("7_e124b")]
-position = Vector2(9000, 0)
+position = Vector2(5860, 0)
 
 [node name="SecondStreetFight" parent="MapList" instance=ExtResource("9_ctvyo")]
-position = Vector2(12000, 0)
+position = Vector2(5960, 0)
 
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
-position = Vector2(15000, 0)
+position = Vector2(9800, 0)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger")]
 position = Vector2(960, 540)
@@ -568,6 +580,27 @@ collision_mask = 128
 position = Vector2(960, 900)
 shape = SubResource("RectangleShape2D_ctvyo")
 
+[node name="ProjectileDespawner" type="Area2D" parent="MainCamera"]
+position = Vector2(-960, -540)
+collision_layer = 0
+collision_mask = 112
+
+[node name="CollisionShapeL" type="CollisionShape2D" parent="MainCamera/ProjectileDespawner"]
+position = Vector2(-125, 540)
+shape = SubResource("RectangleShape2D_nt65e")
+
+[node name="CollisionShapeR" type="CollisionShape2D" parent="MainCamera/ProjectileDespawner"]
+position = Vector2(2045, 540)
+shape = SubResource("RectangleShape2D_bhmdk")
+
+[node name="CollisionShapeT" type="CollisionShape2D" parent="MainCamera/ProjectileDespawner"]
+position = Vector2(960, -125)
+shape = SubResource("RectangleShape2D_s5y6v")
+
+[node name="CollisionShapeB" type="CollisionShape2D" parent="MainCamera/ProjectileDespawner"]
+position = Vector2(960, 1205)
+shape = SubResource("RectangleShape2D_407ns")
+
 [node name="YSortedList" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -582,3 +615,4 @@ y_sort_enabled = true
 
 [connection signal="body_entered" from="MainCamera/TomatoDespawner" to="." method="_on_tomato_despawner_body_entered"]
 [connection signal="area_entered" from="MainCamera/EndOfLevelDetector" to="." method="_on_end_of_level_detector_area_entered"]
+[connection signal="area_entered" from="MainCamera/ProjectileDespawner" to="." method="_on_projectile_despawner_area_entered"]

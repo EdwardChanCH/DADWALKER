@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://beknnb6r0k3ew"]
 
 [ext_resource type="Script" uid="uid://dren52nmku3q4" path="res://scripts/credit_menu.gd" id="1_sileb"]
-[ext_resource type="Texture2D" uid="uid://swomdajmfujo" path="res://assets/textures/ui_sprites/credits.png" id="2_xwfye"]
+[ext_resource type="Texture2D" uid="uid://cbj3srrh0fra1" path="res://assets/textures/ui_sprites/credits.png" id="2_xwfye"]
 [ext_resource type="Texture2D" uid="uid://d0g2pq14xcjk" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_normal.png" id="3_gpbg5"]
 [ext_resource type="Texture2D" uid="uid://3u7fnhqtbt6u" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_pressed.png" id="4_mc2dd"]
 [ext_resource type="Texture2D" uid="uid://j0a1j8dawlcw" path="res://assets/textures/ui_sprites/tomatoe_button/tomatoe_button_hover.png" id="5_qjbvh"]
@@ -308,6 +308,7 @@ libraries = {
 }
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="mouse_entered" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_mouse_entered"]
 [connection signal="mouse_entered" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_mouse_exited"]
 [connection signal="pressed" from="UI/Forground/ButtonRoot/CloseButton" to="." method="_on_close_button_pressed"]

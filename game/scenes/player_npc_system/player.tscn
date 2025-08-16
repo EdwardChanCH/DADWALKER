@@ -51,12 +51,13 @@ radius = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_qhqgy"]
 radius = 20.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hurt_animation", "collision_box", "hit_box", "shadow", "character_world_node", "hit_detector_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("leash_dragoon", "hurt_animation", "collision_box", "hit_box", "shadow", "character_world_node", "hit_detector_node")]
 collision_layer = 2
 collision_mask = 31
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_1yq3d")
+leash_dragoon = NodePath("LeashDragoon")
 hurt_animation = NodePath("HurtAnimation")
 collision_box = NodePath("CollisionBox")
 hit_box = NodePath("HitDetector/HitBox")
@@ -98,5 +99,8 @@ own_world_3d = true
 transparent_bg = true
 
 [node name="DragoonWorld" parent="SubViewport" instance=ExtResource("2_smbph")]
+
+[node name="LeashDragoon" type="Node2D" parent="."]
+position = Vector2(0, -40)
 
 [connection signal="area_entered" from="HitDetector" to="." method="_on_hit_detector_area_entered"]

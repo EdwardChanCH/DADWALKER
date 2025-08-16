@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://comocvmoxgfwf"]
+[gd_scene load_steps=27 format=3 uid="uid://comocvmoxgfwf"]
 
 [ext_resource type="PackedScene" uid="uid://hk5x5mvji4dk" path="res://scenes/player_npc_system/dad_sky_world.tscn" id="1_cmkb5"]
 [ext_resource type="Script" uid="uid://duyp6mutkdpfp" path="res://scripts/final_boss_fight.gd" id="1_k0qlo"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b8ja340vkvie8" path="res://scenes/boss_health.tscn" id="3_hpirs"]
 [ext_resource type="Script" uid="uid://di6q5xwpycqpr" path="res://scripts/projectile_spawner.gd" id="5_j5mu0"]
 [ext_resource type="Script" uid="uid://7fstuali1onp" path="res://scripts/enemy_spawner.gd" id="7_mguhe"]
+[ext_resource type="PackedScene" uid="uid://ducdx3k7iena3" path="res://scenes/player_npc_system/dokibird_world.tscn" id="8_2lg36"]
+[ext_resource type="PackedScene" uid="uid://cqina3gmdpiwh" path="res://scenes/player_npc_system/dad_world.tscn" id="9_y1c10"]
 
 [sub_resource type="Gradient" id="Gradient_2lg36"]
 offsets = PackedFloat32Array(1)
@@ -290,8 +292,299 @@ _data = {
 &"sky_up": SubResource("Animation_cmkb5")
 }
 
+[sub_resource type="Animation" id="Animation_l51jg"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DokiSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(530, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DokiSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DadSprite:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DadSprite:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DokiSpriteShadow:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(530, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DokiSpriteShadow:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DadSpriteShadow:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DadSpriteShadow:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DokiSpriteShadow:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("DadSpriteShadow:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("DokiSprite:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("DadSprite:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_y1c10"]
+resource_name = "npc_slide_out"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DokiSprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(530, -0.25, 0, 0.25, 0, -470, -0.25, 0, 0.25, 0, -470, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DokiSprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0, 810, -0.25, 0, 0.25, 0, 810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DadSprite:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1390, -0.25, 0, 0.25, 0, 1390, -0.25, 0, 0.25, 0, 1390, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 1.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DadSprite:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0, -190, -0.25, 0, 0.25, 0, -190, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 1.5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DokiSpriteShadow:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(530, -0.25, 0, 0.25, 0, -470, -0.25, 0, 0.25, 0, -470, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1.5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DokiSpriteShadow:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(900, -0.25, 0, 0.25, 0, 900, -0.25, 0, 0.25, 0, 900, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 1.5)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DadSpriteShadow:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.4, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.6, 1.5)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DadSpriteShadow:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.3, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0, 1e-05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.6, 1.5)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DokiSpriteShadow:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("DadSpriteShadow:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("DokiSprite:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("DadSprite:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_usxwb"]
+_data = {
+&"RESET": SubResource("Animation_l51jg"),
+&"npc_slide_out": SubResource("Animation_y1c10")
+}
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_cmkb5"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_y1c10"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_l51jg"]
+viewport_path = NodePath("SubViewport3")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mguhe"]
 radius = 200.0
@@ -299,7 +592,7 @@ radius = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_k0qlo"]
 radius = 180.0
 
-[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "enemy_spawner_l1", "enemy_spawner_l2", "enemy_spawner_l3", "camera_target")]
+[node name="FinalBossFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_area", "ground_attack_area", "boss_sprite", "boss_timer", "projectile_spawner", "enemy_spawner", "enemy_spawner_l1", "enemy_spawner_l2", "enemy_spawner_l3", "npc_dokibird_world", "npc_dad_world", "npc_animation", "camera_target")]
 script = ExtResource("1_k0qlo")
 character_world = NodePath("SubViewport/DadSkyWorld")
 boss_animation = NodePath("BossMotion")
@@ -313,6 +606,9 @@ enemy_spawner = NodePath("EnemySpawner")
 enemy_spawner_l1 = NodePath("EnemySpawnerL1")
 enemy_spawner_l2 = NodePath("EnemySpawnerL2")
 enemy_spawner_l3 = NodePath("EnemySpawnerL3")
+npc_dokibird_world = NodePath("SubViewport2/NpcDokibirdWorld")
+npc_dad_world = NodePath("SubViewport3/NpcDadWorld")
+npc_animation = NodePath("NPCMotion")
 camera_target = NodePath("CameraTarget")
 
 [node name="DebugSprite" type="Sprite2D" parent="."]
@@ -330,6 +626,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_hpirs")
 }
 
+[node name="NPCMotion" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_usxwb")
+}
+
 [node name="BossSprite" type="Sprite2D" parent="."]
 z_index = -6
 position = Vector2(960, 540)
@@ -341,6 +642,26 @@ position = Vector2(960, 900)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_3rbw0")
 
+[node name="DokiSpriteShadow" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(530, 900)
+scale = Vector2(0.4, 0.3)
+texture = ExtResource("3_3rbw0")
+
+[node name="DadSpriteShadow" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(1390, 900)
+scale = Vector2(0.4, 0.3)
+texture = ExtResource("3_3rbw0")
+
+[node name="DokiSprite" type="Sprite2D" parent="."]
+position = Vector2(530, 810)
+texture = SubResource("ViewportTexture_y1c10")
+
+[node name="DadSprite" type="Sprite2D" parent="."]
+position = Vector2(1390, 810)
+texture = SubResource("ViewportTexture_l51jg")
+
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
 transparent_bg = true
@@ -349,13 +670,26 @@ size = Vector2i(1024, 1024)
 [node name="DadSkyWorld" parent="SubViewport" instance=ExtResource("1_cmkb5")]
 look_decay = 5.0
 
+[node name="SubViewport2" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="NpcDokibirdWorld" parent="SubViewport2" instance=ExtResource("8_2lg36")]
+
+[node name="SubViewport3" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+
+[node name="NpcDadWorld" parent="SubViewport3" instance=ExtResource("9_y1c10")]
+
 [node name="BossHitbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 112
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossHitbox"]
-position = Vector2(960, 300)
+position = Vector2(960, 340)
 shape = SubResource("CircleShape2D_mguhe")
+metadata/_edit_lock_ = true
 
 [node name="GroundAttack" type="Area2D" parent="."]
 collision_layer = 8
@@ -364,6 +698,7 @@ collision_mask = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundAttack"]
 position = Vector2(960, 900)
 shape = SubResource("CircleShape2D_k0qlo")
+metadata/_edit_lock_ = true
 
 [node name="BossTimer" type="Timer" parent="."]
 

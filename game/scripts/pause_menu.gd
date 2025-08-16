@@ -24,6 +24,7 @@ func _on_mouse_entered() -> void:
 	pass
 
 func _on_close_button_pressed() -> void:
+	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_back_fd1.ogg", 0.5)
 	visible = false
 	pass
 

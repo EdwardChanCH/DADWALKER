@@ -1,6 +1,8 @@
 class_name _Player
 extends _GameObject
 
+@export var leash_dragoon: Node2D = null
+
 @export var hurt_animation: AnimationPlayer = null
 
 @export var collision_box: CollisionShape2D = null
@@ -35,18 +37,12 @@ func _ready() -> void:
 		or not shadow):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	# TODO
 	# Initialize variables.
 	in_player_control = true
 	move_speed = 400
 	projectile_speed = 1000
 	max_health = 3
 	current_health = 3
-	
-	# TODO test only
-	# TODO set walking speed
-	character_world_node.start_walk()
-	
 	pass
 
 func _process(delta: float) -> void:
@@ -105,6 +101,11 @@ func _process(delta: float) -> void:
 	# --- Update Move Vector --- #
 	if (in_player_control):
 		move_vector = input_vector
+		# Player character animation.
+		if (input_vector.is_zero_approx()):
+			character_world_node.start_idle()
+		else:
+			character_world_node.start_walk()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -120,7 +121,7 @@ func add_damage(amount: int = 1) -> void:
 		and __hurting_cooldown <= 0
 		and current_health > 0
 		and amount > 0):
-		# TODO hurt animation, hurt sound.
+		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_pc_dragoonhit_fd1.ogg", 0.5)
 		hurt_animation.play("hurt_flash")
 		__hurting_cooldown = hurting_delay
 		current_health -= amount
@@ -139,10 +140,13 @@ func shoot_once(p_vector: Vector2) -> void:
 	p_velocity += (move_vector * move_speed).project(p_velocity) # Add player velocity.
 	var p_angle: float = Vector2.RIGHT.angle_to(p_vector)
 	
-	
 	if Globals.gameplay:
 		Globals.gameplay.add_projectie_to_scene(projectile)
 	projectile.setup_start(self.global_position, p_velocity, p_angle)
+	
+	if (Globals.dialogue_ui and (not Globals.dialogue_ui.visible)):
+		# Does not play during dialogue.
+		AudioManager.play_sfx("res://assets/sounds/sfx/sfx_pc_dragoonattack_fd1.ogg", 0.1)
 	pass
 
 ## Stomped by final boss.
@@ -152,6 +156,11 @@ func stomped() -> void:
 
 ## Restore to full health.
 func restore_health() -> void:
+	if (current_health <= 0):
+		# Fixes player model doing backflips after being revived.
+		character_world_node.target_look_vector = Vector3.BACK
+	
+	# Reset to max health.
 	current_health = max_health
 	
 	# Enable collisions.
@@ -161,7 +170,6 @@ func restore_health() -> void:
 	hit_detector_node.collision_mask = __hcm
 	
 	# Enable controls.
-	character_world_node.target_look_vector = Vector3.BACK
 	in_player_control = true
 	pass
 

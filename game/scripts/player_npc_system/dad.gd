@@ -11,11 +11,12 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-func start_walk() -> void:
-	if (animation_player.has_animation("dragoon_walk")):
-		animation_player.play("dragoon_walk") # TODO
+func start_idle() -> void:
+	animation_player.stop()
+	animation_player.play("dad_iddle")
 	pass
 
 func start_t_pose() -> void:
-	print("dad: Not implemented yet!")
+	animation_player.stop()
+	animation_player.play("dad_tpose")
 	pass

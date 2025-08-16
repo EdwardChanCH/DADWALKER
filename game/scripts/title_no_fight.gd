@@ -8,7 +8,7 @@ func _ready() -> void:
 	if (false):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
-	self.visible = true # TODO
+	self.visible = true
 	pass
 
 func exit_cutscene() -> void:

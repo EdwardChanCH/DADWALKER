@@ -5,6 +5,8 @@ extends _Character
 
 @export var body_mesh: MeshInstance3D = null
 
+@export var glasses_mesh: MeshInstance3D = null
+
 ## Materials: Red, Yellow, Green
 @export var materials: Array[StandardMaterial3D] = []
 
@@ -14,13 +16,13 @@ func _ready() -> void:
 	# Check if missing export variables.
 	if (not animation_player
 		or not body_mesh
+		or not glasses_mesh
 		or materials.size() != 3):
 		push_error("Missing export variables in node '%s'." % [self.name])
 	pass
 
-# TODO
 ## Update the texture based on new health.
-func update_health_bar(new_health: int) -> void:
+func update_health(new_health: int) -> void:
 	var new_material: StandardMaterial3D
 	match new_health:
 		[0, 1]:
@@ -36,6 +38,9 @@ func update_health_bar(new_health: int) -> void:
 	pass
 
 func start_walk() -> void:
-	# TODO
-	animation_player.play("Animation")
+	animation_player.play("tomato_walk")
+	pass
+
+func sunglasses_off() -> void:
+	glasses_mesh.visible = false
 	pass
