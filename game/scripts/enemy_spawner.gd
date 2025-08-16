@@ -1,7 +1,7 @@
 class_name _EnemySpawner
 extends Node2D
 
-@export var game_object_scene: PackedScene = null
+@export var game_object_scene: PackedScene = preload("res://scenes/player_npc_system/basic_enemy.tscn")
 
 @export var auto_spawn_timer: Timer = null
 

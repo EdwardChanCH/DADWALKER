@@ -34,7 +34,7 @@ func start_walk() -> void:
 
 func start_death() -> void:
 	# Tilt upwards.
-	target_look_vector = target_look_vector * 0.001 + Vector3.UP
+	target_look_vector = target_look_vector * 0.01 + Vector3.UP
 	pass
 
 func update_health(new_health: int) -> void:

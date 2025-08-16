@@ -39,6 +39,10 @@ func _ready() -> void:
 	
 	# Accessible from Globals to avoid awkward node paths.
 	Globals.gameplay = self
+	
+	# Always loaded first.
+	Globals.progress = Globals.Checkpoint.MAINMENU
+	Globals.gameplay.change_map_to(_Globals.Checkpoint.MAINMENU)
 	pass
 
 func destroy_sky() -> void:
@@ -136,13 +140,15 @@ func change_map_to(checkpoint: Globals.Checkpoint) -> void:
 	var scripted_sequence: _ScriptedSequence = map_nodes[map_id]
 	if (before_fight):
 		# Let _ready() execute first.
+		print("before_fight confirmed") # TODO
 		scripted_sequence.call_deferred("enter_cutscene", 1)
 	elif (before_cutscene):
 		# Let _ready() execute first.
+		print("before_cutscene confirmed") # TODO
 		scripted_sequence.call_deferred("enter_cutscene", 0)
 	
 	if (show_credits):
-		#show_credits() # TODO Bee: open the credits menu.
+		# Unused.
 		pass
 	pass
 
@@ -176,5 +182,5 @@ func _on_end_of_level_detector_area_entered(area: Area2D) -> void:
 	var eol_marker := area as _EndOfLevelMarker
 	if (eol_marker):
 		Globals.progress = eol_marker.new_checkpoint
-		change_map_to(Globals.progress)
+		change_map_to(eol_marker.new_checkpoint) # TODO
 	pass

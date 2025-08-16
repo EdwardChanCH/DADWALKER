@@ -438,6 +438,7 @@ size = Vector2(520, 1480)
 size = Vector2(1920, 360)
 
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("player", "main_camera", "game_object_list", "projectile_list", "map_list", "sky_animation", "map_nodes")]
+process_mode = 1
 script = ExtResource("1_00tan")
 player = NodePath("YSortedList/Player")
 main_camera = NodePath("MainCamera")
@@ -511,14 +512,13 @@ position = Vector2(12000, 0)
 [node name="FinalBossFight" parent="MapList" instance=ExtResource("7_4bh5q")]
 position = Vector2(15000, 0)
 
-[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger", "tracking_node")]
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("gameplay_node", "camera_animation", "level_trigger")]
 position = Vector2(960, 540)
 process_callback = 0
 script = ExtResource("2_ct7aa")
 gameplay_node = NodePath("..")
 camera_animation = NodePath("CameraAnimation")
 level_trigger = NodePath("EndOfLevelDetector")
-tracking_node = NodePath("../YSortedList/Player")
 
 [node name="CameraAnimation" type="AnimationPlayer" parent="MainCamera"]
 root_node = NodePath("../..")

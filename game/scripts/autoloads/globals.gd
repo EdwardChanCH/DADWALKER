@@ -31,30 +31,24 @@ enum Checkpoint {
 
 # --- Signals --- #
 
-signal progress_updated(value: Checkpoint)
-
 # --- Global Variables --- #
 
 var god_mode: bool = false
-var show_fps_count: bool = false
-var text_display_speed: bool = 0.02
+var show_fps_count: bool = true
+var text_display_speed: int = 50 # Letters per second.
 
 var main_menu: _MainMenu = null
 var setting_menu: _SettingMenu = null
 var credit_menu: _CreditMenu = null
 var dialogue_ui: _DialogueUI = null
+var border_ui: _Border = null
 var win_menu: _WinMenu = null
 var lose_menu: _LoseMenu = null
 var pause_menu: _PauseMenu = null
 
 var gameplay: _Gameplay = null
 
-var progress: Checkpoint = Checkpoint.MAINMENU :
-	get:
-		return progress
-	set(value):
-		progress = value
-		progress_updated.emit(value)
+var progress: Checkpoint = Checkpoint.MAINMENU
 
 # --- Math Functions --- #
 
@@ -71,10 +65,12 @@ func lerp_t(decay: float, delta: float) -> float:
 
 # --- Misc. Functions --- #
 
-## Change the game to any section, auto-reload if section is used before.
-func load_game(checkpoint: Checkpoint) -> void:
-	if (Globals.gameplay):
-		gameplay.change_map_to(checkpoint)
-	else:
-		push_error("Globals.gameplay is null.")
+var __current_bgm_path: String = ""
+
+## Safely change the background music.
+func change_bgm(filepath: String) -> void:
+	# e.g. "res://assets/sounds/bgm/bgm_dadboss_fd3.ogg"
+	if (filepath != __current_bgm_path):
+		AudioManager.play_music(filepath, 0.25)
+		__current_bgm_path = filepath
 	pass

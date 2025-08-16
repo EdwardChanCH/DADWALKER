@@ -59,10 +59,12 @@ func _ready() -> void:
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	
-	#enter_cutscene() # TODO
 	pass
 
 func _physics_process(delta: float) -> void:
+	if (__fight_ended):
+		return
+	
 	var percentage: float = boss_health.progress_bar.value
 	
 	if (percentage > 0.7):
@@ -79,8 +81,8 @@ func _physics_process(delta: float) -> void:
 		__time_since_last_attack += delta
 		
 		if (__boss_phase == 0 and not __fight_ended):
-			end_fight()
 			__fight_ended = true
+			end_fight()
 		elif __time_since_last_attack > (1.0 * __boss_phase):
 			match __attack_pattern:
 				0:
@@ -112,12 +114,17 @@ func enter_cutscene(_mode: int = 0) -> void:
 	self.visible = true
 	
 	if (Globals.gameplay):
+		Globals.gameplay.player.restore_health()
 		Globals.gameplay.main_camera.tracking_node = camera_target
 		await Globals.gameplay.main_camera.target_reached
 	
 	if (_mode == 1):
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_dadboss_fd3.ogg")
 		start_fight()
 	else:
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_START
+		Globals.change_bgm("res://assets/sounds/bgm/bgm_gameplay_rd2.ogg")
 		start_dialogue()
 	pass
 
@@ -126,11 +133,20 @@ func start_dialogue() -> void:
 	
 	final_boss_dialogue_started.emit()
 	print("fbf: start_dialogue") # TODO
-	end_dialogue() # TODO
+	
+	Globals.border_ui.slide_in()
+	await Globals.border_ui.slide_in_animation_finish
+	
+	Globals.dialogue_ui.start_dialgoue(Globals.dialogue_ui.dialogue_3)
+	await Globals.dialogue_ui.finish_dialogue
+	end_dialogue()
 	pass
 
 func end_dialogue() -> void:
 	map_used_before = true
+	
+	Globals.border_ui.slide_out()
+	await Globals.border_ui.slide_out_animation_finish
 	
 	final_boss_dialogue_ended.emit()
 	print("fbf: end_dialogue") # TODO
@@ -139,6 +155,9 @@ func end_dialogue() -> void:
 
 func start_fight() -> void:
 	map_used_before = true
+	Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
+	Globals.change_bgm("res://assets/sounds/bgm/bgm_dadboss_fd3.ogg")
+	
 	final_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)
 	boss_hitbox_area.set_deferred("monitorable", true)
@@ -169,14 +188,22 @@ func end_fight() -> void:
 	enemy_spawner.stop_spawning()
 	print("fbf: end_fight") # TODO
 	character_world.look_decay = 1
-	# TODO This breaks if the boss is killed before the start_fight animation is finished.
+	# This could break if the boss is killed before the start_fight animation is finished.
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
 	await boss_health.close_ui()
 	character_world.look_decay = 8
 	if (Globals.gameplay):
 		Globals.gameplay.main_camera.shake_camera()
 	
-	exit_cutscene()
+	boss_timer.start(1)
+	await boss_timer.timeout
+	
+	# Prevent win screen if player died during the boss exit animation.
+	if (not Globals.lose_menu.visible):
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
+		Globals.win_menu.visible = true
+	
+	exit_cutscene() # This line may have caused the tomato blackhole incident...
 	pass
 
 func ground_pound_attack() -> void:
@@ -259,11 +286,11 @@ func sonic_boom_attack_helper(from: Vector2, to: Vector2) -> void:
 	pass
 
 func _on_boss_hitbox_area_entered(area: Area2D) -> void:
-	print("Final boss is hit.") # TODO
 	var game_object := area as _Projectile
 	
 	if (game_object is _Feather):
 		boss_health.current_health -= 1
 	elif (game_object is _Seed):
 		boss_health.current_health -= 10_000
+		game_object.despawn()
 	pass

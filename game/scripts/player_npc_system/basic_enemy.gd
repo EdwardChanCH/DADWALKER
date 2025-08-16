@@ -47,7 +47,8 @@ func _physics_process(delta: float) -> void:
 				push_velocity = collider_normal * push_speed
 				
 				# Apply damage to player
-				collider.current_health -= 1
+				if (Globals.gameplay):
+					Globals.gameplay.player.add_damage(1)
 			elif (collider is _BasicEnemy):
 				# Use the larger vector instead of adding (to prevent sticking).
 				if (push_velocity.length_squared() < collider.push_velocity.length_squared()):
@@ -105,7 +106,7 @@ func _on_hit_detector_area_entered(area: Area2D) -> void:
 	var projectile := area as _Projectile
 	
 	if (current_health > 0 and projectile):
-		print("Enemy hit.")
+		#print("Enemy hit.")
 		if (projectile is _Feather):
 			current_health -= 1
 		elif (projectile is _Seed):

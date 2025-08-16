@@ -40,6 +40,8 @@ func _ready() -> void:
 	audio_list.item_selected.connect(set_selected_audio)
 	audio_option.item_selected.connect(set_play_option)
 	play_button.pressed.connect(play_audio)
+	
+	self.hide()
 	pass
 
 func update_volume(_changed: bool, arg_array: Array) -> void:
@@ -60,7 +62,8 @@ func play_audio() -> void:
 		0:
 			AudioManager.play_sfx(selected_audio)
 		1:
-			print("No ui function yet; too lazy to make it")
+			print("No ui function yet; too lazy to make it") # TODO
+			pass
 		2:
 			AudioManager.play_music(selected_audio)
 		3:
@@ -69,5 +72,6 @@ func play_audio() -> void:
 
 
 func _on_back_button_pressed() -> void:
-	queue_free()
-	pass # Replace with function body.
+	#queue_free()
+	self.hide()
+	pass

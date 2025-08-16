@@ -27,7 +27,8 @@ var current_health: int = 1 :
 		else:
 			current_health = value
 			progress_bar.value = float(current_health) / float(max_health)
-			animation.play("ui_bump")
+			if (not animation.is_playing()):
+				animation.play("ui_bump") # Prevent cutting off slide in anumation.
 		health_label.text = str(current_health)
 		pass
 
