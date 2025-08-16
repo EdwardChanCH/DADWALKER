@@ -180,7 +180,6 @@ func start_fight() -> void:
 
 func end_fight() -> void:
 	map_used_before = true
-	Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
 	
 	final_boss_fight_ended.emit()
 	__can_attack_again = false
@@ -201,7 +200,7 @@ func end_fight() -> void:
 	
 	# Prevent win screen if player died during the boss exit animation.
 	if (not Globals.lose_menu.visible):
-		Globals.progress = Globals.Checkpoint.ENDING
+		Globals.progress = Globals.Checkpoint.FINAL_BOSS_END
 		Globals.win_menu.visible = true
 	
 	exit_cutscene()

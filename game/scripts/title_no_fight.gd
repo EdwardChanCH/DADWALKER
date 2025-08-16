@@ -27,6 +27,9 @@ func enter_cutscene(_mode: int = 0) -> void:
 	
 	self.visible = true
 	
+	if (Globals.main_menu and (not Globals.main_menu.visible)):
+		Globals.main_menu.visible = true # Fail safe.
+	
 	if (Globals.gameplay):
 		Globals.gameplay.player.restore_health()
 		Globals.gameplay.main_camera.tracking_node = camera_target
