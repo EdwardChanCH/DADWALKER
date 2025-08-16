@@ -11,6 +11,7 @@ signal mini_boss_fight_ended
 @export var boss_health: _BossHealth = null
 @export var boss_hitbox_left: Area2D = null
 @export var boss_hitbox_right: Area2D = null
+@export var boss_shadow_left: Sprite2D = null
 @export var boss_sprite_left: Node2D = null
 @export var boss_sprite_right: Node2D = null
 @export var boss_timer: Timer = null
@@ -39,6 +40,7 @@ func _ready() -> void:
 		or not boss_health
 		or not boss_hitbox_left
 		or not boss_hitbox_right
+		or not boss_shadow_left
 		or not boss_sprite_left
 		or not boss_sprite_right
 		or not boss_timer
@@ -48,6 +50,8 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	self.visible = false
+	boss_sprite_left.visible = false
+	boss_shadow_left.visible = false
 	boss_hitbox_left.set_deferred("monitoring", false)
 	boss_hitbox_left.set_deferred("monitorable", false)
 	boss_hitbox_right.set_deferred("monitoring", false)
@@ -55,6 +59,7 @@ func _ready() -> void:
 	projectile_despawner.set_deferred("monitoring", false)
 	projectile_despawner.set_deferred("monitorable", false)
 	
+	character_world.target_look_vector = Vector3.LEFT
 	character_world.start_walk() # TODO
 	pass
 
@@ -96,6 +101,9 @@ func exit_cutscene() -> void:
 func enter_cutscene(_mode: int = 0) -> void:
 	map_used_before = true
 	self.visible = true
+	boss_sprite_left.visible = false
+	boss_shadow_left.visible = false
+	character_world.target_look_vector = Vector3.LEFT
 	
 	if (Globals.gameplay):
 		Globals.gameplay.player.restore_health()
@@ -141,6 +149,8 @@ func start_fight() -> void:
 	map_used_before = true
 	Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
 	Globals.change_bgm("res://assets/sounds/bgm/bgm_dokiboss_fd1.ogg")
+	boss_sprite_left.visible = true
+	boss_shadow_left.visible = true
 	
 	mini_boss_fight_started.emit()
 	boss_hitbox_left.set_deferred("monitoring", false)
@@ -168,6 +178,8 @@ func end_fight() -> void:
 		boss_animation.play("boss_appear_right")
 		await boss_animation.animation_finished
 		__is_on_left = false
+		boss_sprite_left.visible = false
+		boss_shadow_left.visible = false
 	
 	mini_boss_fight_ended.emit()
 	

@@ -118,7 +118,7 @@ size = Vector2(2020, 150)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_savtk"]
 size = Vector2(2020, 150)
 
-[node name="MiniBosssFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_left", "boss_hitbox_right", "boss_sprite_left", "boss_sprite_right", "boss_timer", "projectile_spawner", "enemy_spawner", "projectile_despawner", "camera_target")]
+[node name="MiniBosssFight" type="Node2D" node_paths=PackedStringArray("character_world", "boss_animation", "boss_health", "boss_hitbox_left", "boss_hitbox_right", "boss_shadow_left", "boss_sprite_left", "boss_sprite_right", "boss_timer", "projectile_spawner", "enemy_spawner", "projectile_despawner", "camera_target")]
 y_sort_enabled = true
 script = ExtResource("1_tegxn")
 character_world = NodePath("SubViewport/DokibirdWorld")
@@ -126,6 +126,7 @@ boss_animation = NodePath("BossMotion")
 boss_health = NodePath("BossHealth")
 boss_hitbox_left = NodePath("BossMover/BossHitboxL")
 boss_hitbox_right = NodePath("BossMover/BossHitboxR")
+boss_shadow_left = NodePath("BossMover/BossShadowL")
 boss_sprite_left = NodePath("BossMover/BossSpriteL")
 boss_sprite_right = NodePath("BossMover/BossSpriteR")
 boss_timer = NodePath("BossTimer")
