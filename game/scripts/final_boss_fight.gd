@@ -58,7 +58,7 @@ func _ready() -> void:
 		push_error("Missing export variables in node '%s'." % [self.name])
 	
 	# Hide DAD.
-	self.visible = false
+	self.visible = true
 	character_world.use_sky_camera()
 	character_world.look_vector = Vector3.UP * 2 + Vector3.BACK * 0.01
 	character_world.target_look_vector = Vector3.UP + Vector3.BACK * 0.01
@@ -113,6 +113,7 @@ func exit_cutscene() -> void:
 		Globals.gameplay.main_camera.tracking_node = Globals.gameplay.player
 		Globals.gameplay.restore_sky()
 	
+	self.visible = false
 	cutscene_finished.emit()
 	pass
 
