@@ -28,6 +28,7 @@ func _on_retry_button_pressed() -> void:
 
 func _on_exit_button_pressed() -> void:
 	AudioManager.play_sfx("res://assets/sounds/sfx/sfx_ui_confirm_fd1.ogg", 0.5)
+	Globals.progress = Globals.Checkpoint.MAINMENU
 	Globals.gameplay.change_map_to(Globals.Checkpoint.MAINMENU)
 	Globals.main_menu.visible = true
 	visible = false

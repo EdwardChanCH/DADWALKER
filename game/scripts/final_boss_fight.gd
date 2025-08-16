@@ -59,7 +59,6 @@ func _ready() -> void:
 	boss_hitbox_area.set_deferred("monitoring", false)
 	boss_hitbox_area.set_deferred("monitorable", false)
 	
-	#enter_cutscene() # TODO
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -154,6 +153,8 @@ func end_dialogue() -> void:
 
 func start_fight() -> void:
 	map_used_before = true
+	Globals.progress = Globals.Checkpoint.FINAL_BOSS_FIGHT
+	
 	final_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)
 	boss_hitbox_area.set_deferred("monitorable", true)

@@ -53,7 +53,7 @@ func _on_play_button_pressed() -> void:
 	
 	# Load intro level.
 	Globals.progress = Globals.Checkpoint.INTRO_START
-	Globals.gameplay.change_map_to(Globals.progress)
+	Globals.gameplay.change_map_to(Globals.Checkpoint.INTRO_START)
 	pass
 
 func _on_options_button_pressed() -> void:

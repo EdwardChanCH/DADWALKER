@@ -90,12 +90,6 @@ func _physics_process(delta: float) -> void:
 		self.global_transform.origin.x = current_pos_x
 	pass
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug"):
-		#print("Camera at: " + str(self.global_position))
-		pass
-	pass
-
 ## Shake the camera.
 func shake_camera() -> void:
 	camera_animation.play("camera_shake")

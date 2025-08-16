@@ -31,8 +31,6 @@ enum Checkpoint {
 
 # --- Signals --- #
 
-signal progress_updated(value: Checkpoint)
-
 # --- Global Variables --- #
 
 var god_mode: bool = false
@@ -50,12 +48,7 @@ var pause_menu: _PauseMenu = null
 
 var gameplay: _Gameplay = null
 
-var progress: Checkpoint = Checkpoint.MAINMENU :
-	get:
-		return progress
-	set(value):
-		progress = value
-		progress_updated.emit(value)
+var progress: Checkpoint = Checkpoint.MAINMENU
 
 # --- Math Functions --- #
 

@@ -133,6 +133,7 @@ func end_dialogue() -> void:
 
 func start_fight() -> void:
 	map_used_before = true
+	Globals.progress = Globals.Checkpoint.MINI_BOSS_FIGHT
 	
 	mini_boss_fight_started.emit()
 	boss_hitbox_area.set_deferred("monitoring", true)
