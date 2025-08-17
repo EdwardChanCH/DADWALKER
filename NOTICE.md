@@ -1,4 +1,4 @@
-Copyright 2025 >> INSERT OUR NAMES HERE <<
+Copyright 2025 Niko, Edward Chan, Acute Bee, Paichi Pop, RealNeko, Luca
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
